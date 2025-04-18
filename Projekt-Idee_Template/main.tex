@@ -1,0 +1,51 @@
+\documentclass[nonacm]{acmart}
+
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%%
+%% These commands are for a JOURNAL article.
+%% PLEASE IGNORE THEM!
+\acmJournal{TOIT}
+\acmVolume{37}
+\acmNumber{4}
+\acmArticle{111}
+\acmMonth{8}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  margin=3.5cm  
+}
+
+\setcopyright{none}
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain}
+
+\begin{document}
+\input{section/title}
+\input{section/authors}
+
+%\setcounter{footnote}{1} % reset footnote counter
+%\footnotetext{\textbf{Hasiwar, D., Gruber, A., Dragschitz, C. and Ivkic, I. (2023) Towards a Cloud-Based Smart Office Solution for Shared Workplace Individualization. In: Proceedings of the 2023 ACM Conference.}} % footer text
+
+\settopmatter{printfolios=true} % page numbers
+\maketitle
+\input{section/projekt-idee}
+
+\end{document}
+
+\endinput
+%%
+%% End of file 
