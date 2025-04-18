@@ -1,0 +1,98 @@
+%% Je nach dem in welcher Sprache ihr euer Paper schreiben wollt, benutzt bitte entweder den Deutschen-Titel oder den Englischen 
+%% (einfach aus- bzw. einkommentieren mittels '%')
+
+%Deutsch
+\section{Alt vs. Neu}
+\label{sec:alt_vs_neu}
+
+Die Entwicklung von Smart-Office-Lösungen hat in den letzten Jahren stark an Dynamik gewonnen, wobei bestehende 
+Ansätze wie in \cite{ref01}{Towards a Cloud-Based Smart Office Solution for Shared Workplace Individualization},
+vorrangig auf Effizienzsteigerung und Komfort für allgemeine Nutzer:innen abzielen. Im Gegensatz 
+dazu adressiert der neue Prototyp gezielt, die Bedürfnisse neurodivergenter Personen (z.B. Menschen mit ADHS 
+oder Autismus) sowie Burnout-Rückkehrer:innen – Gruppen, deren Anforderungen in der bisherigen Lösung nicht 
+berücktsichtigt werden.
+
+Das etablierte Konzept aus \cite{ref01}{Towards a Cloud-Based Smart Office Solution for Shared Workplace 
+Individualization} fokussiert sich auf die Automatisierung von Shared Open Workspaces durch ein Buchungssystem, 
+ergonomische Anpassungen und die Überwachung von Umweltfaktoren, wie Temperatur oder CO2-Werten via Workplace 
+Environment Index (WEI). Diese Metrik dient jedoch primär der ersten Stufe einer Individualisierung, wobei diese
+nicht auf psychosoziale Bedürfnisse abzielt.
+Der neue Ansatz hingegen integriert multisensorische Echtzeit-Anpassungen, um gezielt Stressfaktoren für 
+neurodivergente Personen zu reduzieren. Beispielsweise minimiert eine dynamische Lichtsteuerung fluoreszierende
+Belastungen, die bei ADHS-Betroffenen zu Konzentrationsverlust führen können. Für Autist:innen werden visuelle
+Tagespläne und Unterbrechungsfilter eingeführt, während Burnout-Rückkehrer:innen von klaren Priorisierungsfunktionen
+profitieren.
+
+Während das ursprüngliche System eine Kubernetes-basierte Mikrodienstarchitektur mit komplexer Orchestrierung
+beschreibt, setzt der neue Prototyp auf schlanke Amazon Web Services (AWS). Durch den Verzicht auf Kubernetes 
+werden Ressourcen gebündelt und die Skalierbarkeit erhöht. Sensoren steuern beispielsweise Licht nicht nur basierend
+auf statischen Daten, sondern reagieren dynamisch auf Tageszeit, Nutzerprofile und externe Bedingungen.
+Weiters werden Tools wie Axe oder WAVE genutzt, um WCAG-Konformität sicherzustellen. Dies ermöglicht beispielsweise eine 
+barrierearme Nutzung des Dashboards für Menschen mit sensorischen Einschränkungen.
+Zudem verbindet die Lösung technische IoT-Funktionen (z.B. adaptive Beleuchtung) mit psychologischen 
+Präventionsstrategien, um eine ganzheitliche Arbeitsumgebung zu schaffen. 
+Diese Intersektionalität – die Integration von Technologie, Psychologie und Ethik – ist ein Novum in der 
+Smart-Office-Landschaft.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Übersicht der wichtigsten Neuerungen}
+\label{tab:delta}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Aspekt} & \textbf{Beschreibung} \\
+\midrule
+\textbf{Zielgruppenspezifität} & Gezielte Anpassung für neurodivergente Gruppen und Burnout-Rückkehrer:innen. \\
+\midrule
+\textbf{Echtzeit-Steuerung} & Sensoren passen Licht dynamisch an Tageszeit und Nutzerprofile an. \\
+\midrule
+\textbf{Intersektionalität} & Kombination von IoT, Psychologie und Ethik in einer Plattform. \\
+\midrule
+\textbf{Ethischer Fokus} & Datensouveränität (Opt-in) und Barrierefreiheit als Kernprinzipien. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Das ursprüngliche Smart-Office-Konzept legt einen soliden Grundstein für effiziente Shared Workspaces. Der
+neue Prototyp baut darauf auf und erweitert den Fokus um inklusive und präventive Elemente. 
+Es soll eine Plattform entstehen, die nicht nur Räume optimiert, sondern gezielt das Wohlbefinden und die 
+Produktivität vulnerabler Gruppen fördert. Dieser Paradigmenwechsel unterstreicht die Notwendigkeit, 
+technologische Lösungen stärker an menschlicher Diversität auszurichten für eine nachhaltige Zukunft der Arbeitswelt.
+
+% Englisch
+%\section{Related Work}
+
+%%Ziel dieses Kapitels ist es, dem Leser zu zeigen, welche anderen verwandten Arbeiten im selben Universum / Forschungsfeld bereits Ergebnisse 
+%%geliefert haben. Hier geht es darum, dass man zeigt, dass man das eigene Forschungsfeld kennt und die wichtigsten Arbeiten darin kurz zusammengefasst beschreibt. 
+
+%%Genauso ist es wichtig, dass man folgenden Unterschied bzw. das DELTA herausarbeitet:
+%%\begin{itemize}
+%%	\item[] Your Work vs. Related Work
+%%	\item[] ODER
+%%	\item[] Was haben die anderen Arbeiten eben NICHT gemacht und darum möchten wir es in diesem Position Paper motivieren
+%%\end{itemize}
+
+%% Dieses Kapitel ist sehr wichtig, weil es aus der Einleitung und der Problembeschreibung heraus nochmal zeigt, dass es einen NEED gibt,
+%% um dieses Problem zu lösen (weil es bis jetzt kein anderer getan hat).
+
+%%Folgende Key-Points gibt es bei diesem Kapitel zu beachten:
+%%\begin{itemize}
+%%	\item mind. 10 wissenschaftliche Quellen (andere Papers oder facheinschlägige Bücher) sollen identifiziert und zusammengefasst dargestellt / beschrieben werden.
+%% Dabei sollen diese wissenschaftlichen Quellen zitiert werden
+%%	\item die wissenschaftlichen Quellen sollen sich zu den nicht wissenschaftlichen Quellen die Waage halten im Verhältnis von 2/3 wissenschaftliche Quellen zu 1/3 andere Quellen 
+%%	\item folgende Datenbanken gelten als "gültige Datenbanken" um wissenschaftliche Quellen zu suchen:
+%%\subitem ACM Digital Library: \href{https://dl.acm.org/}{https://dl.acm.org/}	
+%%	\subitem IEEE Explore: \href{https://ieeexplore.ieee.org/Xplore/home.jsp}{https://ieeexplore.ieee.org/Xplore/home.jsp} 
+%%	\subitem Scopus: \href{https://www.scopus.com/search/form.uri?display=basic\#basic}{https://www.scopus.com/search/form.uri?display=basic\#basic}
+%%	\subitem Science Direct: \href{https://www.sciencedirect.com/search}{https://www.sciencedirect.com/search} 
+%%	\subitem Springer Verlag: \href{https://link.springer.com/}{https://link.springer.com/}
+%%	\subitem Scitepress Digital Library: \href{https://www.scitepress.org/AdvancedSearch.aspx?SearchCriteria=Papers}{https://www.scitepress.org/AdvancedSearch.aspx?SearchCriteria=Papers} 
+%%\end{itemize}
+
+%%\textbf{VORGABE}: dieses Kapitel soll genau eine A4-Seite benötigen!!!!!!!!!!!!!
+
+
+
+
+

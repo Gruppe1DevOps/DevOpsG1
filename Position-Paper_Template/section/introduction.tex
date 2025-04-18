@@ -1,0 +1,264 @@
+%Je nach dem in welcher Sprache ihr euer Paper schreiben wollt, benutzt bitte entweder den Deutschen-Titel oder den Englischen (einfach aus- bzw. einkommentieren mittels '%')
+
+%Deutsch
+\section{Einleitung und Problemhintergrund}
+
+Moderne Smart Offices nutzen heutzutage vermehrt Internet der Dinge / Internet of Things (IoT) und 
+und Künstliche Intelligenz (KI) / Artificial Intelligence (AI), um Arbeitsumgebungen adaptiv zu	gestalten. 
+Während bestehende Lösungen \cite{ref01} allgemeine Automatisierung bieten, fehlt es an zielgruppenspezifischer Anpassung
+für neurodivergente Personen (z.B. Aufmerksamkeitsdefizit- / Hyperaktivitätsstörung (ADHS), Autismus) und Menschen 
+die nach einem Burnout wieder an ihren Arbeitsplatz zurückkehren. Raumgestaltung muss multisensorisch gedacht werden, 
+nicht nur Funktion und Ästetik prägen unsere Wahrnehmung, sondern auch Sinne wie z.B. Klang und Licht beeinflussen unsere 
+Reaktion darauf.Die Arbeitswelt ignoriert bislang häufig, eine individuell angepasste Umgebung, um das Wohlbefinden zu 
+stärken und produktives Potenzial zu entfalten. \\
+
+Aktuelle Smart Office Lösungen sind auf Effizienz und Komfort ausgerichtet, 
+berücksichtigen jedoch nicht, die heterogenen Bedürfnisse neurodivergenter Personen und 
+Burnout-Rückkehrer:innen, zu adressieren. Studien zeigen, dass z.B. ADHS-Betroffene 
+durch sensorische Überlastung (z.B. fluoreszierende Beleuchtung, plötzliche Geräusche) 
+mehr zu Konzentrationsverluste neigen, als neurotypische Personen.
+Trotz dieser Evidenz fehlen Lösungen, die Echtzeit-Anpassungen (z.B. dynamische Lichtsteuerung,
+akustische Geräuschkulisse) ermöglichen.
+Für Autist:innen sind unstrukturierte Arbeitsabläufe und spontane soziale Interaktionen,
+eine zentrale Stressquelle. Bestehende Systeme bieten jedoch kaum Tools zur Visualisierung 
+von Tagesplänen, oder zur Abschirmung von Unterbrechungen, obwohl dies die Produktivität 
+steigern könnte. Gleichzeitig kämpfen Burnout-Rückkehrer:innen mit starren 
+Arbeitszeitmodellen und unklaren Priorisierungen, die Rückfallrisiken erhöhen. Bei den
+gewählten drei Userprofilen sind verschiedene Bedürfnisse und Herausforderungen zu
+berücksichtigen, wo individuelle Anpassungen kontrolliert Reize steuern. \\
+
+In diesem Paper wird ein Cloud-basierter Prototyp für ein Smart Office vorgestellt, dieser 
+soll die identifizierten Lücken durch eine IoT-Architektur adressieren und eine Umgebungsanpassung 
+in Echtzeit ermöglicht. 
+Ein Dashboard soll je nach Userprofil Funktionalitäten, wie z.B. Aufgabenpriorisierung,
+Tagesplänen, Raumstatus abbilden und Reizüberflutung präventiv entgegenwirken.
+Durch individuelle Anpassungen (z.B. Licht, Musik, Raumtemperatur), welche in einem Userprofil
+hinterlegt sind, können äußere Reize minimiert und die Produktivität, sowie das 
+Wohlbefinden gesteigert werden. Weiters wird durch Sensoren eine dynamische Lichtsteuerung
+ermöglicht, die sich u.a. an die jeweilige Tageszeit und äußere Lichteinstrahlung anpasst.\\
+Die Architektur verzichtet auf komplexe Orchestrierung (Kubernetes) zugunsten 
+schlanker Amazon Web Service (AWS)-Dienste. Nutzer:innen behalten via Opt-in-System die 
+Kontrolle über ihre Daten, die ausschließlich lokal oder verschlüsselt im Simple Storage Service (S3) 
+gespeichert werden sollen. Der Unterschied zu bestehenden Lösungen liegt in der 
+Intersektionalität, statt isolierter Anpassungen integriert das System Parameter 
+zur psychologischen Präventionsstrategien in eine einheitliche Plattform. \\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TODO: Feedback Igor -- Überlegt euch was und wie ihr evalierungen wollt:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Was -- Differenzierung -- Wie -- Vergleich mit bestehender Lösung , Referenzmatrix/-modell, DELTA Analyse 
+%Performance -- Tools wie JMeter oder AWS CloudWatch würden sich glaub anbieten
+%Ethik -- Was -- Einhaltung Privatsphäre -- Wie -- Ethik Review
+%Usability -- Was -- Usability wie Verständlich ist das Dashboard aufgebaut -- Wie -- Befragung/Fragebogen -- eher ungeeignet für dieses Paper
+%Barrierefreiheit -- Was -- WCAG konform?(https://www.w3.org/WAI/standards-guidelines/wcag/) -- Wie --automatisierte Accessibility Tests}
+	
+%%% https://wave.webaim.org/
+%% https://www.deque.com/axe/
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%{TODO Feedback Abschlussabsatz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Beim Position Paper wäre es schön, wenn ihr eure Einleitung mit folgendem Absatz beendet 
+%%(das Beispiel ist auf Englisch....ihr müsst es natürlich auf Deutsch. machen):
+%%The reminder of the position paper is organised as follows: Section 2 summarises the 
+%%related work in the field. Next, in Section 3, we describe our experimental design where
+%%we introduce an experimental testbed and explain how it could be used in a cost-benefit analysis.
+%%Furthermore, we give an overview of potential stakeholders in an additive MaaS ecosystem including 
+%%a profit sharing approach. Finally, in Section 4 we conclude our work and give an outline of 
+%%future work in the field.
+%%Ihr gebt also dem Leser einen Überblick, was als nächstes kommt, wenn er/sie weiterliest
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%{TODO: Feedback Abschlussabsatz -- Erster Ansatz schnell zusammengeschrieben, bitte überarbeiten}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Abschnitt 2 wird zunächst ein Überblick über die bestehende Lösung und ein Einblick in den Bereich
+der Smart Offices für neurodivergente Menschen und Burnout-Rückkehrer:innen gegeben. Abschnitt 3 stellt
+das Konzept unseres Cloud-basierten Prototypen vor, der die identifizierten Lücken adressiert. Abschnitt 4 
+schließt mit einer Diskussion möglicher Interessensgruppen und potenzielle Nutzer:innen und der Rolle
+von präventiven psychologischen Strategien innerhalb des Systems. Abschließend wird in Abschnitt 5 wird 
+dieses Projekt zusammengefasst und ein Ausblick auf zukünftige Forschungsmöglichkeiten gegeben, sowie mögliche 
+Erweiterungen des Systems gegeben.
+
+% Englisch
+%\section{Introduction}
+
+%%Ähnliche wie in der ersten Abgabe, gehört hier die Projekt-Idee mit zumindest folgenden Inhalten beschrieben:
+%%\begin{itemize}
+%%	\item\textbf{1. Absatz (Universum / Forschungsfeld): } \\
+%%	Im ersten Absatz soll das Univsersum / Forschungsfeld beschrieben werden, in dem sich das Position Paper befindet. Der Leser / die Leserin soll aus dem "großen Ganzen" an die eigentliche Problemstellung herangeführt werden und wissen, in welchem Themenfeld sich diese befindet. \\
+	
+%%	\textbf{\textit{ACHTUNG}}: Es ist in Ordnung, wenn die Studierenden das Universum / Forschungsfeld in mehr als nur einem Absatz herleiten. Es ist nur wichtig, dass folgende Regel eingehalten wird: ein Absatz beteht zumindest aus 3 Sätzen, wobei ein Satz aus maximal 30 Worten besteht.\\
+	
+%%	\item\textbf{2. Absatz (Problemstellung im Universum / Forschungsfeld): } \\
+%%	Im zweiten Teil wird dem Leser / der Leserin das Problem, welche im beschriebenen Universum / Forschungsfeld besteht, aufgezeigt bzw. beschrieben. Die Problemstellung gilt dabei als die Grundlage für das Position Paper, die hier beschrieben wird und die Methodik "WIE man es lösen würde" erklärt wird (in Kapitel 3). \\
+	
+%%	\textbf{\textit{ACHTUNG}}: Es ist in Ordnung, wenn die Studierenden die Problemstellung in mehr als nur einem Absatz herleiten. Es ist nur wichtig, dass folgende Regel eingehalten wird: ein Absatz beteht zumindest aus 3 Sätzen, wobei ein Satz aus maximal 30 Worten besteht.\\
+	
+%%	\item\textbf{3. Absatz (Lösungsansatz, um die Problemstellung zu bearbeiten): } \\
+%%	Im 3. Teil soll eine Idee bzw. ein möglicher Lösungsansatz "angeteasert" werden, mit dem man die beschriebene Problemstellung bearbeiten möchte. Dabei ist es wichtig, dass der beschriebene Lösungsweg realistisch bzw. umsetzbar und auch nachvollziehbar ist. Es soll ein möglicher Weg sein, den man gehen kann, um die Problemstellung zu bearbieten oder sich zumindest einer Lösung anzunähern. Der Leser bzw. die Leserin soll den Eindruck bekommen, dass die Problemstellung tatsächlich damit lösbar sei. \\
+	
+%%	\textbf{\textit{ACHTUNG}}: Es ist in Ordnung, wenn die Studierenden den Lösungsansatz in mehr als nur einem Absatz herleiten. Es ist nur wichtig, dass folgende Regel eingehalten wird: ein Absatz beteht zumindest aus 3 Sätzen, wobei ein Satz aus maximal 30 Worten besteht.
+
+%%	\item\textbf{Letzter Absatz (Aufbau des Position Papers): }\\
+%%	Jedes Paper hat zum Schluss einen Absatz, der beschreibt, wie das vorliegende Position Paper aufgebaut ist. Hier ein Beispiel aus einem Position Paper, das auf Englisch geschrieben wurde: \\
+	
+%%	The remainder of this paper is organised as fol- lows: Section II summarises the related work in the field. Next, in Section III, we present the Security Evaluation Framework and explain how it can be used to evaluate the security of SDN-components. Furthermore, we show the general applicability of the proposed framework in an experimental study in Section IV. Finally, in Section V we conclude our work and give an outline of future work in the field.
+	
+%%\end{itemize}
+
+%%\textbf{VORGABE}: dieses Kapitel soll genau eine A4-Seite benötigen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% THIS IS THE ORIGINAL ONE PAGER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\section{Einleitung und Problemhintergrund}
+
+%%Bei der ersten Aufgabenstellung sollen die Studierenden ihre Projekt-Idee in Form
+%%eines "One Pagers" (genau eine A4-Seite) beschreiben. Dabei sollen zumindest folgende
+%%Informationen / Inhalte im "One Pager" beschrieben werden:
+
+
+%%\begin{section}
+	%%\textbf{Forschungsfeld: }
+	%%Moderne Smart Offices nutzen heutzutage vermehrt Internet der Dinge / Internet of Things (IoT) und 
+	%%und Künstliche Intelligenz (KI) / Artificial Intelligence (AI), um Arbeitsumgebungen adaptiv zu	gestalten. 
+	%%Während bestehende Lösungen \cite{hasiwar2023towards} allgemeine Automatisierung bieten, fehlt es an zielgruppenspezifischer Anpassung
+	%%für neurodivergente Personen (z.B. Aufmerksamkeitsdefizit- / Hyperaktivitätsstörung (ADHS), Autismus) und Menschen die nach einem Burnout wieder an ihren Arbeitsplatz zurückkehren. Raumgestaltung
+	%%muss multisensorisch gedacht werden, nicht nur Funktion und Ästetik prägen unsere Wahrnehmung, sondern auch Sinne
+	%%wie z.B. Klang und Licht beeinflussen unsere Reaktion darauf.	Die Arbeitswelt ignoriert bislang häufig, eine 
+	%%individuell angepasste Umgebung, um das Wohlbefinden zu stärken und produktives Potenzial zu entfalten. \\
+
+	%%Im ersten Absatz soll das Univsersum / Forschungsfeld beschrieben
+	%%werden, in dem sich die Projektarbeit befindet. Der Leser / die Leserin 
+	%%soll aus dem "großen Ganzen" an die eigentliche Problemstellung herangeführt 
+	%%werden und wissen, in welchem Themenfeld sich diese befindet. \\
+	
+	%%\textbf{\textit{ACHTUNG}}: 
+	%%Es ist in Ordnung, wenn die Studierenden das Universum 
+	%%/ Forschungsfeld in mehr als nur einem Absatz herleiten. Es ist nur wichtig, dass 
+	%%folgende Regel eingehalten wird: ein Absatz beteht zumindest aus 3 Sätzen, wobei ein 
+	%%Satz aus maximal 30 Worten besteht.\\
+	
+	%%\textbf{Problemstellung im Forschungsfeld: } 
+	%%Aktuelle Smart Office Lösungen sind auf Effizienz und Komfort ausgerichtet, 
+	%%berücksichtigen jedoch nicht, die heterogenen Bedürfnisse neurodivergenter Personen und 
+	%%Burnout-Rückkehrer:innen, zu adressieren. Studien zeigen, dass z.B. ADHS-Betroffene 
+	%%durch sensorische Überlastung (z.B. fluoreszierende Beleuchtung, plötzliche Geräusche) 
+	%%mehr zu Konzentrationsverluste neigen, als neurotypische Personen.
+	%%Trotz dieser Evidenz fehlen Lösungen, die Echtzeit-Anpassungen (z.B. dynamische Lichtsteuerung,
+	%%akustische Geräuschkulisse) ermöglichen.
+	%%Für Autist:innen sind unstrukturierte Arbeitsabläufe und spontane soziale Interaktionen,
+	%%eine zentrale Stressquelle. Bestehende Systeme bieten jedoch kaum Tools zur Visualisierung 
+	%%von Tagesplänen, oder zur Abschirmung von Unterbrechungen, obwohl dies die Produktivität 
+	%%steigern könnte. Gleichzeitig kämpfen Burnout-Rückkehrer:innen mit starren 
+	%%Arbeitszeitmodellen und unklaren Priorisierungen, die Rückfallrisiken erhöhen. Bei den
+	%%gewählten drei Userprofilen sind verschiedene Bedürfnisse und Herausforderungen zu
+	%%berücksichtigen, wo individuelle Anpassungen kontrolliert Reize steuern. \\
+
+	%%Universum / Forschungsfeld besteht, aufgezeigt bzw. beschrieben. Die Problemstellung
+	%%gilt dabei als die Grundlage für die Projekt-Arbeit, die es im Zuge des 2. Semesters
+	%%zu lösen gilt. Die Lösung soll dabei mittels einer technischen Umsetzung (z.B.: einem 
+	%%Prototypen bzw. einer Demo) demonstriert werden. \\
+	
+	%%\textbf{\textit{ACHTUNG}}: Es ist in Ordnung, wenn die Studierenden die Problemstellung
+	%%in mehr als nur einem Absatz herleiten. Es ist nur wichtig, dass folgende Regel eingehalten 
+	%%wird: ein Absatz beteht zumindest aus 3 Sätzen, wobei ein Satz aus maximal 30 Worten besteht.\\
+	
+	%%\textbf{Lösungsansatz: } 
+	%%In diesem Paper wird ein Cloud-basierter Prototyp für ein Smart Office vorgestellt, dieser 
+	%%soll die identifizierten Lücken durch eine IoT-Architektur adressieren und eine Umgebungsanpassung 
+	%%in Echtzeit ermöglicht. 
+	%%Ein Dashboard soll je nach Userprofil Funktionalitäten, wie z.B. Aufgabenpriorisierung,
+	%%Tagesplänen, Raumstatus abbilden und Reizüberflutung präventiv entgegenwirken.
+	%%Durch individuelle Anpassungen (z.B. Licht, Musik, Raumtemperatur), welche in einem Userprofil
+	%%hinterlegt sind, können äußere Reize minimiert und die Produktivität, sowie das 
+	%%Wohlbefinden gesteigert werden. Weiters wird durch Sensoren eine dynamische Lichtsteuerung
+	%%ermöglicht, die sich u.a. an die jeweilige Tageszeit und äußere Lichteinstrahlung anpasst.\\
+	%%Die Architektur verzichtet auf komplexe Orchestrierung (Kubernetes) zugunsten 
+	%%schlanker Amazon Web Service (AWS)-Dienste. Nutzer:innen behalten via Opt-in-System die 
+	%%Kontrolle über ihre Daten, die ausschließlich lokal oder verschlüsselt im Simple Storage Service (S3) 
+	%%gespeichert werden sollen. Der Unterschied zu bestehenden Lösungen liegt in der 
+	%%Intersektionalität, statt isolierter Anpassungen integriert das System Parameter 
+	%%zur psychologischen Präventionsstrategien in eine einheitliche Plattform. \\
+	
+
+	%%{TODO: Feedback Igor -- Überlegt euch was und wie ihr evalierungen wollt:
+	%% Was -- Differenzierung -- Wie -- Vergleich mit bestehender Lösung , Referenzmatrix/-modell 
+	%% Performance -- Tools wie JMeter oder AWS CloudWatch würden sich glaub anbieten
+	%% Ethik -- Was -- Einhaltung Privatsphäre -- Wie -- Ethik Review
+	%% Usability -- Was -- Usability wie Verständlich ist das Dashboard aufgebaut -- Wie -- Befragung/Fragebogen
+	%% Barrierefreiheit -- Was -- WCAG konform?(https://www.w3.org/WAI/standards-guidelines/wcag/) -- Wie --automatisierte Accessibility Tests}
+	
+%%% https://wave.webaim.org/
+%% https://www.deque.com/axe/
+
+	%%{TODO Feedback Abschlussabsatz}
+	%%Beim Position Paper wäre es schön, wenn ihr eure Einleitung mit folgendem Absatz beendet 
+	%%(das Beispiel ist auf Englisch....ihr müsst es natürlich auf Deutsch. machen):
+	%%The reminder of the position paper is organised as follows: Section 2 summarises the 
+	%%related work in the field. Next, in Section 3, we describe our experimental design where
+	%%we introduce an experimental testbed and explain how it could be used in a cost-benefit analysis.
+	%%Furthermore, we give an overview of potential stakeholders in an additive MaaS ecosystem including 
+	%%a profit sharing approach. Finally, in Section 4 we conclude our work and give an outline of 
+	%%future work in the field.
+	%%Ihr gebt also dem Leser einen Überblick, was als nächstes kommt, wenn er/sie weiterliest
+	
+	%%{TODO: Feedback Abschlussabsatz -- Erster Ansatz schnell zusammengeschrieben, bitte überarbeiten}
+	%%In Abschnitt 2 wird zunächst ein Überblick über die bestehende Lösung und ein Einblick in den Bereich
+	%%der Smart Offices für neurodivergente Menschen und Burnout-Rückkehrer:innen gegeben. Abschnitt 3 stellt
+	%%das Konzept unseres Cloud-basierten Prototypen vor, der die identifizierten Lücken adressiert. Abschnitt 4 
+	%%schließt mit einer Diskussion möglicher Interessensgruppen und potenzielle Nutzer:innen und der Rolle
+	%%von präventiven psychologischen Strategien innerhalb des Systems. Abschließend wird in Abschnitt 5 wird 
+	%%dieses Projekt zusammengefasst und ein Ausblick auf zukünftige Forschungsmöglichkeiten gegeben, sowie mögliche 
+	%%Erweiterungen des Systems gegeben.
+
+
+	%%Im letzten Teil soll eine Idee bzw. ein möglicher Lösungsansatz präsentiert und beschrieben 
+	%%werden, mit dem man die beschriebene Problemstellung bearbeiten möchte. Dabei ist es wichtig, 
+	%%dass der beschriebene Lösungsweg realistisch bzw. umsetzbar und auch nachvollziehbar ist. Es 
+	%%soll ein möglicher Weg sein, den man gehen kann, um die Problemstellung zu bearbieten oder sich
+	%%zumindest einer Lösung anzunähern. \\
+	
+	%%\textbf{\textit{ACHTUNG}}: Es ist in Ordnung, wenn die Studierenden den Lösungsansatz in
+	%%mehr als nur einem Absatz herleiten. Es ist nur wichtig, dass folgende Regel eingehalten 
+	%%wird: ein Absatz beteht zumindest aus 3 Sätzen, wobei ein Satz aus maximal 30 Worten besteht.
+
+	
+
+%%\item\textbf{Quellen:}
+
+%%\href{https://arxiv.org/pdf/2403.18883=#}{Towards a Cloud-Based Smart Office Solution for Shared
+%%Workplace Individualization}
+
+%%\href{https://diversicon.de/neurodiversitat-in-unserer-arbeitswelt/}{Neurodiversität in unserer Arbeitswelt}
+
+%%ref{https://karriere.myability.jobs/karrieretipps/adhs-und-autismus-im-arbeitsalltag}{ADHS und Autismus im Arbeitsalltag}
+
+%%ref{https://hire.workwise.io/hr-praxis/organisationsentwicklung/neurodiversitaet?06566da5_page=8&859db596_page=1}{Neurodiversität am Arbeitsplatz}
+
+%%\href{https://www.nachhaltigejobs.de/neurodiversitaet-im-job/m}{Neurodiversität im Job}
+
+%%\href{https://hushoffice.com/de/burogestaltung-fur-eine-neurodiverse-belegschaft/}{Bürogestaltung für eine neurodiverse Belegschaft}
+%%Neuy-Lobkowicz, Astrid. "Leben Mit ADHS." Die Heilberufe. 76.6 (2024): 16–19. Web.
+%%ADHD at the workplace: ADHD symptoms, diagnostic status, and work-related functioning
+%%von Fuermaier, Anselm B. M.; Tucha, Lara; Butzbach, Marah ; 
+
+%%Journal of Neural Transmission, 07/2021, Band 128, Ausgabe 7
+%%Adults diagnosed with attention-deficit/hyperactivity disorder (ADHD) commonly experience impairments in multiple domains of daily living. Work has a central...
+
+%%Die Aufmerksamkeitsdefizit‑/Hyperaktivitätsstörung (ADHS) am Arbeitsplatz
+%%von Stockreiter, D.; Reuss, F.; Holzgreve, F.; 
+%%Zentralblatt für Arbeitsmedizin, Arbeitsschutz und Ergonomie, 09/2024, Band 74, Ausgabe 5
+
+%%Yildirim, Murat, and Fatma Solmaz. "COVID-19 Burnout, COVID-19 Stress and Resilience: 
+%%Initial Psychometric Properties of COVID-19 Burnout Scale." Death studies. 46.3 (2022): 524–532. Web.
+
+%%Cheng, Newton. "The Journey to Burnout and Back." American journal of health promotion: 
+%%AJHP. 37.4 (2023): 569–571. Web.
+
+
+%%\end{section}
+
+%%\bibliographystyle{plain}
+%%\bibliography{bibliography}
