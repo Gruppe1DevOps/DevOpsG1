@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.3.11)  18 APR 2025 13:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.3.11)  20 APR 2025 00:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -979,64 +979,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--22
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 25--27
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--32
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--34
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 41--42
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--64
+Underfull \hbox (badness 10000) in paragraph at lines 59--77
 
  []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 65.
+(Font)              scaled to size 9.0pt on input line 78.
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 89--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--124
+
+ []
 
 
 
@@ -1048,26 +1040,6 @@ Package fancyhdr Warning: \headheight is too small (13.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.64952pt}.
 
 [2.2{C:/Users/susan/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 69--71
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 74--75
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 76--80
-
- []
-
-
 
 [3.3] (main.bbl
 
@@ -1097,13 +1069,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  20883 strings out of 473523
  338236 string characters out of 5714630
- 781996 words of memory out of 5000000
+ 783996 words of memory out of 5000000
  43472 multiletter control sequences out of 15000+600000
  634040 words of font info for 134 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 90i,11n,131p,1097b,601s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,11n,131p,1097b,611s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/susan/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/susan/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/susan/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/susan/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb>
-Output written on main.pdf (4 pages, 296274 bytes).
+Output written on main.pdf (4 pages, 296120 bytes).
 PDF statistics:
  82 PDF objects out of 1000 (max. 8388607)
  20 named destinations out of 1000 (max. 500000)
