@@ -1,4 +1,4 @@
-\documentclass[nonacm]{acmart}
+\documentclass{article}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
@@ -6,46 +6,46 @@
   \providecommand\BibTeX{{%
     \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
 
-%%
-%% These commands are for a JOURNAL article.
-%% PLEASE IGNORE THEM!
-\acmJournal{TOIT}
-\acmVolume{37}
-\acmNumber{4}
-\acmArticle{111}
-\acmMonth{8}
 
 %%
 %% end of the preamble, start of the body of the document source.
 \usepackage{textcomp}
 \usepackage{multirow}
 \usepackage{array}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{blindtext}
+\usepackage[ngerman]{babel}
 \usepackage{hyperref}
-\usepackage{ragged2e}
-\usepackage{geometry}
-\geometry{
-  a4paper,
-  margin=3.5cm  
+
+\hypersetup{
+    colorlinks=true,     % true: colored links, false: red boxes
+    linkcolor=black,      % color of internal links
+    citecolor=black,     % color of citation links
+    urlcolor=black     % color of URL links
 }
 
-\setcopyright{none}
-\settopmatter{printacmref=false} % Removes citation information below abstract
-\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%Definition of Colors - Start
 \pagestyle{plain}
 
 \begin{document}
+
 \input{section/title}
 \input{section/authors}
 
-%\setcounter{footnote}{1} % reset footnote counter
-%\footnotetext{\textbf{Hasiwar, D., Gruber, A., Dragschitz, C. and Ivkic, I. (2023) Towards a Cloud-Based Smart Office Solution for Shared Workplace Individualization. In: Proceedings of the 2023 ACM Conference.}} % footer text
-
-\settopmatter{printfolios=true} % page numbers
 \maketitle
+
+\newpage
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\tableofcontents
+\newpage
 \input{section/projekt-idee}
+\newpage
+\renewcommand{\refname}{Literaturverzeichnis}
+\input{section/references}
 
 \end{document}
-
 \endinput
 %%
-%% End of file 
+%% End of file `sample-acmlarge.tex'.
