@@ -1,5 +1,5 @@
 \newpage
-\section{Aufgabenstellung 1}
+\section{Aufgabenstellung 1 Taucher}
 
 %% Gruppengröße die bereits geformten Teams
 %% Alle verwendeten Quellen sind anzugeben.
@@ -20,12 +20,60 @@ Fragestellung: Welche bereits vorgestellten bzw. zusätzlich recherchierte Vorge
 schnelles Iterieren und somit die Möglichkeit Feedback zeitnah durch die jeweiligen Stakeholder
 einzubringen? Zusätzlich soll auch darauf eingegangen werden, weshalb die gewählten
 Vorgehensmodelle dies im Vergleich zu anderen Modellen ermöglichen.
+\\
+
+\paragraph{Scrum}
+
+
+
+\paragraph{Extreme Programming}
+
+
+\paragraph{Test-Driven Development}
+
+
+\paragraph{Kanban}
+
 
 
 \subsubsection{Extreme Programming}
 
 Fragestellung: Beschreiben Sie mindestens 3 Praktiken aus Extreme Programming im Detail und den Einfluss
 die diese Praktik auf die Softwareentwicklung und dem Ergebnis haben.
+
+\paragraph{Pair Programming}
+Beim Pair Programming arbeiten zwei Entwickler gemeinsam an einem Computer. Eine Person (der "Driver") schreibt den Code, während die andere Person (der "Navigator") den Code überprüft, Probleme identifiziert und strategische Entscheidungen trifft. Die Rollen werden regelmäßig gewechselt.
+
+\textbf{Einfluss auf die Softwareentwicklung:}
+\begin{itemize}
+    \item \textbf{Verbesserte Codequalität:} Durch kontinuierliches Review werden Fehler früher erkannt und behoben.
+    \item \textbf{Wissenstransfer:} Entwickler lernen voneinander, was zu einer breiteren Verteilung von Wissen im Team führt.
+    \item \textbf{Bessere Lösungsansätze:} Durch die Kombination verschiedener Perspektiven entstehen oft kreativere und effizientere Lösungen.
+    \item \textbf{Reduzierte technische Schulden:} Die kontinuierliche Überprüfung verhindert Abkürzungen und schlechte Praktiken.
+\end{itemize}
+
+\paragraph{Continuous Integration (CI)}
+Bei der Continuous Integration werden Codeänderungen mehrmals täglich in ein gemeinsames Repository integriert. Nach jeder Integration werden automatisierte Tests durchgeführt, um sicherzustellen, dass die Änderungen keine Fehler verursachen.
+
+\textbf{Einfluss auf die Softwareentwicklung:}
+\begin{itemize}
+    \item \textbf{Frühe Fehlererkennung:} Probleme werden unmittelbar nach ihrer Entstehung identifiziert, was die Behebungskosten drastisch reduziert.
+    \item \textbf{Reduzierte Integrationszeit:} Durch häufige kleine Integrationen werden große, problematische Merges vermieden.
+    \item \textbf{Höhere Softwarestabilität:} Die Software bleibt kontinuierlich in einem funktionsfähigen Zustand.
+    \item \textbf{Schnelleres Feedback:} Entwickler erhalten unmittelbare Rückmeldung zu ihren Änderungen.
+\end{itemize}
+
+\paragraph{Test-Driven Development (TDD)}
+Bei TDD werden Tests geschrieben, bevor der eigentliche Code implementiert wird. Der Entwicklungsprozess folgt einem "Red-Green-Refactor"-Zyklus: Zuerst wird ein fehlschlagender Test geschrieben (Red), dann wird gerade genug Code implementiert, um den Test zu bestehen (Green), und schließlich wird der Code verbessert, ohne seine Funktionalität zu ändern (Refactor).
+
+\textbf{Einfluss auf die Softwareentwicklung:}
+\begin{itemize}
+    \item \textbf{Klarere Anforderungen:} Das Schreiben von Tests zwingt Entwickler, die Anforderungen genau zu verstehen.
+    \item \textbf{Besseres Design:} TDD fördert modularen, entkoppelten Code, der leichter zu testen ist.
+    \item \textbf{Umfassende Testabdeckung:} Jede Funktionalität wird durch Tests abgedeckt, was zu robusterer Software führt.
+    \item \textbf{Dokumentation durch Tests:} Tests dienen als lebende Dokumentation, die zeigt, wie der Code verwendet werden soll.
+    \item \textbf{Sicherheit bei Refactoring:} Entwickler können Code mit Vertrauen umgestalten, da Tests Regressionen aufdecken.
+\end{itemize}
 
     %% possibile quellens:
     %% https://www.it-agile.de/agiles-wissen/agile-entwicklung/was-ist-extreme-programming/
@@ -42,6 +90,39 @@ Diese Informationen fassen Sie bitte in 1 bis maximal 2 Seiten zusammen
 \subsubsection{Git Features}
 
 Fragestellung: Beschreiben Sie Git im Detail sowie mindestens 2 Features im Detail.
+
+\paragraph{Was ist Git?}
+Git ist ein verteiltes Versionskontrollsystem, das 2005 von Linus Torvalds entwickelt wurde.
+Es ermöglicht die Verwaltung von Änderungen an Dateien und Projekten,
+wobei jeder Entwickler eine vollständige Kopie des Projekts und seiner Historie auf seinem lokalen System hat.
+Git ist besonders für seine Geschwindigkeit, Datenintegrität und Unterstützung für nicht-lineare, verteilte Workflows bekannt \cite{github-git}.
+
+\paragraph{Feature 1: Branching und Merging}
+Git bietet ein leistungsfähiges Branching-System, das es ermöglicht, parallele Entwicklungslinien zu erstellen und zu verwalten.
+Branches sind leichtgewichtige Zeiger auf einen bestimmten Commit. Entwickler können schnell neue Branches erstellen,
+zwischen ihnen wechseln und sie zusammenführen. Dies ermöglicht:
+
+    \begin{itemize}
+        \item Isolierte Entwicklung neuer Features
+        \item Experimentieren ohne Risiko für den Hauptcode
+        \item Parallele Arbeit an verschiedenen Aspekten des Projekts
+        \item Einfaches Zusammenführen von Änderungen durch Merging
+    \end{itemize}
+
+    \paragraph{Feature 2: Distributed Version Control}
+    Git ist ein vollständig verteiltes System, was bedeutet, dass jeder Entwickler eine vollständige Kopie des Repositories besitzt. Dies bietet mehrere Vorteile:
+
+    \begin{itemize}
+        \item Offline-Arbeit ist möglich
+        \item Schnelle Operationen durch lokale Ausführung
+        \item Redundanz und Backup durch multiple Kopien
+        \item Flexible Workflow-Möglichkeiten
+        \item Keine zentrale Schwachstelle
+    \end{itemize}
+
+
+
+
     %% possibile quellens:
     %% https://docs.github.com/en/get-started/using-git/about-git
     %% https://www.geeksforgeeks.org/git-features/
