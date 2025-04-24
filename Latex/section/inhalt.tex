@@ -187,7 +187,6 @@ Es existiert eine große Vielfalt an unterschiedlichen Methoden. Zur Vereinfachu
     Retrospective  & RS               \\ \hline
     Specification by example  & SBE               \\ \hline
     Story-driven modeling  & SDM               \\ \hline
-    Test-driven modeling   & TDD               \\ \hline
     Timeboxing   & TB               \\ \hline
     Velocity tracking   & VT               \\ \hline
     \end{tabular}
@@ -221,6 +220,34 @@ DDD findet oft Anwendung beim Entwurf von Microservice-Architekturen, da es eine
 \textbf{IID} ist die Sammelbezeichnung für unterschiedliche Konzepte und Modelle für iterative und inkrementelle Vorgehensmodelle in der Softwareentwicklung. 
 Diese verschiedenen Ansätze sind aber alle der Versuch eines Gegenmodelles zum traditionellen Ansatz einer gleichzeitigen In-tegration aller Teilkomponenten zum Abschluss des Projektes. 
 Durch kleine, häufige Schritte und Auslieferung von Teilsystemen, soll eine sequenzielle, dokumentengesteuerte Auslieferung in einem Durchgang vermieden werden. \cite{Larman2003-fg}
+\newline
+\textbf{PlP}  ist Teil der Planungsmeetings für die nächste Iteration und dient der Schätzung der Zeitres-sourcen, die notwendig sind, um ein neues Feature zu implementieren. 
+Die Kalkulation erfolgt zumeist in sogenannten Story Points, die in der Regel einem idealen Arbeitstag entsprechen. 
+Zumeist werden für die Schätzung vordefinierte Werte wie die Fibonacci-Folge verwendet.
+\cite{Mahnic2012-ve}
+\newline
+\textbf{RF} ist der Prozess, in dem der Quellcode so umstrukturiert wird, dass die interne Codequalität und Struktur der Software verbessert wird, dabei aber das externe Verhalten, das für die Benutzer ersichtlich ist, gleichbleibt. 
+Ziel ist es, die Wartungskosten zu verringern und die Lebensdauer der Software zu verlängern.\cite{Kaur2019-wy}
+\newline
+\textbf{RS} sind Meetings bzw. Aktivitäten zur Erfahrungssicherung der Teammitglieder. 
+Oft auch als Post-Mortems bezeichnet, in der die Probleme sowie Ursachen eines abgeschlossenen Projektes oder einer Softwareiteration analysiert werden. 
+Es sollen durch diese Untersuchung sowohl die Erfolgsfaktoren als auch die Auslöser von Problemen erkannt werden.\cite{Lehtinen2014-ou}
+\newline
+\textbf{SBE} ist ein Leitfaden oder eine kollaborative Methode, deren oberstes Ziel die Entwicklung von Software ist, welche die Kundenanforderungen erfüllt. 
+Es wird hier mit Workshops gearbeitet, in denen die verschiedenen Rollen und Standpunkte vertreten sind und die gemeinsam spezifischen Szenarien der Nutzung anhand von Beispielen entwerfen. 
+Mit Hilfe dieser Szenarien sollen fol-gend die automatisierten und funktionalen Tests entwickelt werden. Ziel ist es, eine Dokumentation zu erstellen, 
+die in der Sprache der jeweiligen Fachdomäne geschrieben wurde und auch von Personen aus den Fachabteilungen, die keine Programmierer sind, gelesen werden kann.\cite{Blasquez2017-og,Bache2014-cp}
+\newline
+Im Gegensatz zu anderen Arten der objektorientierten Modellierung wird im \textbf{SDM} die Struktur nicht durch statische Klassendiagramme und der Beziehung dieser Klassen zueinander Wert gelegt, sondern auf die Erstellung von spezifischen Beispielen, die Szenarien in der Nutzung abbilden. 
+Zudem sollen die daraus entstehenden Objektdiagramme sich im Laufe des Szenarios und der Ausführung der Software weiterentwickeln.\cite{Wautelet2017-rv}
+\newline
+\textbf{TB} ist die Definition eines Zeitrahmens oder einer Zeitphase, die innerhalb der Projektplanung für gewisse Vorgänge genutzt werden darf. Es wird hier ein Zeitbudget für die jeweiligen Aufgaben erstellt. 
+Insbesondere im Scrum und der agilen Softwareentwicklung wird Timeboxing für einzelne Vorgänge wie Meetings und Iterationszyklen verwendet. \cite{Miranda2011-yh}
+\newline
+\textbf{VT} ist die Messung und Darstellung der Team Performanz. Zwei für die Darstellung verwendete Methoden sind Burn-Down und Burn-Up Charts.\cite{Al-Sabbagh2018-bd}
+\newline
+
+Bei diesen verschiedenen Praktiken ist ersichtlich, dass einige bereits die Produktivität (z.B. IID, VT, PlP, BL), Ergebnisorientierung (z.B.: RF, TB) sowie die Weiterentwicklung der Teams (z.B.: RF, PP, AT, AM) innerhalb der agilen Softwareentwicklung mitgedacht bzw. angedacht haben.
 \subsubsection{Extreme Programming}
 
 \textbf{Fragestellung:} \textit{Beschreiben Sie mindestens 3 Praktiken aus Extreme Programming im Detail und den Einfluss
