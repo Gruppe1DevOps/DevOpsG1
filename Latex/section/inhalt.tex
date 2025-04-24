@@ -19,6 +19,12 @@ Agile Software Entwicklung setzt sich aus an Agilität ausgerichteten Methoden u
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
 \subsubsection{Vorgehensmodelle}
+\textbf{Fragestellung:} \textit{Welche bereits vorgestellten bzw. zusätzlich recherchierte Vorgehensmodelle ermöglichen ein
+schnelles Iterieren und somit die Möglichkeit Feedback zeitnah durch die jeweiligen Stakeholder
+einzubringen? Zusätzlich soll auch darauf eingegangen werden, weshalb die gewählten
+Vorgehensmodelle dies im Vergleich zu anderen Modellen ermöglichen.}
+\\
+
 Aufbauend auf das agile Manifest haben sich eine Vielzahl von Frameworks für das Management der agilen Prozesse entwickelt. 
 Diese sind mit Fokus auf die Software Entwicklung entstanden, haben aber ihren Weg auch schon in andere Bereiche angetreten. 
 Einige ausgewählte Frameworks sollen nachfolgenden kurz präsentiert werden. 
@@ -51,7 +57,8 @@ als Hauptaktivitäten der Entwickler fest: Refactoring, neues Design, Beheben vo
 sowie Funktionstests, um die Funktionstüchtigkeit des Produktes sicherzustellen. \cite{Alshayeb2006-nt}
 \newline
 Das \textbf{FDD} hat sich aus der Coad Methode von Peter Coad entwickelt und besteht nur aus zwei Hauptphasen. 
-Der Entdeckungsphase und der Implementierungsphase. Hauptaugenmerk wird dabei auf die Entdeckungsphase gelegt, da hier sowohl die Liste der Features erstellt wird, als auch die UML-Diagramme der spezifischen Kundendomäne. 
+Der Entdeckungsphase und der Implementierungsphase. Hauptaugenmerk wird dabei auf die Entdeckungsphase gelegt, da hier sowohl die 
+Liste der Features erstellt wird, als auch die UML-Diagramme der spezifischen Kundendomäne. 
 Die Mitwirkung des Kunden ist besonders wichtig, damit die Wartbarkeit und Erweiterbarkeit des Codes im weiteren Projektverlauf gewährleistet werden kann. 
 Die verwendete Sprache sollte von sowohl von Entwickler:innen, als auch von Kundenseite verstanden werden. \cite{Chowdhury2011-hg}
 \newline
@@ -157,11 +164,6 @@ Implementation von Large Scale Agile Frameworks \cite{Conboy2019-uw,Kasauli2021-
     \item Fehlende Abstimmung zwischen Kundenprozessen und Frameworks
 \end{itemize}
 
-\textbf{Fragestellung:} Welche bereits vorgestellten bzw. zusätzlich recherchierte Vorgehensmodelle ermöglichen ein
-schnelles Iterieren und somit die Möglichkeit Feedback zeitnah durch die jeweiligen Stakeholder
-einzubringen? Zusätzlich soll auch darauf eingegangen werden, weshalb die gewählten
-Vorgehensmodelle dies im Vergleich zu anderen Modellen ermöglichen.
-\\
 
 \paragraph{Scrum}
 
@@ -179,8 +181,8 @@ Vorgehensmodelle dies im Vergleich zu anderen Modellen ermöglichen.
 
 \subsubsection{Extreme Programming}
 
-\textbf{Fragestellung:} Beschreiben Sie mindestens 3 Praktiken aus Extreme Programming im Detail und den Einfluss
-die diese Praktik auf die Softwareentwicklung und dem Ergebnis haben.
+\textbf{Fragestellung:} \textit{Beschreiben Sie mindestens 3 Praktiken aus Extreme Programming im Detail und den Einfluss
+die diese Praktik auf die Softwareentwicklung und dem Ergebnis haben.}
 
 \paragraph{Pair Programming}
 Beim Pair Programming arbeiten zwei Entwickler gemeinsam an einem Computer. Eine Person (der Driver) schreibt den Code, 
@@ -241,12 +243,14 @@ Fragestellung: Beschreiben Sie Git im Detail sowie mindestens 2 Features im Deta
 Git ist ein verteiltes Versionskontrollsystem, das 2005 von Linus Torvalds entwickelt wurde.
 Es ermöglicht die Verwaltung von Änderungen an Dateien und Projekten,
 wobei jeder Entwickler eine vollständige Kopie des Projekts und seiner Historie auf seinem lokalen System hat.
-Git ist besonders für seine Geschwindigkeit, Datenintegrität und Unterstützung für nicht-lineare, verteilte Workflows bekannt \cite{github-git}.
+Git ist besonders für seine Geschwindigkeit, Datenintegrität und Unterstützung für nicht-lineare, verteilte 
+Workflows bekannt. \cite{github-git}
 
 \paragraph{Feature 1: Branching und Merging}
-Git bietet ein leistungsfähiges Branching-System, das es ermöglicht, parallele Entwicklungslinien zu erstellen und zu verwalten.
-Branches sind leichtgewichtige Zeiger auf einen bestimmten Commit. Entwickler können schnell neue Branches erstellen,
-zwischen ihnen wechseln und sie zusammenführen. Dies ermöglicht:
+Git bietet ein leistungsfähiges Branching-System, das es ermöglicht, parallele Entwicklungslinien 
+zu erstellen und zu verwalten. Branches sind leichtgewichtige Zeiger auf einen bestimmten Commit. 
+Entwickler können schnell neue Branches erstellen, zwischen ihnen wechseln und sie zusammenführen. 
+Dies ermöglicht:
 
     \begin{itemize}
         \item Isolierte Entwicklung neuer Features
@@ -278,7 +282,7 @@ zwischen ihnen wechseln und sie zusammenführen. Dies ermöglicht:
 
 \subsubsection{Qualitätssteigernde Maßnahmen}
 
-Fragestellung: Welche qualitätssteigenden Maßnahmen kennen Sie? Beschreiben Sie 2 beliebige im Detail.
+\textbf{Fragestellung:} \textit{Welche qualitätssteigenden Maßnahmen kennen Sie? Beschreiben Sie 2 beliebige im Detail.}    
 
    %% possibile quellens:
     %% code review https://about.gitlab.com/topics/version-control/what-is-code-review/
@@ -313,7 +317,7 @@ aufgenommen.\\
 
 \subsubsection{Mögliche Probleme in der aktuellen Organisation und Arbeitsaufteilung}
 
-\textbf{Fragestellung:} Beschreibe kurz mögliche Probleme in der aktuellen Organisation und Arbeitsaufteilung
+\textbf{Fragestellung:} \textit{Beschreibe kurz mögliche Probleme in der aktuellen Organisation und Arbeitsaufteilung}
     
 %% mögliche Problems:
 %% Manuelles deployn -- Fehleranfällig -- Mensch 
@@ -322,8 +326,8 @@ aufgenommen.\\
 %% alle 3 Monate wird ausgeliefert - keine Continuous Delivery
 
 \subsubsection{Notwendige Schritte um in dieser Organisation DevOps einzuführen}
-\textbf{Aufgabenstellung:} Beschreibe die notwendigen Schritte um in dieser Organisation DevOps (bis einschließlich
-Continuous Delivery) einzuführen.
+\textbf{Fragestellung:} \textit{Beschreibe die notwendigen Schritte um in dieser Organisation DevOps (bis einschließlich
+Continuous Delivery) einzuführen.}
 
     %% mögliche Schritte:
     %% Verantwortungen neu definieren
@@ -335,7 +339,7 @@ Continuous Delivery) einzuführen.
 
 \subsubsection{Reihenfolge der Schritte}
 
-\textbf{Fragestellung:} Welche Schritte sind in welcher Reihenfolge notwendig?
+\textbf{Fragestellung:} \textit{Welche Schritte sind in welcher Reihenfolge notwendig?}
     %% mögliche Reihenfolge:
     %% Testautomatisierung - unit tests, performance, ui,...
     %% CI/CD Pipeline - Automatisierung des Builds und Deployment
@@ -347,7 +351,7 @@ Continuous Delivery) einzuführen.
 
 \subsubsection{Benötigte Tools}
 
-\textbf{Fragestellung:} Welche Tools werden hierzu benötigt?
+\textbf{Fragestellung:} \textit{Welche Tools werden hierzu benötigt?}
     %% mögliche Tools:
     %% Jenkins
     %% Git
@@ -358,10 +362,10 @@ Continuous Delivery) einzuführen.
 
 \subsubsection{Wesentliche Stakeholder und Argumente}
 
-\textbf{Fragestellung:} Beachte das solche Änderung Schritt für Schritt eingeführt werden müssen damit diese
+\textbf{Fragestellung:} \textit{Beachte das solche Änderung Schritt für Schritt eingeführt werden müssen damit diese
 erfolgreich sein können. Ebenso müssen die wesentlichen Stakeholder überzeugt werden.
 Identifiziere die wesentlichen Stakeholder und liefere ihnen Argumente, die sie davon
-überzeugen das die Einführung von DevOps Praktiken vorteilhaft ist.
+überzeugen das die Einführung von DevOps Praktiken vorteilhaft ist.}
 
     %% Stakeholder:
     %% Geschäftsführung
