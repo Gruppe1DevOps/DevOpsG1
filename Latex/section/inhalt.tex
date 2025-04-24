@@ -102,7 +102,7 @@ dabei auf folgende Parameter \cite{Ibrahim2020-ip}:
     \item \textbf{Talente und Kommunikation }
 \end{itemize}
 Die Methoden von Crystal werden nach Farben benannt und nach der Größe des Projektes und der Anzahl der Projektmitarbeiter*Innen eingeteilt.
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \caption{CS-Diagramm}
         \includegraphics[width=0.5\textwidth]{fig/CSD.png}
@@ -164,21 +164,45 @@ Implementation von Large Scale Agile Frameworks \cite{Conboy2019-uw,Kasauli2021-
     \item Fehlende Abstimmung zwischen Kundenprozessen und Frameworks
 \end{itemize}
 
-
-\paragraph{Scrum}
-
-
-
-\paragraph{Extreme Programming}
-
-
-\paragraph{Test-Driven Development}
-
-
-\paragraph{Kanban}
-
-
-
+\subsubsection{Agile Methoden und Praktiken}
+Es existiert eine große Vielfalt an unterschiedlichen Methoden. Zur Vereinfachung werden diese kurz in Englisch angeführt:
+\begin{table}[h!]
+    \centering
+    \caption{Tabellarische Auflistung agiler Methoden}
+    \label{tab:agile-methods}
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Methoden} & \textbf{Abkürzung} \\ \hline
+    Acceptance test-driven development  & ATDD                 \\ \hline
+    Agile modeling    & AM                \\ \hline
+    Agile testing             & AT          \\ \hline
+    Backlogs & BL                \\ \hline
+    Behavior-driven development & BDD                 \\ \hline
+    Continuos integration        & CI                \\ \hline
+    Cross-Functional Team     & CFT                \\ \hline
+    Domain-driven design   & DDD               \\ \hline
+    Planning poker  & PlP               \\ \hline
+    Refactoring  & RF               \\ \hline
+    Retrospective  & RS               \\ \hline
+    Specification by example  & SBE               \\ \hline
+    Story-driven modeling  & SDM               \\ \hline
+    Test-driven modeling   & TDD               \\ \hline
+    Timeboxing   & TB               \\ \hline
+    Velocity tracking   & VT               \\ \hline
+    \end{tabular}
+\end{table} 
+\newline
+\textbf{ATTD:} Hierbei handelt es sich um eine Methode, welche großen Wert auf die Kommunikation der Kund*Innen, Entwickler*Innen und Tester*Innen legt. 
+Wichtig sind hierbei die Implementierung von Akzeptanztests bevor die Entwicklungsteams mit dem coden beginnen. 
+Diese Tests sollen in der Sprache der Geschäftsdomäne geschrieben werden. Eine Anforderung bzw. User Story für welche kein Test vor Anforderungsumsetzung geschrieben wurde, ist schlecht implementiert.\cite{Downs2011-uk}
+\newline
+\textbf{AM:} Dies ist eine Methode für Modellierung und Dokumentation von Softwaresystemen, die auf unterschiedlichen Kernprinzipien beruht.\cite{Ambler2010-te}
+\newline
+\textbf{AT:} Hiermit werden die Parameter für das Testen und Testszenarien im agilen Softwareentwicklungsumfeld beschrieben. Der Fokus liegt auf der Unterstützung der Entwicklungsteams. 
+Ein Beispiel für die Implementierung ist die Definition of Test (DoT), die die Parameter für die Testdurchführung und Strategie definiert. \cite{Crispin2009}
+\newline
+\textbf{BL} sind eine Liste von Arbeitspaketen, die geordnet sind nach Priorität und Reifegrad der einzelnen Artefakte. Die bekanntesten Varianten der Arbeitspaketformate sind User Stories oder Use Cases. 
+Es werden Features, Problemlösungen und andere nicht technische Anforderungen dokumentiert, um ein Softwareprodukt liefern zu können.\cite{Svensson2019-pq}
 \subsubsection{Extreme Programming}
 
 \textbf{Fragestellung:} \textit{Beschreiben Sie mindestens 3 Praktiken aus Extreme Programming im Detail und den Einfluss
