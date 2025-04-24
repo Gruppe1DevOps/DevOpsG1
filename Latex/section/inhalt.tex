@@ -178,9 +178,10 @@ Es existiert eine große Vielfalt an unterschiedlichen Methoden. Zur Vereinfachu
     Agile testing             & AT          \\ \hline
     Backlogs & BL                \\ \hline
     Behavior-driven development & BDD                 \\ \hline
-    Continuos integration        & CI                \\ \hline
-    Cross-Functional Team     & CFT                \\ \hline
+    Cross-Functional Team     & DST                \\ \hline
+    Daily Stand-up    & CFT                \\ \hline
     Domain-driven design   & DDD               \\ \hline
+    Iterative and incremental development    & IID               \\ \hline
     Planning poker  & PlP               \\ \hline
     Refactoring  & RF               \\ \hline
     Retrospective  & RS               \\ \hline
@@ -203,6 +204,23 @@ Ein Beispiel für die Implementierung ist die Definition of Test (DoT), die die 
 \newline
 \textbf{BL} sind eine Liste von Arbeitspaketen, die geordnet sind nach Priorität und Reifegrad der einzelnen Artefakte. Die bekanntesten Varianten der Arbeitspaketformate sind User Stories oder Use Cases. 
 Es werden Features, Problemlösungen und andere nicht technische Anforderungen dokumentiert, um ein Softwareprodukt liefern zu können.\cite{Svensson2019-pq}
+\newline
+\textbf{BDD} ist eine agile Testtechnik, deren Ziel es ist, Software-Anforderungen als Beispielinteraktionen mit dem System zu spezifizieren,
+wobei eine strukturierte natürliche Sprache verwendet wird. Während die Beispiele (in der Theorie) von nicht-technischen Stakeholdern gelesen werden können, 
+können sie auch gegen die Codebasis ausgeführt werden, um Verhaltensweisen zu identifizieren, die noch nicht korrekt implementiert sind. \cite{Binamungu2020-wt}
+\newline
+\textbf{CFT:} Hierbei handelt es sich um Teams aus unterschiedlichen Fachbereichen einer Firma. Ziel ist es, die Wissenssilos innerhalb der eigenen Organisation aufzubrechen und damit die Kundenbe-dürfnisse an die erste Stelle zu bringen. 
+Innerhalb der Softwareentwicklung bedeutet dies oft, dass Frontend, Backend, Devops, Tester*Innen, Interface Designer*Innen und Personen, die für die Geschäftslogik zuständig sind, zusammenarbeiten.\cite{McDonough2000-fi}
+\newline
+\textbf{DST:} Dies ist eine spezifische Meeting-Art, die täglich stattfinden soll, um sich gegenseitig über den aktuellen Stand der Arbeit zu informieren. 
+Diese Meetings sollten time-boxed (siehe weiter unten) sowie im Stehen stattfinden, um das Meeting fokussiert durchzuführen. Je nach Umsetzung gibt es dafür einen kurzen Fragenkatalog.\cite{Stray2016-me}
+\newline
+\textbf{DDD} ist eine Vorgehensweise, in der versucht wird, das Domänenwissen für den Softwareentwurf korrekt abzufragen, zu erfassen und modellbasiert darzustellen. Ziel ist, die Beziehungen unterschiedlicher Domänenkonzepte zu identifizieren. 
+DDD findet oft Anwendung beim Entwurf von Microservice-Architekturen, da es eine Schnittmenge zwischen den einzelnen funktionalen Microservices und den verschiedenen Geschäftsfeldern gibt.\cite{Rademacher2018-yo}
+\newline
+\textbf{IID} ist die Sammelbezeichnung für unterschiedliche Konzepte und Modelle für iterative und inkrementelle Vorgehensmodelle in der Softwareentwicklung. 
+Diese verschiedenen Ansätze sind aber alle der Versuch eines Gegenmodelles zum traditionellen Ansatz einer gleichzeitigen In-tegration aller Teilkomponenten zum Abschluss des Projektes. 
+Durch kleine, häufige Schritte und Auslieferung von Teilsystemen, soll eine sequenzielle, dokumentengesteuerte Auslieferung in einem Durchgang vermieden werden. \cite{Larman2003-fg}
 \subsubsection{Extreme Programming}
 
 \textbf{Fragestellung:} \textit{Beschreiben Sie mindestens 3 Praktiken aus Extreme Programming im Detail und den Einfluss
