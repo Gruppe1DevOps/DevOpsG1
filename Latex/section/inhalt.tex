@@ -13,8 +13,143 @@
 %% Aufgabenstellung siehe Datei "Aufgabe.pdf".
 
 \subsection{Teilbereich Build and Code}
+Die Agile Softwareentwicklung in der Art und Weise wie Sie heute praktiziert und rezitiert wird, basiert auf dem Manifest für Agile Softwareentwicklung. 
+Agile Software Entwicklung setzt sich aus an Agilität ausgerichteten Methoden und agilen Prozessen zusammen. 
 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
 \subsubsection{Vorgehensmodelle}
+Aufbauend auf das agile Manifest haben sich eine Vielzahl von Frameworks für das Management der agilen Prozesse entwickelt. 
+Diese sind mit Fokus auf die Software Entwicklung entstanden, haben aber ihren Weg auch schon in andere Bereiche angetreten. 
+Einige ausgewählte Frameworks sollen nachfolgenden kurz präsentiert werden.
+\newline
+\begin{table}[]
+    \centering
+    \caption{Agile Prozessmanagement Frameworks der Software Entwicklung}
+    \label{tab:my-table}
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Framework}            & \textbf{Abkürzung} \\ \hline
+    Extreme Programming           & XP                 \\ \hline
+    Feature Driven Development    & FDD                \\ \hline
+    Kanban in der IT              & IT-Kanban          \\ \hline
+    Adaptive Software Development & ASD                \\ \hline
+    Crystal Family                & CF                 \\ \hline
+    Agile unified process         & AUP                \\ \hline
+    Lean software development     & LSD                \\ \hline
+    Large Scale Agile Frameworks  & LSAF               \\ \hline
+    \end{tabular}
+    \end{table}
+\newline
+Die Leitwerte des \textbf{XP} sind Kommunikation, Einfachheit, Feedback und Mut und sollen durch die Praktiken:
+Vor-Ort-Kunde, Planspiel, Metapher, einfaches Design, kleines Release, Pair Programming, Testen, Refactoring, kontinuierliche Integration, 40-Stunden-Woche, 
+Coding Standard und kollektive Verantwortung für die Entstehung eines optimalen Produktes sorgen. Einige dieser Praktiken bzw. Methoden werden auch in anderen agilen Frameworks genutzt, im XP wird aber stark auf die Synergieeffekte zwischen den Leitwerten und Praktiken wert gelegt. \cite{FOJTIK20111464}
+\newline Mohammad Alshayeb und Wie Li untersuchten die spezifischen Praktiken und stellten im XP folgende Tätigkeiten als Hauptaktivitäten der Entwickler fest: 
+Refactoring, neues Design, Beheben von Fehlern und Implementieren von Unit- sowie Funktionstests, um die Funktionstüchtigkeit des Produktes sicherzustellen. \cite{Alshayeb2006-nt}
+\newline
+
+Das \textbf{FDD} hat sich aus der Coad Methode von Peter Coad entwickelt und besteht nur aus zwei Hauptphasen. 
+Der Entdeckungsphase und der Implementierungsphase. Hauptaugenmerk wird dabei auf die Entdeckungsphase gelegt, da hier sowohl die Liste der Features erstellt wird, als auch die UML-Diagramme der spezifischen Kundendomäne. 
+Die Mitwirkung des Kunden ist besonders wichtig, damit die Wartbarkeit und Erweiterbarkeit des Codes im weiteren Projektverlauf gewährleistet werden kann. 
+Die verwendete Sprache sollte von sowohl von Entwickler*Innen,- als auch von Kundenseite verstanden werden. \cite{Chowdhury2011-hg}
+\newline
+
+\textbf{Kanban} ist eine Methodik aus der Produktionsindustrie und wurde von Mary und Tom Poppenieck und später von David Anderson für die Software Entwicklung adaptiert.
+Im Gegensatz zu den meisten anderen agilen Frameworks gibt es keine spezifischen Arbeitsabläufe, Rollen oder zeitliche Begrenzungen des Arbeitsprozesses in Iterationen. 
+Hauptaufgabe ist es, den Arbeitsfluss zu koordinieren und in Teilaufgaben zu unterteilen. Anderson beschreibt dazu fünf Kernprinzipien für IT-Kanban:
+\begin{itemize}
+    \item Arbeitsablauf visualisieren
+    \item Arbeit, die noch nicht abgeschlossen ist, begrenzen des Work in Progress (WIP) 
+    \item Arbeitsfluss messen und verwalten
+    \item Richtlinien für den Arbeitsprozess definieren und explizit sichtbar machen
+    \item Nutzung von Modellen aus der Praxis oder Theorie, um Verbesserungsmöglichkeiten im Arbeitsablauf zu erkennen.
+\end{itemize}
+Die Visualisierung erfolgt durch das sogenannte Kanban-Board, das sowohl die Begrenzung der Arbeitslast bzw. des Arbeitspakets, 
+als auch die Priorisierung der Aufgabe und das Eingreifen bei Engpässen im Arbeitsfluss ermöglicht. \cite{Ahmad2018-jv,Granulo2019-wm}
+\newline
+
+In \textbf{ASD} wird der Fokus auf ein zyklisches Weiterentwicklungsmodell gelegt, das die unterschiedlichen Phasen im Lebenszyklus der Software widerspiegelt. \cite{Abdelaziz2015-lb}
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\textwidth]{fig/ASD.png}
+    \label{fig:title-image}
+\end{figure}
+\begin{itemize}
+    \item \textbf{Spekulieren:} ersetzt planen, um hier mehr Raum für Innovation und Ungewissheit bei komplexen Problemen zu schaffen.
+    \item \textbf{Kollaborieren/Zusammenarbeiten:} Bei komplexen Software-Anwendungen und sich ändernden Anforderungen ist der Informationsfluss nur durch die Zusammenarbeit im Team schaffbar.
+    \item \textbf{Lernen:} In dieser Phase können die technischen Parameter und Kundenwünsche regelmäßig nach den abgeschlossenen einzelnen Iterationen überprüft werden
+\end{itemize}
+\cite{Alnoukari2008-ro,Abdelaziz2015-lb}
+\newline
+
+Die \textbf{CF} wurde von Alistair Cockburn erstellt, um im Rahmen der Entwicklung von Software, ähnlich wie bei einem Kristall oder Edelstein, 
+je nach Größe des Projektes unterschiedliche Methoden, Techniken und Richtlinien nutzen zu können. Die Methoden fokussieren sich dabei auf folgende Parameter \cite{Ibrahim2020-ip}:
+\begin{itemize}
+    \item \textbf{Menschen}
+    \item \textbf{Interaktionen} 
+    \item \textbf{Gemeinschaft}    
+    \item \textbf{Fertigkeiten}
+    \item \textbf{Talente und Kommunikation }
+\end{itemize}
+Die Methoden von Crystal werden nach Farben benannt und nach der Größe des Projektes und der Anzahl der Projektmitarbeiter*Innen eingeteilt.
+\begin{figure}
+    \centering
+        \includegraphics[width=0.5\textwidth]{fig/CSD.png}
+        \label{fig:title-image}
+    \end{figure}
+Auf der Y-Achse werden die vier Level des Gefahrenlevels definiert und auf der X-Achse die Anzahl der Beteiligten. Hier angezeigt werden die Crystal Methoden, die noch nicht das Risikolevel Leben abdecken können. 
+Crystal Clear sollen Projekte mit fixiertem Preis und klaren Parameter sein und sobald Projekte Gefahr für Leib und Leben beinhalten, handelt es sich dabei um Crystal Diamond und Crystal Sapphire.\cite{cockburn2004,Ibrahim2020-ip}
+\newline
+
+\textbf{AUP} ist ein Framework bzw. Modellierungsansatz, der von Scott Ambler aus dem Rational Unified Process (RUP) mit agilen Methoden kombiniert entwickelt wurde. 
+Ambler definiert dafür folgende Kernprinzipen \cite{Christou2010-vf}:
+\begin{itemize}
+    \item Die meisten Menschen werden keine detaillierte Dokumentation lesen.  Sie werden jedoch hin und wieder Anleitung und Schulung benötigen
+    \item Das Projekt sollte einfach mit wenigen Seiten beschrieben werden.
+    \item Die AUP entspricht den von der Agile Alliance beschriebenen Werten und Prinzipien.    
+    \item Das Projekt muss sich darauf konzentrieren, einen wesentlichen Wert zu liefern und nicht unnötige Funktionen.
+    \item Die Entwickler müssen die Freiheit haben, Werkzeuge zu verwenden, die für die jewei-lige Aufgabe am besten geeignet sind, und nicht, um eine Vorschrift zu erfüllen.
+    \item AUP lässt sich über gängige HTML-Editierwerkzeuge leicht anpassen. 
+\end{itemize}
+Es werden dann vier seriell ablaufende Phasen definiert \cite{Li2010-ge,ShuiYuan2009-or}:
+\begin{itemize}
+    \item \textbf{Inception/Beginn}: Ziel ist es, den anfänglichen Umfang des Projekts und eine potenzielle Architektur für Ihr System festzulegen, sowie die anfängliche Projektfinanzierung und die Akzeptanz der Stakeholder zu erhalten.
+    \item \textbf{Elaboration/Ausarbeitung:} Die Architektur des Systems wird überprüft.
+    \item \textbf{Construction/Konstruktion: }Es soll regelmäßig und schrittweise funktionierende Software erstellt werden, welche die Anforderungen der Projektbeteiligten mit höchster Priorität erfüllt.
+    \item \textbf{Transition/Übergabe:} Das Ziel ist die Validierung und der Einsatz ihres Systems in ihrer Produktionsumgebung
+\end{itemize}
+
+LSD hat als Vorbild das Toyota Produktionssystem und definiert sieben Prinzipien und 22 Praktiken für die Umsetzung im Rahmen der agilen Softwareentwicklung. 
+Die sieben Prinzipien sind \cite{Janes2015-ir,Jonsson2013-gn}:
+\begin{itemize}
+    \item Verschwendung vermeiden
+    \item Lernen unterstützen
+    \item So spät entscheiden wie möglich
+    \item Verantwortung an das Team geben
+    \item Integrität einbauen
+    \item Das Ganze sehen
+\end{itemize}
+Unterschiedliche \textbf{LSAF}  sind entwickelt worden, um agile Praktiken auf große Projekte und Softwareentwicklung mit weltweit verteilten Teams anzuwenden. 
+Zu den bekanntesten Modellen zählen\cite{Beecham2021-jj,Ebert2017-jz}:
+\begin{itemize}
+    \item \textbf{Scrum of Scrums (SoS)}
+    \item \textbf{Scaled Agile Framework (SAFe)} 
+    \item \textbf{Large-Scale Scrum (LeSS)}    
+    \item \textbf{Disciplined Agile Delivery (DAD)}
+    \item \textbf{Lean Scalable Agility for Engineering (LeanSAFE)}
+\end{itemize}
+Kieran Conboy und Noel Carroll definieren ausgehend von einer 15-jährigen Retrospektive folgende Herausforderungen bei der Implementation von Large Scale Agile Frameworks \cite{Conboy2019-uw,Kasauli2021-jn}:
+\begin{itemize}
+    \item Definieren von Konzepten
+    \item Vergleich und Gegenüberstellung von Frameworks
+    \item Bereitschaft und Appetit auf Veränderung
+    \item Abgleich von Organisationsstruktur und Rahmenbedingungen
+    \item Top-down- versus Bottom-up-Implementierung
+    \item Überbetonung der 100 \%igen Einhaltung der Regeln des Frameworks gegenüber dem Mehrwert für die Firma
+    \item Fehlender evidenzbasierter Einsatz
+    \item Erhaltung der Autonomie der Entwickler und Entwicklerteams
+    \item Fehlende Abstimmung zwischen Kundenprozessen und Frameworks
+\end{itemize}
 
 Fragestellung: Welche bereits vorgestellten bzw. zusätzlich recherchierte Vorgehensmodelle ermöglichen ein
 schnelles Iterieren und somit die Möglichkeit Feedback zeitnah durch die jeweiligen Stakeholder
