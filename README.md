@@ -1,10 +1,10 @@
 # DevOps Aufgabenstellung 1
 
-Member:
-      Harald Beier
-      Susanne Peer
-      Patrick Prugger
-      Philipp Palatin
+Member:  
+Harald Beier  
+Susanne Peer  
+Patrick Prugger  
+Philipp Palatin  
 
 Gruppengröße die bereits geformten Teams
 Alle verwendeten Quellen sind anzugeben.
