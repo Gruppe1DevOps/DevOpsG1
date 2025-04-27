@@ -398,7 +398,27 @@ Dies ermöglicht:
     %% automated testing https://www.testdevlab.com/blog/automated-testing
     %% weitere Bsp wären Continuous Integration/Continuous Deployment (CI/CD), Code Standards, 
     %% Logging, Code Refactoring 
-
+\paragraph{Statische Code-Analyse:}
+Bei der statischen Code-Analyse wird der Quellcode automatisiert auf potenzielle Fehler, Sicherheitslücken und Code-Smells untersucht, ohne dass er tatsächlich ausgeführt wird. 
+Tools wie SonarQube bieten hierfür umfassende Reports zu Duplikaten, Komplexität und Schwachstellen und lassen sich direkt in IDEs und CI-Pipelines integrieren.\cite{sonarqube-docs-2023,ayewah2008using}
+Bereits beim Build-Prozess aufgesetzte Quality Gates sorgen dafür, dass Builds bei Verstößen gegen definierte Schwellenwerte (z. B. erhöhte Zyklomatische Komplexität oder Sicherheitswarnungen) automatisch blockiert werden. \cite{beller2016static}
+\newline
+Durch diesen maschinellen Vorfilter verringert sich die Menge an einfachen, 
+aber zeitaufwändigen Review-Aufgaben erheblich – Entwickler werden gezielt auf die kritischsten Schwachstellen hingewiesen und können sie schon in einer frühen Phase beheben.\cite{ayewah2008using}
+Gleichzeitig schafft die durchgängige Analyse historischer Trends in Metriken wie Code-Duplikation oder Testabdeckung eine transparente Basis, um technische Schulden systematisch abzubauen. 
+Langfristig steigert sich so nicht nur die Wartbarkeit, sondern auch die Sicherheit und Zuverlässigkeit der Software. \cite{sonarqube-docs-2023}
+\paragraph{Code Reviews}
+Code Reviews sind strukturierte Peer-Inspektionen, bei denen Entwickler:innen Änderungen im Quellcode ihrer Kolleg:innen über Pull- oder Merge-Requests prüfen. 
+Dieses Vorgehen geht zurück auf klassische Inspektionsmethoden nach Fagan (1976), bei denen ein formalisiertes Review-Meeting systematisch alle Aspekte des Codes beleuchtet.\cite{fagan1976design}
+Moderne Plattformen wie GitHub, GitLab oder Bitbucket unterstützen diesen Prozess durch integrierte Kommentar-Threads und automatisierte Review-Checks. \cite{atlassian2024code,cohen2010business}
+\newline
+Der unmittelbare Nutzen zeigt sich in frühzeitigem Feedback und einem deutlich geringeren Aufkommen von Produktionsfehlern: 
+Studien belegen, dass Teams mit etablierten Review-Prozessen bis zu 65 \% weniger kritische Bugs in der Produktivumgebung haben.\cite{bacchelli2013expectations}
+Darüber hinaus fördert Code Review den Wissensaustausch: Teammitglieder lernen neue Patterns und Architekturstile kennen, was die kollektive Codekompetenz stärkt und Einarbeitungszeiten verkürzt \cite{rigby2013modern}.
+\newline
+Best-Practices empfehlen kurze, regelmäßige Reviews anstelle großer Inspektionsschlachten, um den Kontext frisch zu halten und schnelle Korrekturschleifen zu ermöglichen. 
+Die Verantwortlichkeiten sollten rotieren, damit nicht immer dieselben Personen reviewen, und Review-Metriken (z. B. durchschnittliche Review-Dauer, Anzahl der Kommentare) in Dashboards sichtbar gemacht werden.
+So wird das Review-Feedback unmittelbar ins Entwicklerteam zurückgeführt und hohe Codequalität nachhaltig verankert. \cite{atlassian2024code,rigby2013modern}.
 
 \subsection{Teilbereich DevOps}
 
@@ -427,7 +447,21 @@ aufgenommen.\\
 \subsubsection{Mögliche Probleme in der aktuellen Organisation und Arbeitsaufteilung}
 
 \textbf{Fragestellung:} \textit{Beschreibe kurz mögliche Probleme in der aktuellen Organisation und Arbeitsaufteilung}
-    
+
+\paragraph{DevOps-Einführung bei ABC Ad Tech: Von manuellen Handoffs zur Continuous Delivery}
+\subparagraph{Kurzüberblick – Warum sich der aktuelle Handoff bei ABC Ad Tech wie stille Post anfühlt}
+Sie kennen das Szenario: Fünf \textit{Ad-Dev-Ingenieure} kämpfen mit Git, ein einzelner Build-Spezialist kopiert Artefakte manuell,
+und ein \textit{Ad-Ops-Team} klickt sich alle zwei Wochen – oder vierteljährlich – durch den Deployment-Prozess. Es funktioniert irgendwie – aber es ist fehleranfällig, intransparent und hemmt Innovationen. 
+Lassen wir uns einen reibungsloseren Weg skizzieren, der zu Continuous Delivery (CD) führt, ohne das Organigramm über Nacht umzuschreiben.    
+\subparagraph{Was bremst uns aus? – Mainpainpoints im heutigen Setup}
+\begin{itemize}
+    \item \textbf{Siloartige Teams und Übergabereibung:} Ad-Dev erstellt Artefakte auf einem PC und legt sie in einer Freigabe ab; Ad-Ops holt sie dann ab. Das ist fehleranfällig und schafft blinde Flecken, wenn Fehler auftreten.
+    \item \textbf{Rhythmus-Diskrepanz:} Alle zwei Wochen eine Testversion, alle drei Monate ein Produktiv-Rollout – doch Feedback-Schleifen hängen von manuellen Staging-Umgebungen und Meetings ab. 
+    Diese Verzögerung killt die Dynamik.
+    \item \textbf{Mangel an Automatisierung} Keine CI, keine automatisierten Tests zur Qualitätssicherung und keine Pipeline-Transparenz. Builds, Tests und Deployments sind vollständig manuell.
+    \item \textbf{Verborgenes Wissen und Engpässe} Ein Spezialist besitzt das Wissen über den Build-Prozess. Ist diese Person nicht verfügbar, kommt alles ins Stocken. Zudem existiert Insiderwissen in Köpfen, nicht in Dokumentationen oder Skripten.
+\end{itemize}
+
 %% mögliche Problems:
 %% Manuelles deployn -- Fehleranfällig -- Mensch 
 %% devs und ops arbeiten unabhängig voneinander - keine Kommunikation
@@ -437,7 +471,9 @@ aufgenommen.\\
 \subsubsection{Notwendige Schritte um in dieser Organisation DevOps einzuführen}
 \textbf{Fragestellung:} \textit{Beschreibe die notwendigen Schritte um in dieser Organisation DevOps (bis einschließlich
 Continuous Delivery) einzuführen.}
-
+\paragraph{Einen DevOps-Kurs abstecken}
+DevOps ist keine Wunderpille – es ist eine Sammlung von Praktiken, die Entwicklung und Betrieb durch Automatisierung, geteilte Verantwortung und kürzere Feedback-Schleifen verbindet. 
+Unser Ziel: Jeden Commit durch eine automatisierte CI-Pipeline schieben, Tests durchführen und dann auf Abruf in Staging und Produktion ausliefern (Continuous Delivery).
     %% mögliche Schritte:
     %% Verantwortungen neu definieren
     %% CI/CD Pipeline - Automatisierung des Builds und Deployment
@@ -447,8 +483,27 @@ Continuous Delivery) einzuführen.}
 
 
 \subsubsection{Reihenfolge der Schritte}
-
 \textbf{Fragestellung:} \textit{Welche Schritte sind in welcher Reihenfolge notwendig?}
+Nachfolgend unser \textbf{Schritt für Schritt - Plan für eine ABC AD Tech Pipeline} und glücklichere Devs- und Engineers. 
+\begin{itemize}
+    \item \textbf{Shift Left: Build- und Test-Automatisierung}-Phase 1 (Wochen 1–4)
+    \subitem- Einführung eines CI-Servers (z.B. Azure Pipelines, Bitbucket, AWS CodePipeline,GitLab).
+    \subitem- Automatisierung von Builds bei jedem Push auf main oder Feature-Branches.
+    \subitem- Automatische Ausführung von Unit- und Integrationstests.
+    \item \textbf{Artefakt-Repository und Versionierung}-Phase 2 (Wochen 3–6)
+    \subitem- Deployment eines Artefakt-Repositorys (z.B. Nexus, Azure Artifacts).
+    \subitem- Build-Ergebnisse direkt in versionierte Pakete übertragen.
+    \item \textbf{Automatisiertes Deployment in die Staging-Umgebung}-Phase 3 (Wochen 5–8)
+    \subitem- Skriptgesteuerte Deployments (Infrastructure as Code) auf einen Staging-Cluster.
+    \subitem- Workflows durch automatisierte Smoke-Tests absichern.
+    \item \textbf{Feedback-Loop-Integration}- Phase 4 (Wochen 7–10)
+    \subitem- Integration von Testberichten und Metriken in Dashboards (z.B. Grafana).
+    \subitem- Weiterleitung von Staging-Ergebnissen zurück an Ad-Dev via Slack oder Teams.
+    \item \textbf{Continuous Delivery in die Produktion}- Phase 5 (Wochen 9–12)
+    \subitem- Freigaben in der Pipeline für Produktiv-Pushes aktivieren.
+    \subitem- Feature-Flag-gesteuerte Rollouts für sichere Canary-Deployments einrichten.
+\end{itemize}
+Jede Phase baut auf der vorherigen auf – kein großer Knall, sondern inkrementelle Erfolge.
     %% mögliche Reihenfolge:
     %% Testautomatisierung - unit tests, performance, ui,...
     %% CI/CD Pipeline - Automatisierung des Builds und Deployment
@@ -456,11 +511,20 @@ Continuous Delivery) einzuführen.}
     %% Verantwortungen neu definieren
     %% regelmäßige Meetings
 
-
-
 \subsubsection{Benötigte Tools}
 
 \textbf{Fragestellung:} \textit{Welche Tools werden hierzu benötigt?}
+Nachfolgend sind Beispiel des \textbf{Werzeugkasten} der Pipline zu finden.
+\begin{itemize}
+    \item \textbf{Versionskontrolle / Code-Review:} Git (Branches, Hooks, PR/MR-Workflows)
+    \item \textbf{CI/CD-Plattform:} Jenkins, GitHub Actions, GitLab CI oder Azure Pipelines
+    \item \textbf{Artefakt-Management:} Nexus, Artifactory oder Azure Artifacts
+    \item \textbf{Infrastructure as Code:} Terraform, Azure Resource Manager (ARM)-Templates oder Bicep
+    \item \textbf{Konfigurationsmanagement:} Ansible oder Azure Automation
+    \item \textbf{Monitoring und Feedback:} Prometheus + Grafana, Azure Monitor oder ELK-Stack
+    \item \textbf{Zusammenarbeit} Slack/MS Teams-Integrationen, Confluence oder SharePoint-Dokumente
+\end{itemize}
+Diese Tools arbeiten Hand in Hand, um Builds, Tests und Deployments zu automatisieren – und beseitigen das manuelle Kopieren und Einfügen.
     %% mögliche Tools:
     %% Jenkins
     %% Git
@@ -476,7 +540,24 @@ erfolgreich sein können. Ebenso müssen die wesentlichen Stakeholder überzeugt
 Identifiziere die wesentlichen Stakeholder und liefere ihnen Argumente, die sie davon
 überzeugen das die Einführung von DevOps Praktiken vorteilhaft ist.}
 
-    %% Stakeholder:
+Im nächsten Abschnitten schauen wir uns an \textbf{Wen betrifft es? – Stakeholder und unsere Win-Win-Argumente}
+\begin{itemize}
+    \item \textbf{CTO / Leiter Engineering} wird besonders hellhörig, wenn es um messbare Geschäftsvorteile geht. Hier punktet die DevOps-Einführung mit schnellerer \textit{Time-to-Market}, was im werbegetriebenen Geschäft von ABC Ad Tech unmittelbar wettbewerbsrelevant ist. Zudem sinkt das Risiko kostspieliger fehlgeschlagener Releases erheblich, während gleichzeitig eine bessere Ressourcenverteilung möglich wird – Ingenieure können sich auf wertschöpfende Tätigkeiten konzentrieren, statt in manuellen Prozessen festzustecken.
+    \item \textbf{Dev-Lead} für ihn bietet die Transformation eine willkommene Entlastung vom \textit{ständigen Feuerlöschen}. Das unmittelbare Feedback durch automatisierte Tests gibt seinen Entwickler:innen die Sicherheit, dass ihre Änderungen funktionieren, bevor sie in größere Codestränge einfließen. Die Verringerung von Merge-Konflikten durch häufigere Integration spart wertvolle Entwicklungszeit, die sonst für konfliktlösende Meetings verloren ginge.
+    \item \textbf{Ops-Lead} gewinnt durch vorhersehbare, vollständig dokumentierte Deployments erheblich an Betriebsstabilität. Besonders wertvoll ist für ihn die Selbstbedienungsfähigkeit – keine frustrierenden Wartezeiten mehr, bis jemand die richtigen Artefakte auf der Netzwerkfreigabe ablegt. Seine Teams können sich auf strategischere Aufgaben konzentrieren, statt repetitive manuelle Einspielungen durchzuführen.
+    \item \textbf{QA-Lead} bekommt durch DevOps einen Quantensprung (die Metapher,nicht die physikalische diskrete Zustandsänderungen im Quantensystemen) in der Testqualität. Konsistente Testumgebungen, die automatisch und identisch aufgesetzt werden, eliminieren das lästige \textit{Bei mir funktioniert es aber}-Syndrom. Die frühzeitige Fehlererkennung direkt nach einem Commit verkürzt die Fehleranalyse dramatisch, während die durchgängige Nachverfolgbarkeit vom Code bis zum Deployment endlich Klarheit bei auftretenden Problemen schafft.
+    \item \textbf{Produktmanager } sieht den größten Gewinn in den verkürzten Feedback-Schleifen. Statt alle drei Monate auf eine große Release zu warten, können neue Features schneller validiert und bei Bedarf angepasst werden. Diese Agilität führt zu zufriedeneren Kunden, die neue Funktionen schneller nutzen können und dadurch eine höhere Bindung an die SaaS-Lösung von ABC Ad Tech entwickeln.
+\end{itemize}
+Indem DevOps als Reihe inkrementeller Verbesserungen statt als radikaler Umbau dargestellt wird, sieht jeder Stakeholder einen direkten Gewinn in Produktivität, Qualität oder Agilität.
+\paragraph{Zusammenfassung}
+Der Wechsel von \textit{handkopierten}-Artefakten zu einer vollautomatisierten CI/CD-Pipeline dreht sich weniger um ausgefallene Werkzeuge und mehr um eine Denkweise – geteilte Verantwortung, Automatisierung des Mundanen und Verkürzung von Feedback-Schleifen von Wochen auf Minuten. Fangen wir klein an, messen wir unsere Erfolge und bauen durch diese Erfolge Dynamik auf. Bevor wir es merken, wird der vierteljährliche Kraftakt wie eine ferne Erinnerung erscheinen, und wir werden in Cloud-Geschwindigkeit ausliefern – und lernen.
+\begin{figure}[h!]
+    \centering
+    \caption{To the moon}
+        \includegraphics[width=0.5\textwidth]{fig/tothemoon.png}
+        \label{fig:ASD-diagram}
+    \end{figure}
+%% Stakeholder:
     %% Geschäftsführung
     %% Kunden
     %% Entwicklungsteam
