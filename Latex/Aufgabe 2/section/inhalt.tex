@@ -1,0 +1,75 @@
+\newpage
+\section{Aufgabenstellung 2}
+
+
+\subsection{Release Management}
+\textbf{Aufgabe:} \textit{Beschreibe die Besonderheiten von Release Management im Sinne von
+SAFe und inwiefern es bei dem Unternehmen aus der Gruppenarbeit anwendbar wäre.}
+\\
+Das Scaled Agile Framework (SAFe) bietet einen strukturierten Ansatz zur Skalierung agiler Methoden in größeren Organisationen.Im Zentrum steht der Agile Release Train (ART), ein langfristiges Team-of-Teams, das in regelmäßigen Program Increments (PI) von 8-12 Wochen gemeinsame Releases plant und koordiniert.
+Das \textit{Release on Demand}-Prinzip ermöglicht flexible, aber zielorientierte Auslieferungen.
+\linebreak
+Die Continuous Delivery Pipeline bildet die technische Basis von SAFe mit drei Hauptphasen: \textit{Continuous Exploration, Continuous Integration und Continuous Deployment}. Diese Pipeline visualisiert den durchgängigen Fluss von der Ideenfindung, bis zum Release.\cite{atlassian_safe,apwide_safe}
+\begin{itemize}
+    \item Einführung regelmäßiger, teamübergreifender PI-Zyklen (8-12 Wochen) für gemeinsame Planung, Entwicklung und Auslieferung
+    \item Bildung eines funktionsübergreifenden Teams mit geteilter Verantwortung für Releases
+    \item Benennung eines Koordinators für Kommunikation und Dokumentation
+    \item Implementierung einer einfachen Continuous Delivery Pipeline mit automatisierten Builds, Tests und Deployments
+\end{itemize}
+Diese gezielte Anwendung von SAFe-Prinzipien würde manuelle Prozesse reduzieren, konsistente Qualität sicherstellen und das \textit{"Release on Demand"}-Prinzip ermöglichen. ABC Ad Tech würde effizienter und agiler arbeiten können, ohne das komplette Framework implementieren zu müssen, und gleichzeitig eine solide Grundlage für zukünftiges Wachstum schaffen.
+
+
+
+\subsection{Beschreibung der Abkürzungen}
+\textbf{Aufgabe:} \textit{: Was bedeuten die Abkürzungen MTTF, MTTR, RTO, MTTD, MTTA und MTBF und
+wo liegen die Unterschiede? Betrachtung soll aus der DevOps Perspektive erfolgen.}
+
+\begin{itemize}
+    \item \textbf{MTTF (Mean Time To Failure)} bezeichnet die durchschnittliche Zeit zwischen
+    dem Start eines Systems und seinem Ausfall. In DevOps-Umgebungen misst MTTF, wie lange
+    Anwendungen oder Services ohne Fehler laufen. Eine höhere MTTF deutet auf stabilere Software,
+    als auch Infrastruktur hin. DevOps-Teams arbeiten daran, diese Zeit durch kontinuierliche Tests,
+    Code-Reviews und Qualitätssicherung zu verlängern.
+    
+    \item \textbf{MTTR (Mean Time To Recovery/Repair)} ist die durchschnittliche Zeit, die benötigt
+    wird, um ein System nach einem Ausfall wiederherzustellen. In DevOps ist MTTR besonders wichtig,
+    da sie die Effizienz der Wiederherstellungsprozesse und Automatisierung widerspiegelt.
+    Niedrigere MTTR-Werte zeigen eine verbesserte Resilienz. Durch Automatisierung, Überwachung und
+    gut dokumentierte Runbooks können DevOps-Teams die MTTR reduzieren.
+    
+    \item \textbf{RTO (Recovery Time Objective)} ist das Ziel für die maximale Zeit, innerhalb
+    derer ein System nach einem Ausfall wiederhergestellt werden soll. Im Gegensatz zu MTTR ist
+    RTO ein vorab definiertes Ziel und keine Messung der tatsächlichen Leistung. DevOps-Teams
+    definieren RTOs basierend auf Geschäftsanforderungen und implementieren dann Prozesse und
+    Technologien, um diese Ziele zu erreichen.
+    
+    \item \textbf{MTTD (Mean Time To Detect)} misst die durchschnittliche Zeit zwischen dem
+    Auftreten eines Fehlers und seiner Erkennung. In DevOps-Umgebungen ist eine schnelle
+    Fehlererkennung entscheidend. Durch umfassende Überwachung, Logging und Alerting-Systeme
+    streben Teams danach, die MTTD zu minimieren. Je früher ein Problem erkannt wird, desto
+    schneller kann es behoben werden.
+    
+    \item \textbf{MTTA (Mean Time To Acknowledge)} bezieht sich auf die durchschnittliche Zeit
+    zwischen der Erkennung eines Problems und dem Beginn der Behebungsmaßnahmen. Diese Metrik
+    reflektiert die Reaktionsgeschwindigkeit des Teams. In DevOps-Kulturen mit klaren
+    Verantwortlichkeiten und effektiven On-Call-Rotationen, wird die MTTA minimiert,
+    was zu schnelleren Problemlösungen führt.
+    
+    \item \textbf{MTBF (Mean Time Between Failures)} ist die durchschnittliche Zeit zwischen zwei
+    aufeinanderfolgenden Ausfällen eines reparierbaren Systems. MTBF umfasst sowohl die Betriebszeit
+    (MTTF) als auch die Reparaturzeit (MTTR): MTBF = MTTF + MTTR. In DevOps-Umgebungen ist eine hohe
+    MTBF wünschenswert, da sie auf stabile und zuverlässige Systeme hindeutet.
+\end{itemize}
+\cite{echolon_mttr,alertops_metrics}
+
+
+
+
+\subsection{Vorteile von Infrastructure as Code (IaC)}
+\textbf{Aufgabe:} \textit{Inwiefern könnte der IaC Ansatz Vorteile bringen, um die zuvor genannten
+KPI's zu verbessern?}
+
+\subsection{Unterschied DevOps Engineer vs. Site Reliability Engineer (SRE)}
+\textbf{Aufgabe:} \textit{Stelle den Unterschied zwischen einem DevOps Engineer und einem Site
+Reliability Engineer dar. Der Fokus liegt auf den Unterschieden hinsichtlich Aufgaben,
+benötigtem Know-how und dem Mehrwert für das Unternehmen.}
