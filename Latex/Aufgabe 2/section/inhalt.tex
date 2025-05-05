@@ -5,18 +5,44 @@
 \subsection{Release Management}
 \textbf{Aufgabe:} \textit{Beschreibe die Besonderheiten von Release Management im Sinne von
 SAFe und inwiefern es bei dem Unternehmen aus der Gruppenarbeit anwendbar wäre.}
-\\
-Das Scaled Agile Framework (SAFe) bietet einen strukturierten Ansatz zur Skalierung agiler Methoden in größeren Organisationen.Im Zentrum steht der Agile Release Train (ART), ein langfristiges Team-of-Teams, das in regelmäßigen Program Increments (PI) von 8-12 Wochen gemeinsame Releases plant und koordiniert.
-Das \textit{Release on Demand}-Prinzip ermöglicht flexible, aber zielorientierte Auslieferungen.
+
+Das Scaled Agile Framework (SAFe) bietet einen strukturierten Ansatz zur Skalierung agiler Methoden
+in größeren Organisationen.Im Zentrum steht der Agile Release Train (ART), ein langfristiges
+Team-of-Teams, das in regelmäßigen Program Increments (PI) von 8-12 Wochen gemeinsame Releases
+plant und koordiniert. Das \textit{Release on Demand}-Prinzip ermöglicht flexible, aber
+zielorientierte Auslieferungen.
+
+Die Continuous Delivery Pipeline bildet die technische Basis von SAFe mit drei Hauptphasen:
+\textit{Continuous Exploration, Continuous Integration und Continuous Deployment}. Diese Pipeline
+visualisiert den durchgängigen Fluss von der Ideenfindung, bis zum Release. \cite{atlassian_safe,apwide_safe}
 \linebreak
-Die Continuous Delivery Pipeline bildet die technische Basis von SAFe mit drei Hauptphasen: \textit{Continuous Exploration, Continuous Integration und Continuous Deployment}. Diese Pipeline visualisiert den durchgängigen Fluss von der Ideenfindung, bis zum Release.\cite{atlassian_safe,apwide_safe}
+Bei ABC Ad Tech existiert aktuell eine fragmentierte Struktur:
 \begin{itemize}
-    \item Einführung regelmäßiger, teamübergreifender PI-Zyklen (8-12 Wochen) für gemeinsame Planung, Entwicklung und Auslieferung
+    \item Das Entwicklungsteam (AD-Dev) erstellt Softwareversionen auf einem einzelnen PC
+    und kopiert Artefakte manuell auf eine Netzwerkfreigabe
+    \item Das Betriebsteam (AD-Ops) führt alle zwei Wochen Deployments für Test- und alle drei
+    Monate für Produktionsumgebungen durch
+    \item Die Qualitätssicherung (Ad-QS) testet eigenständig und kommuniziert Feedback in Meetings
+\end{itemize}
+Diese Struktur weist erhebliche Mängel auf: \textit{manuelle Übergaben, Zeitverluste, erhöhtes
+Fehlerpotenzial und unklare Verantwortlichkeiten.}
+Es fehlen gemeinsame Planungszyklen, kontinuierliche Integration und eine technische Grundlage
+für regelmäßige Releases.
+Obwohl SAFe primär für größere Unternehmen konzipiert ist, könnte ABC Ad Tech von ausgewählten
+Prinzipien profitieren: \\
+\cite{atlassian_safe,apwide_safe}
+\begin{itemize}
+    \item Einführung regelmäßiger, teamübergreifender PI-Zyklen (8-12 Wochen) für gemeinsame
+    Planung, Entwicklung und Auslieferung
     \item Bildung eines funktionsübergreifenden Teams mit geteilter Verantwortung für Releases
     \item Benennung eines Koordinators für Kommunikation und Dokumentation
-    \item Implementierung einer einfachen Continuous Delivery Pipeline mit automatisierten Builds, Tests und Deployments
+    \item Implementierung einer einfachen Continuous Delivery Pipeline mit automatisierten Builds,
+    Tests und Deployments
 \end{itemize}
-Diese gezielte Anwendung von SAFe-Prinzipien würde manuelle Prozesse reduzieren, konsistente Qualität sicherstellen und das \textit{"Release on Demand"}-Prinzip ermöglichen. ABC Ad Tech würde effizienter und agiler arbeiten können, ohne das komplette Framework implementieren zu müssen, und gleichzeitig eine solide Grundlage für zukünftiges Wachstum schaffen.
+Diese gezielte Anwendung von SAFe-Prinzipien würde manuelle Prozesse reduzieren, konsistente
+Qualität sicherstellen und das \textit{"Release on Demand"}-Prinzip ermöglichen. ABC Ad Tech würde
+effizienter und agiler arbeiten können, ohne das komplette Framework implementieren zu müssen, und
+gleichzeitig eine solide Grundlage für zukünftiges Wachstum schaffen.
 
 
 
@@ -62,14 +88,76 @@ wo liegen die Unterschiede? Betrachtung soll aus der DevOps Perspektive erfolgen
 \end{itemize}
 \cite{echolon_mttr,alertops_metrics}
 
-
-
-
 \subsection{Vorteile von Infrastructure as Code (IaC)}
 \textbf{Aufgabe:} \textit{Inwiefern könnte der IaC Ansatz Vorteile bringen, um die zuvor genannten
 KPI's zu verbessern?}
+
+Infrastructure as Code (IaC) bietet entscheidende Vorteile zur Optimierung der
+DevOps-Zuverlässigkeitsmetriken: \textit{MTTF, MTTR, RTO, MTTD, MTTA und MTBF}.
+
+Die \textbf{Mean Time To Failure (MTTF) }verbessert sich durch standardisierte, getestete
+Infrastrukturkonfigurationen. Da IaC die Implementierung automatisierter Tests ermöglicht, werden
+potenzielle Probleme frühzeitig erkannt. Die Versionskontrolle stellt sicher, dass bewährte
+Konfigurationen wiederverwendet werden können, was zu stabileren Systemen führt.
+
+Die \textbf{Mean Time To Recovery (MTTR)} wird drastisch reduziert, da fehlerhafte Systeme schnell
+und zuverlässig, neu bereitgestellt werden können. Statt zeitaufwändiger manueller Fehlerbehebung
+ermöglicht IaC die automatisierte Wiederherstellung, mit einem einzigen Befehl. Die Idempotenz von
+IaC-Tools garantiert konsistente Wiederherstellungsprozesse.
+
+Ambitionierte \textbf{Recovery Time Objectives (RTO)} werden durch automatisierte
+Infrastrukturbereitstellung erreichbar. Komplette Umgebungen können innerhalb von Minuten
+wiederhergestellt werden, was auch Disaster-Recovery-Szenarien unterstützt. Multi-Region- und
+Multi-Cloud-Strategien werden durch IaC praktisch umsetzbar.
+
+Die \textbf{Mean Time To Detect (MTTD)} verkürzt sich durch konsistente Implementierung von
+Überwachungs- und Logging-Komponenten. Alarme und Schwellenwerte als Code führen zu präziserer
+Problemerkennung und reduzieren Fehlalarme.
+
+Die \textbf{Mean Time To Acknowledge (MTTA)} verbessert sich durch bessere Dokumentation und
+Kontextinformationen. Bereitschaftsteams haben sofortigen Zugriff auf aktuelle
+Systemarchitekturinformationen, und automatisierte Runbooks können relevante Diagnosedaten
+bereitstellen.
+
+Das \textbf{Mean Time Between Failures (MTBF)} steigt durch die Kombination aus weniger Ausfällen
+und schnellerer Wiederherstellung. Techniken wie Canary Deployments und Blue-Green-Deployments
+werden durch IaC praktikabel, was zu stabileren Systemen führt. IaC ermöglicht somit durch
+Automatisierung, Konsistenz, Testbarkeit und Reproduzierbarkeit beträchtliche Verbesserungen
+aller DevOps-Zuverlässigkeitsmetriken. Dies führt zu höherer Systemverfügbarkeit, besserer
+Benutzererfahrung und letztendlich zu einem höheren Geschäftswert für Organisationen, die
+diesen Ansatz implementieren. \\
+\cite{centron_iac,aws_iac}
+
+\newpage
 
 \subsection{Unterschied DevOps Engineer vs. Site Reliability Engineer (SRE)}
 \textbf{Aufgabe:} \textit{Stelle den Unterschied zwischen einem DevOps Engineer und einem Site
 Reliability Engineer dar. Der Fokus liegt auf den Unterschieden hinsichtlich Aufgaben,
 benötigtem Know-how und dem Mehrwert für das Unternehmen.}
+
+\textbf{DevOps Engineers} fokussieren sich primär auf die Optimierung des Softwareentwicklungsprozesses.
+Sie bauen CI/CD-Pipelines, automatisieren Deployments und verbessern den Workflow, zwischen
+Entwicklung und Betrieb. Sie implementieren Tools für kontinuierliche Integration, Delivery und
+Deployment und arbeiten eng mit Entwicklungsteams zusammen, um Code schneller und zuverlässiger in
+Produktion zu bringen.
+
+\textbf{Site Reliability Engineers (SREs)} konzentrieren sich hingegen auf die Zuverlässigkeit
+und Performance von Produktionssystemen. Sie definieren und überwachen SLAs, SLOs und SLIs,
+implementieren Observability-Lösungen und entwickeln Automatisierungen zur Verbesserung der
+Systemstabilität. SREs sind stärker in Incident Response, Kapazitätsplanung und die Analyse von
+Systemausfällen involviert.
+
+\textbf{DevOps Engineers} steigern die Entwicklungsgeschwindigkeit und Agilität. Sie reduzieren
+die Zeit bis zur Markteinführung neuer Features, verbessern die Codequalität durch Automatisierung
+und fördern zudem die Zusammenarbeit zwischen Teams. Ihr Hauptbeitrag liegt in der
+Effizienzsteigerung des Entwicklungsprozesses und der Reduzierung von Silos.
+
+\textbf{SREs} maximieren die Zuverlässigkeit und Verfügbarkeit von Produktionssystemen.
+Sie minimieren Ausfallzeiten, verbessern die Benutzererfahrung durch stabile Services und
+reduzieren die Kosten für Incident Management. Ihr Hauptbeitrag liegt in der Sicherstellung,
+dass Systeme skalierbar, resilient und performant bleiben, auch bei wachsender Komplexität und
+steigender Last.
+Während beide Rollen überlappende Fähigkeiten haben und das gemeinsame Ziel verfolgen, zuverlässige
+Software schneller zu liefern, liegt der Unterschied im Fokus: DevOps Engineers optimieren den
+Weg zur Produktion, während SREs die Qualität des Produktionsbetriebs sicherstellen.
+\cite{netapp_sre,brokee_sre}
