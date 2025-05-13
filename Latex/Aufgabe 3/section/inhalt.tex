@@ -1,0 +1,81 @@
+\newpage
+\section{Aufgabenstellung 3}
+
+\subsection{Ausgangssituation}
+Sie sind Teil eines Qualitätssicherungsteams in einem fiktiven Unternehmen, das eine E-Commerce-Plattform betreibt. Die Plattform bietet Kameraprodukte an, nutzt KI-gestützte Produktsuche, integriert verschiedene Backend-Systeme (z. B. SAP, AWS, NetSuite, HubSpot) und führt den Nutzer durch einen komplexen, serviceorientierten Kaufprozess.
+
+Ein zentraler Bestandteil dieses Systems ist der in der beigefügten Prozessgrafik dargestellte End-to-End-Ablauf, vom Website-Besuch bis zur finalen Mail-Bestätigung. Die Architektur umfasst APIs, externe Services, Cloud-Provisionierung und ERP-Integration.
+
+\subsection{Ziel}
+Erarbeiten Sie als Gruppe eine ganzheitliche Teststrategie für dieses System. Die Strategie soll praktikabel sein, typische Herausforderungen im DevOps-Umfeld adressieren und die Integration verschiedener Testebenen, Tools und Umgebungen berücksichtigen.
+
+\subsection{Bearbeitungsschwerpunkte}
+Bitte erarbeiten Sie eine Ausarbeitung (max. 6 Seiten + Anhang), in der Sie folgende Punkte behandeln:
+
+\subsubsection{1. Testumgebungsstabilisierung}
+\begin{itemize}
+    \item Wie stellen Sie in der Entwicklungs- und Integrationsphase eine stabile Testumgebung sicher, insbesondere angesichts externer Systeme (SAP, AWS, GPT, HubSpot etc.)?
+    \item Wie kann Service-Virtualisierung oder Mocking zum Einsatz kommen?
+    \item Welche Datenanforderungen bestehen (z. B. synthetische Testdaten, Daten-Maskierung)?
+\end{itemize}
+
+\subsubsection{2. Testarten und Abdeckung}
+\begin{itemize}
+    \item Welche Testarten (z. B. Unit-, API-, Integrations-, E2E-, Load-, Performance-, Security-tests) sind erforderlich, um:
+    \begin{itemize}
+        \item die funktionalen Anforderungen abzudecken?
+        \item nicht-funktionale Anforderungen wie Performance, Security, Verfügbarkeit und Datenintegrität zu prüfen?
+    \end{itemize}
+    \item Wo und wie werden diese Tests innerhalb der CI/CD-Pipeline ausgeführt?
+\end{itemize}
+
+\subsubsection{3. Testeffizienz und Wartbarkeit}
+\begin{itemize}
+    \item Wie strukturieren Sie Tests, um gezielt auf Systemveränderungen (z. B. SAP-Upgrade) reagieren zu können?
+    \item Wie nutzen Sie z. B. Impact Analysis, modulare Architekturen oder risikobasiertes Testen, um Wiederverwendbarkeit und Selektivität zu ermöglichen?
+\end{itemize}
+
+\subsubsection{4. Reporting \& Testtransparenz}
+\begin{itemize}
+    \item Wo und wie sollen Testergebnisse dokumentiert und ausgewertet werden (z. B. Dashboards, Logs, automatisierte Reports)?
+    \item Wer sind die Stakeholder für das Reporting (Dev, QA, Ops, Management)?
+\end{itemize}
+
+\subsubsection{5. Toolauswahl und Integration}
+\begin{itemize}
+    \item Welche Testtools (open source und/oder kommerziell) schlagen Sie für die Umsetzung vor für z. B.:
+    \begin{itemize}
+        \item Testautomatisierung
+        \item Performance-Testing
+        \item Service-Virtualisierung
+        \item Testdatenmanagement
+        \item Reporting \& Testmanagement
+    \end{itemize}
+\end{itemize}
+
+\subsection{Teamarbeit \& Rollenverteilung}
+Versucht in der Ausarbeitung die folgenden Rollen einzunehmen:
+\begin{itemize}
+    \item QA-Architekt: übergreifendes Testkonzept \& Architektur
+    \item Testanalyst: Spezifikation von Testfällen und Daten
+    \item Tool-Integrator: Toolauswahl \& CI/CD-Verknüpfung
+\end{itemize}
+Die Aufteilung ist eine Empfehlung, aber keine Pflicht.
+
+\subsection{Abzugebende Materialien}
+\begin{itemize}
+    \item Schriftliches Konzept (PDF, max. 6 Seiten ohne Anhang)
+    \item Architektur- oder Ablaufdiagramm(e) zur Teststrategie
+    \item Tabelle mit empfohlener Tool-Landschaft
+\end{itemize}
+
+\subsection{Vorgesehene Bearbeitungsdauer}
+Gesamt in etwa 5 Stunden pro Person.
+
+\subsection{Lernziele}
+\begin{itemize}
+    \item Eine effektive Teststrategie im Kontext von DevOps
+    \item Den Einsatz moderner Testtools konzeptionell bewerten
+    \item Risiken in komplexen Integrationslandschaften erkennen und adressieren
+    \item Testgetriebene CI/CD-Prozesse planen und visualisieren
+\end{itemize}

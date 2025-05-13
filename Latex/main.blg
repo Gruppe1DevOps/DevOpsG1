@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+The style file: apalike.bst
+Reallocating 'name_of_file' (item size: 1) to 19 items.
+Database file #1: section/references.bib
+Warning--entry type for "github-git" isn't style-file defined
+--line 1 of file section/references.bib
+Warning--entry type for "agile-manifesto" isn't style-file defined
+--line 1481 of file section/references.bib
+Warning--empty journal in cockburn2004
+You've used 45 entries,
+            1935 wiz_defined-function locations,
+            752 strings with 11326 characters,
+and the built_in function-call counts, 17646 in all, are:
+= -- 1769
+> -- 673
+< -- 33
++ -- 238
+- -- 220
+* -- 1448
+:= -- 3053
+add.period$ -- 149
+call.type$ -- 45
+change.case$ -- 335
+chr.to.int$ -- 45
+cite$ -- 46
+duplicate$ -- 707
+empty$ -- 1279
+format.name$ -- 296
+if$ -- 3493
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 41
+newline$ -- 228
+num.names$ -- 135
+pop$ -- 299
+preamble$ -- 1
+purify$ -- 334
+quote$ -- 0
+skip$ -- 502
+stack$ -- 0
+substring$ -- 1184
+swap$ -- 81
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 266
+warning$ -- 1
+while$ -- 144
+width$ -- 0
+write$ -- 595
+(There were 3 warnings)

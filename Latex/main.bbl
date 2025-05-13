@@ -1,0 +1,263 @@
+\begin{thebibliography}{}
+
+\bibitem[Abdelaziz et~al., 2015]{Abdelaziz2015-lb}
+Abdelaziz, A.~A., El-Tahir, Y., and Osman, R. (2015).
+\newblock Adaptive software development for developing safety critical
+  software.
+\newblock In {\em 2015 International Conference on Computing, Control,
+  Networking, Electronics and Embedded Systems Engineering ({ICCNEEE})}. IEEE.
+
+\bibitem[Ahmad et~al., 2018]{Ahmad2018-jv}
+Ahmad, M.~O., Dennehy, D., Conboy, K., and Oivo, M. (2018).
+\newblock Kanban in software engineering: A systematic mapping study.
+\newblock {\em J. Syst. Softw.}, 137:96--113.
+
+\bibitem[Al-Sabbagh and Gren, 2018]{Al-Sabbagh2018-bd}
+Al-Sabbagh, K.~W. and Gren, L. (2018).
+\newblock The connections between group maturity, software development
+  velocity, and planning effectiveness.
+\newblock {\em J. Softw. (Malden)}, 30(1):e1896.
+
+\bibitem[Alnoukari et~al., 2008]{Alnoukari2008-ro}
+Alnoukari, M., Alzoabi, Z., and Hanna, S. (2008).
+\newblock Applying adaptive software development ({ASD}) agile modeling on
+  predictive data mining applications: {ASD-DM} methodology.
+\newblock In {\em 2008 International Symposium on Information Technology}.
+  IEEE.
+
+\bibitem[Alshayeb and Li, 2006]{Alshayeb2006-nt}
+Alshayeb, M. and Li, W. (2006).
+\newblock An empirical study of relationships among extreme programming
+  engineering activities.
+\newblock {\em Inf. Softw. Technol.}, 48(11):1068--1072.
+
+\bibitem[Ambler, 2010]{Ambler2010-te}
+Ambler, S.~W. (2010).
+\newblock {\em The object primer}.
+\newblock Cambridge University Press, Cambridge, England, 3 edition.
+
+\bibitem[{Atlassian}, 2024]{atlassian2024code}
+{Atlassian} (2024).
+\newblock Code review best practices.
+\newblock Zuletzt abgerufen am 27. April 2025.
+
+\bibitem[Ayewah and Pugh, 2008]{ayewah2008using}
+Ayewah, N. and Pugh, W. (2008).
+\newblock Using static analysis to find bugs.
+\newblock In {\em Proceedings of the 2008 20th IEEE/ACM International
+  Conference on Automated Software Engineering}, pages 321--330. IEEE.
+
+\bibitem[Bacchelli and Bird, 2013]{bacchelli2013expectations}
+Bacchelli, A. and Bird, C. (2013).
+\newblock Expectations, outcomes, and challenges of modern code review.
+\newblock In {\em Proceedings of the 2013 International Conference on Software
+  Engineering}, pages 712--721. IEEE Press.
+
+\bibitem[Bache and Bache, 2014]{Bache2014-cp}
+Bache, E. and Bache, G. (2014).
+\newblock Specification by example with {GUI} tests - how could that work?
+\newblock In {\em Lecture Notes in Business Information Processing}, Lecture
+  notes in business information processing, pages 320--326. Springer
+  International Publishing, Cham.
+
+\bibitem[Beck et~al., 2001]{agile-manifesto}
+Beck, K. et~al. (2001).
+\newblock Manifest für agile softwareentwicklung.
+
+\bibitem[Beecham et~al., 2021]{Beecham2021-jj}
+Beecham, S., Clear, T., Lal, R., and Noll, J. (2021).
+\newblock Do scaling agile frameworks address global software development
+  risks? an empirical study.
+\newblock {\em J. Syst. Softw.}, 171(110823):110823.
+
+\bibitem[Beller et~al., 2016]{beller2016static}
+Beller, M., Gousios, G., and Zaidman, A. (2016).
+\newblock Static analysis: A critical evaluation.
+\newblock {\em IEEE Software}, 33(4):51--59.
+
+\bibitem[Binamungu et~al., 2020]{Binamungu2020-wt}
+Binamungu, L.~P., Embury, S.~M., and Konstantinou, N. (2020).
+\newblock Characterising the quality of behaviour driven development
+  specifications.
+\newblock In {\em Lecture Notes in Business Information Processing}, Lecture
+  notes in business information processing, pages 87--102. Springer
+  International Publishing, Cham.
+
+\bibitem[Blasquez and Leblanc, 2017]{Blasquez2017-og}
+Blasquez, I. and Leblanc, H. (2017).
+\newblock Specification by example for educational purposes.
+\newblock In {\em Proceedings of the 2017 {ACM} Conference on Innovation and
+  Technology in Computer Science Education}, New York, NY, USA. ACM.
+
+\bibitem[Chowdhury and Huda, 2011]{Chowdhury2011-hg}
+Chowdhury, A.~F. and Huda, M.~N. (2011).
+\newblock Comparison between adaptive software development and feature driven
+  development.
+\newblock In {\em Proceedings of 2011 International Conference on Computer
+  Science and Network Technology}. IEEE.
+
+\bibitem[Christou et~al., 2010]{Christou2010-vf}
+Christou, I., Ponis, S., and Palaiologou, E. (2010).
+\newblock Using the agile unified process in banking.
+\newblock {\em IEEE Softw.}, 27(3):72--79.
+
+\bibitem[Cockburn, 2004]{cockburn2004}
+Cockburn, A. (2004).
+\newblock Crystal clear a human-powered methodology for small teams.
+
+\bibitem[Cohen, 2010]{cohen2010business}
+Cohen, M. (2010).
+\newblock The business value of code review.
+\newblock Technical report, SmartBear Software.
+\newblock Zuletzt abgerufen am 27. April 2025.
+
+\bibitem[Conboy and Carroll, 2019]{Conboy2019-uw}
+Conboy, K. and Carroll, N. (2019).
+\newblock Implementing large-scale agile frameworks: Challenges and
+  recommendations.
+\newblock {\em IEEE Softw.}, 36(2):44--50.
+
+\bibitem[Crispin and Gregory, 2009]{Crispin2009}
+Crispin, L. and Gregory, J. (2009).
+\newblock {\em Agile Testing: A Practical Guide for Testers and Agile Teams}.
+\newblock Addison-Wesley Professional, 1 edition.
+
+\bibitem[Downs, 2011]{Downs2011-uk}
+Downs, G. (2011).
+\newblock Lean-agile acceptance test-driven development.
+\newblock {\em Softw. Eng. Notes}, 36(4):34--34.
+
+\bibitem[Ebert and Paasivaara, 2017]{Ebert2017-jz}
+Ebert, C. and Paasivaara, M. (2017).
+\newblock Scaling agile.
+\newblock {\em IEEE Softw.}, 34(6):98--103.
+
+\bibitem[Fagan, 1976]{fagan1976design}
+Fagan, M.~E. (1976).
+\newblock Design and code inspections to reduce errors in program development.
+\newblock {\em IBM Systems Journal}, 15(3):182--211.
+
+\bibitem[Fojtik, 2011]{FOJTIK20111464}
+Fojtik, R. (2011).
+\newblock Extreme programming in development of specific software.
+\newblock {\em Procedia Computer Science}, 3:1464--1468.
+\newblock World Conference on Information Technology.
+
+\bibitem[GitHub, 2024]{github-git}
+GitHub (2024).
+\newblock About git.
+
+\bibitem[Granulo and Tanovic, 2019]{Granulo2019-wm}
+Granulo, A. and Tanovic, A. (2019).
+\newblock Comparison of {SCRUM} and {KANBAN} in the learning management system
+  implementation process.
+\newblock In {\em 2019 27th Telecommunications Forum ({TELFOR})}. IEEE.
+
+\bibitem[{Ibrahim} et~al., 2020]{Ibrahim2020-ip}
+{Ibrahim}, {Aftab}, {Bakhtawar}, {Ahmad}, {Iqbal}, {Aziz}, {Javeid}, and
+  {Ihnaini} (2020).
+\newblock Exploring the agile family: A survey.
+\newblock {\em Int. J. Comput. Sci. Netw. Secur.}, 20(10):163--179.
+
+\bibitem[Janes, 2015]{Janes2015-ir}
+Janes, A. (2015).
+\newblock A guide to lean software development in action.
+\newblock In {\em 2015 {IEEE} Eighth International Conference on Software
+  Testing, Verification and Validation Workshops ({ICSTW})}. IEEE.
+
+\bibitem[Jonsson et~al., 2013]{Jonsson2013-gn}
+Jonsson, H., Larsson, S., and Punnekkat, S. (2013).
+\newblock Synthesizing a comprehensive framework for lean software development.
+\newblock In {\em 2013 39th Euromicro Conference on Software Engineering and
+  Advanced Applications}. IEEE.
+
+\bibitem[Kasauli et~al., 2021]{Kasauli2021-jn}
+Kasauli, R., Knauss, E., Horkoff, J., Liebel, G., and de~Oliveira~Neto, F.~G.
+  (2021).
+\newblock Requirements engineering challenges and practices in large-scale
+  agile system development.
+\newblock {\em J. Syst. Softw.}, 172(110851):110851.
+
+\bibitem[Kaur and Singh, 2019]{Kaur2019-wy}
+Kaur, S. and Singh, P. (2019).
+\newblock How does object-oriented code refactoring influence software quality?
+  research landscape and challenges.
+\newblock {\em J. Syst. Softw.}, 157(110394):110394.
+
+\bibitem[Larman and Basili, 2003]{Larman2003-fg}
+Larman, C. and Basili, V.~R. (2003).
+\newblock Iterative and incremental developments. a brief history.
+\newblock {\em Computer (Long Beach Calif.)}, 36(6):47--56.
+
+\bibitem[Lehtinen et~al., 2014]{Lehtinen2014-ou}
+Lehtinen, T. O.~A., Virtanen, R., Viljanen, J.~O., M{\"a}ntyl{\"a}, M.~V., and
+  Lassenius, C. (2014).
+\newblock A tool supporting root cause analysis for synchronous retrospectives
+  in distributed software teams.
+\newblock {\em Inf. Softw. Technol.}, 56(4):408--437.
+
+\bibitem[Li and Wang, 2010]{Li2010-ge}
+Li, J. and Wang, X. (2010).
+\newblock Research and practice of agile unified process.
+\newblock In {\em 2010 2nd International Conference on Software Technology and
+  Engineering}. IEEE.
+
+\bibitem[Mahni{\v c} and Hovelja, 2012]{Mahnic2012-ve}
+Mahni{\v c}, V. and Hovelja, T. (2012).
+\newblock On using planning poker for estimating user stories.
+\newblock {\em J. Syst. Softw.}, 85(9):2086--2095.
+
+\bibitem[McDonough, 2000]{McDonough2000-fi}
+McDonough, III, E.~F. (2000).
+\newblock Investigation of factors contributing to the success of
+  cross-functional teams.
+\newblock {\em J. Prod. Innov. Manage.}, 17(3):221--235.
+
+\bibitem[Miranda, 2011]{Miranda2011-yh}
+Miranda, E. (2011).
+\newblock Time boxing planning.
+\newblock {\em Softw. Eng. Notes}, 36(6):1--5.
+
+\bibitem[Rademacher et~al., 2018]{Rademacher2018-yo}
+Rademacher, F., Sorgalla, J., and Sachweh, S. (2018).
+\newblock Challenges of domain-driven microservice design: A model-driven
+  perspective.
+\newblock {\em IEEE Softw.}, 35(3):36--43.
+
+\bibitem[Rigby et~al., 2013]{rigby2013modern}
+Rigby, P.~C., Storey, M.-A., and Zimmermann, T. (2013).
+\newblock A survey of modern code review: Benefits, challenges and best
+  practices.
+\newblock Technical report, Microsoft Research.
+\newblock Zuletzt abgerufen am 27. April 2025.
+
+\bibitem[ShuiYuan et~al., 2009]{ShuiYuan2009-or}
+ShuiYuan, H., LongZhen, D., Jun, X., JunCai, T., and GuiXiang, C. (2009).
+\newblock A research and practice of agile unified requirement modeling.
+\newblock In {\em 2009 International Symposium on Intelligent Ubiquitous
+  Computing and Education}. IEEE.
+
+\bibitem[{SonarSource}, 2023]{sonarqube-docs-2023}
+{SonarSource} (2023).
+\newblock {\em SonarQube Documentation}.
+\newblock Zuletzt abgerufen am 27. April 2025.
+
+\bibitem[Stray et~al., 2016]{Stray2016-me}
+Stray, V., Sj{\o}berg, D. I.~K., and Dyb{\aa}, T. (2016).
+\newblock The daily stand-up meeting: A grounded theory study.
+\newblock {\em J. Syst. Softw.}, 114:101--124.
+
+\bibitem[Svensson et~al., 2019]{Svensson2019-pq}
+Svensson, R.~B., Gorschek, T., Bengtsson, P.-O., and Widerberg, J. (2019).
+\newblock {BAM} - backlog assessment method.
+\newblock In {\em Lecture Notes in Business Information Processing}, Lecture
+  notes in business information processing, pages 53--68. Springer
+  International Publishing, Cham.
+
+\bibitem[Wautelet et~al., 2017]{Wautelet2017-rv}
+Wautelet, Y., Heng, S., Kiv, S., and Kolp, M. (2017).
+\newblock User-story driven development of multi-agent systems: A process
+  fragment for agile methods.
+\newblock {\em Comput. Lang. Syst. Struct.}, 50:159--176.
+
+\end{thebibliography}
