@@ -1,0 +1,15 @@
+@startuml
+artifact "Terraform\nenv-provision" as TF
+    node "AWS Sandbox" as AWS {
+      [API Gateway Mocks]
+      [Lambda Stubs]
+    }
+    node "SAP Sandbox" as SAP {
+      [BAPI-Stubs]
+    }
+    TF --> AWS : provisioniert
+    TF --> SAP : provisioniert
+    actor Developer
+    Developer -> AWS : Testaufruf (Mock)
+    Developer -> SAP : Testaufruf (Stub)
+@enduml

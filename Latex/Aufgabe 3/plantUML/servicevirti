@@ -1,0 +1,12 @@
+@startuml
+actor Tester
+    participant "Microservice A" as A
+    participant "WireMock Stub" as M
+    participant "External API" as E
+
+    Tester -> A : HTTP GET /produkte
+    A -> M : Anfrage weiterleiten
+    M --> A : simulierte JSON-Antwort
+    A --> Tester : liefert Produktliste
+    A -> E : (nur in Integrationstest) tatsächlicher Aufruf
+@enduml

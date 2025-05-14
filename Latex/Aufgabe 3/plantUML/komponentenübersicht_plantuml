@@ -1,0 +1,19 @@
+@startuml
+skinparam componentStyle rectangle
+package "Testumgebung" {
+  [Terraform/CloudFormation] as IaC
+  [Sandbox-Accounts\n(Kubernetes, Cloud)] as Sandbox
+  [Service-Virtualisierung\n(WireMock, LocalStack)] as Virt
+  [TDM-Plattform\n(Delphix/Informatica)] as TDM
+  [CI/CD-Pipeline\n(Jenkins/GitLab CI)] as CICD
+  [Reporting & Dashboards\n(Grafana, Allure)] as Report
+}
+IaC --> Sandbox : Provisioniert
+IaC --> Virt : Deploy-Skripte
+IaC --> TDM : Daten-Services anlegen
+Sandbox --> CICD : Test-Stacks bereitstellen
+Virt --> CICD : Mocks für Tests
+TDM --> CICD : Testdaten bereitstellen
+CICD --> Report : Test- und Coverage-Daten
+Report --> Entwickler : Dashboards & Reports
+@enduml

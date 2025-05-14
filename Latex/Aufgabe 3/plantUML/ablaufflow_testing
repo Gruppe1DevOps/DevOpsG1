@@ -1,0 +1,30 @@
+@startuml
+|Developer|
+start
+:Push Code;
+|CI/CD|
+:Trigger Build;
+:Checkout Repo;
+partition "Unit & API Tests" {
+  :Run Unit-Tests;
+  :Run API-Tests gegen Mocks;
+}
+partition "Integration & Smoke" {
+  :Deploy in Test-Umgebung;
+  :Run Integration-Tests;
+  :Run Smoke-Tests;
+}
+partition "Performance & Security" {
+  fork
+    :Execute Lasttests (JMeter/Gatling);
+  fork again
+    :Run SAST (SonarQube/Snyk);
+    :Run DAST (OWASP ZAP/Burp);
+  end fork
+}
+:Aggregate Reports;
+:Publish Dashboards;
+|Developer|
+:Review Ergebnisse;
+stop
+@enduml
