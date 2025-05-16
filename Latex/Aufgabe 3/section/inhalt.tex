@@ -33,12 +33,12 @@ Zusammenfassend isolieren wir und verwalten die Infrastruktur mittels Infrastruc
 \subsubsection{Service-Virtualisierung und Mock-Ansätze}
 Service-Virtualisierung ist entscheidend, wenn externe Systeme nicht verfügbar oder instabil sind:
 \begin{itemize}
-    \item \textbf{REST/HTTP-Interfaces:} WireMock oder Mountebank für die Simulation von REST-APIs.
-    \item \textbf{Cloud-APIs:} AWS LocalStack für lokale Emulation von AWS-Services.
+    \item \textbf{REST/HTTP-Interfaces:} WireMock oder Mountebank für die Simulation von REST-APIs \cite{wiremock2025}.
+    \item \textbf{Cloud-APIs:} AWS LocalStack für lokale Emulation von AWS-Services \cite{aws2021}.
     \item \textbf{ERP-Integration:} Virtualisierung von SAP BAPIs und speziellen Schnittstellen.
     \item \textbf{API-Gateway:} Nutzung von AWS API Gateway zur Erstellung von Mock-Endpunkten.
 \end{itemize}
-Wenn abhängige Systeme (ERP oder externe APIs) instabil oder nicht verfügbar sind, simulieren Virtualisierungstools realistische Interaktionen. Open-Source-Lösungen wie WireMock oder Mountebank stubben REST-/HTTP-Schnittstellen, während Cloud-Tools (z.\,B. AWS LocalStack) Cloud-APIs lokal emulieren. Der Ablauf ist in Abbildung~\ref{fig:sequence} dargestellt.\begin{figure}[h!]
+Wenn abhängige Systeme (ERP oder externe APIs) instabil oder nicht verfügbar sind, simulieren Virtualisierungstools realistische Interaktionen. Open-Source-Lösungen wie WireMock oder Mountebank (siehe dazu \citet{byars2018}) stubben REST-/HTTP-Schnittstellen, während Cloud-Tools (z.\,B. AWS LocalStack) Cloud-APIs lokal emulieren. Der Ablauf ist in Abbildung~\ref{fig:sequence} dargestellt.\begin{figure}[h!]
 \centering
 \caption{Sequenzdiagramm: Service-Virtualisierung mit WireMock}
     \includegraphics[width=0.8\textwidth]{fig/servicevirti.png}
@@ -49,8 +49,8 @@ Wenn abhängige Systeme (ERP oder externe APIs) instabil oder nicht verfügbar s
 \subsubsection{Testdatenmanagement}
 Um konsistente und compliance-konforme Tests zu gewährleisten:
 \begin{itemize}
-    \item \textbf{Datenmaskierung:} Ersetzen von PII mit realistischen fiktiven Werten unter Beibehaltung der referentiellen Integrität.
-    \item \textbf{Synthetische Daten:} Künstliche Datensätze für Spezialfälle und Randszenarien.
+    \item \textbf{Datenmaskierung:} Ersetzen von PII mit realistischen fiktiven Werten unter Beibehaltung der referentiellen Integrität.\citet{tricentis2024} empfiehlt Format-preserving Encryption für PII
+    \item \textbf{Synthetische Daten:} Künstliche Datensätze für Spezialfälle und Randszenarien.\citet{browserstack2025} kombiniert synthetische und maskierte Daten
     \item \textbf{Hybridansatz:} Maskierte Produktionsdaten für Basistests, ergänzt durch synthetische Daten für Edge-Cases.
     \item \textbf{API-Integration:} CI/CD-Pipeline kann Testdaten über APIs auffrischen, zurücksetzen oder klonen.
 \end{itemize}
@@ -200,6 +200,7 @@ Reporting \& Testmanagement &
   Testdokumentation, Auswertung \\ \hline
 \end{tabular}
 \end{table}
+Ein Beispiel für eine für eine wissenschaftliches Paper das Tools vergleicht ist Software Testing: 5th Comparative Evaluation: {Test-Comp 2023} von \cite{beyer2023}
 \newpage
 \subsection{Anhang: Testarchitektur und Komponentendiagramm}
 \begin{figure}[h!]
