@@ -27,30 +27,32 @@
 %\end{itemize}
 
 Für unsere E-Commerce-Plattform mit ihren vielfältigen Integrationen (SAP, AWS, GPT, HubSpot) setzen wir auf:
+
 \begin{itemize}
     \item \textbf{Infrastruktur als Code (IaC):} Wir nutzen Terraform/CloudFormation, um isolierte
     Testumgebungen automatisiert zu erstellen und zu verwalten.
-    \item \textbf{Umgebungsmodellierung:} Jede Testumgebung wird mit ihren Komponenten,
-    Konfigurationen und Testdaten dokumentiert, für bessere Transparenz und Kontrolle.
+    \item \textbf{Umgebungsmodellierung:} Jede Testumgebung wird für bessere Transparenz und
+    Kontrolle mit ihren Komponenten, Konfigurationen und Testdaten dokumentiert.
     \item \textbf{Containerisierung:} Kubernetes-Namespaces für kurzlebige, isolierte Testumgebungen.
     \item \textbf{Sandbox-Accounts:} Dedizierte Test-Accounts für Cloud-Dienste verhindern
-    Konflikte zwischen Teams.
+    Konflikte zwischen den Teams.
 \end{itemize}
 
-Zusammenfassend isolieren wir und verwalten die Infrastruktur mittels Infrastructure as Code
+Zusammenfassend isolieren und verwalten wir die Infrastruktur mittels IaC
 (z.\,B. Terraform/CloudFormation) und nutzen dedizierte Sandbox-Accounts, um Konflikte zu vermeiden.
 Service-Virtualisierung ist eine zentrale Strategie die im nächsten Abschnitt beschrieben wird.
-Für eine beispielhafte Darstellung der Umgebung siehe Abbildung~\ref{fig:deployment}).
+Für eine beispielhafte Darstellung der Umgebung siehe Abbildung~\ref{fig:deployment}.
 
 \begin{figure}[h!]
-\centering
-\caption{Deployment-Diagramm: Virtuelle Testumgebungen via IaC}
-    \includegraphics[width=0.8\textwidth]{fig/stubing.png}
+    \centering
+    \includegraphics[width=0.9\textwidth]{fig/stubing.png}
+    \caption{Deployment-Diagramm: Virtuelle Testumgebungen via IaC}
     \label{fig:deployment}
 \end{figure}
 
 \subsubsection{Service-Virtualisierung und Mock-Ansätze}
-Service-Virtualisierung ist entscheidend, wenn externe Systeme nicht verfügbar oder instabil sind:
+Service-Virtualisierung ist entscheidend, wenn externe Systeme nicht verfügbar, instabil oder die
+Kosten für die Nutzung für Tests zu hoch sind:
 
 \begin{itemize}
     \item \textbf{REST/HTTP-Interfaces:} WireMock oder Mountebank für die Simulation von REST-APIs
@@ -60,35 +62,35 @@ Service-Virtualisierung ist entscheidend, wenn externe Systeme nicht verfügbar 
     \item \textbf{API-Gateway:} Nutzung von AWS API Gateway zur Erstellung von Mock-Endpunkten.
 \end{itemize}
 
-Wenn abhängige Systeme (ERP oder externe APIs) instabil oder nicht verfügbar sind, simulieren
-Virtualisierungstools realistische Interaktionen. Open-Source-Lösungen wie WireMock oder Mountebank
+Für abhängige Systeme (ERP oder externe APIs) können Virtualisierungstools realistische
+Interaktionen simulieren. Open-Source-Lösungen wie WireMock oder Mountebank
 (siehe dazu \citet{byars2018}) stubben REST-/HTTP-Schnittstellen, während Cloud-Tools
 (z.\,B. AWS LocalStack) Cloud-APIs lokal emulieren. Der Ablauf ist in Abbildung~\ref{fig:sequence}
-dargestellt.\begin{figure}[h!]
+dargestellt.
 
-\centering
-\caption{Sequenzdiagramm: Service-Virtualisierung mit WireMock}
+\begin{figure}[h!]
+    \centering
     \includegraphics[width=0.8\textwidth]{fig/servicevirti.png}
+    \caption{Sequenzdiagramm: Service-Virtualisierung mit WireMock}
     \label{fig:sequence}
 \end{figure}
 
-\newpage
-
 \subsubsection{Testdatenmanagement}
-Um konsistente und compliance-konforme Tests zu gewährleisten:
+Um konsistente und compliance-konforme Tests zu gewährleisten, können folgende Ansätze verwendet werden:
+
 \begin{itemize}
-    \item \textbf{Datenmaskierung:} Ersetzen von PII (Personally Identifiable Information) mit 
-    realistischen fiktiven Werten unter Beibehaltung der referentiellen 
-    Integrität.\citet{tricentis2024} empfiehlt Format-preserving Encryption für PII
+    \item \textbf{Datenmaskierung:} Ersetzen von Personally Identifiable Information (PII) mit
+    realistischen fiktiven Werten unter Beibehaltung der referentiellen Integrität. \citet{tricentis2024}
+    empfiehlt Format-preserving Encryption für PII
     \item \textbf{Synthetische Daten:} Künstliche Datensätze für Spezialfälle und Randszenarien.
-    \citet{browserstack2025} kombiniert synthetische und maskierte Daten
+    \citet{browserstack2025} kombiniert synthetische und maskierte Daten.
     \item \textbf{Hybridansatz:} Maskierte Produktionsdaten für Basistests, ergänzt durch
     synthetische Daten für Edge-Cases.
     \item \textbf{API-Integration:} CI/CD-Pipeline kann Testdaten über APIs auffrischen,
     zurücksetzen oder klonen.
 \end{itemize}
 
-\subsection{2. Testarten und Abdeckung}
+\subsection{Testarten und Abdeckung}
 %\begin{itemize}
 %    \item \textit{Welche Testarten (z. B. Unit-, API-, Integrations-, E2E-, Load-, Performance-,
 %Security-tests) sind erforderlich, um:}
@@ -121,8 +123,8 @@ Zur Prüfung von Performance, Security, Verfügbarkeit und Datenintegrität verw
     Verkehrsspitzen und Messung der Skalierbarkeit.
     \item \textbf{Security-Tests:} Kombination aus statischer (SAST) und dynamischer (DAST)
     Analyse mit Tools wie SonarQube, Snyk oder OWASP ZAP.
-    \item \textbf{Verfügbarkeitstests:} Monitoring der Systemverfügbarkeit unter verschiedenen
-    Lastbedingungen.
+    \item \textbf{Verfügbarkeitstests:} Monitoring der Systemverfügbarkeit unter
+    verschiedenen Lastbedingungen.
     \item \textbf{Datenintegritätstests:} Validierung der Datenkonsistenz zwischen SAP,
     NetSuite und AWS.
 \end{itemize}
@@ -159,7 +161,7 @@ Um flexibel auf Änderungen (wie SAP-Upgrades oder Microservice-Updates) reagier
 Zur Optimierung des Testaufwands setzen wir ein:
 
 \begin{itemize}
-    \item \textbf{Impact Analysis:}Identifikation relevanter Tests nach Code-Änderungen durch
+    \item \textbf{Impact Analysis:} Identifikation relevanter Tests nach Code-Änderungen durch
     Version-Control-Hooks und spezielle Tools.
     \item \textbf{Risikobasiertes Testen:} Priorisierung von Features mit hoher Geschäftsrelevanz
     oder bekannter Komplexität.
@@ -167,7 +169,7 @@ Zur Optimierung des Testaufwands setzen wir ein:
     Änderungsauswirkungen und passen Testpläne an.
 \end{itemize}
 
-\subsection{4. Reporting \& Testtransparenz}
+\subsection{Reporting \& Testtransparenz}
 
 \subsubsection{Dokumentation und Auswertung}
 Für transparentes Reporting nutzen wir:
@@ -187,7 +189,7 @@ Für transparentes Reporting nutzen wir:
 \begin{itemize}
     \item \textbf{Entwickler:Innen:} Detaillierte Fehlerprotokolle und Stack-Traces zur schnellen
     Fehlerbehebung.
-    \item \textbf{QA-Leads und Team:} Übersichtsdashboards mit Testfallstatus, Defect-Counts und
+    \item \textbf{QA-Leads und Team:} Übersichts-Dashboards mit Testfallstatus, Defect-Counts und
     Coverage (z.B. in TestRail, Xray oder Zephyr).
     \item \textbf{Operations:} Monitoring-Tools (CloudWatch, Prometheus/Grafana) für Performance
     und Systemgesundheit.
@@ -208,7 +210,7 @@ Rechenschaftspflicht und zeitnahes Feedback sicher.
 Diese Strategien ermöglichen eine schlanke, aber effektive Testsuite, die sich an verändernde
 Anforderungen anpasst und gleichzeitig den Wartungsaufwand kontrolliert.
 
-\subsection{5. Toolauswahl und Integration}
+\subsection{Toolauswahl und Integration}
 \subsubsection{Testautomatisierung}
 
 \begin{itemize}
@@ -263,12 +265,14 @@ CI/CD-Pipeline, verbunden mit einer modularen, wartbaren Testarchitektur und tra
 Reporting, garantiert kontinuierliches Qualitätsfeedback und hält mit agilen Lieferanforderungen
 Schritt.
 
-\subsection{Anhang: Tool-Landschaft Überblick}
+\newpage
+\subsection{Anhang}
+\subsubsection{Tool-Landschaft Überblick}
 
-\begin{table}[!h]
+\begin{table}[h!]
 \centering
-\caption{}
-\label{tab:my-table}
+\caption{Tool-Landschaft Überblick}
+\label{tab:tool-summary}
 \begin{tabular}{|l|l|l|}
 \hline
 \rowcolor[HTML]{000000} 
@@ -298,12 +302,12 @@ Ein Beispiel für eine für eine wissenschaftliches Paper das Tools vergleicht i
 
 \newpage
 
-\subsection{Anhang: Testarchitektur und Komponentendiagramm}
+\subsubsection{Testarchitektur und Komponentendiagramm}
 
 \begin{figure}[h!]
-\centering
-\caption{Architektur: Komponentenübersicht der Testumgebung}
+    \centering
     \includegraphics[width=0.8\textwidth]{fig/test_architecture_enviroment.png}
+    \caption{Architektur: Komponentenübersicht der Testumgebung}
     \label{fig:architecture}
 \end{figure} 
 
@@ -326,11 +330,12 @@ gewährleistet.
     Dashboards dar.
 \end{itemize}
 
-\subsection{Anhang: Ablaufflow der Continuous-Testing-Pipeline}
+\subsubsection{Ablaufflow der Continuous-Testing-Pipeline}
+
 \begin{figure}[h!]
 \centering
-\caption{Ablaufflow: Continuous-Testing-Pipeline}
-    \includegraphics[width=0.8\textwidth]{fig/ablauf_pipeline.png}
+    \includegraphics[width=0.9\textwidth]{fig/ablauf_pipeline.png}
+    \caption{Ablaufflow: Continuous-Testing-Pipeline}
     \label{fig:flow}
 \end{figure}
 
