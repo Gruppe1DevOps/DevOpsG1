@@ -2,20 +2,30 @@
 \section{Aufgabenstellung 3}
 
 %\subsection{Ausgangssituation}
-%Sie sind Teil eines Qualitätssicherungsteams in einem fiktiven Unternehmen, das eine E-Commerce-Plattform betreibt. Die Plattform bietet Kameraprodukte an, nutzt KI-gestützte Produktsuche, integriert verschiedene Backend-Systeme (z. B. SAP, AWS, NetSuite, HubSpot) und führt den Nutzer durch einen komplexen, serviceorientierten Kaufprozess.Ein zentraler Bestandteil dieses Systems ist der in der beigefügten Prozessgrafik dargestellte End-to-End-Ablauf, vom Website-Besuch bis zur finalen Mail-Bestätigung. Die Architektur umfasst APIs, externe Services, Cloud-Provisionierung und ERP-Integration.
+%Sie sind Teil eines Qualitätssicherungsteams in einem fiktiven Unternehmen, das eine
+%E-Commerce-Plattform betreibt. Die Plattform bietet Kameraprodukte an, nutzt KI-gestützte
+%Produktsuche, integriert verschiedene Backend-Systeme (z. B. SAP, AWS, NetSuite, HubSpot)
+%und führt den Nutzer durch einen komplexen, serviceorientierten Kaufprozess.Ein zentraler
+%Bestandteil dieses Systems ist der in der beigefügten Prozessgrafik dargestellte End-to-End-Ablauf,
+%vom Website-Besuch bis zur finalen Mail-Bestätigung. Die Architektur umfasst APIs, externe Services,
+%Cloud-Provisionierung und ERP-Integration.
 
 %\subsection{Ziel}
-%\textit{Erarbeiten Sie als Gruppe eine ganzheitliche Teststrategie für dieses System. Die Strategie soll praktikabel sein, typische Herausforderungen im DevOps-Umfeld adressieren und die Integration verschiedener Testebenen, Tools und Umgebungen berücksichtigen.}
+%\textit{Erarbeiten Sie als Gruppe eine ganzheitliche Teststrategie für dieses System.
+%Die Strategie soll praktikabel sein, typische Herausforderungen im DevOps-Umfeld adressieren
+%und die Integration verschiedener Testebenen, Tools und Umgebungen berücksichtigen.}
 
 %\subsection{Bearbeitungsschwerpunkte}
 %\textit{Bitte erarbeiten Sie eine Ausarbeitung (max. 6 Seiten + Anhang), in der Sie folgende Punkte behandeln:}
 
 \subsection{Testumgebungsstabilisierung}
 %\begin{itemize}
-%    \item \textit{Wie stellen Sie in der Entwicklungs- und Integrationsphase eine stabile Testumgebung sicher, insbesondere angesichts externer Systeme (SAP, AWS, GPT, HubSpot etc.)?}
+%    \item \textit{Wie stellen Sie in der Entwicklungs- und Integrationsphase eine stabile
+%Testumgebung sicher, insbesondere angesichts externer Systeme (SAP, AWS, GPT, HubSpot etc.)?}
 %    \item \textit{Wie kann Service-Virtualisierung oder Mocking zum Einsatz kommen?}
 %    \item \textit{Welche Datenanforderungen bestehen (z. B. synthetische Testdaten, Daten-Maskierung)?}
 %\end{itemize}
+
 Für unsere E-Commerce-Plattform mit ihren vielfältigen Integrationen (SAP, AWS, GPT, HubSpot) setzen wir auf:
 \begin{itemize}
     \item \textbf{Infrastruktur als Code (IaC):} Wir nutzen Terraform/CloudFormation, um isolierte
@@ -67,9 +77,9 @@ dargestellt.\begin{figure}[h!]
 \subsubsection{Testdatenmanagement}
 Um konsistente und compliance-konforme Tests zu gewährleisten:
 \begin{itemize}
-    \item \textbf{Datenmaskierung:} Ersetzen von PII mit realistischen fiktiven Werten unter
-    Beibehaltung der referentiellen Integrität.\citet{tricentis2024} empfiehlt Format-preserving
-    Encryption für PII
+    \item \textbf{Datenmaskierung:} Ersetzen von PII (Personally Identifiable Information) mit 
+    realistischen fiktiven Werten unter Beibehaltung der referentiellen 
+    Integrität.\citet{tricentis2024} empfiehlt Format-preserving Encryption für PII
     \item \textbf{Synthetische Daten:} Künstliche Datensätze für Spezialfälle und Randszenarien.
     \citet{browserstack2025} kombiniert synthetische und maskierte Daten
     \item \textbf{Hybridansatz:} Maskierte Produktionsdaten für Basistests, ergänzt durch
@@ -80,10 +90,12 @@ Um konsistente und compliance-konforme Tests zu gewährleisten:
 
 \subsection{2. Testarten und Abdeckung}
 %\begin{itemize}
-%    \item \textit{Welche Testarten (z. B. Unit-, API-, Integrations-, E2E-, Load-, Performance-, Security-tests) sind erforderlich, um:}
+%    \item \textit{Welche Testarten (z. B. Unit-, API-, Integrations-, E2E-, Load-, Performance-,
+%Security-tests) sind erforderlich, um:}
 %    \begin{itemize}
 %        \item \textit{die funktionalen Anforderungen abzudecken?}
-%        \item \textit{nicht-funktionale Anforderungen wie Performance, Security, Verfügbarkeit und Datenintegrität zu prüfen?}
+%        \item \textit{nicht-funktionale Anforderungen wie Performance, Security, Verfügbarkeit
+%und Datenintegrität zu prüfen?}
 %    \end{itemize}
 %    \item \textit{Wo und wie werden diese Tests innerhalb der CI/CD-Pipeline ausgeführt?}
 %\end{itemize}
@@ -128,8 +140,10 @@ Tests sind in der Pipeline wie folgt integriert:
 
 \subsection{Testeffizienz und Wartbarkeit}
 %\begin{itemize}
-%    \item Wie strukturieren Sie Tests, um gezielt auf Systemveränderungen (z. B. SAP-Upgrade) reagieren zu können?
-%    \item Wie nutzen Sie z. B. Impact Analysis, modulare Architekturen oder risikobasiertes Testen, um Wiederverwendbarkeit und Selektivität zu ermöglichen?
+%    \item Wie strukturieren Sie Tests, um gezielt auf Systemveränderungen (z. B. SAP-Upgrade)
+%reagieren zu können?
+%    \item Wie nutzen Sie z. B. Impact Analysis, modulare Architekturen oder risikobasiertes Testen,
+%um Wiederverwendbarkeit und Selektivität zu ermöglichen?
 %\end{itemize}
 \subsubsection{Strukturierung der Tests für Systemveränderungen}
 Um flexibel auf Änderungen (wie SAP-Upgrades oder Microservice-Updates) reagieren zu können:
@@ -186,9 +200,11 @@ Für transparentes Reporting nutzen wir:
 Durch automatisierte Berichterstellung (per E-Mail, Slack oder interne Dashboards) stellen wir
 Rechenschaftspflicht und zeitnahes Feedback sicher.
 %\begin{itemize}
-%    \item Wo und wie sollen Testergebnisse dokumentiert und ausgewertet werden (z. B. Dashboards, Logs, automatisierte Reports)?
+%    \item Wo und wie sollen Testergebnisse dokumentiert und ausgewertet werden
+%(z. B. Dashboards, Logs, automatisierte Reports)?
 %    \item Wer sind die Stakeholder für das Reporting (Dev, QA, Ops, Management)?
 %\end{itemize}
+
 Diese Strategien ermöglichen eine schlanke, aber effektive Testsuite, die sich an verändernde
 Anforderungen anpasst und gleichzeitig den Wartungsaufwand kontrolliert.
 
