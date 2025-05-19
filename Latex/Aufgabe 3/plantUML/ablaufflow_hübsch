@@ -1,0 +1,106 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 100
+
+title Process-Oriented Test Architecture for Camera E-Commerce Platform
+
+' Main process steps with clearer flow
+package "E-Commerce Process Flow" {
+  rectangle "1: User goes to\nwebsite" as P1 #LightBlue
+  rectangle "2: Browse for\nproducts" as P2 #LightBlue
+  rectangle "3: Add camera\nto cart" as P3 #LightBlue
+  rectangle "4: Create\naccount" as P4 #LightBlue
+  rectangle "5: Selects\nshipping" as P5 #LightBlue
+  rectangle "6: Adds photo\nstorage service" as P6 #LightBlue
+  rectangle "7: Completes\nCheckout" as P7 #LightBlue
+  rectangle "8: Mail\nconfirmation" as P8 #Orange
+  
+  P1 --> P2
+  P2 --> P3
+  P3 --> P4
+  P4 --> P5
+  P5 --> P6
+  P6 --> P7
+  P7 --> P8
+}
+
+' System integrations arranged to reduce crossing lines
+package "System Integrations" {
+  component "GPT" as GPT #LightBlue
+  component "SAP" as SAP #LightBlue  
+  component "HubSpot" as HubSpot #LightBlue
+  component "NetSuite" as NetSuite #LightBlue
+  component "AWS" as AWS #LightBlue
+}
+
+' Cleaner connections between process steps and systems
+P1 ..> GPT : Product lookup
+P3 ..> SAP : Verify availability
+P5 ..> SAP : Verify shipping
+P4 ..> HubSpot : CRM integration
+P4 ..> NetSuite : Account creation
+P7 ..> NetSuite : Order updates
+P6 ..> AWS : Service provisioning
+
+' Test levels with clearer association to process steps
+rectangle "Test Coverage" as TestLevels {
+  note "Unit/Component" as UC #PaleGreen
+  note "API Tests" as API #LightGoldenRodYellow
+  note "Integration Tests" as INT #Pink
+  note "UI/UX Tests" as UI #LightCyan
+  note "Security Tests" as SEC #Lavender
+  note "Performance Tests" as PERF #LightSalmon
+}
+
+' E2E Tests as an umbrella over the entire process
+cloud "End-to-End Test Scenarios" as E2ECloud #Gold {
+  rectangle "Standard Purchase" as E2E1
+  rectangle "Returning Customer" as E2E2
+  rectangle "Course Registration" as E2E3
+}
+
+E2ECloud -[hidden]up- P1
+
+' Service virtualization with clearer links to systems
+package "Service Virtualization" {
+  note "Mock Services for Isolated Testing" as MockNote #Wheat
+  component "GPT Mock" as Mock1 #Wheat
+  component "SAP Mock" as Mock2 #Wheat
+  component "HubSpot Mock" as Mock3 #Wheat
+  component "NetSuite Mock" as Mock4 #Wheat
+  component "AWS Mock" as Mock5 #Wheat
+}
+
+' Visual connections between mocks and real systems
+Mock1 .up.> GPT : replaces
+Mock2 .up.> SAP : replaces
+Mock3 .up.> HubSpot : replaces
+Mock4 .up.> NetSuite : replaces
+Mock5 .up.> AWS : replaces
+
+' Test environments with clearer progression
+node "Test Environments" as Envs {
+  rectangle "CI/CD Pipeline\n(Unit, API Tests)" as CICD #PaleTurquoise
+  rectangle "Development\n(Local Tests)" as Dev #PaleTurquoise
+  rectangle "Integration\n(System Tests)" as Int #PaleTurquoise
+  rectangle "Staging\n(E2E, UI/UX)" as Staging #PaleTurquoise
+  rectangle "Prod-like\n(Performance, Security)" as ProdLike #PaleTurquoise
+  
+  CICD -right-> Dev
+  Dev -right-> Int
+  Int -right-> Staging
+  Staging -right-> ProdLike
+}
+
+' Key test coverage per process step (simplified)
+note bottom of P1 : UI, Security, GPT API
+note bottom of P2 : UI, Component, Performance
+note bottom of P3 : SAP Integration, Cart API
+note bottom of P4 : Security, User API
+note bottom of P5 : Shipping API, SAP Integration
+note bottom of P6 : AWS Integration
+note bottom of P7 : Payment Security, Performance
+note bottom of P8 : Mail System Integration
+@enduml

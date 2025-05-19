@@ -18,6 +18,230 @@
 %\subsection{Bearbeitungsschwerpunkte}
 %\textit{Bitte erarbeiten Sie eine Ausarbeitung (max. 6 Seiten + Anhang), in der Sie folgende Punkte behandeln:}
 
+\subsection{Prozessorientierte Teststrategie}
+\subsubsection{Prozessübersicht}
+Der zentrale Kundenprozess besteht aus folgenden Schritten:
+\begin{enumerate}
+\item User goes to website
+\item Browse for products
+\item Add camera to cart
+\item Create account
+\item Selects shipping
+\item Adds photo storage service
+\item Completes Checkout
+\item Mail confirmation
+\end{enumerate}
+\subsubsection{Testebenen und -arten}
+Für jeden Prozessschritt werden folgende Testebenen angewendet:
+\begin{longtable}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testebene} & \textbf{Beschreibung} \\
+\hline
+Unit-/Component-Tests & Tests einzelner Komponenten und Funktionen, isoliert im Entwicklungsprozess \\
+\hline
+API-Tests & Prüfung der Schnittstellen zwischen Services und externen Systemen \\
+\hline
+Integrationstests & Test der Zusammenarbeit von Komponenten und externen Diensten \\
+\hline
+UI/UX-Tests & Testen der Benutzeroberfläche und Nutzungserfahrung \\
+\hline
+End-to-End-Tests & Simulation kompletter Benutzerflüsse über alle Prozessschritte hinweg \\
+\hline
+Performance-Tests & Prüfung des Systemverhaltens unter Last und Stress \\
+\hline
+Security-Tests & Prüfung auf Sicherheitsprobleme wie XSS, CSRF, etc. \\
+\hline
+\end{longtable}
+
+\subsubsection{Detaillierte Test-Definition je Prozessschritt}
+
+\paragraph{A. User goes to website \\}
+\textbf{Service-Virtualisierung:} GPT-Mock für schnelles Testen, simulierte Userprofile \\
+\begin{tabular}{|p{3cm}|p{12cm}|} 
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit/Component & Performance der Startseiten-Komponenten, Responsive Design, Werbeelemente \\
+\hline
+API & GPT-Integration für personalisierte Empfehlungen, Content-API-Abrufe \\
+\hline
+Nicht-funktional & XSS-Vulnerabilities, Content Security Policy, Ladezeit unter 2 Sekunden, WCAG 2.1 AA-Konformität \\
+\hline
+\end{tabular}
+
+
+\paragraph{B. Browse for products\\}
+\textbf{Service-Virtualisierung:} GPT-Mock für Produktempfehlungen, simulierte Produktkatalog-API \\
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit/Component & Filterkomponenten-Verhalten, Suchfunktionalität, Produktkatalog-Darstellung \\
+\hline
+API & Produkt-API-Antwortzeiten und -struktur, Suchoptimierung und -relevanz \\
+\hline
+Nicht-funktional & Reaktionszeit der Suche < 0.5 Sekunden, Verhalten bei gleichzeitiger Suche von 1000+ Nutzern \\
+\hline
+\end{tabular}
+
+
+\paragraph{C. Add camera to cart \\}
+\textbf{Service-Virtualisierung:} SAP-Mock für Verfügbarkeitsprüfungen, simulierte Verzögerungen \\
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit & Warenkorb-Komponente, Preisberechnung \\
+\hline
+Integration & SAP-Anbindung zur Verfügbarkeitsprüfung \\
+\hline
+API & Warenkorb-API, SAP-API für Lagerbestandsprüfung \\
+\hline
+Nicht-funktional & Reaktionszeit der Warenkorb-Operationen, Konsistenz bei gleichzeitigen Zugriffen \\
+\hline
+\end{tabular}
+
+
+\paragraph{D. Create account\\}
+\textbf{Service-Virtualisierung:} NetSuite-Mock für Account-Erstellung, HubSpot-Mock\\
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit & Registrierungsformular, Validierungslogik \\
+\hline
+Integration & NetSuite-Account-Erstellung, HubSpot-Anbindung \\
+\hline
+API & Account-Erstellungs-API, Authentifizierungs-Workflows \\
+\hline
+Nicht-funktional & Passwort-Policies, Account-Übernahme-Schutz, DSGVO-Konformität \\
+\hline
+\end{tabular}
+
+
+\paragraph{E. Selects shipping \\}
+\textbf{Service-Virtualisierung:} SAP-Mock für Versandverifizierung, Simulation internationaler Versandoptionen \\
+
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit & Versandoptionen-Komponenten \\
+\hline
+Integration & SAP-Integration für Versandoptionen \\
+\hline
+API & Versandkosten-Berechnung-API, Lieferzeit-Prognose-API \\
+\hline
+Nicht-funktional & Reaktionszeiten, korrekte Versandoptionen bei verschiedenen Ländercodes \\
+\hline
+\end{tabular}
+
+\paragraph{F. Adds photo storage service\\}
+\textbf{Service-Virtualisierung:} AWS-Service-Mock für Provisioning-Simulation \\
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit & Storage-Plan-Auswahl-Komponenten \\
+\hline
+Integration & AWS-Service-Provisioning \\
+\hline
+API & Storage-Service-API-Aufrufe, Pricing-API für additive Services \\
+\hline
+Nicht-funktional & Service-Aktivierungszeiten, Fehlerbehandlung bei AWS-Provisioning-Problemen \\
+\hline
+\end{tabular}
+
+
+\paragraph{G. Completes Checkout\\}
+\textbf{Service-Virtualisierung:} Payment-Service-Mock, NetSuite-Mock für Order-Updates \\
+
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit & Bezahlprozess-Komponenten, Zusammenfassung \\
+\hline
+Integration & Integration mit NetSuite für Bestellaktualisierung \\
+\hline
+API & Checkout-API, Zahlungsverarbeitungs-API \\
+\hline
+Nicht-funktional & PCI-DSS-Konformität, Zahlungssicherheit, Performance, Transaktions-Rollback \\
+\hline
+\end{tabular}
+
+\newpage
+
+\paragraph{H. Mail confirmation\\}
+\textbf{Service-Virtualisierung:} E-Mail-Service-Mock für Zustellungssimulation\\
+
+\begin{tabular}{|p{3cm}|p{12cm}|}
+\hline
+\textbf{Testarten} & \textbf{Testfokus} \\
+\hline
+Unit & E-Mail-Template-Rendering \\
+\hline
+Integration & E-Mail-Versandsystem-Integration \\
+\hline
+API & E-Mail-API-Aufrufe, Bestätigungs-Tracking-API \\
+\hline
+Nicht-funktional & E-Mail-Zustellung-Rate $>$ 99,5\%, E-Mail-Versandzeit $<$ 30 Sekunden \\
+\hline
+\end{tabular}
+
+\subsection{End-to-End-Testszenarien}
+\subsubsection{Hauptszenarien}
+\paragraph{Standardablauf: Kompletter Kaufprozess}
+\begin{itemize}
+\item \textbf{Beschreibung:} Vollständiger Durchlauf vom Website-Besuch bis zur E-Mail-Bestätigung
+\item \textbf{Testdaten:} Neuer Benutzer, verfügbares Kameraprodukt, Standard-Versand, Basic-Speicherpaket
+\item \textbf{Erwartetes Ergebnis:} Erfolgreicher Kaufabschluss, korrekte Bestellbestätigung per E-Mail
+\item \textbf{Automatisierungsgrad:} 90\% automatisiert (Playwright/Cypress)
+\item \textbf{Testumgebung:} Staging mit teilweise virtualisierten Services
+\end{itemize}
+\paragraph{Szenario: Rückkehrender Kunde mit Login}
+\begin{itemize}
+\item \textbf{Beschreibung:} Login eines Bestandskunden und Durchführung eines Kaufs mit gespeicherter Adresse
+\item \textbf{Testdaten:} Existierender Account, Produktvariante mit Zubehör, vorhandener Fotospeicher
+\item \textbf{Erwartetes Ergebnis:} Korrekte Nutzung gespeicherter Daten, erfolgreicher Checkout
+\item \textbf{Automatisierungsgrad:} 85\% automatisiert
+\item \textbf{Testumgebung:} Staging mit Echtanbindung an HubSpot
+\end{itemize}
+\paragraph{Szenario: Foto-Kursbuchung}
+\begin{itemize}
+\item \textbf{Beschreibung:} Buchung eines Fotografie-Kurses statt eines physischen Produkts
+\item \textbf{Testdaten:} Neuer Benutzer, Online-Kurs "DSLR-Fotografie für Einsteiger"
+\item \textbf{Erwartetes Ergebnis:} Erfolgreiche Kursbuchung, Aktivierungslink in der E-Mail
+\item \textbf{Automatisierungsgrad:} 80\% automatisiert
+\item \textbf{Testumgebung:} Staging mit AWS-Integration
+\end{itemize}
+\subsubsection{Fehlerszenario-Tests}
+\paragraph{Produkt während Checkout nicht mehr verfügbar}
+\begin{itemize}
+\item \textbf{Beschreibung:} Simulation eines Lagerbestandsproblems während des Checkouts
+\item \textbf{Testdaten:} Produkt mit kritischem Lagerbestand, der während des Prozesses auf 0 sinkt
+\item \textbf{Erwartetes Ergebnis:} Nutzerfreundliche Fehlerbehandlung, alternative Produktvorschläge
+\item \textbf{Automatisierungsgrad:} 70\% automatisiert, 30\% manuelle Validierung
+\item \textbf{Testumgebung:} Staging mit manipuliertem SAP-Mock
+\end{itemize}
+\paragraph{Zahlungsabbruch und Wiederaufnahme}
+\begin{itemize}
+\item \textbf{Beschreibung:} Test der Wiederaufnahme eines unterbrochenen Zahlungsprozesses
+\item \textbf{Testdaten:} Bestandskunde mit vollständigem Warenkorb, Zahlungsabbruch
+\item \textbf{Erwartetes Ergebnis:} Persistenz des Warenkorbs, erfolgreiche Wiederaufnahme, Benachrichtigung
+\item \textbf{Automatisierungsgrad:} 65\% automatisiert
+\item \textbf{Testumgebung:} Staging mit Payment-Service-Mock
+\end{itemize}
+\paragraph{AWS-Service-Aktivierungsfehler}
+\begin{itemize}
+\item \textbf{Beschreibung:} Test des Fehlerverhaltens bei AWS-Provisioning-Problemen
+\item \textbf{Testdaten:} Erfolgreich abgeschlossene Bestellung mit Fotospeicherdienst
+\item \textbf{Erwartetes Ergebnis:} Fehlerbenachrichtigung, automatisierter Wiederholungsversuch, Support-Ticket
+\item \textbf{Automatisierungsgrad:} 75\% automatisiert
+\item \textbf{Testumgebung:} Staging mit fehlersimulierendem AWS-Mock
+\end{itemize}
+
+
 \subsection{Testumgebungsstabilisierung}
 %\begin{itemize}
 %    \item \textit{Wie stellen Sie in der Entwicklungs- und Integrationsphase eine stabile
@@ -43,12 +267,31 @@ Zusammenfassend isolieren und verwalten wir die Infrastruktur mittels IaC
 Service-Virtualisierung ist eine zentrale Strategie die im nächsten Abschnitt beschrieben wird.
 Für eine beispielhafte Darstellung der Umgebung siehe Abbildung~\ref{fig:deployment}.
 
+\newpage
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.9\textwidth]{fig/stubing.png}
+    \includegraphics[width=1\textwidth]{fig/stubing.png}
     \caption{Deployment-Diagramm: Virtuelle Testumgebungen via IaC}
     \label{fig:deployment}
 \end{figure}
+
+\begin{longtable}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{2cm}|}
+\caption{Testumgebungen} \\ \hline    
+\hline
+\textbf{Umgebung} & \textbf{Hauptzweck} & \textbf{Virtualisierung} & \textbf{Testdaten} & \textbf{Ausführung} \\
+\hline
+Entwicklung & Entwicklertests, Komponententests & Alle Services virtualisiert & Synthetische Testdaten & Kontinuierlich \\
+\hline
+CI/CD-Pipeline & Unit/API-Tests, statische Codeanalyse & Alle Services virtualisiert & Synthetische Testdaten & Bei jedem Commit \\
+\hline
+Integration & Service-Integration, API-Tests & Kritische externe Services virtualisiert & Gemischte Testdaten & Täglich \\
+\hline
+Staging & E2E-Tests, UAT & Minimale Virtualisierung & Produktionsähnliche Daten & Bei Release-Kandidaten \\
+\hline
+Produktionsähnlich & Performance, Last, Sicherheit & Keine Virtualisierung & Vollständige Testdaten & Wöchentlich \\
+\hline
+\end{longtable}
 
 \subsubsection{Service-Virtualisierung und Mock-Ansätze}
 Service-Virtualisierung ist entscheidend, wenn externe Systeme nicht verfügbar, instabil oder die
@@ -75,6 +318,32 @@ dargestellt.
     \label{fig:sequence}
 \end{figure}
 
+Die Virtualisierung abhängiger Services erfolgt phasengesteuert: Während der Build-Phase kommen
+WireMocks zum Einsatz, um Unit- und API-Tests in der Pipeline oder Entwicklungsumgebung zu
+unterstützen. In der IaC-Testumgebung emuliert AWS LocalStack Cloud-APIs, um Integrationstests
+effizient durchzuführen. Zusätzlich werden SAP-Schnittstellen bereits vor Testbeginn durch Parasoft
+Virtualize gestubbt - dies reduziert Latenzen bei der Testvorbereitung und erfüllt Complance-Anforderungen
+wie Datenmaskierung. Der gestaffelte Einsatz virtueller Komponenten sichert konsistente Testbedingungen,
+unabhängig von externen Systemabhängigkeiten.
+
+\begin{longtable}{|p{2cm}|p{3cm}|p{4cm}|p{2cm}|p{3cm}|}
+\caption{Virtualisierungsansatz pro Prozessschritt} \\ \hline
+\textbf{System} & \textbf{Prozessschritt} & \textbf{Virtualisierungsansatz} & \textbf{Tool} & \textbf{Umgebung} \\ \hline
+\endfirsthead
+
+\multicolumn{5}{c}{\tablename\ \thetable{} -- Fortsetzung} \\ \hline
+\textbf{System} & \textbf{Prozessschritt} & \textbf{Virtualisierungsansatz} & \textbf{Tool} & \textbf{Umgebung} \\ \hline
+\endhead
+
+GPT & User goes to website & Vortrainierte Antworten für Produktsuche & WireMock & Entwicklung, CI/CD \\ \hline
+SAP & Add camera to cart & Statische Verfügbarkeitsantworten & LocalStack & Entwicklung, Integration \\ \hline
+SAP & Selects shipping & Konfigurierbare Versandoptionen & WireMock & Integration, Last-Tests \\ \hline
+HubSpot & Create account & Service-Provisionierung & Mountebank & Entwicklung, Integration \\ \hline
+NetSuite & Create account & Account-Erstellung & WireMock & Alle außer Prod \\ \hline
+NetSuite & Completes Checkout & Bestellaktualisierung & WireMock & Integration, Staging \\ \hline
+AWS & Adds photo storage & Service-Provisioning & LocalStack & Entwicklung, Integration \\ \hline
+\end{longtable}
+
 \subsubsection{Testdatenmanagement}
 Um konsistente und compliance-konforme Tests zu gewährleisten, können folgende Ansätze verwendet werden:
 
@@ -90,18 +359,40 @@ Um konsistente und compliance-konforme Tests zu gewährleisten, können folgende
     zurücksetzen oder klonen.
 \end{itemize}
 
-\subsection{Testarten und Abdeckung}
-%\begin{itemize}
-%    \item \textit{Welche Testarten (z. B. Unit-, API-, Integrations-, E2E-, Load-, Performance-,
-%Security-tests) sind erforderlich, um:}
-%    \begin{itemize}
-%        \item \textit{die funktionalen Anforderungen abzudecken?}
-%        \item \textit{nicht-funktionale Anforderungen wie Performance, Security, Verfügbarkeit
-%und Datenintegrität zu prüfen?}
-%    \end{itemize}
-%    \item \textit{Wo und wie werden diese Tests innerhalb der CI/CD-Pipeline ausgeführt?}
-%\end{itemize}
+\begin{longtable}{|p{3cm}|p{5cm}|p{3cm}|p{3cm}|}
+\caption{Prozessspezifische Testdaten} \\
+\hline
+\textbf{Prozessschritt} & \textbf{Testdaten-Anforderungen} & \textbf{Quelle} & \textbf{Bereitstellung}\\
+\hline
+User goes to website & User-Personas, Browser-Profile & Synthetisch & Fixture-Files\\
+\hline
+Browse for products & Produktkatalog mit Varianten & Prod-Kopie & TDM-Tool (Delphix)\\
+\hline
+Add camera to cart & Produktvarianten mit Lagerbestandsstufen & Synthetisch & API-Seeding\\
+\hline
+Create account & Benutzerprofile, E-Mail-Domains & Synthetisch & Faker.js + API\\
+\hline
+Selects shipping & Verschiedene Länder/Regionen & Prod-Kopie & CSV-Import\\
+\hline
+Adds photo storage & Storage-Pläne mit Preisen & Aktuelle Konfiguration & Configuration-as-Code\\
+\hline
+Completes Checkout & Zahlungsmethoden, Gutscheincodes & Synthetisch & API-Seeding\\
+\hline
+Mail confirmation & E-Mail-Templates, Sprachen & Aktuelle Version & Git-Repository\\
+\hline
+\end{longtable}
 
+\paragraph{Testdaten-Governance}
+Zur Sicherstellung von Datenqualität und Compliance:
+\begin{itemize}
+\item \textbf{Daten-Klassifizierung:} Kategorisierung von Testdaten nach Sensitivität und Verwendungszweck
+\item \textbf{Automatisierte DSGVO-Konformität:} Automatisches Maskieren von personenbezogenen Daten
+\item \textbf{Versionsverwaltung:} Testdaten-Snapshots mit Versionierung für Reproduzierbarkeit
+\item \textbf{Selbstbedienungsportal:} GUI für Tester zum Anfordern und Verwalten von Testdaten-Sets
+\item \textbf{Nutzungsverfolgung:} Logging und Monitoring der Testdatennutzung für Audits
+\end{itemize}
+
+\subsection{Testarten und Abdeckung}
 \subsubsection{Funktionale Tests}
 
 Zur Abdeckung funktionaler Anforderungen setzen wir folgende Testtypen ein:
@@ -133,12 +424,62 @@ Zur Prüfung von Performance, Security, Verfügbarkeit und Datenintegrität verw
 Tests sind in der Pipeline wie folgt integriert:
 
 \begin{itemize}
-    \item \textbf{Build-Phase:} Unit-Tests und API-Tests laufen bei jedem Build.
-    \item \textbf{Deployment-Phase:} Integrations- und Smoke-Tests nach Deployment in Testumgebung.
-    \item \textbf{Post-Deployment:} Aufwändige Tests (Performance, Security) in parallelen oder
-    separaten Pipelines.
-    \item \textbf{Nightly-Jobs:} Umfassende Tests, die mehr Zeit beanspruchen.
+    \item \textbf{Build-Phase:} Unit-Tests (lokal) und API-Tests (gegen Mocks) laufen bei jedem Build.
+    \item \textbf{Deployment-Phase:} Integrations- und Smoke-Tests, in IaC-Umgebung nach Deployment
+    in Testumgebung (mit SAP/AWS-Virtualisierung).
+    \item \textbf{Post-Deployment:} E2E-Tests in Staging-Umgebung (mit SAP/AWS-Virtualisierung).
+    \item \textbf{Nachtests:} Performance- und Security-Tests in isolierten Cloud-Sandboxes.
 \end{itemize}
+
+
+\begin{longtable}{|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{3.5cm}|}
+\caption{Automatisierungsstrategie pro Prozessschritt} \\
+\hline
+\textbf{Prozessschritt} & \textbf{Automatisierungsgrad} & \textbf{Frameworks} & \textbf{CI/CD-Integration} \\
+\hline
+User goes to website & 90\% & Jest, Lighthouse & Commit-Stage \\
+\hline
+Browse for products & 85\% & TestCafe, Cypress & Täglich \\
+\hline
+Add camera to cart & 90\% & Cypress, API-Tests & Commit-Stage \\
+\hline
+Create account & 80\% & Playwright, API-Tests & Täglich \\
+\hline
+Selects shipping & 85\% & Cypress, API-Tests & Täglich \\
+\hline
+Adds photo storage & 75\% & Selenium, API-Tests & Täglich \\
+\hline
+Completes Checkout & 70\% & Cypress, API-Tests & Release-Gate \\
+\hline
+Mail confirmation & 95\% & API-Tests, E-Mail-Tests & Release-Gate \\
+\hline
+\end{longtable}
+
+\subsubsection{Testausführungsorte}
+Die Tests werden an verschiedenen Ausführungsorten ausgeführt:
+
+\begin{table}[h!]
+\centering
+\caption{Testausführungsorte und virtualisierte Services}
+\label{tab:testorte}
+\begin{tabular}{p{3.5cm}p{4cm}p{5cm}}
+\toprule
+\textbf{Testtyp} & \textbf{Ausführungsort} & \textbf{Virtualisierte Services} \\
+\midrule
+Unit-Tests & Lokale Entwicklerumgebung / Build-Pipeline & 
+ WireMock (externe APIs)
+ Lokale DB-Clones \\
+API-/Integrationstests & IaC-basierte Testumgebung (AWS Sandbox) & 
+  AWS LocalStack (Cloud-Services)
+  SAP-Mocks \\
+End-to-End-Tests & Staging-Umgebung (Kubernetes-Namespace) & 
+  HubSpot-\& GPT-Virtualisierung 
+  via API Gateway \\
+Performance/Security & Dedizierte Lastumgebung (BlazeMeter/k6 Cloud) & 
+Vollständig isolierte Sandbox-Accounts \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Testeffizienz und Wartbarkeit}
 %\begin{itemize}
@@ -151,7 +492,8 @@ Tests sind in der Pipeline wie folgt integriert:
 Um flexibel auf Änderungen (wie SAP-Upgrades oder Microservice-Updates) reagieren zu können:
 
 \begin{itemize}
-    \item \textbf{Modulare Testarchitektur:} Tests sind nach Komponenten oder Services organisiert.
+    \item \textbf{Modulare Testarchitektur:} Tests sind nach Komponenten (Unit), Systemen (Integration)
+    und E2E-Prozessen organisiert, um Änderungen in SAP oder Microservices isoliert zu validieren
     \item \textbf{Shared Libraries:} Gemeinsame Funktionen und Daten-Fixtures vermeiden Duplikationen.
     \item \textbf{Page Object Model:} Kapselung von UI-Interaktionen für bessere Wartbarkeit.
     \item \textbf{API-Client-Bibliotheken:} Wiederverwendbare Clients für API-Tests.
@@ -268,39 +610,44 @@ Schritt.
 \newpage
 \subsection{Anhang}
 \subsubsection{Tool-Landschaft Überblick}
+\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{4cm}|p{3cm}|}
+\caption{Tool-Landschaft Überblick mit Testebenen} \\ \hline
+\textbf{Kategorie} & \textbf{Tools} & \textbf{Anwendungsbereich} & \textbf{Testebene} \\ \hline
+\endfirsthead
 
-\begin{table}[h!]
-\centering
-\caption{Tool-Landschaft Überblick}
-\label{tab:tool-summary}
-\begin{tabular}{|l|l|l|}
-\hline
-\rowcolor[HTML]{000000} 
-\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} \textbf{Kategorie}}} &
-  \multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} \textbf{Tools}}} &
-  \multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} \textbf{Anwendungsbereich}}} \\ \hline
+\multicolumn{4}{c}{\tablename\ \thetable{} -- Fortsetzung} \\ \hline
+\textbf{Kategorie} & \textbf{Tools} & \textbf{Anwendungsbereich} & \textbf{Testebene} \\ \hline
+\endhead
+
 Testautomatisierung &
-  \begin{tabular}[c]{@{}l@{}}Selenium, Playwright, \\ Cypress, \\ JUnit/TestNG, \\ pytest, Cucumber, \\ Postman/Newman\end{tabular} &
-  UI- und Funktionstest, API-Test \\ \hline
+Selenium, Playwright, Cypress, JUnit/TestNG, pytest, Cucumber, Postman/Newman &
+UI- und Funktionstest, API-Test &
+Unit/Component, System, E2E \\ \hline
+
 Performance-Testing &
-  \begin{tabular}[c]{@{}l@{}}Apache JMeter, \\ Gatling, k6, \\ BlazeMeter\end{tabular} &
-  Last- und Performance-Tests \\ \hline
+Apache JMeter, Gatling, k6, BlazeMeter &
+Last- und Performance-Tests &
+System, End-to-End \\ \hline
+
 Service-Virtualisierung &
-  \begin{tabular}[c]{@{}l@{}}WireMock, Mountebank, \\ AWS LocalStack,\\ API Gateway Mocks, \\ Parasoft Virtualize\end{tabular} &
-  Mock-Services für APIs und Systeme \\ \hline
+WireMock, Mountebank, AWS LocalStack, API Gateway Mocks, Parasoft Virtualize &
+Mock-Services für APIs und Systeme &
+Build-Phase, Integrationstests \\ \hline
+
 Testdatenmanagement &
-  \begin{tabular}[c]{@{}l@{}}Delphix, Informatica TDM, \\ Redgate Data Generator, \\ Faker-Bibliotheken\end{tabular} &
-  Datenmaskierung, Synthetische Daten \\ \hline
+Delphix, Informatica TDM, Redgate Data Generator, Faker-Bibliotheken &
+Datenmaskierung, Synthetische Daten &
+Alle Testebenen, Pipeline-übergreifend \\ \hline
+
 Reporting \& Testmanagement &
-  \begin{tabular}[c]{@{}l@{}}Jenkins/GitLab CI, \\ Allure Report, \\ ReportPortal,\\  Xray/Zephyr/TestRail, \\ Grafana/ELK\end{tabular} &
-  Testdokumentation, Auswertung \\ \hline
-\end{tabular}
-\end{table}
+Jenkins/GitLab CI, Allure Report, ReportPortal, Xray/Zephyr/TestRail, Grafana/ELK &
+Testdokumentation, Auswertung &
+Pipeline-übergreifend, Stakeholder-Dashboards \\ \hline
+
+\end{longtable}
 
 Ein Beispiel für eine für eine wissenschaftliches Paper das Tools vergleicht ist Software Testing:
 5th Comparative Evaluation: {Test-Comp 2023} von \cite{beyer2023}
-
-\newpage
 
 \subsubsection{Testarchitektur und Komponentendiagramm}
 
@@ -348,42 +695,15 @@ nachfolgende eine kurze Beschreibung der einzelnen Schritte:
     \item \textbf{Integration \& Smoke} werden in einer auf IaC bereitgestellten Testumgebung durchgeführt.
     \item \textbf{Performance \& Security} finden parallel in eigenen Phasen statt.
     \item Abschließend werden alle Reports zusammengeführt und im Dashboard veröffentlicht.
-\end{itemize}
+\end{itemize}  
 
-%\begin{itemize}
-%    \item Welche Testtools (open source und/oder kommerziell) schlagen Sie für die Umsetzung vor für z. B.:
-%    \begin{itemize}
-%        \item Testautomatisierung
-%        \item Performance-Testing
-%        \item Service-Virtualisierung
-%        \item Testdatenmanagement
-%        \item Reporting \& Testmanagement
-%    \end{itemize}
-%\end{itemize}
+\clearpage
 
-%\subsection{Teamarbeit \& Rollenverteilung}
-%Versucht in der Ausarbeitung die folgenden Rollen einzunehmen:
-%\begin{itemize}
-%    \item QA-Architekt: übergreifendes Testkonzept \& Architektur
-%    \item Testanalyst: Spezifikation von Testfällen und Daten
-%    \item Tool-Integrator: Toolauswahl \& CI/CD-Verknüpfung
-%\end{itemize}
-%Die Aufteilung ist eine Empfehlung, aber keine Pflicht.
 
-%\subsection{Abzugebende Materialien}
-%\begin{itemize}
-%    \item Schriftliches Konzept (PDF, max. 6 Seiten ohne Anhang)
-%    \item Architektur- oder Ablaufdiagramm(e) zur Teststrategie
-%    \item Tabelle mit empfohlener Tool-Landschaft
-%\end{itemize}
-
-%\subsection{Vorgesehene Bearbeitungsdauer}
-%Gesamt in etwa 5 Stunden pro Person.
-
-%\subsection{Lernziele}
-%\begin{itemize}
-%    \item Eine effektive Teststrategie im Kontext von DevOps
-%    \item Den Einsatz moderner Testtools konzeptionell bewerten
-%    \item Risiken in komplexen Integrationslandschaften erkennen und adressieren
-%    \item Testgetriebene CI/CD-Prozesse planen und visualisieren
-%\end{itemize}
+\subsubsection{Prozessorientierte Testarchitektur für Foto-Webshop}
+\begin{figure}[h!]
+\centering
+    \includegraphics[width=1.1\textwidth]{fig/prozessschritte.png}
+    \caption{Prozessorientierte Testarchitektur}
+    \label{fig:flow2}
+\end{figure}

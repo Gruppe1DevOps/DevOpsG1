@@ -1,0 +1,139 @@
+@startuml
+skinparam componentStyle rectangle
+
+
+' Hauptprozessschritte
+package "E-Commerce Prozessschritte" {
+  rectangle "User goes to website" as P1 #LightBlue
+  rectangle "Browse for products" as P2 #LightBlue
+  rectangle "Add camera to cart" as P3 #LightBlue
+  rectangle "Create account" as P4 #LightBlue
+  rectangle "Selects shipping" as P5 #LightBlue
+  rectangle "Adds photo storage service" as P6 #LightBlue
+  rectangle "Completes Checkout" as P7 #LightBlue
+  rectangle "Mail confirmation" as P8 #Orange
+  
+  P1 --> P2
+  P2 --> P3
+  P3 --> P4
+  P4 --> P5
+  P5 --> P6
+  P6 --> P7
+  P7 --> P8
+}
+
+' Systemintegrationen
+package "Systemintegrationen" {
+  component "GPT\nAssist with Product lookup" as GPT #LightBlue
+  component "SAP\nVerify availability" as SAP1 #LightBlue
+  component "SAP\nVerify shipping" as SAP2 #LightBlue
+  component "HubSpot\nProvision service" as HubSpot #LightBlue
+  component "NetSuite\nCreate account" as NetSuite1 #LightBlue
+  component "NetSuite\nUpdate for purchases" as NetSuite2 #LightBlue
+  component "AWS\nProvision service" as AWS1 #LightBlue
+  component "AWS\nActivation details" as AWS2 #LightBlue
+  
+  P1 -down-> GPT
+  P3 -down-> SAP1
+  P5 -down-> SAP2
+  P4 -up-> HubSpot
+  P4 -up-> NetSuite1
+  P7 -up-> NetSuite2
+  P6 -down-> AWS1
+  AWS1 -right-> AWS2
+}
+
+' Testarten und deren Platzierung
+package "Testebenen" {
+  note "Unit/Component Tests" as UC #PaleGreen
+  note "API Tests" as API #LightGoldenRodYellow
+  note "Integration Tests" as INT #Pink
+  note "UI/UX Tests" as UI #LightCyan
+  note "E2E Tests" as E2E #Gold
+  note "Performance Tests" as PERF #LightSalmon
+  note "Security Tests" as SEC #Lavender
+}
+
+' Platzierung der Tests am Prozess
+P1 .. UI
+P1 .. UC
+P1 .. API : API-Test für\nGPT-Integration
+P1 .. SEC : Security-Test für\nKundeninteraktion
+
+P2 .. UI
+P2 .. UC : Component-Test für\nSuchfunktion
+P2 .. PERF : Performance-Test für\nProduktsuche & Filter
+
+P3 .. UI
+P3 .. UC
+P3 .. INT : Integration mit\nSAP-Warenverfügbarkeit
+P3 .. API : API-Test für\nWarenkorb-Operationen
+
+P4 .. UI
+P4 .. UC
+P4 .. API : API-Tests für\nAccount-Erstellung
+P4 .. INT : Integration mit\nNetSuite & HubSpot
+P4 .. SEC : Security-Tests für\nBenutzerregistrierung
+
+P5 .. UI
+P5 .. UC
+P5 .. INT : Integration mit\nSAP-Versandverifikation
+P5 .. API : API-Test für\nVersandoptionen
+
+P6 .. UI
+P6 .. UC
+P6 .. INT : Integration mit\nAWS-Services
+P6 .. API : API-Tests für\nStorage-Provisioning
+
+P7 .. UI
+P7 .. UC
+P7 .. INT : Integration mit\nPayment & NetSuite
+P7 .. API : API-Tests für\nCheckout-Prozess
+P7 .. PERF : Performance-Tests\nfür Checkout
+P7 .. SEC : Security-Tests für\nZahlungsverarbeitung
+
+P8 .. UC
+P8 .. INT : Integration mit\nMail-System
+
+' E2E Tests über den gesamten Prozess
+cloud "E2E-Testabläufe" as E2ECloud #LightYellow {
+  note "Standard Kaufprozess" as E2E1
+  note "Rückkehrender Kunde mit Login" as E2E2
+  note "Kursanmeldungsprozess" as E2E3
+}
+
+E2ECloud -[hidden]up- P1
+E2ECloud -[hidden]up- P8
+
+' Virtualisierungsstrategie
+package "Service-Virtualisierung" {
+  note "GPT Mock\nFür Unit & API Tests" as Mock1 #Wheat
+  note "SAP Mock\nFür Integration Tests" as Mock2 #Wheat
+  note "HubSpot Mock\nFür Integration Tests" as Mock3 #Wheat
+  note "NetSuite Mock\nFür Integration & E2E Tests" as Mock4 #Wheat
+  note "AWS Service Mock\nFür Unit & Integration Tests" as Mock5 #Wheat
+}
+
+Mock1 -[hidden]up- GPT
+Mock2 -[hidden]up- SAP1
+Mock3 -[hidden]up- HubSpot
+Mock4 -[hidden]up- NetSuite1
+Mock5 -[hidden]up- AWS1
+
+' Testumgebungen
+node "CI/CD Pipeline" as CICD #PaleTurquoise
+node "Entwicklungsumgebung" as Dev #PaleTurquoise
+node "Integrationsumgebung" as Int #PaleTurquoise
+node "Staging Umgebung" as Staging #PaleTurquoise
+node "Produktionsähnliche Umgebung" as ProdLike #PaleTurquoise
+
+note right of CICD : Unit, Component,\nAPI Tests
+
+note right of Dev : Entwickler lokale Tests,\nService Virtualisierung
+
+note right of Int : Integrationstests,\nSystem-zu-System Tests,\nVirtualisierte externe Services
+
+note right of Staging : E2E Tests,\nUI/UX Tests,\nQualitätssicherung
+
+note right of ProdLike : Performance Tests,\nLasttests,\nSicherheitstests
+@enduml
