@@ -91,7 +91,7 @@ jobs:
             type=raw,value=v1.0.{{run_number}}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: Taucher/PT/Code
           push: true
