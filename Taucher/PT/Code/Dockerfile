@@ -14,11 +14,11 @@ RUN npm ci --only=production
 COPY . .
 
 # Create non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodeuser -u 1001
+RUN addgroup -g 1001 -S nodejs \
+&& adduser -S nodeuser -u 1001 \
+&& chown -R nodeuser:nodejs /app
 
-# Change ownership of app directory
-RUN chown -R nodeuser:nodejs /app
+
 USER nodeuser
 
 # Expose port
@@ -26,7 +26,7 @@ EXPOSE 3001
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3001/', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+  CMD ["node", "-e", "require('http').get('http://localhost:3001/', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
 
 # Start application
 CMD ["npm", "start"] 
