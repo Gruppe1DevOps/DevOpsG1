@@ -1,0 +1,110 @@
+@startuml cicd-pipeline
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 12
+skinparam defaultFontName Arial
+
+title CI/CD Pipeline Workflow - DevOps Group 1
+
+' Define colors
+skinparam activity {
+  BackgroundColor<<trigger>> LightBlue
+  BackgroundColor<<qa>> LightGreen
+  BackgroundColor<<test>> LightYellow
+  BackgroundColor<<security>> Orange
+  BackgroundColor<<build>> LightCyan
+  BackgroundColor<<deploy>> LightGray
+  BackgroundColor<<fail>> Pink
+  BackgroundColor<<dependabot>> Lavender
+}
+
+start
+
+' Trigger Phase
+:Developer Push/PR to main branch;
+note right: Automatic trigger on\ngit push or pull request
+
+' Dependabot parallel flow
+fork
+  :Dependabot Weekly Scan<<dependabot>>;
+  :Create Dependency PRs<<dependabot>>;
+fork again
+
+' Main CI/CD Flow
+partition "Quality Assurance Phase" {
+  :Code Checkout<<qa>>;
+  note right: fetch-depth: 0\nfor SonarQube
+  
+  :Setup Node.js 20.x<<qa>>;
+  note right: Matrix strategy\nwith npm caching
+  
+  :Install Dependencies<<qa>>;
+  note right: npm ci for\nreproducible builds
+  
+  :Run ESLint<<qa>>;
+  note right: Static code analysis\nfor syntax and style
+}
+
+partition "Testing Phase" {
+  :Run Unit Tests<<test>>;
+  note right: Jest with Supertest\nIsolated component tests
+  
+  :Run Integration Tests<<test>>;
+  note right: End-to-end workflows\nCRUD operations
+  
+  :Generate Coverage Report<<test>>;
+  note right: LCOV format for\nSonarQube integration
+}
+
+partition "Security & Quality Gates" {
+  :SonarQube Scan<<security>>;
+  note right: Code quality analysis\nSecurity hotspot detection
+  
+  if (Quality Gate Passed?) then (yes)
+    :Quality Gate Success<<security>>;
+  else (no)
+    :Pipeline Failure<<fail>>;
+    stop
+  endif
+}
+
+' Conditional build only for main branch
+if (Branch == main && Event == push?) then (yes)
+  partition "Build & Deployment Phase" {
+    :Docker Build<<build>>;
+    note right: Multi-stage build\nAlpine base image
+    
+    :Login to GHCR<<build>>;
+    note right: GitHub Container Registry\nAuthentication
+    
+    :Extract Metadata<<build>>;
+    note right: Semantic versioning\nSHA and latest tags
+    
+    :Build & Push Image<<deploy>>;
+    note right: Multi-platform support\nlinux/amd64, linux/arm64
+    
+    :Deployment Ready<<deploy>>;
+  }
+else (no)
+  :Skip Deployment;
+  note right: Only deploy from\nmain branch pushes
+endif
+
+end fork
+
+stop
+
+' Legend
+legend right
+  |Color| Phase |
+  |<back:LightBlue>   </back>| Trigger |
+  |<back:LightGreen>   </back>| Quality Assurance |
+  |<back:LightYellow>   </back>| Testing |
+  |<back:Orange>   </back>| Security & Quality |
+  |<back:LightCyan>   </back>| Build |
+  |<back:LightGray>   </back>| Deployment |
+  |<back:Lavender>   </back>| Dependabot |
+  |<back:Pink>   </back>| Failure |
+endlegend
+
+@enduml 
