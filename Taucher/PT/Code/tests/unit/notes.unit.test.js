@@ -1,5 +1,5 @@
-const request = require("supertest");
-const express = require("express");
+const request = require('supertest');
+const express = require('express');
 
 // Mock the main app functionality for unit testing
 const createApp = () => {
@@ -9,14 +9,14 @@ const createApp = () => {
   let notes = [
     {
       id: 1,
-      content: "HTML is easy",
-      date: "2022-01-10T17:30:31.098Z",
+      content: 'HTML is easy',
+      date: '2022-01-10T17:30:31.098Z',
       important: true,
     },
     {
       id: 2,
-      content: "Browser can execute only Javascript",
-      date: "2022-01-10T18:39:34.091Z",
+      content: 'Browser can execute only Javascript',
+      date: '2022-01-10T18:39:34.091Z',
       important: false,
     },
   ];
@@ -26,16 +26,16 @@ const createApp = () => {
     return maxId + 1;
   };
 
-  app.get("/api/notes", (req, res) => {
+  app.get('/api/notes', (req, res) => {
     res.json(notes);
   });
 
-  app.post("/api/notes", (request, response) => {
+  app.post('/api/notes', (request, response) => {
     const body = request.body;
 
     if (!body.content) {
       return response.status(400).json({
-        error: "content missing",
+        error: 'content missing',
       });
     }
 
@@ -50,7 +50,7 @@ const createApp = () => {
     response.json(note);
   });
 
-  app.get("/api/notes/:id", (request, response) => {
+  app.get('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id);
     const note = notes.find((note) => note.id === id);
 
@@ -64,65 +64,65 @@ const createApp = () => {
   return app;
 };
 
-describe("Notes Unit Tests", () => {
+describe('Notes Unit Tests', () => {
   let app;
 
   beforeEach(() => {
     app = createApp();
   });
 
-  test("should return all notes", async () => {
+  test('should return all notes', async () => {
     const response = await request(app)
-      .get("/api/notes")
+      .get('/api/notes')
       .expect(200)
-      .expect("Content-Type", /application\/json/);
+      .expect('Content-Type', /application\/json/);
 
     expect(response.body).toHaveLength(2);
-    expect(response.body[0]).toHaveProperty("content", "HTML is easy");
+    expect(response.body[0]).toHaveProperty('content', 'HTML is easy');
   });
 
-  test("should create a new note with valid content", async () => {
+  test('should create a new note with valid content', async () => {
     const newNote = {
-      content: "Testing is important",
+      content: 'Testing is important',
       important: true,
     };
 
     const response = await request(app)
-      .post("/api/notes")
+      .post('/api/notes')
       .send(newNote)
       .expect(200)
-      .expect("Content-Type", /application\/json/);
+      .expect('Content-Type', /application\/json/);
 
-    expect(response.body).toHaveProperty("content", "Testing is important");
-    expect(response.body).toHaveProperty("important", true);
-    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty('content', 'Testing is important');
+    expect(response.body).toHaveProperty('important', true);
+    expect(response.body).toHaveProperty('id');
   });
 
-  test("should return 400 when creating note without content", async () => {
+  test('should return 400 when creating note without content', async () => {
     const invalidNote = {
       important: true,
     };
 
     const response = await request(app)
-      .post("/api/notes")
+      .post('/api/notes')
       .send(invalidNote)
       .expect(400)
-      .expect("Content-Type", /application\/json/);
+      .expect('Content-Type', /application\/json/);
 
-    expect(response.body).toHaveProperty("error", "content missing");
+    expect(response.body).toHaveProperty('error', 'content missing');
   });
 
-  test("should return specific note by id", async () => {
+  test('should return specific note by id', async () => {
     const response = await request(app)
-      .get("/api/notes/1")
+      .get('/api/notes/1')
       .expect(200)
-      .expect("Content-Type", /application\/json/);
+      .expect('Content-Type', /application\/json/);
 
-    expect(response.body).toHaveProperty("id", 1);
-    expect(response.body).toHaveProperty("content", "HTML is easy");
+    expect(response.body).toHaveProperty('id', 1);
+    expect(response.body).toHaveProperty('content', 'HTML is easy');
   });
 
-  test("should return 404 for non-existent note", async () => {
-    await request(app).get("/api/notes/999").expect(404);
+  test('should return 404 for non-existent note', async () => {
+    await request(app).get('/api/notes/999').expect(404);
   });
 });
