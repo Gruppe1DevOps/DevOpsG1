@@ -1,0 +1,17 @@
+{
+  "name": "DevOps-PT-Horvath",
+  "type": "module",
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "devDependencies": {
+    "@wdio/local-runner": "^9.15.0",
+    "@wdio/mocha-framework": "^9.15.0",
+    "@wdio/spec-reporter": "^9.15.0",
+    "geckodriver": "^5.0.0"
+  },
+  "dependencies": {
+    "@wdio/junit-reporter": "^9.15.0",
+    "crypto": "^1.0.1"
+  }
+}
