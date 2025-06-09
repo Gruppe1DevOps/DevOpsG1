@@ -50,7 +50,10 @@ export const config = {
       browserName: process.env.BROWSER?.toLowerCase() || "firefox",
       ...(process.env.BROWSER?.toLowerCase() === "firefox" && {
         "moz:firefoxOptions": {
-          args: process.env.HEADLESS === "true" ? ["--headless"] : [],
+          args:
+            process.env.HEADLESS === "true"
+              ? ["--headless", "--window-size=1920,1080"]
+              : [],
         },
       }),
       ...(process.env.BROWSER?.toLowerCase() === "chrome" && {
