@@ -18,6 +18,14 @@ This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MC
 > Website for testing:
 > https://sampleapp.tricentis.com/101/
 
+> [!WARNING]
+> some test data were wrong in th CSV file, we corrected them in the file `Scenarios_Vehicle_Insurance_App.csv` in the root folder of this repository. Following changes were made:
+> Szenario: Female
+> Gold: Changed -> 947.0 to 977.0
+>
+> Szenario: damageInsuranceFullCoverage
+> Gold: Changed -> 1024.0 to 1027.0
+
 ---
 
 **NOTE**
@@ -196,4 +204,60 @@ Object.entries(testData.scenarios).forEach(([scenarioName, scenario]) => {
 > [!NOTE]
 > The code dynamically creates test suites for each scenario in the test data. This pattern generates multiple test cases at runtime, making it highly scalable for testing different data combinations.
 
-## Test Flow Architecture
+#### Test Flow Architecture
+
+> [!IMPORTANT]
+> Each test follows a 5-step user journey:
+>
+> - Vehicle Data Entry - Car specifications (make, engine, fuel type)
+> - Insurant Data Entry - Personal information (name, address, occupation)
+> - Product Data Entry - Insurance preferences (coverage amount, start date)
+> - Price Option Selection - Choose insurance tier (Silver, Gold, Platinum, Ultimate)
+> - Quote Submission - Send email with user credentials
+
+Now we will look a bit more into the details in the code from the tests of the **5-step user journey**:
+
+##### Data Entry Steps (1-3)
+
+```javascript
+await $("#make").selectByVisibleText("BMW");
+await $("#engineperformance").setValue(scenario.enginePerformance);
+await $("#firstname").setValue("John");
+await $("#country").selectByVisibleText(scenario.country);
+```
+
+The first three steps simulate form filling across multiple pages. Each step uses **scenario-specific data** from the test data object, allowing the same test logic to run with different input combinations. The test navigates between pages using "Next" buttons after completing each form section.
+
+##### Price Option Selection (Step 4)
+
+```javascript
+await browser.execute(() => {
+  document.querySelector("#selectsilver").click();
+});
+```
+
+After entering all insurance parameters, the application calculates and displays four pricing tiers. The test selects the Silver option using JavaScript execution to ensure reliable clicking across all browsers in the GitHub Actions matrix.
+
+##### Quote Submission (Step 5)
+
+```javascript
+await $("#email").setValue("test@example.com");
+await $("#sendemail").click();
+await expect($(".sweet-alert")).toHaveText(
+  expect.stringContaining("Sending e-mail success!")
+);
+```
+
+The final step submits the quote request with contact information and validates the success message. This end-to-end verification ensures the complete user workflow functions correctly across all browser environments.
+
+#### Cross-Browser Compatibility Features
+
+The test uses several techniques to handle browser inconsistencies:
+
+```javascript
+await browser.execute((gender) => {
+  document.querySelector(`input[name="Gender"][value="${gender}"]`).click();
+}, scenario.gender);
+```
+
+> [!IMPORTANT]
