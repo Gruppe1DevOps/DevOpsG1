@@ -2,44 +2,33 @@ Ziel der Aufgabe ist es die Tricentis Vehicle Insurance App zu automatisieren.
 
 Dabei soll der End to end flow der web app automatisiert werden, welcher folgende Schritte beinhaltet:
 
- 
-
     Enter Vehicle Data 
     Enter Insurant Data
     Enter Product Data
     Select Price Option
     Send Quote
 
-Jede Gruppe soll mindestens eines der folgenden Attribute variieren:
-
- 
-
-    Merit Rating
-    Damage Insurance
-    Optional Products
-    Courtesy Car
-    Price Options
-
- 
-
 Zusätzlich sind folgende Validierungen durchzuführen:
-
- 
 
     Price Per Year für die selektierte Price Option (Silver, Gold, Platinum, etc.)
     Bestätigung dass die Anfrage abgesendet wurde
 
+Dieser Testfall ist in mehreren Variationen zu automatisieren. Die Variationen inklusive Testdaten können hier eingesehen werden:
+https://1drv.ms/x/c/d0011bb8548d4c58/EVNcMnSNTuRAp_RU1Jcnc-cBWVKmrHW6RKF9dhA3dVpN_A?e=QBe0de
+
+Jede Gruppe soll ein anderes Framework für di eErstellung der Tests verwenden.
+
 Die automatisierten Tests sind in einer CI/CD Platform zu integrieren, wobei jede Gruppe eine andere Platform wählt. In der Pipeline Konfiguration sind mindestens folgende Anforderungen zu erfüllen:
 
     Die Pipeline erlaubt Tests auf einem lokalen Browser auszuführen (Google Chrome)
-    Die Pipeline erlaubt Tests auf mehreren Remote Browsers auszuführen (Chrome, Firefox, Opera, Edge, Safari)
+    Alternativ erlaubt die Pipeline Tests auf remote Browsern auszuführen
     Es wird ein Test Report für jeden Pipeline-Lauf als Artefakt abgespeichert
 
 Abzugeben sind:
-
- 
 
     Projektdokumentation, welche alle Konfigurationsschritte beinhaltet
     Diese Schritte müssen für eine Person mit dem Kenntnisstand eines IT-Bachelor Abschlusses nachvollziehbar sein und sollen detailliert genug sein, dass so eine Person das Projekt mit dieser Dokumentation durchführen kann.
 
 Desweiteren ist das Projekt im Rahmen einer Live Demo zu präsentieren.
+
+ 
