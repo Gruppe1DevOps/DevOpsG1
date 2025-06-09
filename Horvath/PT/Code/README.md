@@ -64,20 +64,22 @@ The aim of the task is to automate the Tricentis Vehicle Insurance App. At least
 ## 📁 Projectstructure
 
 ```
+├── .github
+│   └── workflows
+│       └── test.yml                         # GitHub Actions Workflow für Tests
 ├── Code/
-│   ├── .github
-│   ├── plantUML_Mermaid                                       # plantUML text part for the generation of the figures in the ILV
+│   ├── plantUML_Mermaid                     # plantUML-Text für Diagramme
 │   ├── test
-│       ├── test.e2e.js                                        # e2e tests
-│       ├── VehicleInsuranceTestData.js                        # test data for the e2e tests
-│   ├── package-lock.json                                      # npm package lock file
-│   ├── package.json                                           # npm package file
-│   ├── README.md                                              # 🔴 You are here
-│   ├── Scenarios_Vehicle_Insurance_App.csv                    # CSV file with the test data
-│   ├── wdio.conf.js                                           # Wdio configuration file
-│   ├── diagramms                                              # Diagramms use in markdown for visualisation
-│   ├── Latex                                                  # Latex code for additional PDF projectreport if needed
-│   ├── Unterricht                                             # code from task during course (first testcase tricentis)
+│   │   ├── test.e2e.js                      # End-to-End-Tests
+│   │   └── VehicleInsuranceTestData.js      # Testdaten für die E2E-Tests
+│   ├── package-lock.json                    # npm package lock file
+│   ├── package.json                         # npm package file
+│   ├── README.md                            # 🔴 Du bist hier
+│   ├── Scenarios_Vehicle_Insurance_App.csv  # CSV-Datei mit Testdaten
+│   ├── wdio.conf.js                         # WebdriverIO-Konfiguration
+│   ├── diagramms                            # Diagramme für die Markdown-Visualisierung
+│   ├── Latex                                # Latex-Code für PDF-Projektreport
+│   └── Unterricht                           # Code aus Kursaufgaben (z.B. erster Testcase Tricentis)
 ```
 
 ### WebdriverIO GitHub Actions Workflow Explanation
@@ -260,4 +262,23 @@ await browser.execute((gender) => {
 }, scenario.gender);
 ```
 
-> [!IMPORTANT]
+> [!IMPORTANT] > **JavaScript execution** bypasses WebDriver limitations with certain UI elements, ensuring tests work reliably across Chrome, Firefox, and Edge browsers in the GitHub Actions workflow.
+
+#### Integration with GitHub Actions
+
+This test file directly supports the multi-browser GitHub Actions workflow through:
+
+> [!NOTE]
+>
+> - **Environment variable usage**: The test configuration can read the `BROWSER` environment variable set by the GitHub Actions matrix
+> - **Artifact generation**: Test results and logs are automatically captured in the `./test-results/` and `./logs/` directories
+> - **Cross-browser reliability**: JavaScript execution ensures consistent behavior across all three browsers in the CI pipeline
+
+#### Test Validation Patterns
+
+```javascript
+const silverPrice = await $("#selectsilver_price").getText();
+expect(silverPrice).toBe(scenario.prices.silver.toLocaleString("en-US"));
+```
+
+> [!TIP] > **Price Option Selection** as the fourth test case demonstrates **price verification**, comparing actual application prices against expected values from the test data. This ensures the insurance calculation logic works correctly across different scenarios.
