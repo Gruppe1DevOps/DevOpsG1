@@ -1,8 +1,16 @@
+• Zuweisungen für die CI/CD Plattform, Automation Framework und Variation bitte hier eintragen  https://1drv.ms/x/c/d0011bb8
+
+CI/CD Platform
+Platform: GitHub Actions
+
+Automation Framework
+Wdio
+
+---
+
 Ziel der Aufgabe ist es die Tricentis Vehicle Insurance App zu automatisieren.
 
 Dabei soll der End to end flow der web app automatisiert werden, welcher folgende Schritte beinhaltet:
-
- 
 
     Enter Vehicle Data 
     Enter Insurant Data
@@ -10,9 +18,7 @@ Dabei soll der End to end flow der web app automatisiert werden, welcher folgend
     Select Price Option
     Send Quote
 
-Jede Gruppe soll mindestens eines der folgenden Attribute variieren:
-
- 
+Jede Gruppe soll mindestens eines der folgenden Attribute variieren: 
 
     Merit Rating
     Damage Insurance
@@ -20,11 +26,8 @@ Jede Gruppe soll mindestens eines der folgenden Attribute variieren:
     Courtesy Car
     Price Options
 
- 
 
 Zusätzlich sind folgende Validierungen durchzuführen:
-
- 
 
     Price Per Year für die selektierte Price Option (Silver, Gold, Platinum, etc.)
     Bestätigung dass die Anfrage abgesendet wurde
@@ -37,9 +40,15 @@ Die automatisierten Tests sind in einer CI/CD Platform zu integrieren, wobei jed
 
 Abzugeben sind:
 
- 
-
     Projektdokumentation, welche alle Konfigurationsschritte beinhaltet
     Diese Schritte müssen für eine Person mit dem Kenntnisstand eines IT-Bachelor Abschlusses nachvollziehbar sein und sollen detailliert genug sein, dass so eine Person das Projekt mit dieser Dokumentation durchführen kann.
 
 Desweiteren ist das Projekt im Rahmen einer Live Demo zu präsentieren.
+
+img src="../Screenshot 2025-06-09 100644.jpg" alt="Screenshot" title="Screenshot" />
+
+
+----
+
+• URL zu der Web App  http://sampleapp.tricentis.com/101/ 
+• Video Recording zum end to end flow kann hier gefunden werden https://login.live.com/login.srf?wa=wsignin1%2E0&rpsnv=176&ct=1749456295&rver=7%2E5%2E2146%2E0&wp=MBI%5FSSL&wreply=https%3A%2F%2Fonedrive%2Elive%2Ecom%2F%5Fforms%2Fdefault%2Easpx%3Fapr%3D1&lc=1031&id=250206&guests=1&wsucxt=1&cobrandid=11bd8083%2D87e0%2D41b5%2Dbb78%2D0bc43c8a8e8a&aadredir=1
