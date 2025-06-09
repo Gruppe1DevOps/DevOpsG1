@@ -610,7 +610,8 @@ prices: {
 }
 ```
 
-> [!NOTE] Each scenario includes **expected pricing for all four tiers**.
+> [!NOTE]
+> Each scenario includes **expected pricing for all four tiers**.
 > This enables the price verification test in the WebdriverIO suite to validate
 > that insurance calculations remain accurate across different input combinations and browser environments.
 
