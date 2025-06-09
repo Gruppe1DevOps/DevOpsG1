@@ -191,7 +191,7 @@ class VehicleInsuranceTestData {
         courtesyCarOption: "No",
         prices: {
           silver: 331.0,
-          gold: 947.0,
+          gold: 977.0,
           platinum: 1917.0,
           ultimate: 3652.0,
         },
@@ -341,7 +341,7 @@ class VehicleInsuranceTestData {
         courtesyCarOption: "No",
         prices: {
           silver: 348.0,
-          gold: 1024.0,
+          gold: 1027.0,
           platinum: 2017.0,
           ultimate: 3841.0,
         },
