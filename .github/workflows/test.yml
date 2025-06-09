@@ -25,9 +25,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "Horvath/PT/Code/package-lock.json"
 
       - name: Install dependencies
         run: npm install
+        working-directory: Horvath/PT/Code
 
       - name: Install Chrome
         if: matrix.browser == 'chrome'
@@ -49,6 +52,7 @@ jobs:
 
       - name: Run WebdriverIO tests
         run: npx wdio run wdio.conf.js
+        working-directory: Horvath/PT/Code
         env:
           BROWSER: ${{ matrix.browser }}
 
@@ -58,5 +62,5 @@ jobs:
         with:
           name: test-results-${{ matrix.browser }}
           path: |
-            ./test-results/
-            ./logs/
+            Horvath/PT/Code/test-results/
+            Horvath/PT/Code/logs/
