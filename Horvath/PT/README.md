@@ -148,7 +148,7 @@ The aim of the task is to automate the Tricentis Vehicle Insurance App. At least
 
 ## End-to-End Test Sequence Diagram Analysis
 
-![](../diagramms/end2endtest.png "End-to-End Test Sequence Diagram Analysis")
+![](./diagramms/end2endtest.png "End-to-End Test Sequence Diagram Analysis")
 
 > [!NOTE]
 > This sequence diagram illustrates the chronological flow of interactions between all system components in the Tricentis Vehicle
@@ -247,7 +247,7 @@ This sequence diagram effectively shows the **temporal relationships** between o
 
 ## End-to-End Test Flowchart Analysis
 
-![](../diagramms/flowchart.png "Flowchart Diagram")
+![](./diagramms/flowchart.png "Flowchart Diagram")
 
 > [!NOTE]
 > This flowchart diagram visualizes the complete automated testing pipeline from CI/CD trigger to test report generation
@@ -521,7 +521,8 @@ await browser.execute((gender) => {
 }, scenario.gender);
 ```
 
-> [!IMPORTANT] > **JavaScript execution** bypasses WebDriver limitations with certain UI elements, ensuring tests work reliably across Chrome, Firefox, and Edge browsers in the GitHub Actions workflow.
+> [!IMPORTANT] > **JavaScript execution** bypasses WebDriver limitations with certain UI elements,
+> ensuring tests work reliably across Chrome, Firefox, and Edge browsers in the GitHub Actions workflow.
 
 ### Integration with GitHub Actions
 
@@ -540,7 +541,9 @@ const silverPrice = await $("#selectsilver_price").getText();
 expect(silverPrice).toBe(scenario.prices.silver.toLocaleString("en-US"));
 ```
 
-> [!TIP] > **Price Option Selection** as the fourth test case demonstrates **price verification**, comparing actual application prices against expected values from the test data. This ensures the insurance calculation logic works correctly across different scenarios.
+> [!TIP] > **Price Option Selection** as the fourth test case demonstrates **price verification**,
+> comparing actual application prices against expected values from the test data.
+> This ensures the insurance calculation logic works correctly across different scenarios.
 
 ## Test Data Class Analysis
 
@@ -588,7 +591,8 @@ The class contains **17 distinct test scenarios**, each representing different i
 
 ### Risk Factor Testing Strategy
 
-> [!IMPORTANT] Each scenario isolates specific **insurance risk variables**:
+> [!IMPORTANT]
+> Each scenario isolates specific **insurance risk variables**:
 >
 > - **Vehicle factors**: Engine performance (500 vs 1500), manufacturing date (3 vs 10 years)
 > - **Personal factors**: Age groups (18-25, 56-70), gender (Male vs Female)

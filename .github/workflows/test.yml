@@ -62,7 +62,6 @@ jobs:
         run: |
           rm -rf Horvath/PT/Code/test-results
           mkdir -p Horvath/PT/Code/test-results/junit
-          mkdir -p Horvath/PT/Code/logs
           echo "Created test results directories"
 
       - name: Run WebdriverIO tests
@@ -86,8 +85,8 @@ jobs:
         run: |
           echo "Test Results Summary for ${{ matrix.browser }}"
           echo "----------------------------------------"
-          if [ -d "Horvath/PT/Code/test-results/junit" ]; then
-            for file in Horvath/PT/Code/test-results/junit/*.xml; do
+          if [ -d "test-results/junit" ]; then
+            for file in test-results/junit/*.xml; do
               if [ -f "$file" ]; then
                 echo "Results from $(basename $file):"
                 grep -o 'testsuite.*' "$file" | sed 's/testsuite name="\(.*\)" tests="\(.*\)" failures="\(.*\)" errors="\(.*\)" time="\(.*\)"/Tests: \2, Failures: \3, Errors: \4, Time: \5s/'
@@ -106,5 +105,4 @@ jobs:
           name: test-results-${{ matrix.browser }}
           path: |
             Horvath/PT/Code/test-results/
-            Horvath/PT/Code/logs/
           retention-days: 30
