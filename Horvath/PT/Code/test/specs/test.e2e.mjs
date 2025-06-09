@@ -1,5 +1,5 @@
 import { expect, browser, $ } from "@wdio/globals";
-import VehicleInsuranceTestData from "./VehicleInsuranceTestData.js";
+import VehicleInsuranceTestData from "./VehicleInsuranceTestData.mjs";
 
 describe("Tricentis Vehicle Insurance Tests", () => {
   let testData = new VehicleInsuranceTestData();

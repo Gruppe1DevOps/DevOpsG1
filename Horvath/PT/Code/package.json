@@ -2,6 +2,7 @@
   "name": "vehicle-insurance-tests",
   "version": "1.0.0",
   "description": "Automated tests for Vehicle Insurance application",
+  "type": "module",
   "scripts": {
     "test": "wdio run wdio.conf.js",
     "test:firefox": "cross-env HEADLESS=false BROWSER=firefox wdio run wdio.conf.js",

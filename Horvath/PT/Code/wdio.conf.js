@@ -20,7 +20,7 @@ export const config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["./test/specs/**/*.js"],
+  specs: ["./test/specs/**/*.{js,mjs}"],
   // Patterns to exclude.
   exclude: [],
   //
@@ -181,8 +181,19 @@ export const config = {
           return `results-${options.cid}.xml`;
         },
         addFileAttribute: true,
-        suiteNameFormat: /[^a-z0-9]+/gi,
-        classNameFormat: /[^a-z0-9]+/gi,
+        suiteNameFormat: function (suiteName) {
+          return String(suiteName || "").replace(/[^a-z0-9]+/gi, "");
+        },
+        classNameFormat: function (className) {
+          return String(className || "").replace(/[^a-z0-9]+/gi, "");
+        },
+        errorOptions: {
+          error: "message",
+          failure: "message",
+          stacktrace: "stack",
+        },
+        writeReport: true,
+        writeReportOnComplete: true,
       },
     ],
   ],
@@ -207,8 +218,27 @@ export const config = {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: async function () {
+    console.log("Starting test preparation...");
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const { fileURLToPath } = await import("url");
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const testResultsDir = path.join(__dirname, "test-results", "junit");
+
+    try {
+      await fs.mkdir(testResultsDir, { recursive: true });
+      const files = await fs.readdir(testResultsDir);
+      await Promise.all(
+        files.map((file) => fs.unlink(path.join(testResultsDir, file)))
+      );
+      console.log("Test results directory cleaned");
+    } catch (error) {
+      console.error("Error preparing test results directory:", error);
+    }
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -237,8 +267,22 @@ export const config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    * @param {string} cid worker id (e.g. 0-0)
    */
-  // beforeSession: function (config, capabilities, specs, cid) {
-  // },
+  beforeSession: async function (config, capabilities, specs) {
+    console.log("Test specs to be run:", specs);
+    console.log("Current working directory:", process.cwd());
+    try {
+      const fs = await import("fs/promises");
+      for (const spec of specs) {
+        const exists = await fs
+          .access(spec)
+          .then(() => true)
+          .catch(() => false);
+        console.log(`Spec file ${spec} exists:`, exists);
+      }
+    } catch (error) {
+      console.error("Error checking spec files:", error);
+    }
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
@@ -246,8 +290,11 @@ export const config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {
-  // },
+  before: async function (capabilities, specs) {
+    console.log("Starting test execution...");
+    console.log("Capabilities:", capabilities);
+    console.log("Specs:", specs);
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name
@@ -331,8 +378,33 @@ export const config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: async function (exitCode, config, capabilities, results) {
+    // Wait a moment to ensure all reports are written
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const { fileURLToPath } = await import("url");
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const testResultsDir = path.join(__dirname, "test-results", "junit");
+
+    try {
+      const files = await fs.readdir(testResultsDir);
+      console.log("Test result files generated:", files);
+
+      for (const file of files) {
+        const content = await fs.readFile(
+          path.join(testResultsDir, file),
+          "utf8"
+        );
+        console.log(`Content of ${file}:`, content);
+      }
+    } catch (error) {
+      console.error("Error reading test results:", error);
+    }
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session
