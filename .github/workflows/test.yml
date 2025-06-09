@@ -75,9 +75,9 @@ jobs:
         if: always()
         run: |
           echo "Contents of test-results directory:"
-          ls -la Horvath/PT/Code/test-results/
+          ls -la test-results/
           echo "Contents of junit directory:"
-          ls -la Horvath/PT/Code/test-results/junit/
+          ls -la test-results/junit/
         working-directory: Horvath/PT/Code
 
       - name: Generate Test Summary
