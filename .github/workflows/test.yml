@@ -29,7 +29,9 @@ jobs:
           cache-dependency-path: "Horvath/PT/Code/package-lock.json"
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install @wdio/cli @wdio/local-runner @wdio/mocha-framework @wdio/spec-reporter
         working-directory: Horvath/PT/Code
 
       - name: Install Chrome
@@ -51,7 +53,7 @@ jobs:
           sudo apt-get install -y microsoft-edge-stable
 
       - name: Run WebdriverIO tests
-        run: npx wdio run wdio.conf.js --headless
+        run: npx wdio run wdio.conf.js
         working-directory: Horvath/PT/Code
         env:
           BROWSER: ${{ matrix.browser }}
