@@ -52,6 +52,7 @@ This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MC
 
 ## Task
 
+```
 🙎‍♂️
 /|\\ Group 1: "We choose you!"
 💥
@@ -66,6 +67,7 @@ This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MC
 ▼
 ⚙️ GitHub Actions
 🧪 WebdriverIO
+```
 
 **We chose:**
 
@@ -146,7 +148,7 @@ The aim of the task is to automate the Tricentis Vehicle Insurance App. At least
 
 ## End-to-End Test Sequence Diagram Analysis
 
-<img src="diagramms/end2end-sequence.png" alt="End-to-End Test Sequence Diagram" title="End-to-End Test Sequence Diagram Analysis" />
+![](../diagramms/end2endtest.png "End-to-End Test Sequence Diagram Analysis")
 
 > [!NOTE]
 > This sequence diagram illustrates the chronological flow of interactions between all system components in the Tricentis Vehicle
@@ -245,7 +247,7 @@ This sequence diagram effectively shows the **temporal relationships** between o
 
 ## End-to-End Test Flowchart Analysis
 
-<img src="diagramms/flowchart" alt="" title="End-to-End Test Sequence Diagram Analysis" />
+![](../diagramms/flowchart.png "Flowchart Diagram")
 
 > [!NOTE]
 > This flowchart diagram visualizes the complete automated testing pipeline from CI/CD trigger to test report generation
