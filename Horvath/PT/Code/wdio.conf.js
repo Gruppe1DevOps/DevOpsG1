@@ -50,16 +50,7 @@ export const config = {
       browserName: process.env.BROWSER?.toLowerCase() || "firefox",
       ...(process.env.BROWSER?.toLowerCase() === "firefox" && {
         "moz:firefoxOptions": {
-          args:
-            process.env.HEADLESS === "true"
-              ? [
-                  "--headless",
-                  "--width=1920",
-                  "--height=1080",
-                  "--disable-gpu",
-                  "--disable-dev-shm-usage",
-                ]
-              : [],
+          args: process.env.HEADLESS === "true" ? ["--headless"] : [],
         },
       }),
       ...(process.env.BROWSER?.toLowerCase() === "chrome" && {
