@@ -57,6 +57,14 @@ jobs:
           chmod +x geckodriver
           sudo mv geckodriver /usr/local/bin/
 
+      - name: Check Firefox version
+        if: matrix.browser == 'firefox'
+        run: firefox --version
+
+      - name: Check Geckodriver version
+        if: matrix.browser == 'firefox'
+        run: geckodriver --version
+
       - name: Install Edge
         if: matrix.browser == 'edge'
         run: |
