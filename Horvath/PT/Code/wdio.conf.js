@@ -47,10 +47,32 @@ export const config = {
   //
   capabilities: [
     {
-      browserName: "firefox",
-      "moz:firefoxOptions": {
-        args: [],
-      },
+      browserName: process.env.BROWSER || "firefox",
+      ...(process.env.BROWSER === "firefox" && {
+        "moz:firefoxOptions": {
+          args: ["--headless"],
+        },
+      }),
+      ...(process.env.BROWSER === "chrome" && {
+        "goog:chromeOptions": {
+          args: [
+            "--headless",
+            "--disable-gpu",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+          ],
+        },
+      }),
+      ...(process.env.BROWSER === "edge" && {
+        "ms:edgeOptions": {
+          args: [
+            "--headless",
+            "--disable-gpu",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+          ],
+        },
+      }),
     },
   ],
 
