@@ -50,10 +50,7 @@ export const config = {
       browserName: process.env.BROWSER?.toLowerCase() || "firefox",
       ...(process.env.BROWSER?.toLowerCase() === "firefox" && {
         "moz:firefoxOptions": {
-          args:
-            process.env.HEADLESS === "true"
-              ? ["--headless", "--window-size=1920,1080"]
-              : [],
+          args: process.env.HEADLESS === "true" ? ["--headless"] : [],
         },
       }),
       ...(process.env.BROWSER?.toLowerCase() === "chrome" && {
@@ -102,7 +99,7 @@ export const config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "debug",
+  logLevel: "info",
   //
   // Set specific log levels per logger
   // loggers:
