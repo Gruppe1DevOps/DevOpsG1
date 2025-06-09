@@ -9,7 +9,6 @@ describe("Tricentis Vehicle Insurance Tests", () => {
     await browser.url("https://sampleapp.tricentis.com/101/");
   });
 
-  //test
   // Run tests for each scenario in the test data
   Object.entries(testData.scenarios).forEach(([scenarioName, scenario]) => {
     describe(`Scenario: ${scenarioName}`, () => {
