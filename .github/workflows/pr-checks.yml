@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "Taucher/PT/Code/**"
 
 jobs:
   quality-checks:

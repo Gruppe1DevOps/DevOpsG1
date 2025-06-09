@@ -1,0 +1,62 @@
+name: WebdriverIO Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Horvath/PT/Code/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "Horvath/PT/Code/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Chrome
+        if: matrix.browser == 'chrome'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Firefox
+        if: matrix.browser == 'firefox'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
+
+      - name: Install Edge
+        if: matrix.browser == 'edge'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y microsoft-edge-stable
+
+      - name: Run WebdriverIO tests
+        run: npx wdio run wdio.conf.js
+        env:
+          BROWSER: ${{ matrix.browser }}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: |
+            ./test-results/
+            ./logs/
