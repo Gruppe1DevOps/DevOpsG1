@@ -1,5 +1,7 @@
-• Zuweisungen für die CI/CD Plattform, Automation Framework und Variation bitte hier eintragen  https://1drv.ms/x/c/d0011bb8
+• Zuweisungen für die CI/CD Plattform, Automation Framework und Variation bitte hier eintragen  
+https://onedrive.live.com/:x:/g/personal/D0011BB8548D4C58/EYzereDKXFxIskgVrdHjm4ABYAOzEPNEYpmT5_f07sCnlw?resid=D0011BB8548D4C58!se0adde8c5cca485cb24815add1e39b80&ithint=file%2Cxlsx&e=Q54dwH&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3gvYy9kMDAxMWJiODU0OGQ0YzU4L0VZemVyZURLWEZ4SXNrZ1ZyZEhqbTRBQllBT3pFUE5FWXBtVDVfZjA3c0NubHc_ZT1RNTRkd0g
 
+Gewählt wurden: 
 CI/CD Platform
 Platform: GitHub Actions
 
@@ -12,18 +14,18 @@ Ziel der Aufgabe ist es die Tricentis Vehicle Insurance App zu automatisieren.
 
 Dabei soll der End to end flow der web app automatisiert werden, welcher folgende Schritte beinhaltet:
 
-    Enter Vehicle Data 
-    Enter Insurant Data
-    Enter Product Data
-    Select Price Option
-    Send Quote
+    Enter Vehicle Data --> Home --> Automobile Insurance --> Enter Vehicle Data
+    Enter Insurant Data --> Home --> Automobile Insurance --> next
+    Enter Product Data --> Home --> Automobile Insurance -->  next
+    Select Price Option --> Home --> Automobile Insurance --> next
+    Send Quote --> Home --> Automobile Insurance --> next
 
 Jede Gruppe soll mindestens eines der folgenden Attribute variieren: 
 
-    Merit Rating
-    Damage Insurance
-    Optional Products
-    Courtesy Car
+    Merit Rating --> Enter Product Data
+    Damage Insurance --> Enter Product Data
+    Optional Products --> Enter Product Data
+    Courtesy Car --> Enter Product Data
     Price Options
 
 
