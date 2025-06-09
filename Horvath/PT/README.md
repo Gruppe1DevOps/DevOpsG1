@@ -521,7 +521,8 @@ await browser.execute((gender) => {
 }, scenario.gender);
 ```
 
-> [!IMPORTANT] > **JavaScript execution** bypasses WebDriver limitations with certain UI elements,
+> [!IMPORTANT]
+> **JavaScript execution** bypasses WebDriver limitations with certain UI elements,
 > ensuring tests work reliably across Chrome, Firefox, and Edge browsers in the GitHub Actions workflow.
 
 ### Integration with GitHub Actions
@@ -541,7 +542,8 @@ const silverPrice = await $("#selectsilver_price").getText();
 expect(silverPrice).toBe(scenario.prices.silver.toLocaleString("en-US"));
 ```
 
-> [!TIP] > **Price Option Selection** as the fourth test case demonstrates **price verification**,
+> [!TIP]
+> **Price Option Selection** as the fourth test case demonstrates **price verification**,
 > comparing actual application prices against expected values from the test data.
 > This ensures the insurance calculation logic works correctly across different scenarios.
 
