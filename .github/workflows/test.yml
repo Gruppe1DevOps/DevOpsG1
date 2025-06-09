@@ -58,6 +58,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y microsoft-edge-stable
 
+      - name: Install xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - name: Setup test results directory
         run: |
           rm -rf Horvath/PT/Code/test-results
@@ -65,7 +68,7 @@ jobs:
           echo "Created test results directories"
 
       - name: Run WebdriverIO tests
-        run: npx wdio run wdio.conf.js
+        run: xvfb-run --auto-servernum npx wdio run wdio.conf.js
         working-directory: Horvath/PT/Code
         env:
           BROWSER: ${{ matrix.browser }}
