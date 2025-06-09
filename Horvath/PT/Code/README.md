@@ -489,6 +489,14 @@ await browser.execute(() => {
 
 After entering all insurance parameters, the application calculates and displays four pricing tiers. The test selects the Silver option using JavaScript execution to ensure reliable clicking across all browsers in the GitHub Actions matrix.
 
+> [!WARNING]  
+> We needed to implement a sleep function for the test in chrome as the opening of the menu takes longer on the chromium based
+> browser then on firefox
+>
+> ```javascript
+> await browser.pause(2000); // Wait for 2 seconds
+> ```
+
 #### Quote Submission (Step 5)
 
 ```javascript
