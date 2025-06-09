@@ -54,18 +54,16 @@ Ziel der Aufgabe ist es die Tricentis Vehicle Insurance App zu automatisieren. I
 ## 📁 Projektstruktur
 
 ```
-├── ILV/
-│   ├── fig                            # used diagramms for the laTEX document
-│   ├── plantUML                       # plantUML text part for the generation of the figures in the ILV
-│   ├── section                        # laTEX tex files for the generation of the task in the ILV
-│   ├── Aufgabe.pdf                    # PDF file with the instructions
-│   ├── README.md                      # Readme for the specific ILTV part
-├── PT/
-│   ├── CODE                           # Code part with for the exercise
-│   ├── Latex                          # Exercise Latex
-│   ├── Unterricht                     # Exercise part done in the session
-│   ├── Aufgabe.txt                    # PDF file with the instructions
-│   ├── IMPLEMENTATION_SUMMARY.md      # Summary of the Code implementation
-│   ├── README.md                      # Readme for the specific PT part
-└── README.md                          # 🔴 You are here
+├── Code/
+│   ├── .github                        # used diagramms for the laTEX document
+│   ├── plantUML_Mermaid               # plantUML text part for the generation of the figures in the ILV
+│   ├── test                           # laTEX tex files for the generation of the task in the ILV
+│   ├── package-lock.json              # npm package lock file
+│   ├── package.json                   # npm package file
+│   ├── README.md                      # 🔴 You are here
+│   ├── scenarios_x.csv                # PDF file with the instructions
+│   ├── wdio.conf.js                   # PDF file with the instructions
+│   ├── diagramms                      # PDF file with the instructions
+│   ├── Latex                          # PDF file with the instructions
+│   ├── Unterricht                     # PDF file with the instructions
 ```
