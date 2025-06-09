@@ -79,6 +79,7 @@ describe("Tricentis Vehicle Insurance Tests", () => {
         await browser.execute(() => {
           document.querySelector("#selectsilver").click();
         });
+        await browser.pause(2000); // Wait for 2 seconds
         await $("#nextsendquote").click();
 
         // Step 5: Send Quote

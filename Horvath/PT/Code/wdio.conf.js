@@ -47,30 +47,55 @@ export const config = {
   //
   capabilities: [
     {
-      browserName: process.env.BROWSER || "firefox",
-      ...(process.env.BROWSER === "firefox" && {
+      browserName: process.env.BROWSER?.toLowerCase() || "firefox",
+      ...(process.env.BROWSER?.toLowerCase() === "firefox" && {
         "moz:firefoxOptions": {
-          args: ["--headless"],
+          args:
+            process.env.HEADLESS === "true"
+              ? [
+                  "--headless",
+                  "--width=1920",
+                  "--height=1080",
+                  "--disable-gpu",
+                  "--disable-dev-shm-usage",
+                ]
+              : [],
         },
       }),
-      ...(process.env.BROWSER === "chrome" && {
+      ...(process.env.BROWSER?.toLowerCase() === "chrome" && {
         "goog:chromeOptions": {
-          args: [
-            "--headless",
-            "--disable-gpu",
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-          ],
+          args:
+            process.env.HEADLESS === "true"
+              ? [
+                  "--headless=new",
+                  "--disable-gpu",
+                  "--no-sandbox",
+                  "--disable-dev-shm-usage",
+                  "--window-size=1920,1080",
+                  "--disable-extensions",
+                  "--disable-software-rasterizer",
+                  "--disable-features=TranslateUI",
+                  "--disable-features=IsolateOrigins,site-per-process",
+                ]
+              : ["--start-maximized"],
         },
       }),
-      ...(process.env.BROWSER === "edge" && {
+      ...(process.env.BROWSER?.toLowerCase() === "edge" && {
         "ms:edgeOptions": {
-          args: [
-            "--headless",
-            "--disable-gpu",
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-          ],
+          args:
+            process.env.HEADLESS === "true"
+              ? [
+                  "--headless=new",
+                  "--disable-gpu",
+                  "--no-sandbox",
+                  "--disable-dev-shm-usage",
+                  "--window-size=1920,1080",
+                  "--disable-extensions",
+                  "--disable-software-rasterizer",
+                  "--disable-features=TranslateUI",
+                  "--disable-features=IsolateOrigins,site-per-process",
+                ]
+              : ["--start-maximized"],
         },
       }),
     },
@@ -146,7 +171,21 @@ export const config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec", "dot", "junit"],
+  reporters: [
+    "spec",
+    [
+      "junit",
+      {
+        outputDir: "./test-results/junit",
+        outputFileFormat: function (options) {
+          return `results-${options.cid}.xml`;
+        },
+        addFileAttribute: true,
+        suiteNameFormat: /[^a-z0-9]+/gi,
+        classNameFormat: /[^a-z0-9]+/gi,
+      },
+    ],
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
