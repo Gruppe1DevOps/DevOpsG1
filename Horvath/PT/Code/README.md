@@ -146,7 +146,7 @@ The aim of the task is to automate the Tricentis Vehicle Insurance App. At least
 
 ## End-to-End Test Sequence Diagram Analysis
 
-<img src="diagramms/end2end-sequence.png" alt="End-to-End Test Sequence Diagram" title="End-to-End Test Sequence Diagram Analysis" />
+<img src="Horvath/PT/diagramms/flowchart.png" alt="End-to-End Test Sequence Diagram" title="End-to-End Test Sequence Diagram Analysis" />
 
 > [!NOTE]
 > This sequence diagram illustrates the chronological flow of interactions between all system components in the Tricentis Vehicle
