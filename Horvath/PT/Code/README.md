@@ -586,8 +586,7 @@ The class contains **17 distinct test scenarios**, each representing different i
 ### Risk Factor Testing Strategy
 
 > [!IMPORTANT] Each scenario isolates specific **insurance risk variables**:
->
-> - **Vehicle factors**: Engine performance (500 vs 1500), manufacturing date (3 vs 10 years)
+> > - **Vehicle factors**: Engine performance (500 vs 1500), manufacturing date (3 vs 10 years)
 > - **Personal factors**: Age groups (18-25, 56-70), gender (Male vs Female)
 > - **Coverage factors**: Insurance sum (7M vs 25M), damage coverage (None, Partial, Full)
 > - **Optional products**: Euro Protection, Legal Defense, Courtesy Car
