@@ -1,4 +1,12 @@
 # Devops G1
+  - Harald Beier
+  - Susanne Peer
+  - Patrick Prugger
+  - Philipp Palatin
+
+We worked mostly via the Liveshare extension, so there can often be uneven pushes in the Git repository.
+
+---
 
 This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MCCE second semester for the lecturer Kevin Horvath
 
@@ -69,35 +77,29 @@ This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MC
 🧪 WebdriverIO
 ```
 
-**We chose:**
-
-> [!IMPORTANT]
-> CI/CD Platform
->
-> - Platform: GitHub Actions
->   Automation Framework
->
-> - Wdio
->
-> Website for testing:
-> https://sampleapp.tricentis.com/101/
 
 > [!WARNING]
 > some test data were wrong in th CSV file, we corrected them in the
-> file `Scenarios_Vehicle_Insurance_App.csv` in the root folder of this repository. Following changes were made:
+> file `Scenarios_Vehicle_Insurance_App.csv` in the root folder of this repository.
+> Following changes were made:
+>
 > Szenario: Female
-> Gold: Changed -> 947.0 to 977.0
+>   Gold: Changed -> 947.0 to 977.0
 >
 > Szenario: damageInsuranceFullCoverage
-> Gold: Changed -> 1024.0 to 1027.0
+>   Gold: Changed -> 1024.0 to 1027.0
+
+> [!NOTE]
+> Website for testing:
+> https://sampleapp.tricentis.com/101/
 
 ---
 
 **NOTE**
 The aim of the task is to automate the Tricentis Vehicle Insurance App. At least the following requirements must be met in the pipeline configuration:
 
-- The pipeline allows tests to be executed on a local browser (Google Chrome)
-- The pipeline allows tests to be executed on remote browsers (Chrome, Firefox, Edge)
+- The pipeline allows tests to be executed on a local browser (Chrome)
+- The pipeline allows tests to be executed on remote browsers (Chrome and Edge)
 - A test report is saved as an artifact for each pipeline run
 
 ---
@@ -255,7 +257,7 @@ This sequence diagram effectively shows the **temporal relationships** between o
 
 ### CI/CD Integration Layer
 
-The flowchart begins with the **GitHub Actions workflow** trigger showing the progression from _"Developer Trigger"_ → _"GitHub Actions Pipeline"_ → _"Initialize WebdriverIO"_. This represents the automatic pipeline activation when developers push code or create pull requests, directly connecting to our multi-browser testing strategy across Chrome, Firefox, and Edge.
+The flowchart begins with the **GitHub Actions workflow** trigger showing the progression from _"Developer Trigger"_ → _"GitHub Actions Pipeline"_ → _"Initialize WebdriverIO"_. This represents the automatic pipeline activation when developers push code or create pull requests, directly connecting to our multi-browser testing strategy across Chrome and Edge.
 
 ### Test Execution Environment Decision Point
 
@@ -358,7 +360,7 @@ on:
 ```yaml
 strategy:
   matrix:
-    browser: [chrome, firefox, edge]
+    browser: [chrome, edge]
 ```
 
 > **_NOTE:_** This creates three parallel jobs, one for each browser. Each job runs independently with a different browser configuration.
@@ -491,13 +493,6 @@ await browser.execute(() => {
 
 After entering all insurance parameters, the application calculates and displays four pricing tiers. The test selects the Silver option using JavaScript execution to ensure reliable clicking across all browsers in the GitHub Actions matrix.
 
-> [!WARNING]  
-> We needed to implement a sleep function for the test in chrome as the opening of the menu takes longer on the chromium based
-> browser then on firefox
->
-> ```javascript
-> await browser.pause(2000); // Wait for 2 seconds
-> ```
 
 #### Quote Submission (Step 5)
 
@@ -521,8 +516,7 @@ await browser.execute((gender) => {
 }, scenario.gender);
 ```
 
-> [!IMPORTANT] > **JavaScript execution** bypasses WebDriver limitations with certain UI elements,
-> ensuring tests work reliably across Chrome, Firefox, and Edge browsers in the GitHub Actions workflow.
+> [!IMPORTANT] > **JavaScript execution** bypasses WebDriver limitations with certain UI elements, ensuring tests work reliably across Chrome and Edge browsers in the GitHub Actions workflow.
 
 ### Integration with GitHub Actions
 
@@ -541,9 +535,7 @@ const silverPrice = await $("#selectsilver_price").getText();
 expect(silverPrice).toBe(scenario.prices.silver.toLocaleString("en-US"));
 ```
 
-> [!TIP] > **Price Option Selection** as the fourth test case demonstrates **price verification**,
-> comparing actual application prices against expected values from the test data.
-> This ensures the insurance calculation logic works correctly across different scenarios.
+> [!TIP] > **Price Option Selection** as the fourth test case demonstrates **price verification**, comparing actual application prices against expected values from the test data. This ensures the insurance calculation logic works correctly across different scenarios.
 
 ## Test Data Class Analysis
 
@@ -591,8 +583,7 @@ The class contains **17 distinct test scenarios**, each representing different i
 
 ### Risk Factor Testing Strategy
 
-> [!IMPORTANT]
-> Each scenario isolates specific **insurance risk variables**:
+> [!IMPORTANT] Each scenario isolates specific **insurance risk variables**:
 >
 > - **Vehicle factors**: Engine performance (500 vs 1500), manufacturing date (3 vs 10 years)
 > - **Personal factors**: Age groups (18-25, 56-70), gender (Male vs Female)
@@ -610,8 +601,7 @@ prices: {
 }
 ```
 
-> [!NOTE]
-> Each scenario includes **expected pricing for all four tiers**.
+> [!NOTE] Each scenario includes **expected pricing for all four tiers**.
 > This enables the price verification test in the WebdriverIO suite to validate
 > that insurance calculations remain accurate across different input combinations and browser environments.
 
@@ -622,7 +612,7 @@ Hey Kevin! 👋
 As **Team (Group 1)**, we’ve embarked on a wild journey through the world of CI/CD and E2E test automation—just like a band of aspiring Pokémon Trainers. Here’s our final Pokédex entry:
 
 - **🎯 Pokéball = GitHub Actions**  
-  We threw our Pokéballs with a matrix strategy—capturing Chrome, Firefox and Edge in one go! No browser monster can escape our automated workflow.
+  We threw our Pokéballs with a matrix strategy—capturing Chrome and Edge in one go! No browser monster can escape our automated workflow.
 
 - **⚡️ Pikachu-Power = WebdriverIO**  
   With electrifying data-driven tests, we’ve zapped through the five evolution stages:
