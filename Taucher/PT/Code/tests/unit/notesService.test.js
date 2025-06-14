@@ -27,9 +27,9 @@ describe('Notes Service Unit Tests', () => {
   });
 
   describe('Root Endpoint', () => {
-    test('should return hello world on root endpoint', async () => {
+    test('should return welcome message on root endpoint', async () => {
       const response = await request(app).get('/').expect(200);
-      expect(response.text).toBe('<h1>Hello World!</h1>');
+      expect(response.text).toBe('<h1>Willkommen bei Devops Gruppe 1!</h1>');
     });
   });
 
