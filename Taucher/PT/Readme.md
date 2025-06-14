@@ -94,6 +94,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "Taucher/PT/Code/**"
 
 jobs:
   quality-checks:
@@ -114,6 +116,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "Taucher/PT/Code/**"
+
 
 jobs:
   test-and-build:
