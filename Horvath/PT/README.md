@@ -243,7 +243,7 @@ This sequence diagram effectively shows the **temporal relationships** between o
 - **Test Data Class**: Implicitly drives the validation logic shown in the Validations section
 
 > [!IMPORTANT]
-> The diagram demonstrates how our **17 test scenarios** would each follow this same interaction pattern, with the validation
+> The diagram demonstrates how our **16 test scenarios** would each follow this same interaction pattern, with the validation
 > steps comparing actual results against the expected prices stored in our Test Data Class
 > across all browser combinations in the GitHub Actions matrix.
 
@@ -254,6 +254,77 @@ This sequence diagram effectively shows the **temporal relationships** between o
 > [!NOTE]
 > This flowchart diagram visualizes the complete automated testing pipeline from CI/CD trigger to test report generation
 > illustrating how all components work together in the Tricentis Vehicle Insurance testing framework.
+
+### Test Scenario Categories
+
+#### 1. Vehicle Factors
+- Engine performance variations:
+  - Base case: 500 HP
+  - High performance: 1500 HP (Expected price increase: ~2%)
+- Vehicle age impact:
+  - Recent model: 3 years old
+  - Older model: 10 years old (Expected price increase: ~1%)
+- List price ranges:
+  - Standard: 20,000
+  - Premium: 75,000 (Expected price increase: ~40%)
+
+#### 2. Driver Demographics
+- Age group risk factors:
+  - Young drivers: 21 years
+  - Standard: 26 years
+  - Senior: 62 years
+- Gender influence assessment:
+  - Male (base case)
+  - Female (price equivalence test)
+- Location and occupation impact:
+  - Country: United States
+  - Occupation: Employee
+
+#### 3. Insurance Parameters
+- Coverage level variations:
+  - Standard: 7M coverage
+  - Premium: 25M coverage (Expected price increase: ~2%)
+- Merit rating impact:
+  - Best case: Super Bonus (Expected price reduction: ~3%)
+  - Worst case: Malus 13 (Expected price increase: ~12%)
+- Start date flexibility:
+  - Standard: Next month
+  - Extended: Two months ahead
+
+#### 4. Coverage Options
+- Damage insurance (None/Partial/Full)
+- Euro protection
+- Legal defense
+- Courtesy car
+
+#### 5. Price Verification
+Each scenario validates four price tiers:
+- Silver
+- Gold
+- Platinum
+- Ultimate
+#### Test Coverage Overview
+- Total Scenarios: 16
+- Test Cases per Scenario: 2
+- Total Test Cases: 32
+- Validation Points per Test: 5
+  - Form completion
+  - Navigation flow
+  - Price calculation
+  - Data persistence
+  - Confirmation message
+
+#### Expected Price Variations
+| Scenario Factor    | Silver | Gold  | Platinum | Ultimate |
+|-------------------|--------|-------|----------|----------|
+| Base Case         | 331.0  | 977.0 | 1917.0   | 3652.0   |
+| High Performance  | 337.0  | 993.0 | 1949.0   | 3712.0   |
+| Premium List Price| 466.0  | 1374.0| 2697.0   | 5137.0   |
+| Super Bonus       | 322.0  | 948.0 | 1861.0   | 3546.0   |
+
+> [!NOTE]
+> Price variations demonstrate the impact of different risk factors on insurance calculations.
+> All prices are validated across multiple browser environments.
 
 ### CI/CD Integration Layer
 
@@ -308,7 +379,7 @@ The flowchart displays multiple decision diamonds for price validation:
 
 > [!NOTE]
 > This section demonstrates the **price verification logic** from our WebdriverIO test suite, where each
-> pricing tier is individually validated against expected values from the 17 test scenarios in our Test Data Class.11bd8083
+> pricing tier is individually validated against expected values from the 16 test scenarios in our Test Data Class.11bd8083
 
 ### Test Report Generation (Bottom)
 
@@ -329,7 +400,7 @@ The flowchart effectively illustrates the complete testing ecosystem where our t
 
 - **GitHub Actions Workflow** (top section) manages pipeline execution
 - **WebdriverIO Test File** (middle section) implements automation logic
-- **Test Data Class** (throughout) provides the 17 scenarios driving comprehensive validation
+- **Test Data Class** (throughout) provides the 16 scenarios driving comprehensive validation
 
 > [!NOTE]
 > The visual flow demonstrates how data moves from test scenarios through WebdriverIO automation into the application, with
@@ -363,7 +434,7 @@ strategy:
     browser: [chrome, edge]
 ```
 
-> **_NOTE:_** This creates three parallel jobs, one for each browser. Each job runs independently with a different browser configuration.
+> **_NOTE:_** This creates two parallel jobs, one for each browser. Each job runs independently with a different browser configuration.
 
 ### Environment Setup
 
@@ -579,7 +650,7 @@ class VehicleInsuranceTestData {
 }
 ```
 
-The class contains **17 distinct test scenarios**, each representing different insurance calculation edge cases. This data structure directly feeds the dynamic test generation in the WebdriverIO test file, where `Object.entries(testData.scenarios).forEach()` creates individual test suites.
+The class contains **16 distinct test scenarios**, each representing different insurance calculation edge cases. This data structure directly feeds the dynamic test generation in the WebdriverIO test file, where `Object.entries(testData.scenarios).forEach()` creates individual test suites.
 
 ### Risk Factor Testing Strategy
 
@@ -645,4 +716,4 @@ With this setup, you’ve taught us the art of:
 We’re now fully “evolved” and ready to take on any cloud-native challenge—whether it’s battling container orchestrators or catching elusive performance bugs. Thanks for guiding our team to “Gotta Test ’Em All!” status. We can’t wait for our next lesson in the Masterclass arena.
 
 > [!IMPORTANT]
-> — Team (Group 1) - Patrick Prugger, Susanne Peer, Harald Beier
+> — Team (Group 1) - Patrick Prugger, Susanne Peer, Harald Beier, Philipp Palatin
