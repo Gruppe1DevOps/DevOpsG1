@@ -1,4 +1,4 @@
-# Unit Tests
+# Unit Tests 101
 
 This directory contains unit tests for the Notes API application. Unit tests focus on testing individual functions in isolation, verifying that each component works correctly without external dependencies.
 
