@@ -197,43 +197,67 @@ updates:
 
 ### Testing Strategy
 
-#### Unit Tests (5 Tests)
+#### Unit Tests (`notesService.test.js`)
 
-**File**: `tests/unit/notes.unit.test.js`
+**File**: `tests/unit/notesService.test.js`
 
 **Test Coverage:**
+- **Business Logic Testing**
+  - Note retrieval (all notes and by ID)
+  - Note creation with validation
+  - Note deletion
+  - ID generation
+  - Error handling
+  - Input validation
+- **Root Endpoint Testing**
+  - Welcome message verification
 
-- **GET /api/notes** - Retrieve all notes
-- **POST /api/notes** - Create note with valid data
-- **POST /api/notes** - Validation error handling (missing content)
-- **GET /api/notes/:id** - Retrieve specific note by ID
-- **GET /api/notes/:id** - Handle non-existent note (404)
+**Key Features:**
+- Tests business logic in isolation
+- Uses `resetNotes()` for test isolation
+- No external dependencies
+- Comprehensive input validation testing
 
-#### Integration Tests (2 Tests)
+#### Integration Tests (`api.integration.test.js`)
 
 **File**: `tests/integration/api.integration.test.js`
 
 **Test Coverage:**
+- **Complete CRUD Workflow**
+  - Initial state verification
+  - Note creation
+  - Note retrieval (all and by ID)
+  - Note deletion
+  - State verification
+- **Concurrent Request Handling**
+  - Multiple simultaneous operations
+  - Data consistency verification
+- **Error Handling Across Layers**
+  - Service errors
+  - Not found scenarios
+  - Invalid request handling
 
-- **Complete CRUD Workflow** - End-to-end user journey
-- **Concurrent Request Handling** - Multiple simultaneous operations
+**Key Features:**
+- Uses actual backend implementation
+- Tests component interactions
+- Verifies complete workflows
+- Tests error propagation
 
-**CRUD Workflow Test:**
+#### Test Organization
 
-1. Get initial notes count
-2. Create a new note
-3. Verify note was added
-4. Retrieve the specific note
-5. Delete the note
-6. Verify deletion (404 response)
-7. Verify total count back to original
+Our tests follow a clear separation of concerns:
 
-**Concurrency Test:**
+1. **Unit Tests** (`notesService.test.js`):
+   - Focus on business logic in isolation
+   - Test individual functions
+   - No external dependencies
+   - Located in `tests/unit/`
 
-- Creates 5 notes simultaneously using Promise.all
-- Verifies all requests succeed
-- Checks unique ID generation under load
-- Ensures data integrity with concurrent operations
+2. **Integration Tests** (`api.integration.test.js`):
+   - Test component interactions
+   - Use real backend implementation
+   - Test complete workflows
+   - Located in `tests/integration/`
 
 #### Test Execution in Workflows
 
@@ -344,12 +368,22 @@ Ensure proper trigger separation:
 # pr-checks.yml
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - "Taucher/PT/Code/**"
+
+# Only run on changes under "Taucher"
 
 # ci-build.yml
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - "Taucher/PT/Code/**"
+
+# Both only run on changes under "Taucher/PT/Code"
 ```
 
 ### 2. Permission Issues
