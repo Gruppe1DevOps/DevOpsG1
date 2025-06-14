@@ -4,100 +4,97 @@ This directory contains integration tests for the Notes API application. Integra
 
 ## Overview
 
-Integration tests simulate real-world usage scenarios by testing complete API workflows from start to finish. They verify that all components of the application work together seamlessly, including request handling, data processing, and response generation.
+Integration tests use the actual backend implementation from `index.js` to verify that all components work together seamlessly. They test complete workflows and verify the interaction between:
+- Express routes and middleware
+- Notes service business logic
+- Request/response handling
+- Error handling across layers
 
+## Test Structure
 
-## Test Data
+### 1. Complete CRUD Workflow
+Tests the entire lifecycle of a note:
+1. Initial state verification
+2. Note creation
+3. Note retrieval (all and by ID)
+4. Note deletion
+5. State verification
 
-Integration tests use a complete dataset with 3 predefined notes:
+### 2. Concurrent Request Handling
+Tests multiple simultaneous operations:
+- Creates 5 notes concurrently
+- Verifies all requests succeed
+- Checks unique ID generation
+- Ensures data consistency
 
-- Note 1: "HTML is easy" (important: true)
-- Note 2: "Browser can execute only Javascript" (important: false)
-- Note 3: "GET and POST are the most important methods of HTTP protocol" (important: true)
+### 3. Error Handling Across Layers
+Tests error propagation through the application:
+- Service errors
+- Not found scenarios
+- Invalid request handling
 
 ## Running Integration Tests
 
 ### Run only integration tests:
-
 ```bash
 npm run test:integration
 ```
 
 ### Run all tests including integration:
-
 ```bash
 npm test
 ```
 
-## Key Features Tested
+## Key Features
 
-### 1. **Data Persistence**
+1. **Uses Real Backend**
+   - Tests against actual `index.js` implementation
+   - No mocked components
+   - Real request/response flow
 
-- Verifies that created notes persist across requests
-- Ensures deleted notes are properly removed
-- Validates data integrity throughout operations
+2. **Complete Workflows**
+   - Tests entire user journeys
+   - Verifies data persistence
+   - Checks state management
 
-### 2. **API Consistency**
+3. **Concurrency Testing**
+   - Multiple simultaneous requests
+   - Data consistency verification
+   - Race condition prevention
 
-- Tests that all endpoints work together correctly
-- Verifies consistent response formats
-- Ensures proper HTTP status codes
-
-### 3. **Concurrency Handling**
-
-- Tests multiple simultaneous requests
-- Verifies unique ID generation under load
-- Ensures no data corruption with concurrent access
-
-### 4. **Error Scenarios**
-
-- Tests 404 responses for deleted/non-existent notes
-- Verifies proper error handling in workflows
-- Ensures graceful failure handling
-
-## Test Workflow Example
-
-```javascript
-// 1. Initial State Check
-GET /api/notes → Verify 3 initial notes
-
-// 2. Create New Note
-POST /api/notes → Create "Integration testing is crucial"
-
-// 3. Verify Creation
-GET /api/notes → Verify 4 total notes
-GET /api/notes/:id → Verify specific note exists
-
-// 4. Cleanup
-DELETE /api/notes/:id → Remove created note
-
-// 5. Final Verification
-GET /api/notes/:id → Verify 404 response
-GET /api/notes → Verify back to 3 notes
-```
+4. **Error Handling**
+   - Service error propagation
+   - HTTP status code verification
+   - Error message validation
 
 ## Dependencies
 
-- **Jest**: Testing framework with async/await support
-- **Supertest**: HTTP testing library for Express applications
-- **Express**: Full Express application instance
-- **Promise.all**: For concurrent request testing
+- **Jest**: Testing framework
+- **Supertest**: HTTP testing library
+- **Express**: Full application instance
+- **Promise.all**: Concurrent request testing
 
 ## Best Practices
 
-1. **Complete Workflows**: Tests entire user journeys, not just individual endpoints
-2. **State Management**: Proper setup and teardown to maintain test isolation
-3. **Concurrency Testing**: Validates application behavior under concurrent load
-4. **Data Verification**: Comprehensive checks for data integrity
-5. **Error Scenarios**: Tests both success and failure paths
-6. **Realistic Data**: Uses realistic test data that mirrors production scenarios
+1. **Use Real Implementation**
+   - Test against actual backend
+   - No code duplication
+   - Real-world scenarios
 
-## Performance Considerations
+2. **Complete Workflows**
+   - Test entire user journeys
+   - Verify data persistence
+   - Check state management
 
-- Tests concurrent request handling to ensure scalability
-- Verifies response times are reasonable
-- Checks for memory leaks in long-running operations
-- Validates proper resource cleanup
+3. **Error Scenarios**
+   - Test error propagation
+   - Verify status codes
+   - Check error messages
+
+4. **Concurrency**
+   - Test simultaneous operations
+   - Verify data consistency
+   - Check unique ID generation
 
 ## Coverage Areas
 
