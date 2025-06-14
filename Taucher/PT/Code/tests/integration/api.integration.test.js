@@ -15,151 +15,43 @@
  */
 
 const request = require('supertest');
-const express = require('express');
-
-/**
- * Creates a complete Express application for integration testing
- * This includes all API endpoints and business logic
- *
- * @returns {Express} Full Express application instance with all routes
- */
-const createApp = () => {
-  const app = express();
-
-  // Test data - complete dataset with 3 predefined notes
-  // This simulates a realistic application state
-  let notes = [
-    {
-      id: 1,
-      content: 'HTML is easy',
-      date: '2022-01-10T17:30:31.098Z',
-      important: true,
-    },
-    {
-      id: 2,
-      content: 'Browser can execute only Javascript',
-      date: '2022-01-10T18:39:34.091Z',
-      important: false,
-    },
-    {
-      id: 3,
-      content: 'GET and POST are the most important methods of HTTP protocol',
-      date: '2022-01-10T19:20:14.298Z',
-      important: true,
-    },
-  ];
-
-  app.use(express.json());
-
-  /**
-   * Root endpoint - Health check and welcome message
-   */
-  app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>');
-  });
-
-  /**
-   * Generates unique IDs for new notes
-   * Ensures thread-safe ID generation even under concurrent load
-   *
-   * @returns {number} New unique ID
-   */
-  const generateId = () => {
-    const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
-    return maxId + 1;
-  };
-
-  /**
-   * POST /api/notes
-   * Creates a new note with validation
-   *
-   * Request body should contain:
-   * - content (required): The note content
-   * - important (optional): Boolean flag, defaults to false
-   *
-   * Returns: Created note with generated ID and timestamp
-   */
-  app.post('/api/notes', (request, response) => {
-    const body = request.body;
-
-    // Validation: content field is mandatory
-    if (!body.content) {
-      return response.status(400).json({
-        error: 'content missing',
-      });
-    }
-
-    // Create new note with auto-generated ID and current timestamp
-    const note = {
-      content: body.content,
-      important: body.important || false,
-      date: new Date(),
-      id: generateId(),
-    };
-
-    // Add to notes collection and return created note
-    notes = notes.concat(note);
-    response.json(note);
-  });
-
-  /**
-   * GET /api/notes
-   * Retrieves all notes in the system
-   *
-   * Returns: Array of all notes with their complete data
-   */
-  app.get('/api/notes', (req, res) => {
-    res.json(notes);
-  });
-
-  /**
-   * DELETE /api/notes/:id
-   * Removes a specific note by ID
-   *
-   * Parameters:
-   * - id: The ID of the note to delete
-   *
-   * Returns: 204 No Content on successful deletion
-   */
-  app.delete('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id);
-    notes = notes.filter((note) => note.id !== id);
-    response.status(204).end();
-  });
-
-  /**
-   * GET /api/notes/:id
-   * Retrieves a specific note by ID
-   *
-   * Parameters:
-   * - id: The ID of the note to retrieve
-   *
-   * Returns: Note object if found, 404 if not found
-   */
-  app.get('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id);
-    const note = notes.find((note) => note.id === id);
-
-    if (note) {
-      response.json(note);
-    } else {
-      response.status(404).end();
-    }
-  });
-
-  return app;
-};
+const app = require('../../index');
 
 // Integration Test Suite
 describe('API Integration Tests', () => {
-  let app;
+  /**
+   * Test root endpoint
+   */
+  test('should return hello world on root endpoint', async () => {
+    const response = await request(app).get('/').expect(200);
+    expect(response.text).toBe('<h1>Hello World!</h1>');
+  });
 
   /**
-   * Setup: Create fresh application instance before each test
-   * This ensures test isolation and consistent starting state
+   * Test error handling
    */
-  beforeEach(() => {
-    app = createApp();
+  test('should handle invalid note creation', async () => {
+    const response = await request(app)
+      .post('/api/notes')
+      .send({}) // Empty body
+      .expect(400);
+
+    expect(response.body).toHaveProperty('error', 'content missing');
+  });
+
+  test('should handle non-existent note deletion', async () => {
+    await request(app)
+      .delete('/api/notes/999')
+      .expect(404);
+  });
+
+  test('should handle invalid request body', async () => {
+    const response = await request(app)
+      .post('/api/notes')
+      .send(null) // Invalid body
+      .expect(400);
+
+    expect(response.body).toHaveProperty('error');
   });
 
   /**
@@ -173,8 +65,6 @@ describe('API Integration Tests', () => {
    * 5. Delete the note (DELETE)
    * 6. Verify deletion (GET by ID should return 404)
    * 7. Verify system state is back to original (GET all notes)
-   *
-   * This tests data persistence, state management, and API consistency
    */
   test('should handle complete CRUD workflow for notes', async () => {
     // Step 1: Get initial notes count
@@ -224,14 +114,6 @@ describe('API Integration Tests', () => {
    *
    * This test verifies that the API can handle multiple simultaneous requests
    * without data corruption or race conditions.
-   *
-   * Test scenarios:
-   * - Creates 5 notes simultaneously using Promise.all
-   * - Verifies all requests succeed
-   * - Checks for unique ID generation under concurrent load
-   * - Ensures data integrity with multiple simultaneous operations
-   *
-   * This tests thread safety, concurrent request handling, and data consistency
    */
   test('should handle multiple concurrent requests correctly', async () => {
     const requests = [];
