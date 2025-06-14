@@ -15,6 +15,7 @@
  * - Concurrent request handling
  * - Data persistence across operations
  * - Error propagation through layers
+ * - Route error handling
  */
 
 const request = require('supertest');
@@ -22,6 +23,32 @@ const app = require('../../index');
 
 // Integration Test Suite
 describe('API Integration Tests', () => {
+  /**
+   * Test error handling in routes
+   */
+  describe('Error Handling', () => {
+    test('should handle service errors in POST route', async () => {
+      const response = await request(app)
+        .post('/api/notes')
+        .send({ content: '' }) // Empty content will trigger service error
+        .expect(400);
+
+      expect(response.body).toHaveProperty('error', 'content missing');
+    });
+
+    test('should handle non-existent note deletion', async () => {
+      await request(app)
+        .delete('/api/notes/999')
+        .expect(404);
+    });
+
+    test('should handle non-existent note retrieval', async () => {
+      await request(app)
+        .get('/api/notes/999')
+        .expect(404);
+    });
+  });
+
   /**
    * Integration Test: Complete CRUD Workflow
    *
