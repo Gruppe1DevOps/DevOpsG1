@@ -12,22 +12,28 @@ Integration tests use the actual backend implementation from `index.js` to verif
 
 ## Test Structure
 
-### 1. Complete CRUD Workflow
-Tests the entire lifecycle of a note:
-1. Initial state verification
-2. Note creation
-3. Note retrieval (all and by ID)
-4. Note deletion
-5. State verification
+### 1. Basic Endpoint Testing
+Tests fundamental API functionality:
+- Root endpoint welcome message
+- HTTP status code verification
+- Response format validation
 
-### 2. Concurrent Request Handling
+### 2. Complete CRUD Workflow
+Tests the entire lifecycle of a note:
+- Initial state verification
+- Note creation
+- Note retrieval (all and by ID)
+- Note deletion
+- State verification
+
+### 3. Concurrent Request Handling
 Tests multiple simultaneous operations:
 - Creates 5 notes concurrently
 - Verifies all requests succeed
 - Checks unique ID generation
 - Ensures data consistency
 
-### 3. Error Handling Across Layers
+### 4. Error Handling Across Layers
 Tests error propagation through the application:
 - Service errors
 - Not found scenarios
@@ -98,9 +104,38 @@ npm test
 
 ## Coverage Areas
 
+- ✅ **Basic Endpoints**: Root endpoint and welcome message
 - ✅ **API Endpoints**: All CRUD operations
 - ✅ **Data Flow**: Complete request-response cycles
 - ✅ **Concurrency**: Multiple simultaneous operations
 - ✅ **Error Handling**: Various failure scenarios
 - ✅ **State Management**: Data consistency across operations
 - ✅ **ID Generation**: Unique identifier creation under load
+
+## Test Organization
+
+Tests are organized by functionality:
+1. **Basic Endpoints**
+   - Root endpoint testing
+   - Welcome message verification
+
+2. **CRUD Operations**
+   - Complete note lifecycle
+   - State verification
+   - Data persistence
+
+3. **Error Handling**
+   - Service errors
+   - Not found scenarios
+   - Invalid requests
+
+4. **Concurrency**
+   - Simultaneous operations
+   - Data consistency
+   - ID generation
+
+Each test group focuses on a specific aspect of the API, making it easy to:
+- Locate specific tests
+- Understand test coverage
+- Maintain test code
+- Debug failures

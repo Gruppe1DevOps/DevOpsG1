@@ -12,7 +12,7 @@ Unit tests verify the business logic in `notesService.js` by testing each functi
 
 ## Test Structure
 
-### 1. Business Logic Testing
+### Business Logic Testing
 Tests the core functionality of the notes service:
 - Note retrieval (all notes and by ID)
 - Note creation with validation
@@ -20,10 +20,6 @@ Tests the core functionality of the notes service:
 - ID generation
 - Error handling
 - Input validation
-
-### 2. Root Endpoint Testing
-Tests the basic endpoint functionality:
-- Welcome message verification
 
 ## Running Unit Tests
 
@@ -63,7 +59,6 @@ npm test
 
 - **Jest**: Testing framework
 - **notesService**: Business logic module
-- **index.js**: For root endpoint testing
 
 ## Best Practices
 
@@ -95,16 +90,11 @@ npm test
 - ✅ **ID Generation**: Unique ID creation
 - ✅ **Error Handling**: Various error scenarios
 - ✅ **Input Validation**: All validation rules
-- ✅ **Root Endpoint**: Basic functionality
 
 ## Test Organization
 
 Tests are organized by functionality:
-1. **Root Endpoint Tests**
-   - Basic endpoint functionality
-   - Welcome message verification
-
-2. **Note Service Tests**
+1. **Note Service Tests**
    - `getAllNotes`: Retrieving all notes
    - `getNoteById`: Finding specific notes
    - `createNote`: Creating new notes

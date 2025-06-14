@@ -12,25 +12,15 @@
  * - ID generation
  * - Error handling
  * - Input validation
- * - Basic endpoint functionality
  */
 
 const notesService = require('../../notesService');
-const request = require('supertest');
-const app = require('../../index');
 
 describe('Notes Service Unit Tests', () => {
   beforeEach(() => {
     // Reset the notes array to initial state before each test
     // This ensures test isolation and prevents test interference
     notesService.resetNotes();
-  });
-
-  describe('Root Endpoint', () => {
-    test('should return welcome message on root endpoint', async () => {
-      const response = await request(app).get('/').expect(200);
-      expect(response.text).toBe('<h1>Willkommen bei Devops Gruppe 1!</h1>');
-    });
   });
 
   describe('getAllNotes', () => {

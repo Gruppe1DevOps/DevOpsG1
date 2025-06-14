@@ -16,6 +16,7 @@
  * - Data persistence across operations
  * - Error propagation through layers
  * - Route error handling
+ * - Basic endpoint functionality
  */
 
 const request = require('supertest');
@@ -23,6 +24,16 @@ const app = require('../../index');
 
 // Integration Test Suite
 describe('API Integration Tests', () => {
+  /**
+   * Test basic endpoint functionality
+   */
+  describe('Basic Endpoints', () => {
+    test('should return welcome message on root endpoint', async () => {
+      const response = await request(app).get('/').expect(200);
+      expect(response.text).toBe('<h1>Willkommen bei Devops Gruppe 1!</h1>');
+    });
+  });
+
   /**
    * Test error handling in routes
    */
