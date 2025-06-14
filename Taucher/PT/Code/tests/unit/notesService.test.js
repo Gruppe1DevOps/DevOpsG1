@@ -1,18 +1,40 @@
 /**
  * Unit Tests for Notes Service
- * Tests individual functions in isolation
+ *
+ * These tests focus on testing the business logic in isolation,
+ * verifying that each function in the notesService works correctly
+ * without any external dependencies.
+ *
+ * Test Coverage:
+ * - Note retrieval (all notes and by ID)
+ * - Note creation with validation
+ * - Note deletion
+ * - ID generation
+ * - Error handling
+ * - Input validation
+ * - Basic endpoint functionality
  */
 
 const notesService = require('../../notesService');
+const request = require('supertest');
+const app = require('../../index');
 
 describe('Notes Service Unit Tests', () => {
   beforeEach(() => {
     // Reset the notes array to initial state before each test
+    // This ensures test isolation and prevents test interference
     notesService.resetNotes();
   });
 
+  describe('Root Endpoint', () => {
+    test('should return hello world on root endpoint', async () => {
+      const response = await request(app).get('/').expect(200);
+      expect(response.text).toBe('<h1>Hello World!</h1>');
+    });
+  });
+
   describe('getAllNotes', () => {
-    test('should return all notes', () => {
+    test('should return all notes with correct structure', () => {
       const notes = notesService.getAllNotes();
       expect(notes).toHaveLength(3);
       expect(notes[0]).toHaveProperty('content', 'HTML is easy');
@@ -33,7 +55,7 @@ describe('Notes Service Unit Tests', () => {
   });
 
   describe('createNote', () => {
-    test('should create note with valid content', () => {
+    test('should create note with valid content and important flag', () => {
       const note = notesService.createNote('Test note', true);
       expect(note).toHaveProperty('content', 'Test note');
       expect(note).toHaveProperty('important', true);
@@ -41,10 +63,24 @@ describe('Notes Service Unit Tests', () => {
       expect(note).toHaveProperty('date');
     });
 
-    test('should throw error when content is missing', () => {
-      expect(() => {
-        notesService.createNote();
-      }).toThrow('content missing');
+    describe('input validation', () => {
+      test('should throw error when content is undefined', () => {
+        expect(() => {
+          notesService.createNote(undefined);
+        }).toThrow('content missing');
+      });
+
+      test('should throw error when content is null', () => {
+        expect(() => {
+          notesService.createNote(null);
+        }).toThrow('content missing');
+      });
+
+      test('should throw error when content is empty string', () => {
+        expect(() => {
+          notesService.createNote('');
+        }).toThrow('content missing');
+      });
     });
 
     test('should set important to false by default', () => {
