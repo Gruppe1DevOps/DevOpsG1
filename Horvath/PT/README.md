@@ -12,59 +12,61 @@ This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MC
 
 # Table of Contents
 
-1. [Task](#task)
-2. [📁 Projectstructure](#️-projectstructure)
-3. [End-to-End Test Sequence Diagram Analysis](#end-to-end-test-sequence-diagram-analysis)
-   1. [Actor and Participant Layout (Top)](#actor-and-participant-layout-top)
-   2. [CI/CD Integration Section](#cicd-integration-section)
-   3. [End-to-End Flow Automation Groups](#end-to-end-flow-automation-groups)
-      1. [Group 1: Enter Vehicle Data](#group-1-enter-vehicle-data)
-      2. [Group 2: Enter Insurant Data](#group-2-enter-insurant-data)
-      3. [Group 3: Enter Product Data](#group-3-enter-product-data)
-      4. [Group 4: Select Price Option](#group-4-select-price-option)
-      5. [Group 5: Send Quote](#group-5-send-quote)
-   4. [Validations Section (Validierungen)](#validations-section-validierungen)
-   5. [Test Report Generation Section](#test-report-generation-section)
-   6. [Integration with Our Testing Architecture](#integration-with-our-testing-architecture)
-4. [End-to-End Test Flowchart Analysis](#end-to-end-test-flowchart-analysis)
-   1. [Test Scenario Categories](#test-scenario-categories)
-      1. [Vehicle Factors](#1-vehicle-factors)
-      2. [Driver Demographics](#2-driver-demographics)
-      3. [Insurance Parameters](#3-insurance-parameters)
-      4. [Coverage Options](#4-coverage-options)
-      5. [Price Verification](#5-price-verification)
-      6. [Test Coverage Overview](#test-coverage-overview)
-      7. [Expected Price Variations](#expected-price-variations)
-   2. [CI/CD Integration Layer](#cicd-integration-layer)
-   3. [Test Execution Environment Decision Point](#test-execution-environment-decision-point)
-   4. [End-to-End Flow Automation (Center Section)](#end-to-end-flow-automation-center-section)
-   5. [Application Response Processing (Middle)](#application-response-processing-middle)
-   6. [Comprehensive Validation Strategy (Lower Section)](#comprehensive-validation-strategy-lower-section)
-   7. [Test Report Generation (Bottom)](#test-report-generation-bottom)
-   8. [Visual Integration Summary](#visual-integration-summary)
-5. [WebdriverIO GitHub Actions Workflow Explanation](#webdriverio-github-actions-workflow-explanation)
-   1. [Workflow Triggers](#workflow-triggers)
-   2. [Browser Matrix Strategy](#browser-matrix-strategy)
-   3. [Environment Setup](#environment-setup)
-   4. [Browser Installation](#browser-installation)
-   5. [Test Execution](#test-execution)
-   6. [Artifact Upload](#artifact-upload)
-6. [WebdriverIO Test File Analysis](#webdriverio-test-file-analysis)
-   1. [Test Structure Overview](#test-structure-overview)
-   2. [Dynamic Test Generation](#dynamic-test-generation)
-   3. [Test Flow Architecture](#test-flow-architecture)
-      1. [Data Entry Steps (1–3)](#data-entry-steps-1-3)
-      2. [Price Option Selection (Step 4)](#price-option-selection-step-4)
-      3. [Quote Submission (Step 5)](#quote-submission-step-5)
-   4. [Cross-Browser Compatibility Features](#cross-browser-compatibility-features)
-   5. [Integration with GitHub Actions](#integration-with-github-actions)
-   6. [Test Validation Patterns](#test-validation-patterns)
-7. [Test Data Class Analysis](#test-data-class-analysis)
-   1. [Dynamic Date Generation](#dynamic-date-generation)
-   2. [Test Scenario Architecture](#test-scenario-architecture)
-   3. [Risk Factor Testing Strategy](#risk-factor-testing-strategy)
-   4. [Expected Price Validation](#expected-price-validation)
-8. [Poké-Catch & Release: A Light-hearted Wrap-Up](#-poké-catch--release-a-light-hearted-wrap-up)
+- [Devops G1](#devops-g1)
+- [Table of Contents](#table-of-contents)
+  - [Task](#task)
+  - [📁 Project structure](#-project-structure)
+  - [End-to-End Test Sequence Diagram Analysis](#end-to-end-test-sequence-diagram-analysis)
+    - [Actor and Participant Layout (Top)](#actor-and-participant-layout-top)
+    - [CI/CD Integration Section](#cicd-integration-section)
+    - [End-to-End Flow Automation Groups](#end-to-end-flow-automation-groups)
+      - [Group 1: Enter Vehicle Data](#group-1-enter-vehicle-data)
+      - [Group 2: Enter Insurant Data](#group-2-enter-insurant-data)
+      - [Group 3: Enter Product Data](#group-3-enter-product-data)
+      - [Group 4: Select Price Option](#group-4-select-price-option)
+      - [Group 5: Send Quote](#group-5-send-quote)
+    - [Validations Section (Validierungen)](#validations-section-validierungen)
+    - [Test Report Generation Section](#test-report-generation-section)
+    - [Integration with Our Testing Architecture](#integration-with-our-testing-architecture)
+  - [End-to-End Test Flowchart Analysis](#end-to-end-test-flowchart-analysis)
+    - [Test Scenario Categories](#test-scenario-categories)
+      - [1. Vehicle Factors](#1-vehicle-factors)
+      - [2. Driver Demographics](#2-driver-demographics)
+      - [3. Insurance Parameters](#3-insurance-parameters)
+      - [4. Coverage Options](#4-coverage-options)
+      - [5. Price Verification](#5-price-verification)
+      - [Test Coverage Overview](#test-coverage-overview)
+      - [Expected Price Variations](#expected-price-variations)
+    - [CI/CD Integration Layer](#cicd-integration-layer)
+    - [Test Execution Environment Decision Point](#test-execution-environment-decision-point)
+    - [End-to-End Flow Automation (Center Section)](#end-to-end-flow-automation-center-section)
+    - [Application Response Processing (Middle)](#application-response-processing-middle)
+    - [Comprehensive Validation Strategy (Lower Section)](#comprehensive-validation-strategy-lower-section)
+    - [Test Report Generation (Bottom)](#test-report-generation-bottom)
+    - [Visual Integration Summary](#visual-integration-summary)
+  - [WebdriverIO GitHub Actions Workflow Explanation](#webdriverio-github-actions-workflow-explanation)
+    - [Workflow Triggers](#workflow-triggers)
+    - [Browser Matrix Strategy](#browser-matrix-strategy)
+    - [Environment Setup](#environment-setup)
+    - [Browser Installation](#browser-installation)
+    - [Test Execution](#test-execution)
+    - [Artifact Upload](#artifact-upload)
+  - [WebdriverIO Test File Analysis](#webdriverio-test-file-analysis)
+    - [Test Structure Overview](#test-structure-overview)
+    - [Dynamic Test Generation](#dynamic-test-generation)
+    - [Test Flow Architecture](#test-flow-architecture)
+      - [Data Entry Steps (1-3)](#data-entry-steps-1-3)
+      - [Price Option Selection (Step 4)](#price-option-selection-step-4)
+      - [Quote Submission (Step 5)](#quote-submission-step-5)
+    - [Cross-Browser Compatibility Features](#cross-browser-compatibility-features)
+    - [Integration with GitHub Actions](#integration-with-github-actions)
+    - [Test Validation Patterns](#test-validation-patterns)
+  - [Test Data Class Analysis](#test-data-class-analysis)
+    - [Dynamic Date Generation](#dynamic-date-generation)
+    - [Test Scenario Architecture](#test-scenario-architecture)
+    - [Risk Factor Testing Strategy](#risk-factor-testing-strategy)
+    - [Expected Price Validation](#expected-price-validation)
+  - [🎉 Poké-Catch \& Release: A Light-hearted Wrap-Up](#-poké-catch--release-a-light-hearted-wrap-up)
 
 ## Task
 
@@ -87,18 +89,21 @@ This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MC
 
 
 > [!WARNING]
-> some test data were wrong in th CSV file, we corrected them in the
-> file `Scenarios_Vehicle_Insurance_App.csv` in the root folder of this repository.
-> Following changes were made:
+> Some test data was wrong in th CSV file, we corrected them in the
+> file `Scenarios_Vehicle_Insurance_App.csv` in the Code folder.
+> The following changes were made:
 >
 > Szenario: Female
->   Gold: Changed -> 947.0 to 977.0
+> 
+> Gold: Changed -> 947.0 to 977.0
 >
 > Szenario: damageInsuranceFullCoverage
->   Gold: Changed -> 1024.0 to 1027.0
+>
+> Gold: Changed -> 1024.0 to 1027.0
 
 > [!NOTE]
-> Website for testing:
+> Website to be tested:
+> 
 > https://sampleapp.tricentis.com/101/
 
 ---
@@ -136,7 +141,7 @@ The aim of the task is to automate the Tricentis Vehicle Insurance App. At least
 
 ---
 
-## 📁 Projectstructure
+## 📁 Project structure
 
 ```
 ├── .github
@@ -424,8 +429,12 @@ In the .github folder is the test.yml in this YAML a is a GitHub Actions workflo
 on:
   push:
     branches: [main]
+    paths:
+      - "Horvath/PT/Code/**"
   pull_request:
     branches: [main]
+    paths:
+      - "Horvath/PT/Code/**"
 ```
 
 > [!NOTE]
@@ -433,6 +442,9 @@ on:
 >
 > - When code is pushed to the `main` branch
 > - When a pull request is opened targeting the `main` branch
+>
+> The workflow is only run when there are changes under the path "Horvath/PT/Code".
+> This is necessary because we have the work for all 3 lectors in one repository.
 
 ### Browser Matrix Strategy
 
@@ -451,13 +463,13 @@ strategy:
 - name: Setup Node.js
   uses: actions/setup-node@v3
   with:
-    node-version: "18"
+    node-version: "22"
 - name: Install dependencies
   run: npm install
 ```
 
 > [!NOTE]
-> These steps prepare the environment by checking out the code, installing Node.js 18, and installing project dependencies.
+> These steps prepare the environment by checking out the code, installing Node.js 22, and installing project dependencies.
 
 ### Browser Installation
 
@@ -514,16 +526,6 @@ describe("Tricentis Vehicle Insurance Tests", () => {
 ```
 
 The test suite uses a **data-driven approach** where test scenarios are externalized in a separate `VehicleInsuranceTestData.js` file. This allows multiple test scenarios to run with different input data without duplicating test code.
-
-### Dynamic Test Generation
-
-```javascript
-Object.entries(testData.scenarios).forEach(([scenarioName, scenario]) => {
-  describe(`Scenario: ${scenarioName}`, () => {
-    // Individual test cases
-  });
-});
-```
 
 ### Dynamic Test Generation
 
