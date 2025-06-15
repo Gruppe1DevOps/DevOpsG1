@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 /* sonar-disable */
 const js = require('@eslint/js');
 const globals = require('globals');
