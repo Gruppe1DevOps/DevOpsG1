@@ -113,12 +113,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
-
-jobs:
-  quality-checks:
-    name: Quality Gates and Testing
-    runs-on: ubuntu-latest
+      - "Taucher/PT/**"
 ```
 
 #### Workflow 2: Main Branch CI/CD (`ci-build.yml`)
@@ -135,7 +130,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 
 jobs:
@@ -165,7 +160,7 @@ sonar.projectVersion=1.0.0
 
 # Source code location
 sonar.sources=Taucher/PT/Code
-sonar.exclusions=**/node_modules/**,**/coverage/**,**/tests/**,**/*.test.js,**/*.spec.js
+sonar.exclusions=**/node_modules/**,**/coverage/**,**/tests/**,**/*.test.js,**/*.spec.js,**/eslint.config.js
 
 # Test files
 sonar.tests=Taucher/PT/Code/tests/
@@ -432,7 +427,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 # Only run on changes under "Taucher"
 
@@ -442,7 +437,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 # Both only run on changes under "Taucher/PT/Code"
 ```
