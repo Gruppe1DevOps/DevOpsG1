@@ -9,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 jobs:
   test-and-build:

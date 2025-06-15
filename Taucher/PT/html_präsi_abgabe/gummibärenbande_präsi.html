@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐻 Die epische DevOps Gummibärenbande</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #101014;
+            color: #f1f1f1;
+            font-size: 15px;
+        }
+        .slideshow-container {
+            max-width: 1100px;
+            margin: 30px auto 0 auto;
+            background: #181a1b;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.35);
+            overflow: hidden;
+            position: relative;
+        }
+        .slide {
+            display: none;
+            padding: 40px 40px 80px 40px;
+            min-height: 600px;
+            animation: fadein 0.5s;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .header {
+            background: linear-gradient(135deg, #232526 0%, #3b2c1a 100%);
+            color: #fcd34d;
+            padding: 28px 20px 20px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.25);
+        }
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 8px #000;
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.85;
+            margin-bottom: 10px;
+        }
+        .meta-info {
+            background: rgba(255,255,255,0.07);
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 0.95em;
+            color: #fcd34d;
+            margin-top: 10px;
+        }
+        .signpost {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .signpost-icon {
+            font-size: 1.7em;
+            color: #888;
+            background: #232526;
+            border-radius: 50%;
+            padding: 10px;
+            transition: color 0.2s, background 0.2s;
+            cursor: pointer;
+        }
+        .signpost-icon.active {
+            color: #fcd34d;
+            background: #101014;
+            box-shadow: 0 0 0 2px #fcd34d;
+        }
+        .epic-box {
+            background: linear-gradient(90deg, #232526 80%, #3b2c1a 100%);
+            color: #fcd34d;
+            border-left: 6px solid #fcd34d;
+            border-radius: 10px;
+            padding: 18px 22px 18px 22px;
+            margin-bottom: 22px;
+            font-size: 1.13em;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
+        }
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            color: #fcd34d;
+            text-align: center;
+            margin: 25px 0 20px;
+            font-size: 1.4em;
+            letter-spacing: 1px;
+        }
+        .character-card {
+            background: linear-gradient(145deg, #232526 60%, #181a1b 100%);
+            border: 2px solid #fcd34d;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1em;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
+        }
+        .char-icon {
+            font-size: 2.1em;
+            margin-right: 0.3em;
+            flex-shrink: 0;
+            line-height: 1;
+            margin-top: 0.1em;
+        }
+        .character-info strong {
+            font-size: 1.2rem;
+            color: #fcd34d;
+        }
+        .scroll {
+            background: #181a1b;
+            padding: 1.2rem 1.2rem 1.2rem 1rem;
+            border-radius: 14px;
+            border: 2.5px solid #3b2c1a;
+            box-shadow: 0 8px 24px rgba(60,40,10,0.08);
+            margin-bottom: 1.5rem;
+            position: relative;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        a {
+            color: #fcd34d;
+            font-weight: bold;
+            text-decoration: underline dotted;
+            word-break: break-all;
+        }
+        .quote {
+            font-style: italic;
+            border-left: 4px solid #fcd34d;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #fcd34d;
+            background: #232526;
+            border-radius: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            background: #232526;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(60,40,10,0.06);
+            font-size: 1em;
+        }
+        th, td {
+            padding: 0.7em 1em;
+            border-bottom: 1px solid #fcd34d;
+            text-align: left;
+            word-break: break-word;
+        }
+        th {
+            background: linear-gradient(90deg, #fcd34d 60%, #232526 100%);
+            color: #232526;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.05em;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            background: #232526;
+            color: #fcd34d;
+            padding: 18px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            text-align: center;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+        .footer {
+            background: #232526;
+            color: #fcd34d;
+            padding: 18px 10px 12px 10px;
+            text-align: center;
+            font-size: 1.05em;
+            border-radius: 18px 18px 0 0;
+            margin-top: 30px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 -2px 12px 0 rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .footer em {
+            color: #fcd34d;
+        }
+        .footer strong {
+            color: #fcd34d;
+        }
+        .nav-btn {
+            background: #232526;
+            color: #fcd34d;
+            border: 2px solid #fcd34d;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-size: 1.1em;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-btn:hover {
+            background: #fcd34d;
+            color: #232526;
+        }
+        .fa-table-cells, .fa-bug, .fa-shield-halved, .fa-rocket, .fa-cloud, .fa-vial, .fa-hammer, .fa-users, .fa-crown, .fa-map, .fa-route, .fa-crystal-ball, .fa-docker, .fa-robot, .fa-skull-crossbones, .fa-trophy, .fa-medal {
+            color: #fcd34d;
+        }
+        @media (max-width: 900px) {
+            .slide { padding: 20px 5vw 80px 5vw; }
+        }
+        @media (max-width: 600px) {
+            .slide { padding: 10px 2vw 60px 2vw; }
+            .header h1 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+
+        <!-- Slide 1: Agenda -->
+        <div class="slide active" id="slide-0">
+            <div class="header">
+                <h1>🐻 Die epische DevOps Gummibärenbande</h1>
+                <div class="subtitle">Ein Abenteuer im dunklen Wald der Software – MCCE DevOps</div>
+                <div class="meta-info">Gruppe 1 &nbsp;|&nbsp; SS2025 &nbsp;|&nbsp; Lektor: Stefan Taucher</div>
+            </div>
+            <div class="signpost">
+                <span class="signpost-icon active" title="Intro"><i class="fa-solid fa-scroll"></i></span>
+                <span class="signpost-icon" title="Helden"><i class="fa-solid fa-users"></i></span>
+                <span class="signpost-icon" title="Prophezeiung"><i class="fa-solid fa-crown"></i></span>
+                <span class="signpost-icon" title="Schatzkarte"><i class="fa-solid fa-map"></i></span>
+                <span class="signpost-icon" title="Werkzeuge"><i class="fa-solid fa-hammer"></i></span>
+                <span class="signpost-icon" title="Pipeline"><i class="fa-solid fa-route"></i></span>
+                <span class="signpost-icon" title="Tests"><i class="fa-solid fa-vial"></i></span>
+                <span class="signpost-icon" title="SonarCloud"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="signpost-icon" title="Docker"><i class="fa-brands fa-docker"></i></span>
+                <span class="signpost-icon" title="Dependabot"><i class="fa-solid fa-robot"></i></span>
+                <span class="signpost-icon" title="Fallen"><i class="fa-solid fa-skull-crossbones"></i></span>
+                <span class="signpost-icon" title="Triumph"><i class="fa-solid fa-trophy"></i></span>
+                <span class="signpost-icon" title="Epilog"><i class="fa-solid fa-medal"></i></span>
+            </div>
+            <div class="epic-box">
+                <strong>🏰 Die Gummibärenbande versammelt sich!</strong><br>
+                Im tiefen Wald der Software beginnt unser Abenteuer. Die Bande steht bereit, um die Herausforderungen der DevOps-Welt zu meistern. <br>
+                <em>Wohin wird uns die Reise führen?</em>
+            </div>
+            <h2 class="section-title">Agenda</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 30px;">
+                <div class="character-card"><span class="char-icon">🛡️</span>Helden</div>
+                <div class="character-card"><span class="char-icon">🏰</span>Prophezeiung</div>
+                <div class="character-card"><span class="char-icon">🗂️</span>Schatzkarte</div>
+                <div class="character-card"><span class="char-icon">⚙️</span>Werkzeuge</div>
+                <div class="character-card"><span class="char-icon">🗺️</span>Pipeline</div>
+                <div class="character-card"><span class="char-icon">🧪</span>Tests</div>
+                <div class="character-card"><span class="char-icon">🔮</span>SonarCloud</div>
+                <div class="character-card"><span class="char-icon">📦</span>Docker</div>
+                <div class="character-card"><span class="char-icon">🤖</span>Dependabot</div>
+                <div class="character-card"><span class="char-icon">⚠️</span>Fallen</div>
+                <div class="character-card"><span class="char-icon">🏆</span>Triumph</div>
+                <div class="character-card"><span class="char-icon">🏅</span>Epilog</div>
+            </div>
+            <div class="footer">
+                <span>🐻 Die epische DevOps Gummibärenbande – Das Abenteuer beginnt!</span>
+            </div>
+        </div>
+
+        <!-- Slide 2: Die Helden -->
+        <div class="slide" id="slide-1">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🛡️ Die Helden erwachen!</strong><br>
+                Die Gummibärenbande stellt sich vor: Jeder bringt einzigartige Fähigkeiten mit, um die DevOps-Welt zu erobern. <br>
+                <em>Wer sind unsere tapferen Gefährten?</em>
+            </div>
+            <h2 class="section-title">🧙‍♂️ Kapitel I – Die Helden erwachen</h2>
+            <div class="character-card"><span class="char-icon" title="Gruffi">🛡️</span>
+                <div class="character-info"><strong>Gruffi Gummi (Harald Beier)</strong><br>Der grummelige Wächter der Codeordnung.<br><em>„Ohne Linter kommt mir kein Merge ins Schloss!“</em></div>
+            </div>
+            <div class="character-card"><span class="char-icon" title="Sunni">🌞</span>
+                <div class="character-info"><strong>Sunni Gummi (Susanne Peer)</strong><br>Lichtgestalt der Qualität und Meisterin der Testmagie.<br><em>„Ein Fehler gesehen ist ein Bug besiegt!“</em></div>
+            </div>
+            <div class="character-card"><span class="char-icon" title="Zummi">🧙‍♂️</span>
+                <div class="character-info"><strong>Zummi Gummi (Patrick Prugger)</strong><br>Magier der GitHub-Zauberei und YAML-Rituale.<br><em>„Actions, die aus der Tiefe kommen!“</em></div>
+            </div>
+            <div class="character-card"><span class="char-icon" title="Tummi">🍯</span>
+                <div class="character-info"><strong>Tummi Gummi (Philipp Palatin)</strong><br>Der Genießer – liebt stabile Builds wie andere Honigkuchen.<br><em>„Ich deploye nur, wenn's richtig gut riecht.“</em></div>
+            </div>
+            <div class="character-card"><span class="char-icon" title="Cavin">⚔️</span>
+                <div class="character-info"><strong>Cavin (Stefan Taucher)</strong><br>Unser Lektor und Mentor – der junge Ritter, der die Gummibärenbande mit Wissen, Mut und Pull-Request-Zaubern unterstützt!</div>
+            </div>
+            <div class="character-card"><span class="char-icon" title="Herzog Igzorn">🦹‍♂️</span>
+                <div class="character-info"><strong>Herzog Igzorn</strong><br>Der ewige Widersacher, der mit alten, fehleranfälligen Praktiken und Chaos die Bande herausfordert – doch diesmal hat er keine Chance!</div>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-users"></i> Die Helden sind bereit für das Abenteuer!</span>
+            </div>
+        </div>
+
+        <!-- Slide 3: Die Prophezeiung -->
+        <div class="slide" id="slide-2">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🏰 Die Prophezeiung!</strong><br>
+                Ein geheimnisvoller Auftrag wartet: Die Gummibärenbande muss eine legendäre DevOps-Pipeline erschaffen, die allen Gefahren trotzt.<br>
+                <em>Wird die Bande die Herausforderung meistern?</em>
+            </div>
+            <h2 class="section-title">🏰 Kapitel II – Die Prophezeiung</h2>
+            <div class="scroll">
+                <p>
+                    Herzog Igzorn übergab eine vergilbte Pergamentrolle:<br>
+                    <em>„Erbaut mir eine Anwendung, getestet und geprüft, damit sie ewig laufen möge – selbst in Docker-Gefilden...“</em><br><br>
+                    Und so begaben sich unsere Gummibären auf ein episches Abenteuer!
+                </p>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-crown"></i> Die Prophezeiung ist ausgesprochen – das Abenteuer beginnt!</span>
+            </div>
+        </div>
+
+        <!-- Slide 4: Die geheime Schatzkarte -->
+        <div class="slide" id="slide-3">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🗂️ Die geheime Schatzkarte!</strong><br>
+                Die Gummibärenbande entdeckt die Struktur ihres Projekts – jede Datei ein Hinweis, jeder Ordner ein Schatz.<br>
+                <em>Welche Geheimnisse birgt die Karte?</em>
+            </div>
+            <h2 class="section-title">🗂️ Kapitel III – Die geheime Schatzkarte</h2>
+            <div class="scroll">
+                <div style="font-size:1.3em; margin-bottom:10px;">Projektstruktur</div>
+                <pre>
+<i class="fa-solid fa-folder-tree"></i>
+.github/
+ ├─ workflows/
+ │   ├─ <i class="fa-solid fa-table-cells"></i> pr-checks.yml      # Wächter des Pull Requests
+ │   └─ <i class="fa-solid fa-table-cells"></i> ci-build.yml       # Hauptzweig-Zauberweg
+ └─ <i class="fa-solid fa-robot"></i> dependabot.yml         # Kobold-Konfiguration
+Taucher/
+└─ PT/
+    ├─ Code/
+    │   ├─ tests/
+    │   │   ├─ integration/
+    │   │   └─ unit/
+    │   ├─ Dockerfile
+    │   ├─ index.js
+    │   ├─ package.json
+    │   └─ sonar-project.properties
+    └─ Aufgaben.pdf
+    └─ README.md
+                </pre>
+                <ul>
+                    <li><i class="fa-solid fa-table-cells"></i> Getrennte Workflows für schnelle Rückmeldung und sicheres Deployment</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Automatisierte Qualitätssicherung und Security</li>
+                    <li><i class="fa-solid fa-cloud"></i> Kein Geheimnis bleibt verborgen – SonarCloud wacht!</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-map"></i> Die Schatzkarte zeigt den Weg zur perfekten Pipeline!</span>
+            </div>
+        </div>
+
+        <!-- Slide 5: Die Werkzeuge der Macht -->
+        <div class="slide" id="slide-4">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>⚙️ Die Werkzeuge der Macht!</strong><br>
+                Die Bande sammelt mächtige Tools, um jede DevOps-Prüfung zu bestehen.<br>
+                <em>Welche Zauber helfen uns auf dem Weg?</em>
+            </div>
+            <h2 class="section-title">⚙️ Kapitel IV – Die Werkzeuge der Macht</h2>
+            <div class="scroll">
+                <div style="font-size:1.5em; margin-bottom:10px;">🛠️🔮🧪📦🕵️🤖</div>
+                <ul>
+                    <li>🛠️ <strong>Node.js 20+</strong> – Der Grundstein der Anwendung</li>
+                    <li>🔮 <strong>GitHub Actions</strong> – Unsichtbare Wächter der Qualität</li>
+                    <li>🧪 <strong>Jest</strong> – Der Prüfstein aller Funktionen</li>
+                    <li>📦 <strong>Docker</strong> – Das magische Fass der Verbreitung</li>
+                    <li>🕵️ <strong>SonarCloud</strong> – Das allsehende Auge des Codereichs</li>
+                    <li>🤖 <strong>Dependabot</strong> – Der kleine Kobold für Updates</li>
+                    <li>🔎 <strong>ESLint</strong> – Wächter der Codeordnung</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-hammer"></i> Die Werkzeuge sind geschärft – das Abenteuer kann beginnen!</span>
+            </div>
+        </div>
+
+        <!-- Slide 6: Die magische Pipeline-Schlucht -->
+        <div class="slide" id="slide-5">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🗺️ Die Pipeline-Schlucht!</strong><br>
+                Zwei Wege führen durch die Schlucht: Einer prüft, einer deployed. Nur wer alle Prüfungen besteht, erreicht das Ziel.<br>
+                <em>Wird die Bande den richtigen Pfad wählen?</em>
+            </div>
+            <h2 class="section-title">🗺️ Kapitel V – Die magische Pipeline-Schlucht</h2>
+            <div class="scroll">
+                <p>
+                    Die Gummibärenbande trennt ihre Abenteuer in zwei geheime Pfade:<br>
+                    <strong>1. Pull-Request-Prüfpfad:</strong> <em>„Wer ins Schloss will, muss erst an Linter, Tests und Sonar vorbei!“</em><br>
+                    <strong>2. Hauptzweig-Zauberweg:</strong> <em>„Nur geprüfte Helden dürfen ins Docker-Fass und werden ins Königreich deployed.“</em>
+                </p>
+                <table>
+                    <tr>
+                        <th><i class="fa-solid fa-route"></i> Pfad</th>
+                        <th><i class="fa-solid fa-vial"></i> Prüfungen</th>
+                        <th><i class="fa-solid fa-trophy"></i> Belohnung</th>
+                    </tr>
+                    <tr>
+                        <td>Pull Request</td>
+                        <td>Linter, Unit-Tests, Integrationstests, SonarCloud</td>
+                        <td>Merge ins Hauptschloss</td>
+                    </tr>
+                    <tr>
+                        <td>Main Branch</td>
+                        <td>Alle Checks + Docker Build & Push</td>
+                        <td>Deployment ins Königreich</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-route"></i> Zwei Wege, ein Ziel: Qualität und Sicherheit!</span>
+            </div>
+        </div>
+
+        <!-- Slide 7: Der Testfall-Wald -->
+        <div class="slide" id="slide-6">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🧪 Der Testfall-Wald!</strong><br>
+                Die Bande prüft ihre Zaubertränke: Nur getesteter Code besteht das Abenteuer.<br>
+                <em>Welche Prüfungen erwarten uns?</em>
+            </div>
+            <h2 class="section-title">🧪 Kapitel VI – Der Testfall-Wald</h2>
+            <div class="scroll">
+                <ul>
+                    <li><strong>Unit-Tests:</strong> Jeder Gummibär prüft seine eigenen Zaubertränke (Funktionen isoliert getestet).</li>
+                    <li><strong>Integrationstests:</strong> Die Bande kämpft gemeinsam gegen das Unbekannte (API-Endpunkte, echte Workflows).</li>
+                    <li><strong>Testabdeckung:</strong> „Kein Blatt bleibt ungewendet!“</li>
+                </ul>
+                <table>
+                    <tr>
+                        <th><i class="fa-solid fa-vial"></i> Testtyp</th>
+                        <th><i class="fa-solid fa-file-code"></i> Datei</th>
+                        <th><i class="fa-solid fa-bug"></i> Beschreibung</th>
+                    </tr>
+                    <tr>
+                        <td>Unit-Test</td>
+                        <td>tests/unit/notesService.test.js</td>
+                        <td>Geschäftslogik in Isolation</td>
+                    </tr>
+                    <tr>
+                        <td>Integrationstest</td>
+                        <td>tests/integration/api.integration.test.js</td>
+                        <td>End-to-End API Workflow</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-vial"></i> Getestet und für gut befunden – der Wald ist sicher!</span>
+            </div>
+        </div>
+
+        <!-- Slide 8: Die SonarCloud-Kristallkugel -->
+        <div class="slide" id="slide-7">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🔮 Die SonarCloud-Kristallkugel!</strong><br>
+                Die Gummibärenbande blickt in die Zukunft: SonarCloud entdeckt Fehler, bevor sie gefährlich werden.<br>
+                <em>Warum brauchen wir SonarCloud?</em><br>
+                SonarCloud ist unser magischer Wächter, der unseren Code auf Fehler, Schwächen und dunkle Geheimnisse prüft, bevor wir weiterziehen.
+            </div>
+            <h2 class="section-title">🔮 Kapitel VII – Die SonarCloud-Kristallkugel</h2>
+            <div class="scroll">
+                <p>
+                    Mit der SonarCloud-Kristallkugel sehen die Gummibären jeden Bug und jede Schwäche im Code – und kein Merge kommt durch, wenn der Kristall rot leuchtet!
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-shield-halved"></i> Statische Codeanalyse und Quality Gates</li>
+                    <li><i class="fa-solid fa-vial"></i> Testabdeckung wird geprüft</li>
+                    <li><i class="fa-solid fa-route"></i> Integration in beide Workflows</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-shield-halved"></i> SonarCloud wacht über die Codequalität – kein Bug bleibt verborgen!</span>
+            </div>
+        </div>
+
+        <!-- Slide 9: Docker und das Fass der Unendlichkeit -->
+        <div class="slide" id="slide-8">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>📦 Docker und das Fass der Unendlichkeit!</strong><br>
+                Der Code wird ins magische Docker-Fass gefüllt und ins Königreich gerollt.<br>
+                <em>Wie bleibt unser Abenteuer überall lauffähig?</em>
+            </div>
+            <h2 class="section-title">📦 Kapitel VIII – Docker und das Fass der Unendlichkeit</h2>
+            <div class="scroll">
+                <p>
+                    Am Ende jedes Abenteuers wird der Code in ein magisches Docker-Fass gefüllt, mit mehreren Zauber-Etiketten versehen und sicher ins Königreich (Container Registry) gerollt.
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-tag"></i> Multi-Tagging: <code>latest</code>, <code>main-&lt;sha&gt;</code>, <code>v1.0.x</code></li>
+                    <li><i class="fa-solid fa-user-shield"></i> Non-root User für Sicherheit</li>
+                    <li><i class="fa-solid fa-heart-pulse"></i> Healthcheck-Zauber</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <span><i class="fa-brands fa-docker"></i> Docker macht die Anwendung überall startklar!</span>
+            </div>
+        </div>
+
+        <!-- Slide 10: Dependabot, der fleißige Kobold -->
+        <div class="slide" id="slide-9">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🤖 Dependabot, der fleißige Kobold!</strong><br>
+                Jede Woche bringt Dependabot frische Zutaten für die Zaubertränke – und Cavin prüft, ob alles noch sicher ist!<br>
+                <em>Wie bleiben wir immer auf dem neuesten Stand?</em>
+            </div>
+            <h2 class="section-title">🤖 Kapitel IX – Dependabot, der fleißige Kobold</h2>
+            <div class="scroll">
+                <p>
+                    Jede Woche bringt Dependabot frische Zutaten für die Zaubertränke – und Cavin prüft, ob alles noch sicher ist!
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-robot"></i> Automatische Updates für npm und GitHub Actions</li>
+                    <li><i class="fa-solid fa-user-check"></i> Review- und Assignee-Zauber</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-robot"></i> Dependabot hält unsere Abhängigkeiten frisch und sicher!</span>
+            </div>
+        </div>
+
+        <!-- Slide 11: Die Fallen des dunklen Herzogs -->
+        <div class="slide" id="slide-10">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>⚠️ Die Fallen des dunklen Herzogs!</strong><br>
+                Auf dem Weg lauern Gefahren: Fehlerhafte Workflows, vergessene Tests und fehlende Tokens.<br>
+                <em>Wie umgehen wir die Fallen?</em>
+            </div>
+            <h2 class="section-title">⚠️ Kapitel X – Die Fallen des dunklen Herzogs</h2>
+            <div class="scroll">
+                <ul>
+                    <li><strong>Fehlerhafte Workflows:</strong> „Zwei Jobs auf einmal? Da stolpert selbst Tummi!“</li>
+                    <li><strong>Registry-Zugang verweigert:</strong> „Ohne Zauberwort (Token) kein Einlass!“</li>
+                    <li><strong>Vergessene Coverage:</strong> „Sonar sieht alles – außer du vergisst den Testbericht!“</li>
+                </ul>
+                <div class="quote">
+                    „Nur wer die Stolpersteine kennt, kann sie mit einem Sprung überwinden!“
+                </div>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-skull-crossbones"></i> Fallen erkannt – die Bande bleibt wachsam!</span>
+            </div>
+        </div>
+
+        <!-- Slide 12: Der Triumph über Herzog Igzorn -->
+        <div class="slide" id="slide-11">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🏆 Der Triumph über Herzog Igzorn!</strong><br>
+                Die Gummibärenbande hat alle Prüfungen bestanden und den dunklen Herzog Igzorn besiegt!<br>
+                <em>Das Königreich feiert seine Helden!</em>
+            </div>
+            <h2 class="section-title">🧑‍🎤 Kapitel XI – Der Triumph über Herzog Igzorn</h2>
+            <div class="character-card">
+                <span class="char-icon">🏆</span>
+                <div class="character-info"><strong>Die Gummibärenbande</strong><br>hat alle Prüfungen bestanden und den dunklen Herzog Igzorn besiegt!</div>
+            </div>
+            <div class="character-card">
+                <span class="char-icon">🎉</span>
+                <div class="character-info"><strong>Das Königreich</strong><br>feiert die Rückkehr der Helden und die Einführung der modernen DevOps-Pipeline.</div>
+            </div>
+            <div class="footer">
+                <span><i class="fa-solid fa-trophy"></i> Sieg! Die Gummibärenbande hat das Abenteuer bestanden!</span>
+            </div>
+        </div>
+
+        <!-- Slide 13: Epilog -->
+        <div class="slide" id="slide-12">
+            <div class="signpost"></div>
+            <div class="epic-box">
+                <strong>🏅 Epilog – Die moderne Gummibären-Pipeline!</strong><br>
+                Das Abenteuer ist geschafft, doch neue Herausforderungen warten schon. Die Pipeline ist bereit für die Zukunft!<br>
+                <em>Was bleibt? Teamgeist, Qualität und Mut!</em>
+            </div>
+            <h2 class="section-title">🏅 Epilog – Die moderne Gummibären-Pipeline</h2>
+            <div class="scroll">
+                <ul>
+                    <li>Getrennte Workflows für schnelle Rückmeldung und sicheres Deployment</li>
+                    <li>Automatisierte Qualitätssicherung und Security</li>
+                    <li>Kein Geheimnis bleibt verborgen – SonarCloud wacht!</li>
+                    <li>Die Gummibärenbande ist bereit für jedes neue Abenteuer!</li>
+                </ul>
+                <div class="ascii-art">
+   _____       _     _     _           _           _           
+  / ____|     | |   | |   | |         | |         | |          
+ | |  __  __ _| |__ | |__ | | ___  ___| |__   ___ | | ___  ___ 
+ | | |_ |/ _` | '_ \| '_ \| |/ _ \/ __| '_ \ / _ \| |/ _ \/ __|
+ | |__| | (_| | |_) | |_) | |  __/\__ \ | | | (_) | |  __/\__ \
+  \_____|\__,_|_.__/|_.__/|_|\___||___/_| |_|\___/|_|\___||___/
+                </div>
+                <p style="text-align:center; margin-top:20px;">
+                    <strong>Die Gummibärenbande ist bereit für jedes DevOps-Abenteuer!</strong>
+                </p>
+                <p style="text-align:center; margin-top:20px;">
+                    Entdecke den vollen Zauber im <a href="https://github.com/Gruppe1DevOps/DevOpsG1/tree/main/Taucher/PT" target="_blank">GitHub-Zauberbuch</a> 📚✨
+                </p>
+            </div>
+            <div class="footer">
+                <p><em>Erstellt mit 🍯, Mut und Magie von Gruppe 1</em></p>
+                <p><strong>DevOps ILV & PT - MCCE Semester 2</strong></p>
+                <p><strong>Lektor: Stefan Taucher</strong> 🎓</p>
+                <span><i class="fa-solid fa-medal"></i> Das Abenteuer endet – die Reise geht weiter!</span>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin: 30px 0 18px 0;">
+            <button class="nav-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i> Zurück</button>
+            <button class="nav-btn" id="nextBtn">Weiter <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <script>
+        // Slide navigation logic
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const signpostIcons = [
+            ...document.querySelectorAll('.signpost-icon')
+        ];
+        let currentSlide = 0;
+
+        // Helper: update signpost icons on all slides
+        function updateSignposts(idx) {
+            signpostIcons.forEach((icon, i) => {
+                icon.classList.toggle('active', i === idx);
+            });
+        }
+
+        function showSlide(idx) {
+            if (idx < 0 || idx >= slides.length) return;
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === idx);
+                // On all slides except the first, inject the signpost bar at the top
+                let signpost = slide.querySelector('.signpost');
+                if (signpost) {
+                    signpost.innerHTML = '';
+                    signpostIcons.forEach((icon, j) => {
+                        const clone = icon.cloneNode(true);
+                        clone.classList.toggle('active', j === idx);
+                        clone.addEventListener('click', () => {
+                            showSlide(j);
+                        });
+                        signpost.appendChild(clone);
+                    });
+                }
+            });
+            updateSignposts(idx);
+            currentSlide = idx;
+            prevBtn.disabled = (currentSlide === 0);
+            nextBtn.disabled = (currentSlide === slides.length - 1);
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(currentSlide - 1);
+        });
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowLeft" || e.key === "PageUp") prevBtn.click();
+            if (e.key === "ArrowRight" || e.key === "PageDown") nextBtn.click();
+        });
+
+        // Allow clicking signpost icons to jump to slide
+        signpostIcons.forEach((icon, idx) => {
+            icon.addEventListener('click', () => showSlide(idx));
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

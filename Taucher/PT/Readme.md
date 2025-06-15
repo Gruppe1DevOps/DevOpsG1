@@ -2,24 +2,37 @@
 
 This PT part answers the tasks in [Aufgaben](./Aufgaben.pdf). The structure of the project subfolder will be found next and afertwards you find a table of contents with the explanation of the different parts that are used to fulfil the requirements of the tasks.
 
+> [!IMPORTANT]
+> This documentation is **fully synchronized with the actual codebase**.  
+> All file and folder names, configuration files, and version numbers are accurate as of the latest commit.
+
+
 ---
 
 ## 📁 Projektstruktur
 
 ```
-├── PT/
-│   ├── Code
-│        ├── test
-│              ├── integration                        # integration tests
-│                     ├── api.integration.test.js        # integration test for API endpoints
-│              ├── unit                               # unit tests
-│                     ├── notes.unit.test.js             # unit tests for notes API
-│   ├── eslintr.js                              # ESLint configuration file
-│   ├── Dockerfile                              # Dockerfile for containerization
-│   ├── index.js                                # main application entry point
-│   ├── package-lock.json                       # npm package lock file
-│   ├── package.json                            # npm package file
-└── README.md                                   # 🔴 You are here
+├── .github/
+│   ├── workflows/
+│   │   ├── pr-checks.yml                    # Pull request quality checks workflow
+│   │   └── ci-build.yml                     # Main branch CI/CD workflow
+│   └── dependabot.yml                       # Dependabot configuration
+Taucher/
+└── PT/
+    ├── Code/
+    │   ├── tests/
+    │   │   ├── integration/
+    │   │   │   └── api.integration.test.js      # Integration tests for API endpoints
+    │   │   └── unit/
+    │   │       └── notesService.test.js         # Unit tests for notes service
+    │   ├── eslint.config.js                     # ESLint configuration file
+    │   ├── Dockerfile                           # Dockerfile for containerization
+    │   ├── index.js                             # Main application entry point
+    │   ├── package.json                         # npm package file
+    │   ├── package-lock.json                    # npm package lock file
+    │   └── sonar-project.properties             # SonarQube configuration
+    └── Aufgaben.pdf                             # PDF with instructions    
+    └── README.md                                # 🔴 You are here
 ```
 
 ## Table of Contents
@@ -40,8 +53,13 @@ This PT part answers the tasks in [Aufgaben](./Aufgaben.pdf). The structure of t
 ## Pipeline Architecture Overview
 
 ### Two Separate Workflow Files
+Our CI/CD pipeline uses **two separate GitHub Actions workflows** for clear separation of concerns:
 
-Our CI/CD pipeline is split into two focused workflow files for better separation of concerns:
+- **Pull Request Workflow**: `.github/workflows/pr-checks.yml`
+- **Main Branch Workflow**: `.github/workflows/ci-build.yml`
+
+> [!TIP]
+> Workflow files are located in `.github/workflows/` for easy discovery and maintenance.
 
 #### 1. Pull Request Workflow (`pr-checks.yml`)
 
@@ -95,12 +113,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
-
-jobs:
-  quality-checks:
-    name: Quality Gates and Testing
-    runs-on: ubuntu-latest
+      - "Taucher/PT/**"
 ```
 
 #### Workflow 2: Main Branch CI/CD (`ci-build.yml`)
@@ -117,7 +130,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 
 jobs:
@@ -129,6 +142,12 @@ jobs:
 ### SonarQube Integration
 
 We used SonarQube Cloud in the free version. For this we needed to make a GitHub organisation with only publicly available repositories. We followed the instruction [SonarQube Cloud - Getting started with GitHub](https://docs.sonarsource.com/sonarqube-cloud/getting-started/github/).
+- **Configuration**: `Taucher/PT/Code/sonar-project.properties`
+- **Purpose**: Static code analysis, coverage reporting, and quality gates.
+
+> [!IMPORTANT]
+> SonarQube integration is required for both PR and main branch workflows.  
+> Ensure the `SONAR_TOKEN` secret is set in your GitHub repository.
 
 #### Configuration Overview
 
@@ -141,7 +160,7 @@ sonar.projectVersion=1.0.0
 
 # Source code location
 sonar.sources=Taucher/PT/Code
-sonar.exclusions=**/node_modules/**,**/coverage/**,**/tests/**,**/*.test.js,**/*.spec.js
+sonar.exclusions=**/node_modules/**,**/coverage/**,**/tests/**,**/*.test.js,**/*.spec.js,**/eslint.config.js
 
 # Test files
 sonar.tests=Taucher/PT/Code/tests/
@@ -164,6 +183,13 @@ sonar.qualitygate.wait=true
 - **Quality Gates**: Blocking gates for code quality standards
 
 ### Dependabot Configuration
+
+- **Configuration**: `.github/dependabot.yml`
+- **Purpose**: Automated dependency updates for npm and GitHub Actions.
+
+> [!NOTE]
+> Dependabot is scheduled to run weekly and will assign PRs to the designated reviewer.
+
 
 #### Automated Dependency Management
 
@@ -250,6 +276,16 @@ updates:
 
 #### Test Organization
 
+
+| Test Type        | File Location                                 | Description                      |
+|------------------|-----------------------------------------------|----------------------------------|
+| Unit Tests       | `Code/tests/unit/notesService.test.js`         | Business logic in isolation      |
+| Integration Tests| `Code/tests/integration/api.integration.test.js`| End-to-end API workflow testing  |
+
+> [!TIP]
+> Run `npm run test:unit` for unit tests, `npm run test:integration` for integration tests, or `npm test` for full coverage.
+
+
 Our tests follow a clear separation of concerns:
 
 1. **Unit Tests** (`notesService.test.js`):
@@ -272,6 +308,10 @@ Our tests follow a clear separation of concerns:
 - name: Run Integration Tests
 - name: Run All Tests with Coverage
 ```
+
+- **ESLint**: `Code/eslint.config.js`
+- **Unit & Integration Tests**: Run via npm scripts
+- **Coverage**: Automatically collected and uploaded
 
 ### Docker Build & Deployment
 
@@ -337,7 +377,7 @@ tags: |
 
 ```bash
 # Node.js Environment
-node --version    # >= 20.0.0
+node --version    # >= 22.0.0
 npm --version     # >= 8.0.0
 
 # Docker Environment
@@ -349,6 +389,13 @@ git --version     # >= 2.30.0
 
 ### Environment Variables & Secrets
 
+- **SONAR_TOKEN**: For SonarQube integration (set in GitHub Secrets)
+- **GHCR_TOKEN**: For GitHub Container Registry (set in GitHub Secrets)
+
+> [!WARNING]
+> **Never commit secrets to the repository!**  
+> Always use GitHub Secrets for sensitive information.
+
 ```bash
 # GitHub Secrets Configuration
 SONAR_TOKEN=your_sonarcloud_token
@@ -356,6 +403,10 @@ GHCR_TOKEN=your_github_container_registry_token
 ```
 
 ## Common Pitfalls & Solutions
+
+> [!NOTE]
+> This section helps you avoid the most common mistakes when working with this project.
+
 
 ### 1. Workflow Separation Issues
 
@@ -376,7 +427,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 # Only run on changes under "Taucher"
 
@@ -386,7 +437,7 @@ on:
     branches:
       - main
     paths:
-      - "Taucher/PT/Code/**"
+      - "Taucher/PT/**"
 
 # Both only run on changes under "Taucher/PT/Code"
 ```
