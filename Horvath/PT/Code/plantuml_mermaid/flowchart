@@ -1,0 +1,79 @@
+@startuml
+!theme blueprint
+title Tricentis Vehicle Insurance - End-to-End Flowchart
+
+|CI/CD Integration|
+start
+:Developer Trigger;
+:GitHub Actions Pipeline;
+:Initialize WebdriverIO;
+
+|Test Execution Environment|
+if (Execution Strategy?) then (Primary)
+  :Local Chrome Browser;
+else (Alternative)
+  :Device Cloud;
+endif
+
+|End-to-End Flow Automation|
+:Step 1: Enter Vehicle Data;
+:Vehicle Form Interaction;
+:Step 2: Enter Insurant Data;
+:Insurant Form Interaction;
+:Step 3: Enter Product Data;
+:Product Configuration;
+:Step 4: Select Price Option;
+:Price Selection Interface;
+:Step 5: Send Quote;
+:Quote Submission;
+
+|Tricentis Application Responses|
+-> .
+.
+-> [Vehicle Data, Insurant Data, Product Data Processed]
+-> [Price Options Displayed]
+-> [Confirmation Page Shown]
+
+|Validations|
+:Capture All Price Options;
+:Validate Price Per Year;
+if (Silver Valid?) then (Yes)
+  :Silver Passed;
+else (No)
+  :Silver Failed;
+endif
+if (Gold Valid?) then (Yes)
+  :Gold Passed;
+else (No)
+  :Gold Failed;
+endif
+if (Platinum Valid?) then (Yes)
+  :Platinum Passed;
+else (No)
+  :Platinum Failed;
+endif
+if (Other Options Valid?) then (Yes)
+  :Other Passed;
+else (No)
+  :Other Failed;
+endif
+:Validate Quote Confirmation;
+if (Confirmation Present?) then (Yes)
+  :Confirmation Passed;
+else (No)
+  :Confirmation Failed;
+endif
+
+|Test Report Generation|
+:Collect Test Results;
+:Generate HTML Test Report;
+note right
+• E2E Flow Results  
+• Price Validation Summary  
+• Confirmation Status  
+• Screenshots & Logs
+end note
+:Store as Pipeline Artifact;
+:Notify Developer;
+stop
+@enduml
