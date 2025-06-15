@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🐻 Die sagenhafte DevOps Gummibärenbande</title>
+  <style>
+    :root {
+      --holzbear: #3b2c1a;
+      --honiggelb: #fcd34d;
+      --heldenrot: #dc2626;
+      --waldgruen: #065f46;
+      --pergament: #fdf6e3;
+      --scroll-shadow: 0 8px 24px rgba(60,40,10,0.08);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: var(--pergament);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--holzbear);
+      padding: 1.2cm 0;
+      max-width: 21cm;
+      min-height: 29.7cm;
+      margin: auto;
+      line-height: 1.7;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      background-repeat: repeat;
+      background-size: auto;
+      box-sizing: border-box;
+    }
+    h1, h2 {
+      color: var(--waldgruen);
+      border-bottom: 3px solid var(--honiggelb);
+      padding-bottom: 0.3rem;
+      font-family: Georgia, serif;
+      letter-spacing: 1px;
+      page-break-after: avoid;
+    }
+    .intro {
+      font-style: italic;
+      font-size: 1.2rem;
+      margin: 1.5rem 0;
+      border-left: 5px solid var(--heldenrot);
+      padding-left: 1rem;
+      background: rgba(252,211,77,0.08);
+      border-radius: 8px;
+    }
+    .scroll {
+      background: var(--pergament);
+      padding: 1.2rem 1.2rem 1.2rem 1rem;
+      border-radius: 14px;
+      border: 2.5px solid var(--holzbear);
+      box-shadow: var(--scroll-shadow);
+      margin-bottom: 1.5rem;
+      position: relative;
+      page-break-inside: avoid;
+      max-width: 18.5cm;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .scroll:before, .scroll:after {
+      content: '';
+      position: absolute;
+      left: -12px;
+      width: 12px;
+      height: 40px;
+      background: linear-gradient(135deg, #e6c97a 60%, #bfa14a 100%);
+      border-radius: 10px 0 0 10px;
+      top: 18px;
+      opacity: 0.25;
+    }
+    .scroll:after {
+      left: auto;
+      right: -12px;
+      border-radius: 0 10px 10px 0;
+    }
+    .character {
+      background: #fffdf5;
+      padding: 1rem;
+      border-left: 5px solid var(--honiggelb);
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(252,211,77,0.08);
+      display: flex;
+      align-items: flex-start;
+      gap: 1em;
+      page-break-inside: avoid;
+    }
+    .char-icon {
+      font-size: 2.1em;
+      margin-right: 0.3em;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 0.1em;
+    }
+    .character strong {
+      font-size: 1.2rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    a {
+      color: var(--heldenrot);
+      font-weight: bold;
+      text-decoration: underline dotted;
+      word-break: break-all;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .quote {
+      font-style: italic;
+      border-left: 4px solid var(--waldgruen);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: #065f46;
+      background: #f8f5e6;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+      background: #fffdf5;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(60,40,10,0.06);
+      font-size: 1em;
+      page-break-inside: avoid;
+    }
+    th, td {
+      padding: 0.7em 1em;
+      border-bottom: 1px solid #fcd34d;
+      text-align: left;
+      word-break: break-word;
+    }
+    th {
+      background: linear-gradient(90deg, #fcd34d 60%, #fffbe6 100%);
+      color: #3b2c1a;
+      font-family: 'Georgia', serif;
+      font-size: 1.05em;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .tool-icons {
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+    }
+    .ascii-art {
+      font-family: 'Courier New', monospace;
+      white-space: pre;
+      background: #2d3436;
+      color: #fcd34d;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      overflow-x: auto;
+      text-align: center;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      page-break-inside: avoid;
+    }
+    pre {
+      font-size: 0.98em;
+      line-height: 1.4;
+      page-break-inside: avoid;
+      background: #fffbe6;
+      border-radius: 8px;
+      padding: 1em;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    @media print {
+      html, body {
+        background: var(--pergament) !important;
+        color: #222 !important;
+        box-shadow: none !important;
+        max-width: 21cm !important;
+        width: 21cm !important;
+        min-height: 29.7cm !important;
+        margin: 0 auto !important;
+        padding: 1.2cm 0 !important;
+        background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png') !important;
+        background-repeat: repeat !important;
+        background-size: auto !important;
+      }
+      body {
+        font-size: 11.5pt;
+      }
+      .scroll {
+        background: var(--pergament) !important;
+        border: 1.5px solid #bbb !important;
+        box-shadow: none !important;
+        margin-bottom: 1.2rem !important;
+        padding: 1.1rem 1rem 1.1rem 0.8rem !important;
+        max-width: 18.5cm !important;
+      }
+      .scroll:before, .scroll:after {
+        display: none !important;
+      }
+      h1, h2 {
+        color: #065f46 !important;
+        border-bottom: 2px solid #bbb !important;
+        page-break-after: avoid;
+      }
+      .character {
+        background: #f8f8f8 !important;
+        border-left: 4px solid #bbb !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .char-icon {
+        font-size: 1.7em !important;
+      }
+      .tool-icons {
+        font-size: 1.1em !important;
+      }
+      .ascii-art {
+        background: #222 !important;
+        color: #fcd34d !important;
+        font-size: 1em !important;
+        padding: 10px !important;
+        border-radius: 6px !important;
+      }
+      table {
+        background: #fff !important;
+        box-shadow: none !important;
+        font-size: 0.97em !important;
+      }
+      th {
+        background: #f8f8f8 !important;
+        color: #222 !important;
+        border-bottom: 1.5px solid #bbb !important;
+      }
+      td {
+        border-bottom: 1px solid #eee !important;
+      }
+      a, a:visited {
+        color: #065f46 !important;
+        text-decoration: underline !important;
+        word-break: break-all;
+      }
+      .quote {
+        background: #f8f8f8 !important;
+        color: #065f46 !important;
+        border-left: 3px solid #bbb !important;
+      }
+      pre {
+        background: #f8f8f8 !important;
+        border-radius: 5px !important;
+        font-size: 0.95em !important;
+        padding: 0.7em !important;
+        max-width: 100% !important;
+      }
+      ul, ol {
+        page-break-inside: avoid;
+      }
+      .scroll, .character, .ascii-art, table, pre {
+        page-break-inside: avoid;
+      }
+      h2, h1 {
+        page-break-after: avoid;
+      }
+    }
+    @media (max-width: 700px) {
+      body { padding: 0.5rem; }
+      .scroll { padding: 1rem 0.5rem 1rem 0.5rem; }
+      table, th, td { font-size: 0.95em; }
+      .character { flex-direction: column; gap: 0.2em; }
+      .char-icon { margin-bottom: 0.3em; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐻 Die sagenhafte DevOps Gummibärenbande</h1>
+
+  <div class="intro">
+    Es war einmal in einer weit entfernten Hochschule, tief im Wald des Software-Wissens, wo eine Gruppe mutiger Gummibären sich einer gefährlichen Aufgabe stellte: Die legendäre DevOps-Pipeline zu meistern und den finsteren Herzog Igzorn zu besiegen! Dank der weisen Führung ihres Lektors Stefan Taucher alias „Cavin“ konnten sie das Unmögliche möglich machen.
+  </div>
+
+  <div class="scroll">
+    <h2>🧙‍♂️ Kapitel I – Die Helden erwachen</h2>
+    <div class="character">
+      <span class="char-icon" title="Gruffi">🛡️</span>
+      <div>
+        <strong>Gruffi Gummi (Harald Beier)</strong><br/>
+        Der grummelige Wächter der Codeordnung.<br/>
+        <em>„Ohne Linter kommt mir kein Merge ins Schloss!“</em>
+      </div>
+    </div>
+    <div class="character">
+      <span class="char-icon" title="Sunni">🌞</span>
+      <div>
+        <strong>Sunni Gummi (Susanne Peer)</strong><br/>
+        Lichtgestalt der Qualität und Meisterin der Testmagie.<br/>
+        <em>„Ein Fehler gesehen ist ein Bug besiegt!“</em>
+      </div>
+    </div>
+    <div class="character">
+      <span class="char-icon" title="Zummi">🧙‍♂️</span>
+      <div>
+        <strong>Zummi Gummi (Patrick Prugger)</strong><br/>
+        Magier der GitHub-Zauberei und YAML-Rituale.<br/>
+        <em>„Actions, die aus der Tiefe kommen!“</em>
+      </div>
+    </div>
+    <div class="character">
+      <span class="char-icon" title="Tummi">🍯</span>
+      <div>
+        <strong>Tummi Gummi (Philipp Palatin)</strong><br/>
+        Der Genießer – liebt stabile Builds wie andere Honigkuchen.<br/>
+        <em>„Ich deploye nur, wenn's richtig gut riecht.“</em>
+      </div>
+    </div>
+    <div class="character">
+      <span class="char-icon" title="Cavin">⚔️</span>
+      <div>
+        <strong>Cavin (Stefan Taucher)</strong><br/>
+        Unser Lektor und Mentor – der junge Ritter, der die Gummibärenbande mit Wissen, Mut und Pull-Request-Zaubern unterstützt!
+      </div>
+    </div>
+    <div class="character">
+      <span class="char-icon" title="Herzog Igzorn">🦹‍♂️</span>
+      <div>
+        <strong>Herzog Igzorn</strong><br/>
+        Der ewige Widersacher, der mit alten, fehleranfälligen Praktiken und Chaos die Bande herausfordert – doch diesmal hat er keine Chance!
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <h2>🏰 Kapitel II – Die Prophezeiung</h2>
+    <p>
+      Herzog Igzorn übergab eine vergilbte Pergamentrolle:<br/>
+      <em>„Erbaut mir eine Anwendung, getestet und geprüft, damit sie ewig laufen möge – selbst in Docker-Gefilden...“</em><br/><br/>
+      Und so begaben sich unsere Gummibären auf ein episches Abenteuer!
+    </p>
+  </div>
+
+  <div class="scroll">
+    <h2>🗂️ Kapitel III – Die geheime Schatzkarte (Projektstruktur)</h2>
+    <div class="tool-icons">📁🗃️🗄️</div>
+    <pre>
+.github/
+ ├─ workflows/
+ │   ├─ pr-checks.yml      # Wächter des Pull Requests
+ │   └─ ci-build.yml       # Hauptzweig-Zauberweg
+ └─ dependabot.yml         # Kobold-Konfiguration
+Taucher/
+└─ PT/
+    ├─ Code/
+    │   ├─ tests/
+    │   │   ├─ integration/
+    │   │   └─ unit/
+    │   ├─ Dockerfile
+    │   ├─ index.js
+    │   ├─ package.json
+    │   └─ sonar-project.properties
+    └─ Aufgaben.pdf
+    └─ README.md
+    </pre>
+  </div>
+
+  <div class="scroll">
+    <h2>⚙️ Kapitel IV – Die Werkzeuge der Macht</h2>
+    <div class="tool-icons">🛠️🔮🧪📦🕵️🤖</div>
+    <ul>
+      <li>🛠️ <strong>Node.js 20</strong> – Der Grundstein der Anwendung</li>
+      <li>🔮 <strong>GitHub Actions</strong> – Unsichtbare Wächter der Qualität</li>
+      <li>🧪 <strong>Jest</strong> – Der Prüfstein aller Funktionen</li>
+      <li>📦 <strong>Docker</strong> – Das magische Fass der Verbreitung</li>
+      <li>🕵️ <strong>SonarCloud</strong> – Das allsehende Auge des Codereichs</li>
+      <li>🤖 <strong>Dependabot</strong> – Der kleine Kobold für Updates</li>
+    </ul>
+  </div>
+
+  <div class="scroll">
+    <h2>🗺️ Kapitel V – Die magische Pipeline-Schlucht</h2>
+    <p>
+      Die Gummibärenbande trennt ihre Abenteuer in zwei geheime Pfade:<br>
+      <strong>1. Pull-Request-Prüfpfad:</strong> <em>„Wer ins Schloss will, muss erst an Linter, Tests und Sonar vorbei!“</em><br>
+      <strong>2. Hauptzweig-Zauberweg:</strong> <em>„Nur geprüfte Helden dürfen ins Docker-Fass und werden ins Königreich deployed.“</em>
+    </p>
+    <table>
+      <tr>
+        <th>Pfad</th>
+        <th>Wächter</th>
+        <th>Belohnung</th>
+      </tr>
+      <tr>
+        <td>Pull Request</td>
+        <td>ESLint, Unit & Integration Tests, SonarCloud</td>
+        <td>Merge-Erlaubnis</td>
+      </tr>
+      <tr>
+        <td>Main Branch</td>
+        <td>Alle Prüfungen + Docker-Build</td>
+        <td>Deployment ins Königreich</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="scroll">
+    <h2>🧪 Kapitel VI – Der Testfall-Wald</h2>
+    <ul>
+      <li><strong>Unit-Tests:</strong> Jeder Gummibär prüft seine eigenen Zaubertränke (Funktionen isoliert getestet).</li>
+      <li><strong>Integrationstests:</strong> Die Bande kämpft gemeinsam gegen das Unbekannte (API-Endpunkte, echte Workflows).</li>
+      <li><strong>Testabdeckung:</strong> „Kein Blatt bleibt ungewendet!“</li>
+    </ul>
+    <table>
+      <tr>
+        <th>Testart</th>
+        <th>Datei</th>
+        <th>Beschreibung</th>
+      </tr>
+      <tr>
+        <td>Unit</td>
+        <td>tests/unit/notesService.test.js</td>
+        <td>Geschäftslogik in Isolation</td>
+      </tr>
+      <tr>
+        <td>Integration</td>
+        <td>tests/integration/api.integration.test.js</td>
+        <td>End-to-End API Workflow</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="scroll">
+    <h2>🔮 Kapitel VII – Die SonarCloud-Kristallkugel</h2>
+    <p>
+      Mit der SonarCloud-Kristallkugel sehen die Gummibären jeden Bug und jede Schwäche im Code – und kein Merge kommt durch, wenn der Kristall rot leuchtet!
+    </p>
+    <ul>
+      <li>Statische Codeanalyse und Quality Gates</li>
+      <li>Testabdeckung wird geprüft</li>
+      <li>Integration in beide Workflows</li>
+    </ul>
+  </div>
+
+  <div class="scroll">
+    <h2>📦 Kapitel VIII – Docker und das Fass der Unendlichkeit</h2>
+    <p>
+      Am Ende jedes Abenteuers wird der Code in ein magisches Docker-Fass gefüllt, mit mehreren Zauber-Etiketten versehen und sicher ins Königreich (Container Registry) gerollt.
+    </p>
+    <ul>
+      <li>Multi-Tagging: <code>latest</code>, <code>main-&#60;sha&#62;</code>, <code>v1.0.x</code></li>
+      <li>Non-root User für Sicherheit</li>
+      <li>Healthcheck-Zauber</li>
+    </ul>
+  </div>
+
+  <div class="scroll">
+    <h2>🤖 Kapitel IX – Dependabot, der fleißige Kobold</h2>
+    <p>
+      Jede Woche bringt Dependabot frische Zutaten für die Zaubertränke – und Cavin prüft, ob alles noch sicher ist!
+    </p>
+    <ul>
+      <li>Automatische Updates für npm und GitHub Actions</li>
+      <li>Review- und Assignee-Zauber</li>
+    </ul>
+  </div>
+
+  <div class="scroll">
+    <h2>⚠️ Kapitel X – Die Fallen des dunklen Herzogs</h2>
+    <ul>
+      <li><strong>Fehlerhafte Workflows:</strong> „Zwei Jobs auf einmal? Da stolpert selbst Tummi!“</li>
+      <li><strong>Registry-Zugang verweigert:</strong> „Ohne Zauberwort (Token) kein Einlass!“</li>
+      <li><strong>Vergessene Coverage:</strong> „Sonar sieht alles – außer du vergisst den Testbericht!“</li>
+    </ul>
+    <div class="quote">
+      „Nur wer die Stolpersteine kennt, kann sie mit einem Sprung überwinden!“
+    </div>
+  </div>
+
+  <div class="scroll">
+    <h2>🧑‍🎤 Kapitel XI – Der Triumph über Herzog Igzorn</h2>
+    <div class="character">
+      <span class="char-icon" title="Cavin">⚔️</span>
+      <div>
+        <strong>Cavin (Stefan Taucher)</strong><br/>
+        Unser Lektor und Mentor – dank seiner Lehren und Unterstützung konnte die Gummibärenbande Herzog Igzorn endgültig besiegen!
+      </div>
+    </div>
+    <div class="character">
+      <span class="char-icon" title="Herzog Igzorn">🦹‍♂️</span>
+      <div>
+        <strong>Herzog Igzorn</strong><br/>
+        Der ewige Widersacher, der diesmal von moderner DevOps-Magie und Teamgeist in die Flucht geschlagen wurde!
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <h2>🏅 Epilog – Die moderne Gummibären-Pipeline</h2>
+    <ul>
+      <li>Getrennte Workflows für schnelle Rückmeldung und sicheres Deployment</li>
+      <li>Automatisierte Qualitätssicherung und Security</li>
+      <li>Kein Geheimnis bleibt verborgen – SonarCloud wacht!</li>
+      <li>Die Gummibärenbande ist bereit für jedes neue Abenteuer!</li>
+    </ul>
+    <div class="ascii-art">
+      ⚡️⚡️⚡️ GUMMIBÄREN-PIPELINE ERFOLGREICH! ⚡️⚡️⚡️
+    </div>
+    <p>
+      Entdecke den vollen Zauber im <a href="https://github.com/Gruppe1DevOps/DevOpsG1/tree/main/Taucher/PT" target="_blank">GitHub-Zauberbuch</a> 📚✨
+    </p>
+  </div>
+
+</body>
+</html>
