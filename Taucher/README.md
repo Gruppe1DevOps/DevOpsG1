@@ -1,4 +1,4 @@
-# Devops G1
+# Taucher Devops G1
 
 This is the subfolder / repository for the courses DEVOPS ILV and DEVOPS PT - MCCE second semester for the lecturer Stefan Taucher
 ## 📁 Projektstruktur

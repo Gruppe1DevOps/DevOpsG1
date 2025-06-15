@@ -1,0 +1,105 @@
+name: WebdriverIO Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Horvath/PT/Code/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "Horvath/PT/Code/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [chrome, edge]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "Horvath/PT/Code/package-lock.json"
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install @wdio/cli @wdio/local-runner @wdio/mocha-framework @wdio/spec-reporter @wdio/dot-reporter @wdio/junit-reporter
+        working-directory: Horvath/PT/Code
+
+      - name: Install Chrome
+        if: matrix.browser == 'chrome'
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Edge
+        if: matrix.browser == 'edge'
+        run: |
+          curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+          sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list'
+          sudo rm microsoft.gpg
+          sudo apt-get update
+          sudo apt-get install -y microsoft-edge-stable
+
+      - name: Install xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Setup test results directory
+        run: |
+          rm -rf Horvath/PT/Code/test-results
+          mkdir -p Horvath/PT/Code/test-results/junit
+          echo "Created test results directories"
+
+      - name: Run WebdriverIO tests
+        run: xvfb-run --auto-servernum npx wdio run wdio.conf.js
+        working-directory: Horvath/PT/Code
+        env:
+          BROWSER: ${{ matrix.browser }}
+          HEADLESS: "true"
+
+      - name: List test results
+        if: always()
+        run: |
+          echo "Contents of test-results directory:"
+          ls -la test-results/
+          echo "Contents of junit directory:"
+          ls -la test-results/junit/
+        working-directory: Horvath/PT/Code
+
+      - name: Generate Test Summary
+        if: always()
+        run: |
+          echo "Test Results Summary for ${{ matrix.browser }}"
+          echo "----------------------------------------"
+          if [ -d "test-results/junit" ]; then
+            for file in test-results/junit/*.xml; do
+              if [ -f "$file" ]; then
+                echo "Results from $(basename $file):"
+                grep -o 'testsuite.*' "$file" | sed 's/testsuite name="\(.*\)" tests="\(.*\)" failures="\(.*\)" errors="\(.*\)" time="\(.*\)"/Tests: \2, Failures: \3, Errors: \4, Time: \5s/'
+                echo ""
+              fi
+            done
+          else
+            echo "No test results found"
+          fi
+        working-directory: Horvath/PT/Code
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: |
+            Horvath/PT/Code/test-results/
+          retention-days: 30
