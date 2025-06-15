@@ -4,6 +4,8 @@
  * These tests focus on testing the business logic in isolation,
  * verifying that each function in the notesService works correctly
  * without any external dependencies.
+ * 
+ * This file is linted with eslint
  *
  * Test Coverage:
  * - Note retrieval (all notes and by ID)
