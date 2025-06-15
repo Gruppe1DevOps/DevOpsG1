@@ -4,177 +4,72 @@
  * These tests verify that different components work together correctly
  * and test complete user workflows from start to finish.
  *
- * Integration tests simulate real-world usage scenarios by testing
- * complete API workflows, ensuring all components work together seamlessly.
+ * Integration tests verify the interaction between:
+ * - Express routes and middleware
+ * - Notes service business logic
+ * - Request/response handling
+ * - Error handling across layers
  *
  * Test Coverage:
- * - Complete CRUD workflow (Create, Read, Update, Delete)
- * - Concurrent request handling and data consistency
- * - End-to-end user interaction patterns
+ * - Complete CRUD workflow
+ * - Concurrent request handling
  * - Data persistence across operations
+ * - Error propagation through layers
+ * - Route error handling
+ * - Basic endpoint functionality
  */
 
 const request = require('supertest');
-const express = require('express');
-
-/**
- * Creates a complete Express application for integration testing
- * This includes all API endpoints and business logic
- *
- * @returns {Express} Full Express application instance with all routes
- */
-const createApp = () => {
-  const app = express();
-
-  // Test data - complete dataset with 3 predefined notes
-  // This simulates a realistic application state
-  let notes = [
-    {
-      id: 1,
-      content: 'HTML is easy',
-      date: '2022-01-10T17:30:31.098Z',
-      important: true,
-    },
-    {
-      id: 2,
-      content: 'Browser can execute only Javascript',
-      date: '2022-01-10T18:39:34.091Z',
-      important: false,
-    },
-    {
-      id: 3,
-      content: 'GET and POST are the most important methods of HTTP protocol',
-      date: '2022-01-10T19:20:14.298Z',
-      important: true,
-    },
-  ];
-
-  app.use(express.json());
-
-  /**
-   * Root endpoint - Health check and welcome message
-   */
-  app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>');
-  });
-
-  /**
-   * Generates unique IDs for new notes
-   * Ensures thread-safe ID generation even under concurrent load
-   *
-   * @returns {number} New unique ID
-   */
-  const generateId = () => {
-    const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
-    return maxId + 1;
-  };
-
-  /**
-   * POST /api/notes
-   * Creates a new note with validation
-   *
-   * Request body should contain:
-   * - content (required): The note content
-   * - important (optional): Boolean flag, defaults to false
-   *
-   * Returns: Created note with generated ID and timestamp
-   */
-  app.post('/api/notes', (request, response) => {
-    const body = request.body;
-
-    // Validation: content field is mandatory
-    if (!body.content) {
-      return response.status(400).json({
-        error: 'content missing',
-      });
-    }
-
-    // Create new note with auto-generated ID and current timestamp
-    const note = {
-      content: body.content,
-      important: body.important || false,
-      date: new Date(),
-      id: generateId(),
-    };
-
-    // Add to notes collection and return created note
-    notes = notes.concat(note);
-    response.json(note);
-  });
-
-  /**
-   * GET /api/notes
-   * Retrieves all notes in the system
-   *
-   * Returns: Array of all notes with their complete data
-   */
-  app.get('/api/notes', (req, res) => {
-    res.json(notes);
-  });
-
-  /**
-   * DELETE /api/notes/:id
-   * Removes a specific note by ID
-   *
-   * Parameters:
-   * - id: The ID of the note to delete
-   *
-   * Returns: 204 No Content on successful deletion
-   */
-  app.delete('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id);
-    notes = notes.filter((note) => note.id !== id);
-    response.status(204).end();
-  });
-
-  /**
-   * GET /api/notes/:id
-   * Retrieves a specific note by ID
-   *
-   * Parameters:
-   * - id: The ID of the note to retrieve
-   *
-   * Returns: Note object if found, 404 if not found
-   */
-  app.get('/api/notes/:id', (request, response) => {
-    const id = Number(request.params.id);
-    const note = notes.find((note) => note.id === id);
-
-    if (note) {
-      response.json(note);
-    } else {
-      response.status(404).end();
-    }
-  });
-
-  return app;
-};
+const app = require('../../index');
 
 // Integration Test Suite
 describe('API Integration Tests', () => {
-  let app;
-
   /**
-   * Setup: Create fresh application instance before each test
-   * This ensures test isolation and consistent starting state
+   * Test basic endpoint functionality
    */
-  beforeEach(() => {
-    app = createApp();
+  describe('Basic Endpoints', () => {
+    test('should return welcome message on root endpoint', async () => {
+      const response = await request(app).get('/').expect(200);
+      expect(response.text).toBe('<h1>Willkommen bei Devops Gruppe 1!</h1>');
+    });
   });
 
   /**
-   * Integration Test 1: Complete CRUD Workflow
+   * Test error handling in routes
+   */
+  describe('Error Handling', () => {
+    test('should handle service errors in POST route', async () => {
+      const response = await request(app)
+        .post('/api/notes')
+        .send({ content: '' }) // Empty content will trigger service error
+        .expect(400);
+
+      expect(response.body).toHaveProperty('error', 'content missing');
+    });
+
+    test('should handle non-existent note deletion', async () => {
+      await request(app)
+        .delete('/api/notes/999')
+        .expect(404);
+    });
+
+    test('should handle non-existent note retrieval', async () => {
+      await request(app)
+        .get('/api/notes/999')
+        .expect(404);
+    });
+  });
+
+  /**
+   * Integration Test: Complete CRUD Workflow
    *
-   * This test simulates a complete user journey:
-   * 1. Check initial state (GET all notes)
-   * 2. Create a new note (POST)
-   * 3. Verify note was added (GET all notes)
-   * 4. Retrieve the specific note (GET by ID)
-   * 5. Delete the note (DELETE)
-   * 6. Verify deletion (GET by ID should return 404)
-   * 7. Verify system state is back to original (GET all notes)
-   *
-   * This tests data persistence, state management, and API consistency
+   * This test verifies the complete lifecycle of a note:
+   * 1. Initial state check
+   * 2. Note creation
+   * 3. Note retrieval (all and by ID)
+   * 4. Note deletion
+   * 5. Verification of deletion
+   * 6. State restoration check
    */
   test('should handle complete CRUD workflow for notes', async () => {
     // Step 1: Get initial notes count
@@ -220,18 +115,14 @@ describe('API Integration Tests', () => {
   });
 
   /**
-   * Integration Test 2: Concurrent Request Handling
+   * Integration Test: Concurrent Request Handling
    *
    * This test verifies that the API can handle multiple simultaneous requests
-   * without data corruption or race conditions.
-   *
-   * Test scenarios:
-   * - Creates 5 notes simultaneously using Promise.all
-   * - Verifies all requests succeed
-   * - Checks for unique ID generation under concurrent load
-   * - Ensures data integrity with multiple simultaneous operations
-   *
-   * This tests thread safety, concurrent request handling, and data consistency
+   * without data corruption or race conditions by:
+   * - Creating multiple notes concurrently
+   * - Verifying all requests succeed
+   * - Checking for unique ID generation
+   * - Ensuring data consistency
    */
   test('should handle multiple concurrent requests correctly', async () => {
     const requests = [];

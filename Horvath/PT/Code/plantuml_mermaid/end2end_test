@@ -1,0 +1,95 @@
+@startuml
+!theme blueprint
+
+title Tricentis Vehicle Insurance - End-to-End Test Automation
+
+actor Developer as dev
+participant "GitHub Actions\nCI/CD Pipeline" as pipeline
+participant "WebdriverIO\nTest Framework" as wdio
+participant "Local Chrome\nBrowser" as chrome
+participant "Device Cloud\n(Alternative)" as cloud
+participant "Tricentis Insurance\nApplication" as app
+database "Test Reports" as reports
+
+== CI/CD Integration ==
+dev -> pipeline : Trigger Pipeline
+activate pipeline
+
+pipeline -> pipeline : Initialize Test Environment
+pipeline -> wdio : Start Test Execution
+
+alt Local Browser Execution
+    wdio -> chrome : Launch Local Chrome
+    note right : Primary execution path
+    chrome -> app : Navigate to application
+    
+else Device Cloud Execution  
+    wdio -> cloud : Connect to Device Cloud
+    note right : Alternative execution path
+    cloud -> app : Navigate to application
+end
+
+== End-to-End Flow Automation ==
+
+group Step 1: Enter Vehicle Data
+    chrome -> app : Fill vehicle information
+    app -> chrome : Navigate to next step
+end
+
+group Step 2: Enter Insurant Data
+    chrome -> app : Fill insurant information
+    app -> chrome : Navigate to next step
+end
+
+group Step 3: Enter Product Data
+    chrome -> app : Configure product options
+    app -> chrome : Navigate to next step
+end
+
+group Step 4: Select Price Option
+    chrome -> app : Choose price plan
+    app -> chrome : Display selected option
+    chrome -> chrome : Capture price information
+    note right : Store price for validation
+end
+
+group Step 5: Send Quote
+    chrome -> app : Submit quote request
+    app -> chrome : Show confirmation page
+end
+
+== Validierungen (Validations) ==
+
+chrome -> chrome : Validate Price Per Year
+note right : Verify price for ALL\navailable price options:\n- Silver\n- Gold\n- Platinum\n- Any other options
+
+alt Price Validation Success
+    chrome -> wdio : Price validation passed
+else Price Validation Failed
+    chrome -> wdio : Price validation failed
+    wdio -> reports : Log price mismatch
+end
+
+chrome -> chrome : Validate Quote Confirmation
+note right : Confirm request was\nsuccessfully submitted
+
+alt Confirmation Validation Success
+    chrome -> wdio : Confirmation validated
+else Confirmation Validation Failed
+    chrome -> wdio : Confirmation failed
+    wdio -> reports : Log confirmation error
+end
+
+== Test Report Generation ==
+
+wdio -> reports : Collect all test results
+wdio -> reports : Generate comprehensive report
+
+reports -> reports : Create HTML report
+note right : Report includes:\n- E2E flow results\n- Price validations\n- Confirmation status\n- Screenshots\n- Execution logs
+
+reports -> pipeline : Store report as artifact
+pipeline -> dev : Notify completion with report link
+
+deactivate pipeline
+@enduml
