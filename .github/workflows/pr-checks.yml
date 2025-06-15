@@ -11,43 +11,78 @@ on:
       - "Taucher/PT/Code/**"
 
 jobs:
-  quality-checks:
-    name: Quality Gates and Testing
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Setup Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: npm
           cache-dependency-path: Taucher/PT/Code/package-lock.json
-
       - name: Install dependencies
         run: npm ci
         working-directory: Taucher/PT/Code
-
-      - name: Run ESLint (Quality Gate)
+      - name: Run ESLint
         run: npm run lint
         working-directory: Taucher/PT/Code
 
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+          cache-dependency-path: Taucher/PT/Code/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: Taucher/PT/Code
       - name: Run Unit Tests
         run: npm run test:unit
         working-directory: Taucher/PT/Code
 
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+          cache-dependency-path: Taucher/PT/Code/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: Taucher/PT/Code
       - name: Run Integration Tests
         run: npm run test:integration
         working-directory: Taucher/PT/Code
 
-      - name: Run All Tests with Coverage
-        run: npm test
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+          cache-dependency-path: Taucher/PT/Code/package-lock.json
+      - name: Install dependencies
+        run: npm ci
         working-directory: Taucher/PT/Code
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
