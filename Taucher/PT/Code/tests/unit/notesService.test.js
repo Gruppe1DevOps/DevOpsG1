@@ -83,7 +83,7 @@ describe('Notes Service Unit Tests', () => {
     test('should generate ID 1 when no notes exist', () => {
       // Clear all notes
       notesService.resetNotes();
-      notesService.getAllNotes().forEach(note => {
+      notesService.getAllNotes().forEach((note) => {
         notesService.deleteNote(note.id);
       });
 
