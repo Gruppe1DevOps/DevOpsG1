@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧙‍♂️ DevOps des Ringes - Team Gruppe 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0d0f0f;
+            color: #f1f1f1;
+            font-size: 14px;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png');
+        }
+        .slideshow-container {
+            max-width: 1100px;
+            margin: 30px auto 0 auto;
+            background: #1a1d1e;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #5d4037;
+        }
+        .slide {
+            display: none;
+            padding: 40px 40px 80px 40px;
+            min-height: 600px;
+            animation: fadein 0.5s;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .header {
+            background: linear-gradient(135deg, #5d4037, #8d6e63, #bcaaa4, #d7ccc8, #efebe9);
+            color: #ffd700;
+            padding: 28px 20px 20px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.5);
+            border-bottom: 3px solid #ffd700;
+        }
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 8px #000;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .meta-info {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 0.95em;
+            color: #ffd700;
+            margin-top: 10px;
+            border: 1px solid #8d6e63;
+        }
+        .signpost {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .signpost-icon {
+            font-size: 1.7em;
+            color: #8d6e63;
+            background: #1a1d1e;
+            border-radius: 50%;
+            padding: 10px;
+            transition: color 0.2s, background 0.2s;
+            border: 1px solid #5d4037;
+        }
+        .signpost-icon.active {
+            color: #ffd700;
+            background: #0d0f0f;
+            box-shadow: 0 0 0 2px #ffd700;
+            border-color: #ffd700;
+        }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            text-align: center;
+            margin: 25px 0 20px;
+            font-size: 1.6em;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px #000;
+            position: relative;
+        }
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 10px auto;
+        }
+        .character-card {
+            background: linear-gradient(145deg, #1a1d1e 60%, #0d0f0f 100%);
+            border: 2px solid;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.3);
+            border-image: linear-gradient(45deg, #5d4037, #8d6e63) 1;
+        }
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: inherit;
+        }
+        .frodo { border-color: #4caf50; }
+        .frodo::before { background: linear-gradient(90deg, #4caf50, #8bc34a); }
+        .harald { border-color: #9c27b0; }
+        .harald::before { background: linear-gradient(90deg, #9c27b0, #673ab7); }
+        .patrick { border-color: #3f51b5; }
+        .patrick::before { background: linear-gradient(90deg, #3f51b5, #2196f3); }
+        .susanne { border-color: #e91e63; }
+        .susanne::before { background: linear-gradient(90deg, #e91e63, #f06292); }
+        .samantha { border-color: #9c27b0; }
+        .samantha::before { background: linear-gradient(90deg, #9c27b0, #ba68c8); }
+        .philipp { border-color: #00bcd4; }
+        .philipp::before { background: linear-gradient(90deg, #00bcd4, #009688); }
+        .character-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .character-icon {
+            font-size: 2em;
+            margin-right: 15px;
+            color: #ffd700;
+        }
+        .character-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            margin-bottom: 3px;
+            color: #fff;
+        }
+        .character-type {
+            color: #bcaaa4;
+            font-style: italic;
+            font-size: 0.95em;
+        }
+        .special-power {
+            background: rgba(139, 195, 74, 0.13);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 3px solid #8bc34a;
+            font-size: 0.98em;
+            color: #fff;
+            font-style: italic;
+        }
+        .achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .achievement {
+            background: #5d4037;
+            color: #ffd700;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            border: 1px solid #8d6e63;
+        }
+        .battle-section {
+            background: linear-gradient(135deg, #1a1d1e 0%, #2d2926 100%);
+            color: #fff;
+            padding: 22px;
+            border-radius: 15px;
+            margin: 22px 0;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.3);
+            border: 1px solid #5d4037;
+        }
+        .battle-section h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #ffd700;
+        }
+        .middleearth-fight {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid #5d4037;
+        }
+        .middleearth-fight h3 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #8bc34a;
+            font-family: 'Cinzel', serif;
+        }
+        .quest-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .quest-step {
+            background: rgba(255,255,255,0.08);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+            position: relative;
+            font-size: 0.9em;
+            color: #fff;
+            border: 1px solid #5d4037;
+        }
+        .quest-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #ffd700;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #1a1d1e;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.95em;
+            color: #fff;
+            border: 1px solid #5d4037;
+        }
+        .stats-table th {
+            background: linear-gradient(135deg, #5d4037, #8d6e63);
+            color: #ffd700;
+            padding: 8px;
+            text-align: left;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+        }
+        .stats-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #333;
+        }
+        .validation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #1a1d1e;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.9em;
+            color: #fff;
+            border: 1px solid #5d4037;
+        }
+        .validation-table th {
+            background: linear-gradient(135deg, #5d4037, #8d6e63);
+            color: #ffd700;
+            padding: 10px 8px;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .validation-table td {
+            padding: 8px;
+            border-bottom: 1px solid #333;
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .validation-table td:first-child {
+            text-align: left;
+            background: rgba(93, 64, 55, 0.3);
+            color: #ffd700;
+        }
+        .palantir-link {
+            background: linear-gradient(135deg, #5d4037, #8d6e63);
+            color: #ffd700;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #bcaaa4;
+        }
+        .palantir-link h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            font-family: 'Cinzel', serif;
+        }
+        .palantir-link a {
+            color: #ffd700;
+            text-decoration: underline;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        .palantir-link ul {
+            text-align: left;
+            max-width: 90%;
+            margin: 10px auto;
+            font-size: 0.95em;
+            list-style-type: none;
+        }
+        .palantir-link ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .palantir-link ul li::before {
+            content: "•";
+            color: #ffd700;
+            position: absolute;
+            left: 0;
+        }
+        .finale {
+            background: linear-gradient(135deg, #5d4037, #8d6e63, #bcaaa4);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: #ffd700;
+            margin: 20px 0;
+            font-weight: 500;
+            border: 1px solid #ffd700;
+        }
+        .finale h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .finale h3 {
+            margin: 25px 0 15px;
+            font-size: 1.2em;
+            font-family: 'Cinzel', serif;
+        }
+        .fellowship-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .fellowship-member {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+            color: #fff;
+            border: 1px solid #5d4037;
+        }
+        .fellowship-member h4 {
+            margin: 8px 0 4px;
+            font-size: 1em;
+            color: #ffd700;
+            font-family: 'Cinzel', serif;
+        }
+        .elvish-art {
+            font-family: 'Cinzel', serif;
+            white-space: pre;
+            background: #1a1d1e;
+            color: #ffd700;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 1.2em;
+            text-align: center;
+            border: 1px solid #5d4037;
+        }
+        .footer {
+            background: #1a1d1e;
+            color: #bcaaa4;
+            padding: 22px 10px 18px 10px;
+            text-align: center;
+            font-size: 1.05em;
+            border-radius: 18px 18px 0 0;
+            margin-top: 30px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 -2px 12px 0 rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            border-top: 1px solid #5d4037;
+        }
+        .footer i {
+            color: #ffd700;
+            margin-right: 6px;
+        }
+        .footer em {
+            color: #8bc34a;
+        }
+        .footer strong {
+            color: #ffd700;
+        }
+        .nav-btn {
+            background: linear-gradient(135deg, #8d6e63, #5d4037);
+            color: #ffd700;
+            border: 1px solid #bcaaa4;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 1.1em;
+            margin: 0 10px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #5d4037, #8d6e63);
+            color: #fff;
+        }
+        /* Ring animation for demo slide */
+        .ring-demo {
+            margin: 40px auto 0 auto;
+            width: 120px;
+            height: 120px;
+            position: relative;
+            animation: rotate 4s infinite linear;
+        }
+        .ring-outer {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #ffd700;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow: 0 0 15px #ffd700;
+        }
+        .ring-inner {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            box-shadow: 0 0 10px #ffd700;
+        }
+        .ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: #ffd700;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px #000;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        @media (max-width: 900px) {
+            .fellowship-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .fellowship-grid { grid-template-columns: repeat(2, 1fr); }
+            .header, .finale, .battle-section, .character-card, .palantir-link, .footer, .slide { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+
+        <!-- Slide 1: Agenda -->
+        <div class="slide active" id="slide-0">
+            <div class="header">
+                <h1>🧙‍♂️ DevOps des Ringes</h1>
+                <div class="subtitle">Eine epische Reise durch AWS Terraform</div>
+                <div class="meta-info">
+                    <strong>Die Gefährten der IaC - Gruppe 1</strong><br>
+                    Datum: Juni 22, 2025<br>
+                    Projekt: Automatisierte AWS To-Do App
+                </div>
+            </div>
+            <div class="signpost">
+                <span class="signpost-icon active" title="Agenda">🗺️</span>
+                <span class="signpost-icon" title="Die Gefährten">👥</span>
+                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
+                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
+                <span class="signpost-icon" title="Die Demonstration">🔮</span>
+                <span class="signpost-icon" title="Das Ende">🏰</span>
+            </div>
+            <h2 class="section-title">Unsere Reiseroute</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 30px;">
+                <div class="character-card frodo" style="min-width:220px;flex:1;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        👥 <span>Die Gefährten</span>
+                    </div>
+                </div>
+                <div class="character-card harald" style="min-width:220px;flex:1;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        ⚔️ <span>Die Schlachten</span>
+                    </div>
+                </div>
+                <div class="character-card patrick" style="min-width:220px;flex:1;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        📖 <span>Das Weiße Buch</span>
+                    </div>
+                </div>
+                <div class="character-card" style="min-width:220px;flex:1;border-color:#ffd700;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        🔮 <span>Die Demonstration</span>
+                    </div>
+                </div>
+                <div class="character-card philipp" style="min-width:220px;flex:1;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        🏰 <span>Das Ende</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <span>🗺️ DevOps des Ringes - Reiseroute</span>
+            </div>
+        </div>
+
+        <!-- Slide 2: Die Gefährten -->
+        <div class="slide" id="slide-1">
+            <div class="signpost">
+                <span class="signpost-icon" title="Agenda">🗺️</span>
+                <span class="signpost-icon active" title="Die Gefährten">👥</span>
+                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
+                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
+                <span class="signpost-icon" title="Die Demonstration">🔮</span>
+                <span class="signpost-icon" title="Das Ende">🏰</span>
+            </div>
+            <h2 class="section-title">Unsere Gefährten</h2>
+            <section>
+                <div class="character-card frodo">
+                    <div class="character-header">
+                        <div class="character-icon">🧙‍♂️</div>
+                        <div class="character-info">
+                            <h3>Harald der Graue</h3>
+                            <div class="character-type">Typ: Terraform-Weiser</div>
+                        </div>
+                    </div>
+                    <div class="special-power">
+                        <strong>Spezialkraft: IaC-Zauberstab</strong><br>
+                        Effekt: Beschwört AWS-Ressourcen aus dem Nichts!
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">✅ Multi-Cloud Strategie</div>
+                        <div class="achievement">✅ HCL-Meisterschaft</div>
+                    </div>
+                </div>
+                <div class="character-card harald">
+                    <div class="character-header">
+                        <div class="character-icon">👑</div>
+                        <div class="character-info">
+                            <h3>Patrick der Entwickler</h3>
+                            <div class="character-type">Typ: Serverless-König</div>
+                        </div>
+                    </div>
+                    <div class="special-power">
+                        <strong>Spezialkraft: Lambda-Bogen</strong><br>
+                        Effekt: Trifft Geschäftslogik ins Schwarze!
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">✅ DynamoDB Integration</div>
+                        <div class="achievement">✅ Cognito Authentifizierung</div>
+                    </div>
+                </div>
+                <div class="character-card susanne">
+                    <div class="character-header">
+                        <div class="character-icon">⚔️</div>
+                        <div class="character-info">
+                            <h3>Susanne die Kriegerin</h3>
+                            <div class="character-type">Typ: Security-Wächterin</div>
+                        </div>
+                    </div>
+                    <div class="special-power">
+                        <strong>Spezialkraft: IAM-Schwert</strong><br>
+                        Effekt: Zerschlägt unbefugte Zugriffe!
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">✅ Least Privilege Prinzip</div>
+                        <div class="achievement">✅ Secrets Manager Konfiguration</div>
+                    </div>
+                </div>
+                <div class="character-card samantha">
+                    <div class="character-header">
+                        <div class="character-icon">✨</div>
+                        <div class="character-info">
+                            <h3>Samantha die Elbin</h3>
+                            <div class="character-type">Typ: Frontend-Zauberin</div>
+                        </div>
+                    </div>
+                    <div class="special-power">
+                        <strong>Spezialkraft: React-Zauber</strong><br>
+                        Effekt: Erschafft wunderschöne Benutzeroberflächen!
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">✅ Responsive Design</div>
+                        <div class="achievement">✅ Progressive Web App</div>
+                    </div>
+                </div>
+                <div class="character-card philipp">
+                    <div class="character-header">
+                        <div class="character-icon">🏹</div>
+                        <div class="character-info">
+                            <h3>Philipp der Schnelle</h3>
+                            <div class="character-type">Typ: CI/CD-Bogenschütze</div>
+                        </div>
+                    </div>
+                    <div class="special-power">
+                        <strong>Spezialkraft: Pipeline-Pfeile</strong><br>
+                        Effekt: Trifft Deployment-Ziele in unter 10 Minuten!
+                    </div>
+                        <div class="achievements">
+                        <div class="achievement">✅ Jenkins Integration</div>
+                        <div class="achievement">✅ Checkov Security Scans</div>
+                    </div>
+                </div>
+            </section>
+            <div class="footer">
+                <span>👥 Unsere Gefährten</span>
+            </div>
+        </div>
+
+        <!-- Slide 3: Die Schlachten -->
+        <div class="slide" id="slide-2">
+            <div class="signpost">
+                <span class="signpost-icon" title="Agenda">🗺️</span>
+                <span class="signpost-icon" title="Die Gefährten">👥</span>
+                <span class="signpost-icon active" title="Die Schlachten">⚔️</span>
+                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
+                <span class="signpost-icon" title="Die Demonstration">🔮</span>
+                <span class="signpost-icon" title="Das Ende">🏰</span>
+            </div>
+            <h2 class="section-title">Unsere Schlachten</h2>
+            <div class="battle-section">
+                <div class="middleearth-fight">
+                    <h3>⚔️ Schlacht um die AWS-Architektur</h3>
+                    <div class="quest-flow">
+                        <div class="quest-step">☁️<br>AWS Cloud</div>
+                        <div class="quest-step">🪣<br>S3 Bucket</div>
+                        <div class="quest-step">🌐<br>CloudFront</div>
+                        <div class="quest-step">🚪<br>API Gateway</div>
+                        <div class="quest-step">λ<br>Lambda</div>
+                    </div>
+                </div>
+                <div class="middleearth-fight">
+                    <h3>🛡️ Festung der Sicherheit</h3>
+                    <table class="stats-table">
+                        <tr>
+                            <th>Verteidigungslinie</th>
+                            <th>Status</th>
+                            <th>Schutzlevel</th>
+                        </tr>
+                        <tr>
+                            <td>🔐 IAM Policies</td>
+                            <td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td>
+                            <td>Stufe 4</td>
+                        </tr>
+                        <tr>
+                            <td>🛡️ Cognito Auth</td>
+                            <td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td>
+                            <td>Stufe 5</td>
+                        </tr>
+                        <tr>
+                            <td>🔑 Secrets Manager</td>
+                            <td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td>
+                            <td>Stufe 4</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="middleearth-fight">
+                    <h3>📊 Validierung der Ressourcen</h3>
+                    <table class="validation-table">
+                        <thead>
+                            <tr>
+                                <th>Ressource</th>
+                                <th>Dev</th>
+                                <th>Test</th>
+                                <th>Prod</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lambda-Funktionen</td>
+                                <td>✅ 4</td>
+                                <td>✅ 4</td>
+                                <td>✅ 4</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <td>DynamoDB Tabellen</td>
+                                <td>✅ 1</td>
+                                <td>✅ 1</td>
+                                <td>✅ 1</td>
+                            </tr>
+                            <tr>
+                                <td>S3 Buckets</td>
+                                <td>✅ 2</td>
+                                <td>✅ 2</td>
+                                <td>✅ 2</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <td>CloudFront Distributionen</td>
+                                <td>✅ 1</td>
+                                <td>✅ 1</td>
+                                <td>✅ 1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="middleearth-fight">
+                    <h3>🏰 Belagerung der Terraform State-Festung</h3>
+                    <p>S3 mit Locking-Mechanismus erfolgreich verteidigt!</p>
+                </div>
+            </div>
+            <div class="footer">
+                <span>⚔️ Unsere Schlachten</span>
+            </div>
+        </div>
+
+        <!-- Slide 4: Das Weiße Buch -->
+        <div class="slide" id="slide-3">
+            <div class="signpost">
+                <span class="signpost-icon" title="Agenda">🗺️</span>
+                <span class="signpost-icon" title="Die Gefährten">👥</span>
+                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
+                <span class="signpost-icon active" title="Das Weiße Buch">📖</span>
+                <span class="signpost-icon" title="Die Demonstration">🔮</span>
+                <span class="signpost-icon" title="Das Ende">🏰</span>
+            </div>
+            <h2 class="section-title">Das Weiße Buch von DevOps</h2>
+            <div class="palantir-link">
+                <h3>🔎 Palantir des Wissens</h3>
+                <p><strong>Repository:</strong> <a href="https://github.com/Gruppe1DevOps/AWS-Todo-App" target="_blank">https://github.com/Gruppe1DevOps/AWS-Todo-App</a></p>
+                <p style="margin-top: 10px;"><strong>Was die Weisen in unserem Buch finden:</strong></p>
+                <ul>
+                    <li><strong>Terraform Module</strong> (netzwerk/, datenbank/, backend/)</li>
+                    <li><strong>IaC Konfigurationen</strong> (main.tf, variables.tf, outputs.tf)</li>
+                    <li><strong>DynamoDB Provisionierung</strong> (dynamodb.tf)</li>
+                    <li><strong>Sicherheitskonfiguration</strong> (iam.tf, cognito.tf)</li>
+                    <li><strong>CI/CD Pipeline</strong> (Jenkinsfile, .gitlab-ci.yml)</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <span>📖 Das Weiße Buch von DevOps</span>
+            </div>
+        </div>
+
+        <!-- Slide 5: Die Demonstration -->
+        <div class="slide" id="slide-4">
+            <div class="signpost">
+                <span class="signpost-icon" title="Agenda">🗺️</span>
+                <span class="signpost-icon" title="Die Gefährten">👥</span>
+                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
+                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
+                <span class="signpost-icon active" title="Die Demonstration">🔮</span>
+                <span class="signpost-icon" title="Das Ende">🏰</span>
+            </div>
+            <h2 class="section-title">Die Demonstration - Terraform-Magie</h2>
+            <div style="text-align:center;">
+                <div class="ring-demo">
+                    <div class="ring-outer"></div>
+                    <div class="ring-inner"></div>
+                    <div class="ring-text">Ein Ring<br>sie zu knechten</div>
+                </div>
+                <h3 style="margin-top:40px;font-size:1.5em;color:#ffd700;">Bereit für die Terraform-Beschwörung!</h3>
+                <p style="font-size:1.1em;margin-top:18px;">Zeigt die Macht der IaC-Magie in AWS.<br>
+                <span style="font-size:2em;">🧙‍♂️</span> <br>
+                <em>Ein Terraform-Apply, sie alle zu binden</em>
+                </p>
+            </div>
+            <div class="footer">
+                <span>🔮 Die Demonstration - Terraform-Magie</span>
+            </div>
+        </div>
+
+        <!-- Slide 6: Das Ende -->
+        <div class="slide" id="slide-5">
+            <div class="signpost">
+                <span class="signpost-icon" title="Agenda">🗺️</span>
+                <span class="signpost-icon" title="Die Gefährten">👥</span>
+                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
+                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
+                <span class="signpost-icon" title="Die Demonstration">🔮</span>
+                <span class="signpost-icon active" title="Das Ende">🏰</span>
+            </div>
+            <h2 class="section-title">Das Ende aller Aufgaben</h2>
+            <div class="finale">
+                <div class="elvish-art">Ein Terraform-Apply, sie zu finden
+Ein Terraform-Apply, sie zu binden
+Ins AWS-Land sie zu führen
+Und ewiglich zu deployen</div>
+                <h2>🎵 "Die Gefährten des Terraform-Rings" - Finale</h2>
+                <p style="font-size: 1.1em; margin: 15px 0;"><strong>Harald</strong>, mit deiner Weisheit haben wir Mittelerde vor dem manuellen Deployment gerettet:</p>
+                <div style="text-align: left; max-width: 80%; margin: 15px auto; font-size: 1em;">
+                    <p>🔥 <strong>Von manuellen Konfigurationen zu IaC-Magie</strong></p>
+                    <p>🚀 <strong>Von einzelnen Servern zu skalierbaren Serverless-Architekturen</strong></p>
+                    <p>🎯 <strong>Von unsicheren Zugängen zu bewachten AWS-Festungen</strong></p>
+                </div>
+                <p style="font-size: 1.1em; margin: 20px 0;">Wir sind bereit für die nächste Reise! Bringt die nächste AWS-Herausforderung - unsere Terraform-Künste sind scharf geschliffen! ⚔️</p>
+                <h3>🏰 Die Gefährten der IaC</h3>
+                <div class="fellowship-grid">
+                    <div class="fellowship-member">
+                        <div style="font-size: 1.5em;">🧙‍♂️</div>
+                        <h4>Harald</h4>
+                        <p>Terraform-Weiser</p>
+                        <p>HCL-Magie</p>
+                    </div>
+                    <div class="fellowship-member">
+                        <div style="font-size: 1.5em;">👑</div>
+                        <h4>Patrick</h4>
+                        <p>Serverless-König</p>
+                        <p>Lambda-Bogen</p>
+                    </div>
+                    <div class="fellowship-member">
+                        <div style="font-size: 1.5em;">⚔️</div>
+                        <h4>Susanne</h4>
+                        <p>Security-Wächterin</p>
+                        <p>IAM-Schwert</p>
+                    </div>
+                    <div class="fellowship-member">
+                        <div style="font-size: 1.5em;">✨</div>
+                        <h4>Samantha</h4>
+                        <p>Deploy-Zauberin</p>
+                        <p>Weisheits-Zauber</p>
+                        <p>
+                    </div>
+                    <div class="fellowship-member">
+                        <div style="font-size: 1.5em;">🏹</div>
+                        <h4>Philipp</h4>
+                        <p>CI/CD-Bogenschütze</p>
+                        <p>Pipeline-Pfeile</p>
+                    </div>
+                </div>
+            </div>     
+            <div class="footer" style="color:#ffd700;">
+                <p><em>Erstellt mit der Weisheit der Elben und der Stärke der Zwerge</em></p>
+                <p><strong>DevOps ILV & PT - MCCE Semester 2</strong></p>
+                <p><strong>Lecturer: Samantha Mika</strong> 🎓</p>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin: 30px 0 18px 0;">
+            <button class="nav-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i> Zurück</button>
+            <button class="nav-btn" id="nextBtn">Weiter <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <script>
+        // Slide navigation logic
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+
+        function showSlide(idx) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === idx);
+                // Update signpost icons
+                const signposts = slide.querySelectorAll('.signpost-icon');
+                signposts.forEach((icon, j) => {
+                    icon.classList.toggle('active', j === idx);
+                });
+            });
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === slides.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevBtn.click();
+            }
+        });
+
+        // Allow clicking signpost icons to jump to slide
+        document.querySelectorAll('.signpost').forEach((signpost, slideIdx) => {
+            signpost.querySelectorAll('.signpost-icon').forEach((icon, idx) => {
+                icon.style.cursor = 'pointer';
+                icon.addEventListener('click', () => {
+                    currentSlide = idx;
+                    showSlide(currentSlide);
+                });
+            });
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
