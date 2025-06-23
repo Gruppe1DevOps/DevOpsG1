@@ -10,7 +10,7 @@ werden kann. Das Ziel ist es alle nötigen Komponenten automatisch über Infrast
 (IaC) bereitzustellen. Die Lösung besteht aus Benutzerschnittstelle, Backend, Datenbank und 
 Sicherheitskomponenten.
 
-\section{Technologieauswahl}
+\section{Technologieauswahl} 
 \subsection{Terraform als Provisionierungstool}
 Als primäres Provisionierungstool wurde Terraform gewählt, da es
 Plattformunabhängigkeit ermöglicht und eine Multi-Cloud-Strategie unterstützt. Somit
@@ -148,10 +148,10 @@ Diese Struktur ermöglicht eine klare Trennung der Zuständigkeiten und erleicht
 Erweiterung der Infrastruktur~\cite{terraform-module-best-practices}.
 
 \subsection{Beispiel: DynamoDB-Provisionierung}
-Ein konkretes Beispiel für die Provisionierung ist die DynamoDB-Tabelle für die To-Do-Items. 
-Die Tabelle wird mit Pay-per-Request-Billing konfiguriert, was eine kosteneffiziente 
-Skalierung ermöglicht. Die ID wird als Hash-Key definiert, und die Tabelle wird mit 
-entsprechenden Tags für die Umgebung und das Management versehen.
+Ein konkretes Beispiel für die Provisionierung ist die DynamoDB-Tabelle für die To-Do-Items.
+Die Tabelle wird mit Pay-per-Request-Billing konfiguriert, was eine kosteneffiziente
+Skalierung ermöglicht. Die ID wird als Hash-Key definiert, und die Tabelle
+wird mit entsprechenden Tags für die Umgebung und das Management versehen.
 
 Die automatisierte Provisionierung mit Terraform ermöglicht reproduzierbare, sichere und 
 kosteneffiziente AWS-Umgebungen für die To-Do-Applikation. Durch modularen Code und 
