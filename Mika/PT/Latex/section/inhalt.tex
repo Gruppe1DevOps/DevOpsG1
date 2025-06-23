@@ -1,17 +1,18 @@
 \newpage
 
 \section{Einleitung}
-Diese Konzeption beschreibt die automatische Provisionierung einer vollständig serverlosen Todo-Anwendung in der AWS Cloud \cite{jain2021serverless}\cite{wen2023rise}. 
+Diese Konzeption beschreibt die automatische Provisionierung einer vollständig serverlosen Todo-Anwendung
+in der AWS Cloud~\cite{jain2021serverless, wen2023rise}. 
 Die Lösung nutzt moderne Infrastructure-as-Code (IaC) Prinzipien mit Terraform als 
-primärem Automatisierungstool\cite{ozdogan2023systematic}\cite{hashicorp2024terraform}  
+primärem Automatisierungstool \cite{ozdogan2023systematic, hashicorp2024terraform}  
 und implementiert eine CI/CD-Pipeline für kontinuierliche Bereitstellung.
 
 \textbf{Kernkomponenten:}
 
 \begin{itemize}
-    \item \textbf{Frontend:} Angular SPA gehostet auf Amazon S3 mit CloudFront CDN \cite{cloudfront2012performance}\cite{tyagi2025optimizing}
-    \item \textbf{Backend:} AWS Lambda Functions für CRUD-Operationen \cite{hussain2024performance}\cite{tanneru2024serverless}
-    \item \textbf{Datenbank:} Amazon DynamoDB für hochperformante NoSQL-Datenspeicherung \cite{haseeb2017review}\cite{ahmed2018literature}
+    \item \textbf{Frontend:} Angular SPA gehostet auf Amazon S3 mit CloudFront CDN~\cite{cloudfront2012performance, tyagi2025optimizing}
+    \item \textbf{Backend:} AWS Lambda Functions für CRUD-Operationen~\cite{hussain2024performance, tanneru2024serverless}
+    \item \textbf{Datenbank:} Amazon DynamoDB für hochperformante NoSQL Datenspeicherung \cite{haseeb2017review, ahmed2018literature}
     \item \textbf{API Gateway:} RESTful API-Endpunkte mit integrierter Authentifizierung
     \item \textbf{Authentifizierung:} RESTful API-Endpunkte mit integrierter Authentifizierung 
 \end{itemize}
@@ -20,7 +21,8 @@ und implementiert eine CI/CD-Pipeline für kontinuierliche Bereitstellung.
 \section{Architekturüberblick} 
 \subsection{Hochebenen-Architektur}
 Die Architektur der Todo-Anwendung basiert auf einem serverlosen Ansatz, der eine hohe Skalierbarkeit und Kosteneffizienz bietet. 
-Die Anwendung besteht aus mehreren AWS-Diensten, die nahtlos integriert sind, um eine robuste und wartungsarme Lösung zu schaffen. Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen \cite{maharjan2022evaluating}.
+Die Anwendung besteht aus mehreren AWS-Diensten, die nahtlos integriert sind, um eine robuste und wartungsarme Lösung zu schaffen.
+Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen~\cite{maharjan2022evaluating}.
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
@@ -199,6 +201,7 @@ State Management & \textcolor{darkgreen}{\yes~Explizit} & \textcolor{darkgreen}{
     \item \textbf{Ansible} zeichnet sich durch seine einfache YAML-Syntax und die niedrige Einstiegshürde aus. Als primäres Konfigurationsmanagement-Tool konzipiert, weist es jedoch Schwächen im Bereich des State Managements auf, was bei der Verwaltung komplexer Infrastrukturen problematisch werden kann.
 \end{itemize}
 Die Entscheidung für Terraform als primäres Provisionierungstool basiert auf der Kombination aus Multi-Cloud-Fähigkeit, starker Community-Unterstützung und der expliziten Verwaltung des Zustands. Diese Eigenschaften ermöglichen eine flexible, skalierbare und wartungsfreundliche Infrastruktur, die den Anforderungen moderner Cloud-Anwendungen gerecht wird.
+\newpage
 \subsection{Terraform-Projektstruktur}
 Die Projektstruktur für die Terraform-Konfiguration folgt den Best Practices für eine modulare und wartbare Architektur. Die Hauptkonfigurationsdateien befinden sich im Wurzelverzeichnis, während spezifische Module und Umgebungen in separaten Verzeichnissen organisiert sind. Diese Struktur ermöglicht eine klare Trennung der Verantwortlichkeiten und erleichtert die Wiederverwendbarkeit von Code.
 \begin{lstlisting}[style=terraform, caption=Terraform Projektstruktur]
