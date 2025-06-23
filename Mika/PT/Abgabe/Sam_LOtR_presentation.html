@@ -493,379 +493,773 @@
             .fellowship-grid { grid-template-columns: repeat(2, 1fr); }
             .header, .finale, .battle-section, .character-card, .palantir-link, .footer, .slide { padding: 10px; }
         }
+        .balrog-animated {
+            position: relative;
+            width: 120px;
+            height: 140px;
+            margin: 0 auto 18px auto;
+            animation: balrog-bounce 2.5s infinite cubic-bezier(.5,0,.5,1);
+        }
+        .balrog-body {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+            background: #2d1a0b;
+            border-radius: 30px 30px 30px 30px/40px 40px 40px 40px;
+            box-shadow: 0 0 18px 4px #ff9800;
+            z-index: 2;
+        }
+        .balrog-face {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 32px;
+            background: #ff9800;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px #ff5722;
+            z-index: 3;
+        }
+        .balrog-horns {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 60px;
+            height: 30px;
+            transform: translateX(-50%);
+            z-index: 4;
+        }
+        .balrog-horns::before, .balrog-horns::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border: 5px solid #ffd700;
+            border-bottom: none;
+            border-radius: 50% 50% 0 0;
+            top: 0;
+        }
+        .balrog-horns::before {
+            left: 0;
+            transform: rotate(-18deg);
+        }
+        .balrog-horns::after {
+            right: 0;
+            transform: rotate(18deg);
+        }
+        .balrog-flames {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .balrog-flames .flame {
+            width: 16px;
+            height: 40px;
+            background: linear-gradient(180deg, #ffd700 0%, #ff9800 60%, #ff5722 100%);
+            border-radius: 50% 50% 20% 20%;
+            opacity: 0.85;
+            animation: flame-flicker 1.2s infinite alternate;
+        }
+        .balrog-flames .flame:nth-child(2) {
+            height: 32px;
+            background: linear-gradient(180deg, #fffde4 0%, #ffd700 60%, #ff9800 100%);
+            animation-delay: 0.3s;
+        }
+        .balrog-flames .flame:nth-child(3) {
+            height: 36px;
+            background: linear-gradient(180deg, #fffde4 0%, #ffd700 50%, #ff9800 100%);
+            animation-delay: 0.6s;
+        }
+        .balrog-flames .flame:nth-child(4) {
+            height: 28px;
+            background: linear-gradient(180deg, #ffd700 0%, #ff9800 80%, #ff5722 100%);
+            animation-delay: 0.9s;
+        }
+        @keyframes flame-flicker {
+            0% { transform: scaleY(1) scaleX(1) translateY(0); opacity: 1; }
+            50% { transform: scaleY(1.2) scaleX(0.95) translateY(-6px); opacity: 0.85; }
+            100% { transform: scaleY(0.9) scaleX(1.1) translateY(0); opacity: 0.7; }
+        }
+        @keyframes balrog-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        /* Animated burning castle for Minas Tirith */
+        .burning-castle-container {
+            position: relative;
+            width: 160px;
+            height: 80px;
+            margin: 0 auto 10px auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .castle-icon {
+            font-size: 3em;
+            color: #fffde4;
+            z-index: 2;
+            position: relative;
+        }
+        .castle-fire {
+            position: absolute;
+            left: 38px;
+            top: -10px;
+            font-size: 2em;
+            color: #ff9800;
+            animation: fire-flicker 1.1s infinite alternate;
+            z-index: 3;
+        }
+        .castle-fire2 {
+            left: 80px;
+            top: -18px;
+            font-size: 1.7em;
+            color: #ff5722;
+            animation: fire-flicker2 1.3s infinite alternate;
+        }
+        .castle-fire3 {
+            left: 100px;
+            top: -8px;
+            font-size: 1.3em;
+            color: #ffd700;
+            animation: fire-flicker3 1.2s infinite alternate;
+        }
+        @keyframes fire-flicker {
+            0% { transform: scaleY(1) scaleX(1) translateY(0); opacity: 1; }
+            50% { transform: scale(1.1) translateY(-8px); opacity: 0.7; }
+            100% { transform: scale(0.95) translateY(0); opacity: 1; }
+        }
+        @keyframes fire-flicker2 {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            50% { transform: scale(1.1) translateY(-8px); opacity: 0.7; }
+            100% { transform: scale(0.95) translateY(0); opacity: 1; }
+        }
+        @keyframes fire-flicker3 {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            50% { transform: scale(1.15) translateY(-4px); opacity: 0.8; }
+            100% { transform: scale(0.9) translateY(0); opacity: 1; }
+        }
+        /* Animated charging riders for Rohan */
+        .riders-charge-container {
+            position: relative;
+            width: 220px;
+            height: 60px;
+            margin: 0 auto 10px auto;
+            overflow: visible;
+        }
+        .rider {
+            position: absolute;
+            bottom: 0;
+            font-size: 2.2em;
+            color: #ffd700;
+            animation: rider-charge 2.5s linear infinite;
+        }
+        .rider2 {
+            left: 30px;
+            animation-delay: 0.5s;
+            color: #fffde4;
+        }
+        .rider3 {
+            left: 60px;
+            animation-delay: 1s;
+            color: #ffe082;
+        }
+        .rider4 {
+            left: 90px;
+            animation-delay: 1.5s;
+            color: #ffd700;
+        }
+        @keyframes rider-charge {
+            0% { left: -40px; opacity: 0; }
+            10% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { left: 180px; opacity: 0; }
+        }
+        .riders-sun {
+            position: absolute;
+            left: 160px;
+            bottom: 18px;
+            font-size: 2.5em;
+            color: #ffe082;
+            filter: blur(0.5px);
+            animation: sun-rise 2.5s linear infinite;
+        }
+        @keyframes sun-rise {
+            0% { bottom: 0; opacity: 0.7; }
+            50% { bottom: 18px; opacity: 1; }
+            100% { bottom: 0; opacity: 0.7; }
+        }
+        /* Black Gate battle animation */
+        .black-gate-battle {
+            position: relative;
+            height: 48px;
+            margin-bottom: 10px;
+        }
+        .sword {
+            font-size: 2.2em;
+            color: #ffd700;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            margin: 0 8px;
+        }
+        .sword-left {
+            transform: rotate(-35deg) translateY(6px);
+            animation: sword-left-swing 1.2s infinite alternate;
+        }
+        .sword-right {
+            transform: rotate(35deg) translateY(6px);
+            animation: sword-right-swing 1.2s infinite alternate;
+        }
+        .battle-impact {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 18px;
+            height: 18px;
+            background: radial-gradient(circle, #ffd700 60%, #ff9800 100%, transparent 80%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.7;
+            animation: impact-flash 1.2s infinite alternate;
+            z-index: 1;
+        }
+        @keyframes sword-left-swing {
+            0% { transform: rotate(-35deg) translateY(6px); }
+            50% { transform: rotate(-40deg) translateY(0); }
+            100% { transform: rotate(-35deg) translateY(6px); }
+        }
+        @keyframes sword-right-swing {
+            0% { transform: rotate(35deg) translateY(6px); }
+            50% { transform: rotate(40deg) translateY(0); }
+            100% { transform: rotate(35deg) translateY(6px); }
+        }
+        @keyframes impact-flash {
+            0% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+            100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+        }
+        /* Sam carries Frodo up the mountain */
+        .sam-carries-frodo-container {
+            position: relative;
+            width: 120px;
+            height: 90px;
+            margin: 0 auto 18px auto;
+        }
+        .mountain {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #5d4037 60%, #bcaaa4 100%);
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            z-index: 1;
+        }
+        .sam-frodo {
+            position: absolute;
+            left: 38px;
+            bottom: 38px;
+            z-index: 2;
+            animation: sam-frodo-climb 3.5s infinite linear;
+        }
+        .sam {
+            font-size: 1.7em;
+            color: #ffd700;
+            position: relative;
+        }
+        .frodo {
+            font-size: 1.1em;
+            color: #bcaaa4;
+            position: absolute;
+            left: 18px;
+            top: 2px;
+            animation: frodo-bounce 1.2s infinite alternate;
+        }
+        @keyframes sam-frodo-climb {
+            0% { left: 38px; bottom: 38px; }
+            80% { left: 55px; bottom: 60px; }
+            100% { left: 38px; bottom: 38px; }
+        }
+        @keyframes frodo-bounce {
+            0% { top: 2px; }
+            100% { top: -2px; }
+        }
+        /* Ring falling into fire */
+        .ring-destruction-animation {
+            position: relative;
+            width: 60px;
+            height: 70px;
+            margin: 0 auto 10px auto;
+        }
+        .falling-ring {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            font-size: 1.7em;
+            color: #ffd700;
+            animation: ring-fall 2.2s infinite cubic-bezier(.5,0,.5,1);
+            z-index: 2;
+        }
+        .mount-doom-fire {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 22px;
+            background: radial-gradient(circle at 50% 80%, #ff9800 60%, #ff5722 100%, transparent 90%);
+            border-radius: 50% 50% 60% 60%;
+            z-index: 1;
+            box-shadow: 0 0 18px 6px #ff9800;
+            animation: fire-flicker 1.1s infinite alternate;
+        }
+        @keyframes ring-fall {
+            0% { top: 0; opacity: 1; }
+            80% { top: 38px; opacity: 1; }
+            100% { top: 38px; opacity: 0; }
+        }
+        .black-gate-visual {
+            position: relative;
+            width: 180px;
+            height: 70px;
+            margin: 0 auto 18px auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .gate-tower {
+            width: 24px;
+            height: 60px;
+            background: linear-gradient(180deg, #222 80%, #444 100%);
+            border-radius: 4px 4px 8px 8px;
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+        }
+        .gate-tower-left {
+            left: 0;
+        }
+        .gate-tower-right {
+            right: 0;
+        }
+        .gate-body {
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: 0;
+            height: 40px;
+            background: linear-gradient(180deg, #181818 80%, #333 100%);
+            border-radius: 0 0 12px 12px;
+            z-index: 1;
+        }
+        .gate-arch {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 44px;
+            height: 28px;
+            background: #111;
+            border-radius: 0 0 28px 28px;
+            transform: translateX(-50%);
+            z-index: 3;
+            box-shadow: 0 0 12px 2px #000 inset;
+        }
+        /* Black Gate battle animation */
+        .battle-armies {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0; top: 0;
+            pointer-events: none;
+        }
+        .army {
+            position: absolute;
+            bottom: 8px;
+            display: flex;
+            gap: 2px;
+        }
+        .army-left {
+            left: -60px;
+            flex-direction: row;
+        }
+        .army-right {
+            right: -60px;
+            flex-direction: row-reverse;
+        }
+        .fighter {
+            font-size: 1.5em;
+            opacity: 0.95;
+            animation: army-charge 2.2s infinite alternate;
+        }
+        .fighter.orc {
+            color: #bcaaa4;
+            filter: brightness(0.7) contrast(1.2);
+        }
+        @keyframes army-charge {
+            0% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-6px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        .arrow-volley {
+            position: absolute;
+            top: 10px;
+            font-size: 1.2em;
+            color: #ffd700;
+            opacity: 0.8;
+            animation: arrow-fly 1.5s infinite linear;
+        }
+        .volley-left {
+            left: 30px;
+            animation-delay: 0.3s;
+        }
+        .volley-right {
+            right: 30px;
+            transform: scaleX(-1);
+            animation-delay: 0.8s;
+        }
+        @keyframes arrow-fly {
+            0% { top: 10px; opacity: 0.8; }
+            60% { top: 30px; opacity: 1; }
+            100% { top: 60px; opacity: 0; }
+        }
+        .battle-dust {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 38px;
+            height: 18px;
+            background: radial-gradient(circle, #ffd700 40%, #ff9800 80%, transparent 100%);
+            border-radius: 50%;
+            transform: translateX(-50%) scale(1);
+            opacity: 0.7;
+            animation: dust-puff 1.2s infinite alternate;
+            z-index: 1;
+        }
+        /* END Black Gate battle animation */
     </style>
 </head>
 <body>
     <div class="slideshow-container">
 
-        <!-- Slide 1: Agenda -->
+        <!-- Slide 0: Bruchtal – Der Rat der Gefährten (Rivendell – The Council of the Fellowship) -->
         <div class="slide active" id="slide-0">
             <div class="header">
-                <h1>🧙‍♂️ DevOps des Ringes</h1>
-                <div class="subtitle">Eine epische Reise durch AWS Terraform</div>
+                <h1>🧙‍♂️ Bruchtal – Der Rat der Gefährten</h1>
+                <div class="subtitle">Kapitel I: Die Berufung – Architektur & Motivation</div>
                 <div class="meta-info">
-                    <strong>Die Gefährten der IaC - Gruppe 1</strong><br>
-                    Datum: Juni 22, 2025<br>
-                    Projekt: Automatisierte AWS To-Do App
+                    <strong>Gruppe 1 – DevOps ILV</strong><br>
+                    Juni 2025<br>
+                    Projekt: Serverlose AWS Todo-App
                 </div>
             </div>
             <div class="signpost">
-                <span class="signpost-icon active" title="Agenda">🗺️</span>
-                <span class="signpost-icon" title="Die Gefährten">👥</span>
-                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
-                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
-                <span class="signpost-icon" title="Die Demonstration">🔮</span>
-                <span class="signpost-icon" title="Das Ende">🏰</span>
+                <span class="signpost-icon active" title="Bruchtal">🏞️</span>
+                <span class="signpost-icon" title="Moria">⛏️</span>
+                <span class="signpost-icon" title="Rohan">🏇</span>
+                <span class="signpost-icon" title="Minas Tirith">🏰</span>
+                <span class="signpost-icon" title="Die Rückkehr">👑</span>
+                <span class="signpost-icon" title="Epilog">🍃</span>
             </div>
-            <h2 class="section-title">Unsere Reiseroute</h2>
+            <h2 class="section-title">Die Gefährten & ihre Mission</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 30px;">
-                <div class="character-card frodo" style="min-width:220px;flex:1;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        👥 <span>Die Gefährten</span>
-                    </div>
-                </div>
                 <div class="character-card harald" style="min-width:220px;flex:1;">
                     <div style="display:flex;align-items:center;gap:10px;">
-                        ⚔️ <span>Die Schlachten</span>
+                        <span class="character-icon"><i class="fa-solid fa-hat-wizard"></i></span>
+                        <span>Harald der Graue (Gandalf) – Terraform-Weiser</span>
                     </div>
                 </div>
-                <div class="character-card patrick" style="min-width:220px;flex:1;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        📖 <span>Das Weiße Buch</span>
-                    </div>
+                <div class="character-card susanne" style="min-width:220px;flex:1;">
+                    <div style="display:flex;align-items:center;gap:10px;">🌸 <span>Susanne (Arwen) – Security-Elbin</span></div>
                 </div>
-                <div class="character-card" style="min-width:220px;flex:1;border-color:#ffd700;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        🔮 <span>Die Demonstration</span>
-                    </div>
+                <div class="character-card samantha" style="min-width:220px;flex:1;">
+                    <div style="display:flex;align-items:center;gap:10px;">🍃 <span>Samantha (Samweis Gamdschie) – Die Retterin</span></div>
                 </div>
                 <div class="character-card philipp" style="min-width:220px;flex:1;">
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        🏰 <span>Das Ende</span>
-                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;">🥧 <span>Philip (Peregrin Took) – CI/CD-Hobbit</span></div>
                 </div>
             </div>
+            <div style="margin: 30px auto; max-width: 700px;">
+                <h3>Die Berufung</h3>
+                <p>Im Schutz von Bruchtal wird die Mission beschlossen: Eine serverlose Todo-App in AWS, erschaffen mit Terraform und geschützt durch die Macht der Gefährten. Die Reise beginnt…</p>
+                <table class="stats-table" style="margin-top:18px;">
+                    <thead>
+                        <tr><th>Bereich</th><th>Technologien</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Frontend</td><td>Angular SPA auf S3 + CloudFront</td></tr>
+                        <tr><td>Backend</td><td>Lambda Functions, API Gateway, DynamoDB</td></tr>
+                        <tr><td>Security</td><td>Cognito, IAM, Secrets Manager</td></tr>
+                        <tr><td>Automatisierung</td><td>GitHub Actions, Terraform</td></tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="footer">
-                <span>🗺️ DevOps des Ringes - Reiseroute</span>
+                <span>🏞️ Bruchtal – Der Rat der Gefährten</span>
             </div>
         </div>
 
-        <!-- Slide 2: Die Gefährten -->
+        <!-- Slide 1: Die Minen von Moria – Herausforderungen & Gefahren -->
         <div class="slide" id="slide-1">
             <div class="signpost">
-                <span class="signpost-icon" title="Agenda">🗺️</span>
-                <span class="signpost-icon active" title="Die Gefährten">👥</span>
-                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
-                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
-                <span class="signpost-icon" title="Die Demonstration">🔮</span>
-                <span class="signpost-icon" title="Das Ende">🏰</span>
+                <span class="signpost-icon" title="Bruchtal">🏞️</span>
+                <span class="signpost-icon active" title="Moria">⛏️</span>
+                <span class="signpost-icon" title="Rohan">🏇</span>
+                <span class="signpost-icon" title="Minas Tirith">🏰</span>
+                <span class="signpost-icon" title="Die Rückkehr">👑</span>
+                <span class="signpost-icon" title="Epilog">🍃</span>
             </div>
-            <h2 class="section-title">Unsere Gefährten</h2>
-            <section>
-                <div class="character-card frodo">
-                    <div class="character-header">
-                        <div class="character-icon">🧙‍♂️</div>
-                        <div class="character-info">
-                            <h3>Harald der Graue</h3>
-                            <div class="character-type">Typ: Terraform-Weiser</div>
+            <h2 class="section-title">Die Minen von Moria – Herausforderungen</h2>
+            <div class="battle-section">
+                <div class="middleearth-fight">
+                    <h3>⛏️ Dunkle Tunnel der Infrastruktur</h3>
+                    <p>Die Gefährten stoßen auf die ersten Hindernisse: Komplexe AWS-Architektur, verschlungene Abhängigkeiten und die Notwendigkeit, alles als Code zu meistern.</p>
+                    <table class="stats-table" style="margin-top:12px;">
+                        <thead>
+                            <tr><th>Herausforderung</th><th>Beschreibung</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Terraform-Module</td><td>Für jede AWS-Komponente</td></tr>
+                            <tr><td>State-Management</td><td>S3 mit Locking</td></tr>
+                            <tr><td>Fehlerquellen</td><td>Syntax, Abhängigkeiten, Berechtigungen</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="middleearth-fight">
+                    <h3>🔥 Der Balrog der Security</h3>
+                    <div class="balrog-animated">
+                        <div class="balrog-body">
+                            <div class="balrog-face"></div>
+                            <div class="balrog-horns"></div>
+                        </div>
+                        <div class="balrog-flames">
+                            <span class="flame"></span>
+                            <span class="flame"></span>
+                            <span class="flame"></span>
+                            <span class="flame"></span>
                         </div>
                     </div>
-                    <div class="special-power">
-                        <strong>Spezialkraft: IaC-Zauberstab</strong><br>
-                        Effekt: Beschwört AWS-Ressourcen aus dem Nichts!
-                    </div>
-                    <div class="achievements">
-                        <div class="achievement">✅ Multi-Cloud Strategie</div>
-                        <div class="achievement">✅ HCL-Meisterschaft</div>
-                    </div>
+                    <p>IAM Policies, Secrets Management und Authentifizierung – nur mit vereinten Kräften gelingt es, die Security-Herausforderungen zu bezwingen.</p>
                 </div>
-                <div class="character-card harald">
-                    <div class="character-header">
-                        <div class="character-icon">👑</div>
-                        <div class="character-info">
-                            <h3>Patrick der Entwickler</h3>
-                            <div class="character-type">Typ: Serverless-König</div>
-                        </div>
-                    </div>
-                    <div class="special-power">
-                        <strong>Spezialkraft: Lambda-Bogen</strong><br>
-                        Effekt: Trifft Geschäftslogik ins Schwarze!
-                    </div>
-                    <div class="achievements">
-                        <div class="achievement">✅ DynamoDB Integration</div>
-                        <div class="achievement">✅ Cognito Authentifizierung</div>
-                    </div>
-                </div>
-                <div class="character-card susanne">
-                    <div class="character-header">
-                        <div class="character-icon">⚔️</div>
-                        <div class="character-info">
-                            <h3>Susanne die Kriegerin</h3>
-                            <div class="character-type">Typ: Security-Wächterin</div>
-                        </div>
-                    </div>
-                    <div class="special-power">
-                        <strong>Spezialkraft: IAM-Schwert</strong><br>
-                        Effekt: Zerschlägt unbefugte Zugriffe!
-                    </div>
-                    <div class="achievements">
-                        <div class="achievement">✅ Least Privilege Prinzip</div>
-                        <div class="achievement">✅ Secrets Manager Konfiguration</div>
-                    </div>
-                </div>
-                <div class="character-card samantha">
-                    <div class="character-header">
-                        <div class="character-icon">✨</div>
-                        <div class="character-info">
-                            <h3>Samantha die Elbin</h3>
-                            <div class="character-type">Typ: Deploy-Zauberin</div>
-                        </div>
-                    </div>
-                    <div class="special-power">
-                        <strong>Spezialkraft: Blue-Green-Zauber</strong><br>
-                        Effekt: Deployt ohne Downtime und rollt bei Problemen zurück</div>
-                    <div class="achievements">
-                        <div class="achievement">✅ Zero-Downtime Deployments</div>
-                        <div class="achievement">✅ Automated Rollbacks</div>
-                    </div>
-                </div>
-                <div class="character-card philipp">
-                    <div class="character-header">
-                        <div class="character-icon">🏹</div>
-                        <div class="character-info">
-                            <h3>Philipp der Schnelle</h3>
-                            <div class="character-type">Typ: CI/CD-Bogenschütze</div>
-                        </div>
-                    </div>
-                    <div class="special-power">
-                        <strong>Spezialkraft: Pipeline-Pfeile</strong><br>
-                        Effekt: Trifft Deployment-Ziele in unter 10 Minuten!
-                    </div>
-                        <div class="achievements">
-                        <div class="achievement">✅ Jenkins Integration</div>
-                        <div class="achievement">✅ Checkov Security Scans</div>
-                    </div>
-                </div>
-            </section>
+            </div>
             <div class="footer">
-                <span>👥 Unsere Gefährten</span>
+                <span>⛏️ Die Minen von Moria – Kapitel II</span>
             </div>
         </div>
 
-        <!-- Slide 3: Die Schlachten -->
+        <!-- Slide 2: Rohan – Die Schlachten der Automatisierung -->
         <div class="slide" id="slide-2">
             <div class="signpost">
-                <span class="signpost-icon" title="Agenda">🗺️</span>
-                <span class="signpost-icon" title="Die Gefährten">👥</span>
-                <span class="signpost-icon active" title="Die Schlachten">⚔️</span>
-                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
-                <span class="signpost-icon" title="Die Demonstration">🔮</span>
-                <span class="signpost-icon" title="Das Ende">🏰</span>
+                <span class="signpost-icon" title="Bruchtal">🏞️</span>
+                <span class="signpost-icon" title="Moria">⛏️</span>
+                <span class="signpost-icon active" title="Rohan">🏇</span>
+                <span class="signpost-icon" title="Minas Tirith">🏰</span>
+                <span class="signpost-icon" title="Die Rückkehr">👑</span>
+                <span class="signpost-icon" title="Epilog">🍃</span>
             </div>
-            <h2 class="section-title">Unsere Schlachten</h2>
+            <div class="riders-charge-container">
+                <span class="rider" style="animation-delay:0s;"><i class="fa-solid fa-horse"></i></span>
+                <span class="rider rider2"><i class="fa-solid fa-horse"></i></span>
+                <span class="rider rider3"><i class="fa-solid fa-horse"></i></span>
+                <span class="rider rider4"><i class="fa-solid fa-horse"></i></span>
+                <span class="riders-sun"><i class="fa-solid fa-sun"></i></span>
+            </div>
+            <div style="text-align:center; font-size:1em; color:#ffe082; margin-bottom:2px;">Die Reiter Rohans reiten ein letztes Mal zur Schlacht aus der belagerten Hornburg  – Gandalf erscheint mit Erkenbrand beim Lichte des fünften Tages im Osten!</div>
+            <h2 class="section-title">Rohan – Die Schlachten der Automatisierung</h2>
             <div class="battle-section">
                 <div class="middleearth-fight">
-                    <h3>⚔️ Schlacht um die AWS-Architektur</h3>
-                    <div class="quest-flow">
-                        <div class="quest-step">☁️<br>AWS Cloud</div>
-                        <div class="quest-step">🪣<br>S3 Bucket</div>
-                        <div class="quest-step">🌐<br>CloudFront</div>
-                        <div class="quest-step">🚪<br>API Gateway</div>
-                        <div class="quest-step">λ<br>Lambda</div>
-                    </div>
-                </div>
-                <div class="middleearth-fight">
-                    <h3>🛡️ Festung der Sicherheit</h3>
-                    <table class="stats-table">
-                        <tr>
-                            <th>Verteidigungslinie</th>
-                            <th>Status</th>
-                            <th>Schutzlevel</th>
-                        </tr>
-                        <tr>
-                            <td>🔐 IAM Policies</td>
-                            <td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td>
-                            <td>Stufe 4</td>
-                        </tr>
-                        <tr>
-                            <td>🛡️ Cognito Auth</td>
-                            <td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td>
-                            <td>Stufe 5</td>
-                        </tr>
-                        <tr>
-                            <td>🔑 Secrets Manager</td>
-                            <td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td>
-                            <td>Stufe 4</td>
-                        </tr>
+                    <h3>🏇 Die Reiter von CI/CD</h3>
+                    <p>Mit der Kraft von GitHub Actions und Terraform reiten die Gefährten gegen die Zeit: Automatisierte Deployments, Validierung und Tests sichern den Erfolg.</p>
+                    <table class="stats-table" style="margin-top:12px;">
+                        <thead>
+                            <tr><th>Prozess</th><th>Details</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>CI/CD Pipeline</td><td>Code → Test → Plan → Apply</td></tr>
+                            <tr><td>Automatisierte Tests</td><td>Für Lambda & API</td></tr>
+                            <tr><td>Monitoring & Alerts</td><td>Automatisierte Überwachung</td></tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="middleearth-fight">
                     <h3>📊 Validierung der Ressourcen</h3>
                     <table class="validation-table">
-                        <thead>
-                            <tr>
-                                <th>Ressource</th>
-                                <th>Dev</th>
-                                <th>Test</th>
-                                <th>Prod</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Ressource</th><th>Dev</th><th>Test</th><th>Prod</th></tr></thead>
                         <tbody>
-                            <tr>
-                                <td>Lambda-Funktionen</td>
-                                <td>✅ 4</td>
-                                <td>✅ 4</td>
-                                <td>✅ 4</td>
-                            </tr>
-                            <tr style="background: rgba(255,255,255,0.05);">
-                                <td>DynamoDB Tabellen</td>
-                                <td>✅ 1</td>
-                                <td>✅ 1</td>
-                                <td>✅ 1</td>
-                            </tr>
-                            <tr>
-                                <td>S3 Buckets</td>
-                                <td>✅ 2</td>
-                                <td>✅ 2</td>
-                                <td>✅ 2</td>
-                            </tr>
-                            <tr style="background: rgba(255,255,255,0.05);">
-                                <td>CloudFront Distributionen</td>
-                                <td>✅ 1</td>
-                                <td>✅ 1</td>
-                                <td>✅ 1</td>
-                            </tr>
+                            <tr><td>Lambda-Funktionen</td><td>✅ 4</td><td>✅ 4</td><td>✅ 4</td></tr>
+                            <tr style="background: rgba(255,255,255,0.05);"><td>DynamoDB Tabellen</td><td>✅ 1</td><td>✅ 1</td><td>✅ 1</td></tr>
+                            <tr><td>S3 Buckets</td><td>✅ 2</td><td>✅ 2</td><td>✅ 2</td></tr>
+                            <tr style="background: rgba(255,255,255,0.05);"><td>CloudFront Distributionen</td><td>✅ 1</td><td>✅ 1</td><td>✅ 1</td></tr>
                         </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="footer">
+                <span>🏇 Rohan – Kapitel III</span>
+            </div>
+        </div>
+
+        <!-- Slide 3: Minas Tirith – Die Verteidigung der Cloud -->
+        <div class="slide" id="slide-3">
+            <div class="signpost">
+                <span class="signpost-icon" title="Bruchtal">🏞️</span>
+                <span class="signpost-icon" title="Moria">⛏️</span>
+                <span class="signpost-icon" title="Rohan">🏇</span>
+                <span class="signpost-icon active" title="Minas Tirith">🏰</span>
+                <span class="signpost-icon" title="Die Rückkehr">👑</span>
+                <span class="signpost-icon" title="Epilog">🍃</span>
+            </div>
+            <div class="burning-castle-container">
+                <span class="castle-icon"><i class="fa-solid fa-chess-rook"></i></span>
+                <span class="castle-fire"><i class="fa-solid fa-fire"></i></span>
+                <span class="castle-fire castle-fire2"><i class="fa-solid fa-fire"></i></span>
+                <span class="castle-fire castle-fire3"><i class="fa-solid fa-fire"></i></span>
+            </div>
+            <div style="text-align:center; font-size:1em; color:#ff9800; margin-bottom:2px;">Mikas Tirith ist umzingelt – Die Belagerung beginnt!</div>
+            <h2 class="section-title">Mikas Tirith – Die Verteidigung der Cloud</h2>
+            <div class="battle-section">
+                <div class="middleearth-fight">
+                    <h3>🏰 Festung der Sicherheit</h3>
+                    <table class="stats-table">
+                        <tr><th>Verteidigungslinie</th><th>Status</th><th>Schutzlevel</th></tr>
+                        <tr><td>🔐 IAM Policies</td><td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td><td>Stufe 4</td></tr>
+                        <tr><td>🛡️ Cognito Auth</td><td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td><td>Stufe 5</td></tr>
+                        <tr><td>🔑 Secrets Manager</td><td style="color: #8bc34a; font-weight: bold;">✅ AKTIV</td><td>Stufe 4</td></tr>
                     </table>
                 </div>
                 <div class="middleearth-fight">
                     <h3>🏰 Belagerung der Terraform State-Festung</h3>
-                    <p>S3 mit Locking-Mechanismus erfolgreich verteidigt!</p>
+                    <p>S3 mit Locking-Mechanismus erfolgreich verteidigt!<br>CI/CD-Pipeline: <strong>GitHub Actions</strong> orchestriert die Verteidigung – von <em>terraform plan</em> bis <em>apply</em>.</p>
                 </div>
             </div>
             <div class="footer">
-                <span>⚔️ Unsere Schlachten</span>
+                <span>🏰 Mikas Tirith – Kapitel IV</span>
             </div>
         </div>
 
-        <!-- Slide 4: Das Weiße Buch -->
-        <div class="slide" id="slide-3">
-            <div class="signpost">
-                <span class="signpost-icon" title="Agenda">🗺️</span>
-                <span class="signpost-icon" title="Die Gefährten">👥</span>
-                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
-                <span class="signpost-icon active" title="Das Weiße Buch">📖</span>
-                <span class="signpost-icon" title="Die Demonstration">🔮</span>
-                <span class="signpost-icon" title="Das Ende">🏰</span>
-            </div>
-            <h2 class="section-title">Das Weiße Buch von DevOps</h2>
-            <div class="palantir-link">
-                <h3>🔎 Palantir des Wissens</h3>
-                <p><strong>Repository:</strong> <a href="https://github.com/Gruppe1DevOps/AWS-Todo-App" target="_blank">https://github.com/Gruppe1DevOps/AWS-Todo-App</a></p>
-                <p style="margin-top: 10px;"><strong>Was die Weisen in unserem Buch finden:</strong></p>
-                <ul>
-                    <li><strong>Terraform Module</strong> (netzwerk/, datenbank/, backend/)</li>
-                    <li><strong>IaC Konfigurationen</strong> (main.tf, variables.tf, outputs.tf)</li>
-                    <li><strong>DynamoDB Provisionierung</strong> (dynamodb.tf)</li>
-                    <li><strong>Sicherheitskonfiguration</strong> (iam.tf, cognito.tf)</li>
-                    <li><strong>CI/CD Pipeline</strong> (Jenkinsfile, .gitlab-ci.yml)</li>
-                </ul>
-            </div>
-            <div class="footer">
-                <span>📖 Das Weiße Buch von DevOps</span>
-            </div>
-        </div>
-
-        <!-- Slide 5: Die Demonstration -->
+        <!-- Slide 4: Die Reiter Rohans befreien Mikas Tirith & Die Schlacht am Schwarzen Tor -->
         <div class="slide" id="slide-4">
             <div class="signpost">
-                <span class="signpost-icon" title="Agenda">🗺️</span>
-                <span class="signpost-icon" title="Die Gefährten">👥</span>
-                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
-                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
-                <span class="signpost-icon active" title="Die Demonstration">🔮</span>
-                <span class="signpost-icon" title="Das Ende">🏰</span>
+                <span class="signpost-icon" title="Bruchtal">🏞️</span>
+                <span class="signpost-icon" title="Moria">⛏️</span>
+                <span class="signpost-icon" title="Rohan">🏇</span>
+                <span class="signpost-icon" title="Minas Tirith">🏰</span>
+                <span class="signpost-icon active" title="Die Rückkehr">👑</span>
+                <span class="signpost-icon" title="Epilog">🍃</span>
             </div>
-            <h2 class="section-title">Die Demonstration - Terraform-Magie</h2>
-            <div style="text-align:center;">
-                <div class="ring-demo">
-                    <div class="ring-outer"></div>
-                    <div class="ring-inner"></div>
-                    <div class="ring-text">Ein Ring<br>sie zu knechten</div>
+            <div class="black-gate-visual" style="margin-bottom: 18px;">
+                <div class="gate-tower gate-tower-left"></div>
+                <div class="gate-tower gate-tower-right"></div>
+                <div class="gate-body"></div>
+                <div class="gate-arch"></div>
+                <!-- Animated armies -->
+                <div class="battle-armies">
+                    <!-- Fellowship army (left) -->
+                    <div class="army army-left">
+                        <span class="fighter" style="animation-delay:0s;">🧙‍♂️</span>
+                        <span class="fighter" style="animation-delay:0.15s;">🧝</span>
+                        <span class="fighter" style="animation-delay:0.3s;">🧔</span>
+                        <span class="fighter" style="animation-delay:0.45s;">🧑‍🎤</span>
+                        <span class="fighter" style="animation-delay:0.6s;">🛡️</span>
+                        <span class="fighter" style="animation-delay:0.75s;">🏇</span>
+                    </div>
+                    <!-- Orc army (right) -->
+                    <div class="army army-right">
+                        <span class="fighter orc" style="animation-delay:0s;">🦹</span>
+                        <span class="fighter orc" style="animation-delay:0.15s;">🧟</span>
+                        <span class="fighter orc" style="animation-delay:0.3s;">🧟‍♂️</span>
+                        <span class="fighter orc" style="animation-delay:0.45s;">🦹</span>
+                        <span class="fighter orc" style="animation-delay:0.6s;">🧟</span>
+                        <span class="fighter orc" style="animation-delay:0.75s;">🦹‍♂️</span>
+                    </div>
+                    <!-- Arrow volleys (multiple, for more action) -->
+                    <div class="arrow-volley volley-left" style="animation-delay:0.1s;">➵</div>
+                    <div class="arrow-volley volley-left" style="animation-delay:0.5s;">➵</div>
+                    <div class="arrow-volley volley-right" style="animation-delay:0.3s;">➵</div>
+                    <div class="arrow-volley volley-right" style="animation-delay:0.7s;">➵</div>
+                    <!-- Sword clash in the center -->
+                    <span class="sword sword-left" style="left: 50%; top: 10px; position: absolute; z-index: 3; transform: translateX(-120%) rotate(-35deg); animation: sword-left-swing 1.2s infinite alternate;"><i class="fa-solid fa-sword"></i></span>
+                    <span class="sword sword-right" style="left: 50%; top: 10px; position: absolute; z-index: 3; transform: translateX(20%) rotate(35deg); animation: sword-right-swing 1.2s infinite alternate;"><i class="fa-solid fa-sword"></i></span>
+                    <div class="battle-impact"></div>
+                    <!-- Dust/impact at the gate -->
+                    <div class="battle-dust"></div>
+                    <!-- Extra: random fire/explosion for drama -->
+                    <div class="battle-fire" style="left: 60px; bottom: 8px;"></div>
+                    <div class="battle-fire" style="right: 60px; bottom: 8px;"></div>
                 </div>
-                <h3 style="margin-top:40px;font-size:1.5em;color:#ffd700;">Bereit für die Terraform-Beschwörung!</h3>
-                <p style="font-size:1.1em;margin-top:18px;">Zeigt die Macht der IaC-Magie in AWS.<br>
-                <span style="font-size:2em;">🧙‍♂️</span> <br>
-                <em>Ein Terraform-Apply, sie alle zu binden</em>
-                </p>
+            </div>
+            <h2 class="section-title">Der Ritt der Rohirrim entsetzt Mikas Tirith & Die Schlacht am Schwarzen Tor</h2>
+            <div class="palantir-link">
+                <h3>🏇 Die Befreiung von Mikas Tirith</h3>
+                <p>Im letzten Moment stürmen die Reiter Rohans heran, durchbrechen die Belagerung und retten die Festung. Doch der wahre Endkampf steht noch bevor: Die Schlacht am Schwarzen Tor!</p>
+                <h3>⚔️ Die letzte Schlacht – DevOps Best Practices</h3>
+                <table class="stats-table" style="margin: 0 auto 18px auto;">
+                    <thead>
+                        <tr><th>Prinzip</th><th>Beschreibung</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Infrastructure as Code</td><td>Alles versioniert & nachvollziehbar</td></tr>
+                        <tr><td>Immutable Infrastructure</td><td>Keine manuellen Änderungen</td></tr>
+                        <tr><td>Security by Design</td><td>Least Privilege überall</td></tr>
+                        <tr><td>Cost Awareness</td><td>Regelmäßige Reviews & Alerts</td></tr>
+                        <tr><td>Disaster Recovery</td><td>Backups & Rollbacks automatisiert</td></tr>
+                    </tbody>
+                </table>
+                <h3>📖 Das Weiße Buch</h3>
+                <p>Alle Details, Codebeispiele und Architekturdiagramme finden sich im <strong>Weißen Buch</strong> (siehe <em>inhalt.tex</em>).</p>
+            </div>
+            <div class="finale">
+                <h2>Die letzte Schlacht ist geschlagen – Mikas Tirith ist befreit!</h2>
+                <h3>Doch das Schicksal des Rings entscheidet sich am Schicksalsberg…</h3>
             </div>
             <div class="footer">
-                <span>🔮 Die Demonstration - Terraform-Magie</span>
+                <span>👑 Die Reiter Rohans & Schwarzes Tor – Kapitel V</span>
             </div>
         </div>
 
-        <!-- Slide 6: Das Ende -->
+        <!-- Slide 5: Sam der Held – Der Ring der Macht wird vernichtet -->
         <div class="slide" id="slide-5">
             <div class="signpost">
-                <span class="signpost-icon" title="Agenda">🗺️</span>
-                <span class="signpost-icon" title="Die Gefährten">👥</span>
-                <span class="signpost-icon" title="Die Schlachten">⚔️</span>
-                <span class="signpost-icon" title="Das Weiße Buch">📖</span>
-                <span class="signpost-icon" title="Die Demonstration">🔮</span>
-                <span class="signpost-icon active" title="Das Ende">🏰</span>
+                <span class="signpost-icon" title="Bruchtal">🏞️</span>
+                <span class="signpost-icon" title="Moria">⛏️</span>
+                <span class="signpost-icon" title="Rohan">🏇</span>
+                <span class="signpost-icon" title="Minas Tirith">🏰</span>
+                <span class="signpost-icon" title="Die Rückkehr">👑</span>
+                <span class="signpost-icon active" title="Epilog">🍃</span>
             </div>
-            <h2 class="section-title">Das Ende aller Aufgaben</h2>
+            <div class="sam-carries-frodo-container">
+                <div class="mountain"></div>
+                <div class="sam-frodo">
+                    <span class="sam"><i class="fa-solid fa-person-hiking"></i></span>
+                    <span class="frodo"><i class="fa-solid fa-ring"></i></span>
+                </div>
+            </div>
+            <div class="ring-destruction-animation">
+                <span class="falling-ring"><i class="fa-solid fa-ring"></i></span>
+                <span class="mount-doom-fire"></span>
+            </div>
             <div class="finale">
-                <div class="elvish-art">Ein Terraform-Apply, sie zu finden
-Ein Terraform-Apply, sie zu binden
-Ins AWS-Land sie zu führen
-Und ewiglich zu deployen</div>
-                <h2>🎵 "Die Gefährten des Terraform-Rings" - Finale</h2>
-                <p style="font-size: 1.1em; margin: 15px 0;"><strong>Harald</strong>, mit deiner Weisheit haben wir Mittelerde vor dem manuellen Deployment gerettet:</p>
-                <div style="text-align: left; max-width: 80%; margin: 15px auto; font-size: 1em;">
-                    <p>🔥 <strong>Von manuellen Konfigurationen zu IaC-Magie</strong></p>
-                    <p>🚀 <strong>Von einzelnen Servern zu skalierbaren Serverless-Architekturen</strong></p>
-                    <p>🎯 <strong>Von unsicheren Zugängen zu bewachten AWS-Festungen</strong></p>
-                </div>
-                <p style="font-size: 1.1em; margin: 20px 0;">Wir sind bereit für die nächste Reise! Bringt die nächste AWS-Herausforderung - unsere Terraform-Künste sind scharf geschliffen! ⚔️</p>
-                <h3>🏰 Die Gefährten der IaC</h3>
-                <div class="fellowship-grid">
-                    <div class="fellowship-member">
-                        <div style="font-size: 1.5em;">🧙‍♂️</div>
-                        <h4>Harald</h4>
-                        <p>Terraform-Weiser</p>
-                        <p>HCL-Magie</p>
-                    </div>
-                    <div class="fellowship-member">
-                        <div style="font-size: 1.5em;">👑</div>
-                        <h4>Patrick</h4>
-                        <p>Serverless-König</p>
-                        <p>Lambda-Bogen</p>
-                    </div>
-                    <div class="fellowship-member">
-                        <div style="font-size: 1.5em;">⚔️</div>
-                        <h4>Susanne</h4>
-                        <p>Security-Wächterin</p>
-                        <p>IAM-Schwert</p>
-                    </div>
-                    <div class="fellowship-member">
-                        <div style="font-size: 1.5em;">✨</div>
-                        <h4>Samantha</h4>
-                        <p>Deploy-Zauberin</p>
-                        <p>Blue-Green-Zauber</p>
-                    </div>
-                    <div class="fellowship-member">
-                        <div style="font-size: 1.5em;">🏹</div>
-                        <h4>Philipp</h4>
-                        <p>CI/CD-Bogenschütze</p>
-                        <p>Pipeline-Pfeile</p>
-                    </div>
-                </div>
-            </div>     
-            <div class="footer" style="color:#ffd700;">
-                <p><em>Erstellt mit der Weisheit der Elben und der Stärke der Zwerge</em></p>
+                <h2>„Ich kann den Ring nicht für dich tragen, Frodo – aber ich kann dich tragen!“</h2>
+                <h3>Sam hilft Frodo (Gruppe 1) bis zum Schicksalsberg</h3>
+                <p>Gemeinsam gelingt es, den <strong>Ring der Macht des alten manuellen Deployments</strong>, der alle Entwickler ins Dunkel trieb, in den Feuern des Schicksalsberges zu vernichten.<br>
+                Dank Sam (unserer Lektorin) ist der Weg frei für moderne DevOps und automatisierte Deployments!</p>
+            </div>
+            <div class="footer">
+                <p><em>Erstellt mit Mut, Magie und Teamgeist von Gruppe 1</em></p>
                 <p><strong>DevOps ILV & PT - MCCE Semester 2</strong></p>
-                <p><strong>Lecturer: Samantha Mika</strong> 🎓</p>
+                <p><strong>Lektorin: Samantha Mika</strong> 🎓</p>
+                <span><i class="fa-solid fa-medal"></i> Danke, Sam – Heldin der DevOps-Reise!</span>
             </div>
         </div>
 
