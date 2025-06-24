@@ -17,12 +17,19 @@ und implementiert eine CI/CD-Pipeline für kontinuierliche Bereitstellung.
     \item \textbf{Authentifizierung:} RESTful API-Endpunkte mit integrierter Authentifizierung 
 \end{itemize}
 
-\textbf{Automatisierung:} Vollständige Infrastructure-as-Code mit Terraform, GitHub Actions CI/CD Pipeline, und automatisierte Tests.
+\textbf{Automatisierung:} Infrastructure-as-Code mit Terraform, GitHub Actions CI/CD Pipeline, 
+und automatisierte Tests.
+
 \section{Architekturüberblick} 
-\subsection{Hochebenen-Architektur}
-Die Architektur der Todo-Anwendung basiert auf einem serverlosen Ansatz, der eine hohe Skalierbarkeit und Kosteneffizienz bietet. 
-Die Anwendung besteht aus mehreren AWS-Diensten, die nahtlos integriert sind, um eine robuste und wartungsarme Lösung zu schaffen.
-Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen~\cite{maharjan2022evaluating}.
+
+\subsection{High-Level Architektur}
+
+Die Architektur der Todo-Anwendung basiert auf einem serverlosen Ansatz, der eine hohe
+Skalierbarkeit und Kosteneffizienz bietet. Die Anwendung besteht aus mehreren AWS-Diensten, 
+die nahtlos integriert sind, um eine robuste und wartungsarme Lösung zu schaffen.
+Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen
+\cite{maharjan2022evaluating}.
+
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
@@ -51,10 +58,10 @@ Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen~
         \node[database] (dynamodb) at (6,0) {DynamoDB\\Todos DB};
         
         % Authentication
-        \node[service] (cognito) at (0,-2) {AWS Cognito\\Authentication};
+        \node[service] (cognito) at (-1.7,-2) {AWS Cognito\\Authentication};
         
         % Monitoring
-        \node[service] (cloudwatch) at (0,-4) {CloudWatch\\Logs \& Monitoring};
+        \node[service] (cloudwatch) at (2,-2) {CloudWatch\\Logs \& Monitoring};
         
         % Client
         \node[client] (client) at (0,-8) {Angular Frontend\\(Browser)};
@@ -93,8 +100,8 @@ Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen~
 
 \begin{itemize}
     \item \textbf{S3 Bucket:} Static Website Hosting für Angular-Bundle \cite{infosys2025s3hosting}
-    \item \textbf{CloudFront Distribution:} Globale CDN für niedrige Latenz
-    \item \textbf{Route 53:} DNS-Management (optional für Custom Domain)
+    \item \textbf{CloudFront Distribution:} Globales Content Delivery Network (CDN) für niedrige Latenz
+    \item \textbf{Route 53:} Doman Name Service (DNS)-Management (optional für Custom Domain)
 \end{itemize}
 
 \textbf{Vorteile:}
@@ -146,9 +153,9 @@ Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen~
 
 \textbf{Konfiguration:}
 \begin{itemize}
-    \item \textbf{Runtime:} Node.js 18.x oder Python 3.11
+    \item \textbf{Runtime:} Node.js 22.x oder Python 3.13
     \item \textbf{Memory:} 128-512 MB je nach Funktion
-    \item \textbf{Timeout:} 30 Sekunden maximum
+    \item \textbf{Timeout:} 30 Sekunden Maximum
 \end{itemize}
 
 \subsection{Datenbank-Layer}
@@ -176,8 +183,11 @@ Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen~
 \section{Infrastructure-as-Code (IaC) Strategie}
 
 \subsection{Terraform als Provisionierungstool}
-Bei der Auswahl eines geeigneten Infrastructure-as-Code (IaC) Tools stehen verschiedene Optionen zur Verfügung, die jeweils unterschiedliche Stärken und Schwächen aufweisen. Im Folgenden werden die wichtigsten Alternativen zu Terraform analysiert und deren charakteristische Eigenschaften gegenübergestellt.
-Die Bewertung der verschiedenen Tools erfolgt anhand mehrerer kritischer Dimensionen, die für die erfolgreiche Implementierung von Infrastructure-as-Code-Projekten entscheidend sind.
+Bei der Auswahl eines geeigneten Infrastructure-as-Code (IaC) Tools stehen verschiedene Optionen zur Verfügung, 
+die jeweils unterschiedliche Stärken und Schwächen aufweisen. Im Folgenden werden die wichtigsten Alternativen 
+zu Terraform analysiert und deren charakteristische Eigenschaften gegenübergestellt.
+Die Bewertung der verschiedenen Tools erfolgt anhand mehrerer kritischer Dimensionen, die für die 
+erfolgreiche Implementierung von Infrastructure-as-Code-Projekten entscheidend sind.
 
 \begin{table}[h!]
 \centering
@@ -194,16 +204,42 @@ State Management & \textcolor{darkgreen}{\yes~Explizit} & \textcolor{darkgreen}{
 \end{tabular}
 \caption{Vergleichsmatrix der Infrastructure-as-Code Tools}
 \end{table}
+
 \begin{itemize}
-    \item \textbf{AWS CloudFormation} stellt als nativer AWS-Service eine solide Grundlage für AWS-spezifische Infrastrukturen dar. Die enge Integration in das AWS-Ökosystem bietet Vorteile bei der Verwaltung von AWS-Ressourcen, jedoch beschränkt sich die Anwendbarkeit ausschließlich auf die Amazon-Cloud-Plattform. Die JSON- oder YAML-basierte Syntax kann bei komplexeren Infrastrukturen schnell unübersichtlich werden.
-    \item \textbf{Terraform} ist ein Open-Source-Tool, das eine deklarative Syntax in HashiCorp Configuration Language (HCL) verwendet. Es bietet eine starke Multi-Cloud-Unterstützung und eine große Community, die kontinuierlich zur Weiterentwicklung beiträgt. Die explizite Verwaltung des Zustands ermöglicht eine präzise Kontrolle über die Infrastruktur, was insbesondere bei komplexen Umgebungen von Vorteil ist.
-    \item \textbf{AWS CDK (Cloud Development Kit)} ermöglicht die Definition von Infrastruktur mittels vertrauter Programmiersprachen wie TypeScript, Python oder Java. Während dies für Entwickler attraktiv erscheint, erhöht sich dadurch die Komplexität erheblich, da sowohl die jeweilige Programmiersprache als auch die CDK-spezifischen Konzepte beherrscht werden müssen.
-    \item \textbf{Ansible} zeichnet sich durch seine einfache YAML-Syntax und die niedrige Einstiegshürde aus. Als primäres Konfigurationsmanagement-Tool konzipiert, weist es jedoch Schwächen im Bereich des State Managements auf, was bei der Verwaltung komplexer Infrastrukturen problematisch werden kann.
+    \item \textbf{AWS CloudFormation} stellt als nativer AWS-Service eine solide Grundlage für 
+    AWS-spezifische Infrastrukturen dar. Die enge Integration in das AWS-Ökosystem bietet Vorteile 
+    bei der Verwaltung von AWS-Ressourcen, jedoch beschränkt sich die Anwendbarkeit ausschließlich 
+    auf die Amazon-Cloud-Plattform. Die JSON- oder YAML-basierte Syntax kann bei komplexeren 
+    Infrastrukturen schnell unübersichtlich werden.
+    \item \textbf{Terraform} ist ein Open-Source-Tool, das eine deklarative Syntax in HashiCorp 
+    Configuration Language (HCL) verwendet. Es bietet Multi-Cloud-Unterstützung und 
+    eine große Community, die kontinuierlich zur Weiterentwicklung beiträgt. Die explizite 
+    Verwaltung des Zustands ermöglicht eine präzise Kontrolle über die Infrastruktur, was 
+    insbesondere bei komplexen Umgebungen von Vorteil ist.
+    \item \textbf{AWS CDK (Cloud Development Kit)} ermöglicht die Definition von Infrastruktur 
+    mittels vertrauter Programmiersprachen wie TypeScript, Python oder Java. Während dies für 
+    Entwickler attraktiv erscheint, erhöht sich dadurch die Komplexität erheblich, da sowohl die 
+    jeweilige Programmiersprache als auch die CDK-spezifischen Konzepte beherrscht werden müssen.
+    \item \textbf{Ansible} zeichnet sich durch seine einfache YAML-Syntax und die niedrige 
+    Einstiegshürde aus. Als primäres Konfigurationsmanagement-Tool konzipiert, weist es 
+    jedoch Schwächen im Bereich des State Managements auf, was bei der Verwaltung komplexer 
+    Infrastrukturen problematisch werden kann.
 \end{itemize}
-Die Entscheidung für Terraform als primäres Provisionierungstool basiert auf der Kombination aus Multi-Cloud-Fähigkeit, starker Community-Unterstützung und der expliziten Verwaltung des Zustands. Diese Eigenschaften ermöglichen eine flexible, skalierbare und wartungsfreundliche Infrastruktur, die den Anforderungen moderner Cloud-Anwendungen gerecht wird.
-\newpage
+
+Die Entscheidung für Terraform als primäres Provisionierungstool basiert auf der Kombination aus
+Multi-Cloud-Fähigkeit, starker Community-Unterstützung und der expliziten Verwaltung des Zustands.
+Diese Eigenschaften ermöglichen eine flexible, skalierbare und wartungsfreundliche Infrastruktur,
+die den Anforderungen moderner Cloud-Anwendungen gerecht wird.
+
+
 \subsection{Terraform-Projektstruktur}
-Die Projektstruktur für die Terraform-Konfiguration folgt den Best Practices für eine modulare und wartbare Architektur. Die Hauptkonfigurationsdateien befinden sich im Wurzelverzeichnis, während spezifische Module und Umgebungen in separaten Verzeichnissen organisiert sind. Diese Struktur ermöglicht eine klare Trennung der Verantwortlichkeiten und erleichtert die Wiederverwendbarkeit von Code.
+Die Projektstruktur für die Terraform-Konfiguration folgt den Best Practices
+für eine modulare und wartbare Architektur. Die Hauptkonfigurationsdateien befinden sich im
+Wurzelverzeichnis, während spezifische Module und Umgebungen in separaten Verzeichnissen organisiert
+sind. Diese Struktur ermöglicht eine klare Trennung der Verantwortlichkeiten und erleichtert die
+Wiederverwendbarkeit von Code.
+
+\newpage
 \begin{lstlisting}[style=terraform, caption=Terraform Projektstruktur]
 terraform/
 |-- main.tf                 # Hauptkonfiguration
@@ -222,8 +258,14 @@ terraform/
     |-- staging/
     `-- production/
 \end{lstlisting}
+
 \subsection{Beispiel Terraform-Code}
-Die Hauptkonfiguration für die Todo-Anwendung umfasst die Definition der AWS-Provider, die Konfiguration der Ressourcen und die Integration der Module. Die folgenden Code-Snippets zeigen die wichtigsten Teile der Terraform-Konfiguration, einschließlich der Definition von Variablen, Modulen und Ressourcen.
+
+Die Hauptkonfiguration für die Todo-Anwendung umfasst die Definition der AWS-Provider,
+die Konfiguration der Ressourcen und die Integration der Module. Die folgenden Code-Snippets
+zeigen die wichtigsten Teile der Terraform-Konfiguration, einschließlich der Definition von
+Variablen, Modulen und Ressourcen.
+
 \begin{lstlisting}[style=terraform, caption=Hauptkonfiguration (main.tf)]
 # main.tf
 terraform {
@@ -282,7 +324,7 @@ module "api_gateway" {
 \subsubsection{Pipeline-Stages}
 
 \begin{enumerate}
-    \item \textbf{Code Commit:} Developer pushed Code zu GitHub
+    \item \textbf{Code Commit:} Entwickler pushed Code zu GitHub
     \item \textbf{Validation:} Terraform fmt, validate, security scanning
     \item \textbf{Planning:} Terraform plan für Infrastructure Changes
     \item \textbf{Testing:} Unit Tests für Lambda Functions
@@ -292,6 +334,8 @@ module "api_gateway" {
     \item \textbf{Monitoring:} Health Checks und Alerting
 \end{enumerate}
 
+
+\newpage
 \subsection{GitHub Actions Workflow}
 
 \begin{lstlisting}[style=yaml, caption=GitHub Actions Deployment Workflow]
