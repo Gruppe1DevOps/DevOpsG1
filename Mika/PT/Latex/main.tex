@@ -13,13 +13,43 @@
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{booktabs}
 \usepackage{blindtext}
 \usepackage[ngerman]{babel}
 \usepackage{hyperref}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{colortbl}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb} % for \checkmark
+\usepackage{pifont}  % for \ding
+\newcommand{\yes}{\checkmark}
+\newcommand{\no}{\texttimes}
+\newcommand{\partialyes}{\ding{108}} % or another symbol for partial
+\newcommand{\warn}{\ding{115}} % triangle exclamation, or use \textcolor{orange}{!}
 
+
+% Farben definieren
+\definecolor{darkgreen}{RGB}{0,100,0}
+\definecolor{darkorange}{RGB}{255,140,0}
+\definecolor{darkred}{RGB}{139,0,0}
+\definecolor{awsorange}{RGB}{255,153,0}
+\definecolor{awsblue}{RGB}{35,47,62}
+\definecolor{lightgray}{RGB}{245,245,245}
+\definecolor{darkgray}{RGB}{64,64,64}
+\definecolor{codegreen}{RGB}{0,128,0}
+\definecolor{codegray}{RGB}{128,128,128}
+\definecolor{codepurple}{RGB}{128,0,128}
 
 \hypersetup{
     colorlinks=true,     % true: colored links, false: red boxes
@@ -27,6 +57,51 @@
     citecolor=black,     % color of citation links
     urlcolor=black     % color of URL links
 }
+
+
+% Code listings style
+\lstdefinestyle{terraform}{
+    backgroundcolor=\color{lightgray},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{awsblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{darkgray}
+}
+
+\lstdefinestyle{yaml}{
+    backgroundcolor=\color{lightgray},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{awsblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{darkgray}
+}
+
 
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 %Definition of Colors - Start
@@ -47,7 +122,7 @@
 \newpage
 \renewcommand{\refname}{Literaturverzeichnis}
 \addcontentsline{toc}{section}{Literaturverzeichnis}
-%\input{section/references}
+\input{section/references}
 
 \end{document}
 \endinput

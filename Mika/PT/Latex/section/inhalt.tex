@@ -1,121 +1,478 @@
 \newpage
 
 \section{Einleitung}
-Diese Planung beschreibt die automatische
-Bereitstellung der To-Do-App in der AWS-Cloud. Das Ziel ist es,
-alle notwendigen Komponenten automatisch über Infrastructure-as-Code (IaC)
-bereitzustellen. Die Lösung besteht aus einer Benutzerschnittstelle, einem Backend,
-einer Datenbank und Sicherheitskomponenten.
+Diese Konzeption beschreibt die automatische Provisionierung einer vollständig serverlosen Todo-Anwendung
+in der AWS Cloud~\cite{jain2021serverless, wen2023rise}. 
+Die Lösung nutzt moderne Infrastructure-as-Code (IaC) Prinzipien mit Terraform als 
+primärem Automatisierungstool \cite{ozdogan2023systematic, hashicorp2024terraform}  
+und implementiert eine CI/CD-Pipeline für kontinuierliche Bereitstellung.
 
-\section{Technologieauswahl} 
-\subsection{Terraform als Provisionierungstool}
-Als primäres Provisionierungstool wurde Terraform gewählt, da es
-Plattformunabhängigkeit ermöglicht und eine Multi-Cloud-Strategie unterstützt. Somit
-wird ein Vendor-Lock-in verhindert. Die deklarative Syntax in Form der HashiCorp
-Configuration Language (HCL) sorgt für besonders lesbare und wartbare
-Konfigurationen. Das integrierte State-Management ermöglicht eine präzise
-Nachverfolgung aller verwalteten Ressourcen. Zusätzlich profitiert das Projekt
-von der großen Community und der umfangreichen AWS-Modulbibliothek. 
-Die Möglichkeit, wiederverwendbare Module zu erstellen, gewährleistet 
-konsistente Architekturen über verschiedene Umgebungen hinweg.
+\textbf{Kernkomponenten:}
 
-Als Alternativen wurden Amazon Web Services (AWS), CloudFormation und Pulumi evaluiert. 
-CloudFormation wurde aufgrund des potenziellen Vendor-Lock-ins ausgeschlossen, während
-Pulumi zwar interessante Code-basierte Ansätze bietet, aber die deklarative
-Natur von Terraform für dieses Projekt als vorteilhafter erachtet wurde.
+\begin{itemize}
+    \item \textbf{Frontend:} Angular SPA gehostet auf Amazon S3 mit CloudFront CDN~\cite{cloudfront2012performance, tyagi2025optimizing}
+    \item \textbf{Backend:} AWS Lambda Functions für CRUD-Operationen~\cite{hussain2024performance, tanneru2024serverless}
+    \item \textbf{Datenbank:} Amazon DynamoDB für hochperformante NoSQL Datenspeicherung \cite{haseeb2017review, ahmed2018literature}
+    \item \textbf{API Gateway:} RESTful API-Endpunkte mit integrierter Authentifizierung
+    \item \textbf{Authentifizierung:} RESTful API-Endpunkte mit integrierter Authentifizierung 
+\end{itemize}
 
-\subsection{Architekturübersicht}
-Die Architektur der To-Do-Applikation basiert auf einer modernen 
-Serverless-Architektur in AWS. Im Zentrum steht ein Simple Storage Service (S3)-Bucket 
-für das Frontend-Hosting, der über CloudFront als Content Delivery Network (CDN)
-bereitgestellt wird. Die Representational State Transfer (REST)-API-Endpunkte
-werden durch API Gateway bereitgestellt, während die Backend-Logik in
-Lambda-Funktionen implementiert ist. Die Datenspeicherung erfolgt in DynamoDB,
-und die Benutzerauthentifizierung wird über AWS Cognito realisiert.
+\textbf{Automatisierung:} Infrastructure-as-Code mit Terraform, GitHub Actions CI/CD Pipeline, 
+und automatisierte Tests.
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{fig/mermaidflowChart.jpg}
-\caption{Architekturübersicht der To-Do-Applikation}
-\label{fig:architektur}
+\section{Architekturüberblick} 
+
+\subsection{High-Level Architektur}
+
+Die Architektur der Todo-Anwendung basiert auf einem serverlosen Ansatz, der eine hohe
+Skalierbarkeit und Kosteneffizienz bietet. Die Anwendung besteht aus mehreren AWS-Diensten, 
+die nahtlos integriert sind, um eine robuste und wartungsarme Lösung zu schaffen.
+Die folgende Abbildung zeigt die Architekturkomponenten und deren Interaktionen
+\cite{maharjan2022evaluating}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=2cm,
+        every node/.style={align=center, font=\small},
+        cloud/.style={draw, ellipse, fill=blue!20, minimum width=3cm, minimum height=1.5cm},
+        service/.style={draw, rectangle, fill=orange!20, minimum width=2.5cm, minimum height=1.2cm, rounded corners=3pt},
+        database/.style={draw, rectangle, fill=green!20, minimum width=2cm, minimum height=1.5cm, rounded corners=3pt},
+        client/.style={draw, rectangle, fill=gray!20, minimum width=2.5cm, minimum height=1cm, rounded corners=3pt}
+    ]
+        % AWS Cloud boundary
+        \draw[thick, dashed, blue] (-8,-6) rectangle (8,4);
+        \node[above] at (0,4.2) {\Large\textbf{AWS Cloud Environment}};
+        
+        % Frontend layer
+        \node[service] (s3) at (-5,2) {Amazon S3\\Static Hosting};
+        \node[service] (cloudfront) at (-5,0) {CloudFront\\CDN};
+        
+        % API layer
+        \node[service] (apigateway) at (0,1) {API Gateway\\REST APIs};
+        
+        % Compute layer
+        \node[service] (lambda) at (3,2) {AWS Lambda\\Functions};
+        
+        % Database layer
+        \node[database] (dynamodb) at (6,0) {DynamoDB\\Todos DB};
+        
+        % Authentication
+        \node[service] (cognito) at (-1.7,-2) {AWS Cognito\\Authentication};
+        
+        % Monitoring
+        \node[service] (cloudwatch) at (2,-2) {CloudWatch\\Logs \& Monitoring};
+        
+        % Client
+        \node[client] (client) at (0,-8) {Angular Frontend\\(Browser)};
+        
+        % Connections
+        \draw[->] (client) -- (cloudfront);
+        \draw[->] (cloudfront) -- (s3);
+        \draw[->] (client) -- (apigateway);
+        \draw[->] (apigateway) -- (lambda);
+        \draw[->] (lambda) -- (dynamodb);
+        \draw[->] (apigateway) -- (cognito);
+        \draw[->] (lambda) -- (cloudwatch);
+        \draw[->] (apigateway) -- (cloudwatch);
+        
+    \end{tikzpicture}
+    \caption{AWS Serverless Architecture Diagramm}
+    \label{fig:architecture}
 \end{figure}
 
-Die Kommunikation zwischen den Komponenten folgt einem klar definierten
-Fluss: CloudFront dient als zentraler Einstiegspunkt und leitet statische
-Inhalte an den S3-Bucket sowie API-Aufrufe an das API Gateway weiter. Das API
-Gateway wiederum leitet die Anfragen an die entsprechenden Lambda-Funktionen
-weiter, die für die Geschäftslogik zuständig sind. Die Lambda-Funktionen
-interagieren mit DynamoDB für Create, Read, Update, Delete (CRUD)-Operationen
-und mit Cognito für die Authentifizierung. Der S3-Bucket kommuniziert direkt 
-mit Cognito für den Login-Prozess.
+\subsection{Datenfluss und Interaktionen}
+\begin{enumerate}
+    \item \textbf{Client Request:} Browser lädt Angular App von S3 über CloudFront
+    \item \textbf{API Calls:} Frontend sendet HTTP-Requests an API Gateway
+    \item \textbf{Authentication:} Cognito validiert Benutzer-Tokens
+    \item \textbf{Processing:} Lambda Functions verarbeiten Business Logic
+    \item \textbf{Data Persistence:} DynamoDB speichert/liest Todo-Daten
+    \item \textbf{Response:} JSON-Antworten zurück zum Frontend
+\end{enumerate}
 
-\section{Umsetzungskonzept}
-\subsection{Authentifizierung in AWS}
-Die Authentifizierung in AWS erfolgt auf mehreren Ebenen, um maximale Sicherheit
-zu gewährleisten. Für die Continuous Integration / Continuous Deployment (CI/CD)-
-Pipeline werden spezielle Identity and Access Management (IAM)-Rollen für
-Jenkins oder GitLab-Runner konfiguriert. Diese Rollen erhalten temporäre
-Security Token Service (STS)-Tokens für Ephemeral Environments,
-was die Sicherheit erheblich erhöht.
 
-Die lokale Entwicklung wird über die AWS Command Line Interface (CLI)
-mit benutzerbasierten Zugriffsschlüsseln ermöglicht. Für Produktiv-Accounts ist
-Multi-Faktor-Authentifizierung (MFA) obligatorisch. Sensible Daten werden
-über den AWS Secrets Manager verwaltet, der eine sichere und zentrale
-Verwaltung von Zugangsdaten ermöglicht.
+\section{AWS Services und Komponenten}
 
-Die Sicherheit wird durch strikte Anwendung des Least-Privilege-Prinzips
-in den IAM-Policies gewährleistet. Zusätzlich wird eine automatische
-Schlüsselrotation implementiert, um die Sicherheit kontinuierlich zu
-gewährleisten.
+\subsection{Frontend-Layer}
 
-\subsection{Provisionierungs-Workflow}
-Der Provisionierungs-Workflow ist vollständig automatisiert und 
-beginnt mit einem Code-Commit im Git-Repository. Dies löst die Pipeline in
-Jenkins oder GitLab CI aus. Anschließend werden die Terraform-Konfigurationen 
-initialisiert und ein Plan erstellt. Automatisierte Tests, insbesondere
-Security-Checks mit Checkov, stellen die Qualität und Sicherheit der Konfiguration
-sicher.
+\subsubsection{Amazon S3 + CloudFront}
 
-Für die Produktivumgebung ist eine manuelle Freigabe erforderlich,
-um ungewollte Änderungen zu verhindern. Nach der Freigabe wird der
-Terraform-Apply-Prozess ausgeführt. Der Zustand der Infrastruktur wird
-in einem S3-Bucket mit Locking-Mechanismus gespeichert, um Konflikte bei
-parallelen Änderungen zu vermeiden.
+\begin{itemize}
+    \item \textbf{S3 Bucket:} Static Website Hosting für Angular-Bundle \cite{infosys2025s3hosting}
+    \item \textbf{CloudFront Distribution:} Globales Content Delivery Network (CDN) für niedrige Latenz
+    \item \textbf{Route 53:} Doman Name Service (DNS)-Management (optional für Custom Domain)
+\end{itemize}
 
-\section{Vorteile und Herausforderungen}
-\subsection{Vorteile} 
-Die gewählte Architektur bietet zahlreiche Vorteile. Durch die Verwendung von
-Infrastructure-as-Code werden identische Umgebungen gewährleistet, was die
-Konsistenz über verschiedene Deployment-Stages hinweg sicherstellt. Die
-vollständige Provisionierung kann in weniger als 10 Minuten abgeschlossen
-werden, was die Geschwindigkeit der Entwicklung und des Deployments erheblich
-steigert. Die Kostentransparenz wird durch konsequentes Tagging aller
-Ressourcen gewährleistet. Die Sicherheit profitiert von der versionierten
-Konfiguration, die Compliance-Anforderungen erfüllt.
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Skalierbarkeit ohne Server-Management
+    \item Globale Verfügbarkeit durch Edge Locations \cite{xu2024understanding}
+    \item Kosteneffizient für statische Inhalte
+\end{itemize}
 
-\subsection{Herausforderungen} 
-Trotz der vielen Vorteile gibt es auch Herausforderungen zu bewältigen. 
-Die Terraform-Syntax und die AWS-Services erfordern eine gewisse Einarbeitungszeit. 
-Das Zustandsmanagement erfordert ein sorgfältiges Handling der state-Dateien, 
-um Konflikte zu vermeiden. Die Fehlersuche bei Abhängigkeitsproblemen kann
-komplex sein und erfordert ein tiefes Verständnis der Infrastruktur-Komponenten.
+\subsection{API-Layer}
 
-\section{Technische Umsetzung}
-\subsection{Terraform-Modulstruktur}
-Die Terraform-Konfiguration ist in logische Module aufgeteilt, die jeweils
-spezifische Aspekte der Infrastruktur verwalten. Die Module umfassen Netzwerk,
-Datenbank, Backend, Frontend und Sicherheit. Diese Struktur ermöglicht eine
-klare Trennung der Zuständigkeiten und erleichtert die Wartung und Erweiterung
-der Infrastruktur.
+\subsubsection{Amazon API Gateway}
 
-\subsection{Beispiel: DynamoDB-Provisionierung}
-Ein konkretes Beispiel für die Provisionierung ist die DynamoDB-Tabelle für die To-Do-Items.
-Die Tabelle wird mit Pay-per-Request-Billing konfiguriert, was eine kosteneffiziente
-Skalierung ermöglicht. Die ID wird als Hash-Key definiert, und die Tabelle
-wird mit entsprechenden Tags für die Umgebung und das Management versehen.
+\begin{itemize}
+    \item RESTful API-Endpunkte
+    \item Request/Response Transformation
+    \item Throttling und Rate Limiting
+    \item CORS-Konfiguration
+    \item Integration mit AWS Lambda
+\end{itemize}
 
-Die automatisierte Provisionierung mit Terraform ermöglicht reproduzierbare,
-sichere und kosteneffiziente AWS-Umgebungen für die To-Do-Applikation. Durch
-modularen Code und CI/CD-Integration wird der Entwicklungslebenszyklus
-optimiert.
+\textbf{Endpunkt-Struktur:}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}ll@{}}
+        \toprule
+        \textbf{HTTP Method} & \textbf{Endpoint} \\
+        \midrule
+        GET & /todos - Alle Todos abrufen \\
+        POST & /todos - Neues Todo erstellen \\
+        PUT & /todos/\{id\} - Todo aktualisieren \\
+        DELETE & /todos/\{id\} - Todo löschen \\
+        \bottomrule
+    \end{tabular}
+    \caption{REST API Endpunkte}
+    \label{tab:endpoints}
+\end{table}
+
+\subsection{Computing-Layer}
+
+\subsubsection{AWS Lambda Functions}
+
+\begin{itemize}
+    \item \textbf{Get-Todos Function:} Liest alle Todos aus DynamoDB
+    \item \textbf{Create-Todo Function:} Erstellt neues Todo-Item
+    \item \textbf{Update-Todo Function:} Aktualisiert bestehende Todos
+    \item \textbf{Delete-Todo Function:} Entfernt Todo-Items
+\end{itemize}
+
+\textbf{Konfiguration:}
+\begin{itemize}
+    \item \textbf{Runtime:} Node.js 22.x oder Python 3.13
+    \item \textbf{Memory:} 128-512 MB je nach Funktion
+    \item \textbf{Timeout:} 30 Sekunden Maximum
+\end{itemize}
+
+\subsection{Datenbank-Layer}
+
+\subsubsection{Amazon DynamoDB}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}ll@{}}
+        \toprule
+        \textbf{Attribut} & \textbf{Wert} \\
+        \midrule
+        Table Name & TodosTable \\
+        Partition Key & userId (String) \\
+        Sort Key & todoId (String) \\
+        Attributes & title, description, completed \\
+        & createdAt, updatedAt \\
+        Skalierung & On-Demand Billing \\
+        \bottomrule
+    \end{tabular}
+    \caption{DynamoDB Tabellen-Konfiguration}
+    \label{tab:dynamodb}
+\end{table}
+
+\section{Infrastructure-as-Code (IaC) Strategie}
+
+\subsection{Terraform als Provisionierungstool}
+Bei der Auswahl eines geeigneten Infrastructure-as-Code (IaC) Tools stehen verschiedene Optionen zur Verfügung, 
+die jeweils unterschiedliche Stärken und Schwächen aufweisen. Im Folgenden werden die wichtigsten Alternativen 
+zu Terraform analysiert und deren charakteristische Eigenschaften gegenübergestellt.
+Die Bewertung der verschiedenen Tools erfolgt anhand mehrerer kritischer Dimensionen, die für die 
+erfolgreiche Implementierung von Infrastructure-as-Code-Projekten entscheidend sind.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{>{\bfseries}p{3cm}p{2.5cm}p{2.8cm}p{2.2cm}p{2.5cm}}
+\toprule
+\textbf{Kriterium} & \textbf{Terraform} & \textbf{AWS CloudFormation} & \textbf{AWS CDK} & \textbf{Ansible} \\
+\midrule
+Multi-Cloud & \yes & \no & \no & \yes \\[0.3cm]
+Lernkurve & \partialyes & \partialyes & \textcolor{darkred}{\warn~Schwer} & \textcolor{darkgreen}{\yes~Einfach} \\[0.3cm]
+Community & \textcolor{darkgreen}{\yes~Sehr groß} & \partialyes & \textcolor{darkorange}{\warn~Klein} & \textcolor{darkgreen}{\yes~Groß} \\[0.3cm]
+Syntax & \textcolor{darkgreen}{\yes~HCL} & \textcolor{darkorange}{\warn~JSON/YAML} & \textcolor{darkorange}{\warn~Code} & \textcolor{darkgreen}{\yes~YAML} \\[0.3cm]
+State Management & \textcolor{darkgreen}{\yes~Explizit} & \textcolor{darkgreen}{\yes~Implizit} & \textcolor{darkgreen}{\yes~CloudFormation} & \textcolor{darkred}{\warn~Schwach} \\
+\bottomrule
+\end{tabular}
+\caption{Vergleichsmatrix der Infrastructure-as-Code Tools}
+\end{table}
+
+\begin{itemize}
+    \item \textbf{AWS CloudFormation} stellt als nativer AWS-Service eine solide Grundlage für 
+    AWS-spezifische Infrastrukturen dar. Die enge Integration in das AWS-Ökosystem bietet Vorteile 
+    bei der Verwaltung von AWS-Ressourcen, jedoch beschränkt sich die Anwendbarkeit ausschließlich 
+    auf die Amazon-Cloud-Plattform. Die JSON- oder YAML-basierte Syntax kann bei komplexeren 
+    Infrastrukturen schnell unübersichtlich werden.
+    \item \textbf{Terraform} ist ein Open-Source-Tool, das eine deklarative Syntax in HashiCorp 
+    Configuration Language (HCL) verwendet. Es bietet Multi-Cloud-Unterstützung und 
+    eine große Community, die kontinuierlich zur Weiterentwicklung beiträgt. Die explizite 
+    Verwaltung des Zustands ermöglicht eine präzise Kontrolle über die Infrastruktur, was 
+    insbesondere bei komplexen Umgebungen von Vorteil ist.
+    \item \textbf{AWS CDK (Cloud Development Kit)} ermöglicht die Definition von Infrastruktur 
+    mittels vertrauter Programmiersprachen wie TypeScript, Python oder Java. Während dies für 
+    Entwickler attraktiv erscheint, erhöht sich dadurch die Komplexität erheblich, da sowohl die 
+    jeweilige Programmiersprache als auch die CDK-spezifischen Konzepte beherrscht werden müssen.
+    \item \textbf{Ansible} zeichnet sich durch seine einfache YAML-Syntax und die niedrige 
+    Einstiegshürde aus. Als primäres Konfigurationsmanagement-Tool konzipiert, weist es 
+    jedoch Schwächen im Bereich des State Managements auf, was bei der Verwaltung komplexer 
+    Infrastrukturen problematisch werden kann.
+\end{itemize}
+
+Die Entscheidung für Terraform als primäres Provisionierungstool basiert auf der Kombination aus
+Multi-Cloud-Fähigkeit, starker Community-Unterstützung und der expliziten Verwaltung des Zustands.
+Diese Eigenschaften ermöglichen eine flexible, skalierbare und wartungsfreundliche Infrastruktur,
+die den Anforderungen moderner Cloud-Anwendungen gerecht wird.
+
+
+\subsection{Terraform-Projektstruktur}
+Die Projektstruktur für die Terraform-Konfiguration folgt den Best Practices
+für eine modulare und wartbare Architektur. Die Hauptkonfigurationsdateien befinden sich im
+Wurzelverzeichnis, während spezifische Module und Umgebungen in separaten Verzeichnissen organisiert
+sind. Diese Struktur ermöglicht eine klare Trennung der Verantwortlichkeiten und erleichtert die
+Wiederverwendbarkeit von Code.
+
+\newpage
+\begin{lstlisting}[style=terraform, caption=Terraform Projektstruktur]
+terraform/
+|-- main.tf                 # Hauptkonfiguration
+|-- variables.tf            # Input-Variablen
+|-- outputs.tf              # Output-Werte
+|-- terraform.tfvars        # Umgebungsspezifische Werte
+|-- backend.tf              # Remote State Configuration
+|-- modules/
+|   |-- api-gateway/        # API Gateway Module
+|   |-- lambda/             # Lambda Functions Module
+|   |-- dynamodb/           # DynamoDB Module
+|   |-- s3-cloudfront/      # Frontend Hosting Module
+|   `-- cognito/            # Authentication Module
+`-- environments/
+    |-- dev/
+    |-- staging/
+    `-- production/
+\end{lstlisting}
+
+\subsection{Beispiel Terraform-Code}
+
+Die Hauptkonfiguration für die Todo-Anwendung umfasst die Definition der AWS-Provider,
+die Konfiguration der Ressourcen und die Integration der Module. Die folgenden Code-Snippets
+zeigen die wichtigsten Teile der Terraform-Konfiguration, einschließlich der Definition von
+Variablen, Modulen und Ressourcen.
+
+\begin{lstlisting}[style=terraform, caption=Hauptkonfiguration (main.tf)]
+# main.tf
+terraform {
+  required_version = ">= 1.5"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.aws_region
+  
+  default_tags {
+    tags = {
+      Project     = "TodoApp"
+      Environment = var.environment
+      ManagedBy   = "Terraform"
+    }
+  }
+}
+
+# DynamoDB Table
+module "dynamodb" {
+  source = "./modules/dynamodb"
+  
+  table_name   = "${var.project_name}-todos-${var.environment}"
+  environment  = var.environment
+}
+
+# Lambda Functions
+module "lambda_functions" {
+  source = "./modules/lambda"
+  
+  environment     = var.environment
+  dynamodb_table  = module.dynamodb.table_name
+  dynamodb_arn    = module.dynamodb.table_arn
+}
+
+# API Gateway
+module "api_gateway" {
+  source = "./modules/api-gateway"
+  
+  environment    = var.environment
+  lambda_functions = module.lambda_functions.function_arns
+  cognito_user_pool_arn = module.cognito.user_pool_arn
+}
+\end{lstlisting}
+
+\section{Automatisierungskonzept}
+
+\subsection{CI/CD Pipeline mit GitHub Actions}
+
+\subsubsection{Pipeline-Stages}
+
+\begin{enumerate}
+    \item \textbf{Code Commit:} Entwickler pushed Code zu GitHub
+    \item \textbf{Validation:} Terraform fmt, validate, security scanning
+    \item \textbf{Planning:} Terraform plan für Infrastructure Changes
+    \item \textbf{Testing:} Unit Tests für Lambda Functions
+    \item \textbf{Deployment:} Terraform apply (umgebungsabhängig)
+    \item \textbf{Frontend Build:} Angular Build und S3 Upload
+    \item \textbf{Integration Tests:} End-to-End Tests der API
+    \item \textbf{Monitoring:} Health Checks und Alerting
+\end{enumerate}
+
+
+\newpage
+\subsection{GitHub Actions Workflow}
+
+\begin{lstlisting}[style=yaml, caption=GitHub Actions Deployment Workflow]
+# .github/workflows/deploy.yml
+name: Deploy Todo App Infrastructure
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  AWS_REGION: eu-central-1
+  TF_VERSION: 1.5.7
+
+jobs:
+  terraform:
+    name: Terraform Plan/Apply
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./terraform
+      
+    - name: Terraform Plan
+      run: terraform plan -no-color
+      working-directory: ./terraform
+      
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'
+      run: terraform apply -auto-approve
+      working-directory: ./terraform
+\end{lstlisting}
+\section{Sicherheit und Authentifizierung}
+
+\subsection{AWS-Authentifizierung für Terraform}
+
+\subsubsection{IAM Roles mit OIDC (Empfohlen)}
+
+\begin{lstlisting}[style=yaml, caption=AWS Credential Configuration]
+- name: Configure AWS credentials
+  uses: aws-actions/configure-aws-credentials@v2
+  with:
+    role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsRole
+    role-session-name: GitHubActions-TodoApp
+    aws-region: eu-central-1
+\end{lstlisting}
+
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Keine langlebigen AWS Access Keys
+    \item Automatische Token-Rotation
+    \item Granulare Berechtigungen pro Repository
+\end{itemize}
+
+\subsection{Anwendungssicherheit}
+
+\subsubsection{Lambda Function Security}
+\begin{itemize}
+    \item VPC-Integration für Netzwerk-Isolation
+    \item Environment Variables für Konfiguration
+    \item AWS X-Ray für Tracing und Monitoring
+    \item Least Privilege IAM Roles
+\end{itemize}
+
+\subsubsection{API Gateway Security}
+\begin{itemize}
+    \item Cognito Authorizer für alle Endpunkte
+    \item Request/Response Validation
+    \item Rate Limiting (1000 requests/minute)
+    \item CORS-Konfiguration
+\end{itemize}
+
+\subsubsection{DynamoDB Security}
+\begin{itemize}
+    \item Encryption at Rest aktiviert
+    \item Encryption in Transit (TLS)
+    \item Point-in-Time Recovery
+    \item VPC Endpoints für private Zugriffe
+\end{itemize}
+
+% Cost Optimization
+\section{Kosten-Optimierung}
+
+\subsection{Pricing-Modell}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lrr@{}}
+        \toprule
+        \textbf{Service} & \textbf{Development} & \textbf{Production} \\
+        \midrule
+        Lambda & \$5 & \$50 \\
+        API Gateway & \$3 & \$35 \\
+        DynamoDB & \$2 & \$25 \\
+        S3 & \$1 & \$10 \\
+        CloudFront & \$5 & \$50 \\
+        \midrule
+        \textbf{Total/Monat} & \textbf{\$16} & \textbf{\$170} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Monatliche Kostenschätzung (USD)}
+    \label{tab:costs}
+\end{table}
+
+\subsection{Kostenoptimierung-Strategien}
+
+\begin{enumerate}
+    \item \textbf{DynamoDB On-Demand:} Für unvorhersagbare Workloads
+    \item \textbf{Lambda Provisioned Concurrency:} Nur für kritische Funktionen
+    \item \textbf{S3 Intelligent Tiering:} Automatische Kostenoptimierung
+    \item \textbf{CloudFront Caching:} Reduzierte Origin-Requests
+    \item \textbf{Reserved Capacity:} Für vorhersagbare Workloads
+\end{enumerate}
+\section{Fazit}
+Abschließend lässt sich festhalten, dass die serverlose Todo-Anwendung auf AWS eine moderne, skalierbare und wartungsarme Lösung darstellt. Die Verwendung von Infrastructure-as-Code mit Terraform ermöglicht eine effiziente Verwaltung der Infrastruktur und eine nahtlose Integration in CI/CD-Pipelines
+Folgende Best Practices wurden implementiert, um eine robuste und sichere Anwendung zu gewährleisten:
+\begin{enumerate}
+    \item \textbf{Infrastructure as Code:} Alle Änderungen über Git versioniert
+    \item \textbf{Immutable Infrastructure:} Keine manuellen Änderungen in AWS Console
+    \item \textbf{Security by Design:} Least Privilege Principle durchgehend angewendet
+    \item \textbf{Cost Awareness:} Regelmäßige Cost Reviews und Budget Alerts
+    \item \textbf{Disaster Recovery:} Automatisierte Backups und Rollback-Prozesse
+\end{enumerate}
